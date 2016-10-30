@@ -1,0 +1,20 @@
+Package: prediction
+Type: Package
+Title: Tidy, Type-Safe 'prediction()' Methods
+Description: A one-function package containing 'prediction()', a type-safe alernative to 'predict()' that always returns a data frame.
+License: MIT + file LICENSE
+Version: 0.1.0
+Date: 2016-10-30
+Authors@R: c(person("Thomas J.", "Leeper",
+                    role = c("aut", "cre"),
+                    email = "thosjleeper@gmail.com"))
+Imports:
+    utils,
+    stats
+Suggests:
+    testthat
+Enhances:
+    survival,
+    nlme,
+    AER
+RoxygenNote: 5.0.1

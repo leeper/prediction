@@ -1,0 +1,52 @@
+# prediction
+
+**prediction** is a one-function package that provides type-safe methods for generating predictions from fitted regression models. It provides an S3 generic, `prediction()`, and associated methods, which always return a `"data.frame"` class object rather than the mix of vectors, lists, etc. that are returned by the `predict()` method for many model types. It provides a key piece of infrastructure for the **margins** package.
+
+## Simple code examples
+
+```{r opts, echo = FALSE}
+library("knitr")
+options(width = 100)
+opts_knit$set(upload.fun = imgur_upload, base.url = NULL)
+opts_chunk$set(fig.width=7, fig.height=4)
+```
+
+A major downside of the `predict()` methods for common modelling classes is that the result is not typesafe. Consider the following simple example:
+
+```{r predict}
+library("stats")
+library("datasets")
+x <- lm(mpg ~ cyl * hp + wt, data = mtcars)
+class(predict(x))
+class(predict(x, se.fit = TRUE))
+```
+
+**prediction** solves this issue by providing a wrapper around `predict()`, called `prediction()`, that always returns a tidy data frame:
+
+```{r prediction}
+library("prediction")
+p <- prediction(x)
+class(p)
+head(p)
+str(p)
+```
+
+
+## Requirements and Installation
+
+[![CRAN](http://www.r-pkg.org/badges/version/prediction)](https://cran.r-project.org/package=prediction)
+[![Build Status](https://travis-ci.org/leeper/prediction.svg?branch=master)](https://travis-ci.org/leeper/prediction)
+[![Build status](https://ci.appveyor.com/api/projects/status/t6nxndmvvcw3gw7f/branch/master?svg=true)](https://ci.appveyor.com/project/leeper/prediction/branch/master)
+[![codecov.io](http://codecov.io/github/leeper/prediction/coverage.svg?branch=master)](http://codecov.io/github/leeper/prediction?branch=master)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+
+The development version of this package can be installed directly from GitHub using `ghit`:
+
+```R
+if (!require("ghit")) {
+    install.packages("ghit")
+    library("ghit")
+}
+install_github("leeper/prediction")
+```
+
