@@ -2,6 +2,7 @@
 % Please edit documentation in R/prediction.R, R/prediction_methods.R
 \name{prediction}
 \alias{prediction}
+\alias{prediction.clm}
 \alias{prediction.coxph}
 \alias{prediction.default}
 \alias{prediction.glm}
@@ -46,6 +47,8 @@ prediction(model, data, ...)
 \method{prediction}{gls}(model, data, ...)
 
 \method{prediction}{polr}(model, data = find_data(model, parent.frame()), ...)
+
+\method{prediction}{clm}(model, data = find_data(model, parent.frame()), ...)
 }
 \arguments{
 \item{model}{A model object, perhaps returned by \code{\link[stats]{lm}} or \code{\link[stats]{glm}}.}

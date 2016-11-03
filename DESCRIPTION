@@ -19,5 +19,6 @@ Enhances:
     survival,
     nlme,
     AER,
+    ordinal,
     survey
 RoxygenNote: 5.0.1
