@@ -12,6 +12,7 @@
 \alias{prediction.nls}
 \alias{prediction.polr}
 \alias{prediction.survreg}
+\alias{prediction.svyglm}
 \title{Extract Predictions from a Model Object}
 \usage{
 prediction(model, data, ...)
@@ -23,6 +24,9 @@ prediction(model, data, ...)
   type = "response", ...)
 
 \method{prediction}{glm}(model, data = find_data(model, parent.frame()),
+  type = c("response", "link"), ...)
+
+\method{prediction}{svyglm}(model, data = find_data(model, parent.frame()),
   type = c("response", "link"), ...)
 
 \method{prediction}{loess}(model, data = find_data(model, parent.frame()),
