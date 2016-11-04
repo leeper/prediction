@@ -76,7 +76,7 @@ prediction.svyglm <- function(model, data = find_data(model, parent.frame()), ty
     # obs-x-2 data.frame of predictions
     structure(pred, 
               class = c("prediction", "data.frame"), 
-              row.names = seq_len(length(pred[["fit"]])),
+              row.names = seq_len(length(pred[["fitted"]])),
               model.class = class(model),
               type = type)
 }
