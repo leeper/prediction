@@ -2,9 +2,21 @@
 % Please edit documentation in R/find_data.R
 \name{find_data}
 \alias{find_data}
+\alias{find_data.default}
+\alias{find_data.glm}
+\alias{find_data.lm}
+\alias{find_data.svyglm}
 \title{Extract data from a model object}
 \usage{
-find_data(model, env = parent.frame())
+find_data(model, env)
+
+\method{find_data}{default}(model, env = parent.frame())
+
+\method{find_data}{lm}(model, env = parent.frame())
+
+\method{find_data}{glm}(model, env = parent.frame())
+
+\method{find_data}{svyglm}(model, env = parent.frame())
 }
 \arguments{
 \item{model}{The model object.}
