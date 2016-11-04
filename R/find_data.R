@@ -10,7 +10,7 @@
 #' 
 #' @seealso \code{\link{prediction}}
 #' @export
-find_data <- function(model, env) {
+find_data <- function(model, env = parent.frame()) {
   UseMethod("find_data")
   
 }
