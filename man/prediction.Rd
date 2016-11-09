@@ -2,6 +2,9 @@
 % Please edit documentation in R/prediction.R, R/prediction_methods.R
 \name{prediction}
 \alias{prediction}
+\alias{prediction.Arima}
+\alias{prediction.ar}
+\alias{prediction.arima0}
 \alias{prediction.clm}
 \alias{prediction.coxph}
 \alias{prediction.default}
@@ -32,6 +35,12 @@ prediction(model, data, ...)
 
 \method{prediction}{loess}(model, data = find_data(model, parent.frame()),
   type = "response", ...)
+
+\method{prediction}{ar}(model, data, ...)
+
+\method{prediction}{arima0}(model, data, ...)
+
+\method{prediction}{Arima}(model, data, ...)
 
 \method{prediction}{ivreg}(model, data = find_data(model, parent.frame()),
   ...)
@@ -83,6 +92,9 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{lm}, see \code{\link[stats]{lm}}
   \item \dQuote{glm}, see \code{\link[stats]{glm}}, \code{\link[MASS]{glm.nb}}
   \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}
+  \item \dQuote{ar}, see \code{\link[stats]{ar}}
+  \item \dQuote{Arima}, see \code{\link[stats]{arima}}
+  \item \dQuote{arima0}, see \code{\link[stats]{arima0}}
   \item \dQuote{loess}, see \code{\link[stats]{loess}}
   \item \dQuote{polr}, see \code{\link[MASS]{polr}}
   \item \dQuote{gls}, see \code{\link[nlme]{gls}}

@@ -12,6 +12,9 @@
 #'   \item \dQuote{lm}, see \code{\link[stats]{lm}}
 #'   \item \dQuote{glm}, see \code{\link[stats]{glm}}, \code{\link[MASS]{glm.nb}}
 #'   \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}
+#'   \item \dQuote{ar}, see \code{\link[stats]{ar}}
+#'   \item \dQuote{Arima}, see \code{\link[stats]{arima}}
+#'   \item \dQuote{arima0}, see \code{\link[stats]{arima0}}
 #'   \item \dQuote{loess}, see \code{\link[stats]{loess}}
 #'   \item \dQuote{polr}, see \code{\link[MASS]{polr}}
 #'   \item \dQuote{gls}, see \code{\link[nlme]{gls}}

@@ -1,6 +1,7 @@
 # CHANGES TO prediction 0.1.4
 
 * Added `mean_or_mode()` and `median_or_mode()` functions, which provide a simple way to aggregate a variable of factor or numeric type. (#3)
+* Added `prediction()` methods for various time-series model classes: "ar", "arima0", and "Arima".
 
 # CHANGES TO prediction 0.1.3
 
