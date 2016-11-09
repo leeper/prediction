@@ -1,3 +1,7 @@
+# CHANGES TO prediction 0.1.4
+
+* Added `mean_or_mode()` and `median_or_mode()` functions, which provide a simple way to aggregate a variable of factor or numeric type. (#3)
+
 # CHANGES TO prediction 0.1.3
 
 * `find_data()` is now a generic, methods for "lm", "glm", and "svyglm" classes. (#2, h/t Carl Ganz)
