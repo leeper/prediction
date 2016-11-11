@@ -16,6 +16,7 @@
 \alias{prediction.nls}
 \alias{prediction.polr}
 \alias{prediction.survreg}
+\alias{prediction.svm}
 \alias{prediction.svyglm}
 \title{Extract Predictions from a Model Object}
 \usage{
@@ -55,7 +56,10 @@ prediction(model, data, ...)
 
 \method{prediction}{gls}(model, data, ...)
 
-\method{prediction}{polr}(model, data = find_data(model, parent.frame()), ...)
+\method{prediction}{svm}(model, data = find_data(model, parent.frame()), ...)
+
+\method{prediction}{polr}(model, data = find_data(model, parent.frame()),
+  type = NULL, ...)
 
 \method{prediction}{clm}(model, data = find_data(model, parent.frame()), ...)
 }
@@ -102,6 +106,7 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{nls}, see \code{\link[stats]{nls}}
   \item \dQuote{coxph}, see \code{\link[survival]{coxph}}
   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}
+  \item \dQuote{svm}, see \code{\link[e1071]{svm}}
 }
 }
 \seealso{

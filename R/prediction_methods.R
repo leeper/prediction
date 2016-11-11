@@ -6,10 +6,6 @@ prediction.default <- function(model, data = find_data(model, parent.frame()), t
     
     type <- match.arg(type)
     
-    # reduce memory profile
-    model[["model"]] <- NULL
-    attr(model[["terms"]], ".Environment") <- NULL
-    
     # extract predicted value at input value (value can only be 1 number)
     pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
     class(pred[["fit"]]) <- c("fit", "numeric")
@@ -35,10 +31,6 @@ prediction.glm <- function(model, data = find_data(model, parent.frame()), type 
     
     type <- match.arg(type)
     
-    # reduce memory profile
-    model[["model"]] <- NULL
-    attr(model[["terms"]], ".Environment") <- NULL
-    
     # extract predicted value at input value (value can only be 1 number)
     pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
     class(pred[["fit"]]) <- c("fit", "numeric")
@@ -60,10 +52,6 @@ prediction.svyglm <- function(model, data = find_data(model, parent.frame()), ty
     data <- data
     
     type <- match.arg(type)
-    
-    # reduce memory profile
-    model[["model"]] <- NULL
-    attr(model[["terms"]], ".Environment") <- NULL
     
     # extract predicted value at input value (value can only be 1 number)
     pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
@@ -88,10 +76,6 @@ prediction.loess <- function(model, data = find_data(model, parent.frame()), typ
     data <- data
     
     type <- match.arg(type)
-    
-    # reduce memory profile
-    model[["model"]] <- NULL
-    attr(model[["terms"]], ".Environment") <- NULL
     
     # extract predicted value at input value (value can only be 1 number)
     pred <- predict(model, newdata = data, type = type, se = TRUE, ...)
@@ -161,10 +145,6 @@ prediction.ivreg <- function(model, data = find_data(model, parent.frame()), ...
     # setup data
     data <- data
     
-    # reduce memory profile
-    model[["model"]] <- NULL
-    attr(model[["terms"]], ".Environment") <- NULL
-    
     # extract predicted value at input values
     pred <- data.frame(fit = predict(model, newdata = data, ...))
     pred[["se.fit"]] <- NA_real_
@@ -185,10 +165,6 @@ prediction.ivreg <- function(model, data = find_data(model, parent.frame()), ...
 prediction.nls <- function(model, data = find_data(model, parent.frame()), ...) {
     # setup data
     data <- data
-    
-    # reduce memory profile
-    model[["model"]] <- NULL
-    attr(model[["terms"]], ".Environment") <- NULL
     
     # extract predicted value at input values
     pred <- data.frame(fit = predict(model, newdata = data, ...))
@@ -217,10 +193,6 @@ function(model,
     
     type <- match.arg(type)
     
-    # reduce memory profile
-    model[["model"]] <- NULL
-    attr(model[["terms"]], ".Environment") <- NULL
-    
     # extract predicted value at input value (value can only be 1 number)
     pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
     class(pred[["fit"]]) <- c("fit", "numeric")
@@ -242,10 +214,6 @@ prediction.coxph <- function(model, data = find_data(model, parent.frame()), typ
     data <- data
     
     type <- match.arg(type)
-    
-    # reduce memory profile
-    model[["model"]] <- NULL
-    attr(model[["terms"]], ".Environment") <- NULL
     
     # extract predicted value at input value (value can only be 1 number)
     pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
@@ -273,10 +241,6 @@ prediction.gls <- function(model, data, ...) {
     class(pred[["fit"]]) <- c("fit", class(pred[["fit"]]))
     class(pred[["se.fit"]]) <- c("se.fit", "numeric")
     
-    # reduce memory profile
-    model[["model"]] <- NULL
-    attr(model[["terms"]], ".Environment") <- NULL
-    
     # obs-x-2 data.frame of predictions
     structure(list(fitted = pred[["fit"]], 
                    se.fitted = pred[["se.fit"]]),
@@ -288,13 +252,41 @@ prediction.gls <- function(model, data, ...) {
 
 #' @rdname prediction
 #' @export
-prediction.polr <- function(model, data = find_data(model, parent.frame()), ...) {
+prediction.svm <- function(model, data = find_data(model, parent.frame()), ...) {
     # setup data
     data <- data
     
-    # reduce memory profile
-    model[["model"]] <- NULL
-    attr(model[["terms"]], ".Environment") <- NULL
+    # extract predicted value
+    if (any(grepl("prob.+", names(model)))) {
+        pred <- data.frame(fitted = predict(model, newdata = data, probability = TRUE, ...))
+        pred[["se.fit"]] <- NA_real_
+        pred <- cbind(pred, attributes(pred[["fitted"]])[["probabilities"]])
+        attr(pred[["fitted"]], "probabilities") <- NULL
+        names(pred) <- c("fitted", "se.fit", paste0("Pr(", names(pred)[-c(1L:2L)], ")"))
+    } else {
+        pred <- data.frame(fitted = predict(model, newdata = data, probability = FALSE, ...))
+        pred[["se.fit"]] <- NA_real_
+    }
+    class(pred[["fitted"]]) <- c("fit", class(pred[["fit"]]))
+    class(pred[["se.fit"]]) <- c("se.fit", "numeric")
+    
+    # obs-x-(2+nlevels) data.frame of predictions
+    structure(pred,
+              class = c("prediction", "data.frame"), 
+              row.names = seq_len(length(pred[["fit"]])),
+              model.class = class(model),
+              type = NULL)
+}
+
+#' @rdname prediction
+#' @export
+prediction.polr <- function(model, data = find_data(model, parent.frame()), type = NULL, ...) {
+    # setup data
+    data <- data
+    
+    if (!is.null(type)) {
+        warning("'type' is ignored for models of class 'polr'")
+    }
     
     # extract predicted value at input value (value can only be 1 number)
     pred <- data.frame(fit = predict(model, newdata = data, type = "class", ...))
@@ -319,10 +311,6 @@ prediction.polr <- function(model, data = find_data(model, parent.frame()), ...)
 prediction.clm <- function(model, data = find_data(model, parent.frame()), ...) {
     # setup data
     data <- data
-    
-    # reduce memory profile
-    model[["model"]] <- NULL
-    attr(model[["terms"]], ".Environment") <- NULL
     
     # extract predicted value at input value
     pred <- predict(model, newdata = data, type = "class", se.fit = FALSE, ...)
