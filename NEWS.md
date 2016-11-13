@@ -1,3 +1,7 @@
+# CHANGES TO prediction 0.1.6
+
+* Moved the `build_datalist()` function from **margins** to **prediction**. This will simplify the ability to calculate arbitrary predictions.
+
 # CHANGES TO prediction 0.1.5
 
 * Added `prediction.svm()` method for objects of class `"svm"` from **e1071**. (#1)

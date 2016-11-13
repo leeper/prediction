@@ -13,6 +13,7 @@
 \alias{prediction.ivreg}
 \alias{prediction.lm}
 \alias{prediction.loess}
+\alias{prediction.multinom}
 \alias{prediction.nls}
 \alias{prediction.polr}
 \alias{prediction.survreg}
@@ -59,6 +60,9 @@ prediction(model, data, ...)
 \method{prediction}{svm}(model, data = find_data(model, parent.frame()), ...)
 
 \method{prediction}{polr}(model, data = find_data(model, parent.frame()),
+  type = NULL, ...)
+
+\method{prediction}{multinom}(model, data = find_data(model, parent.frame()),
   type = NULL, ...)
 
 \method{prediction}{clm}(model, data = find_data(model, parent.frame()), ...)

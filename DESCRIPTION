@@ -17,6 +17,7 @@ Imports:
     utils,
     stats
 Suggests:
+    datasets,
     testthat
 Enhances:
     survival,
