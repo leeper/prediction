@@ -1,5 +1,6 @@
 # CHANGES TO prediction 0.1.6
 
+* Moved the `seq_range()` function from **margins** to **prediction**.
 * Moved the `build_datalist()` function from **margins** to **prediction**. This will simplify the ability to calculate arbitrary predictions.
 
 # CHANGES TO prediction 0.1.5
