@@ -12,6 +12,7 @@
 #' lapply(iris, mean_or_mode)
 #' 
 #' @seealso \code{\link{prediction}}
+#' @importFrom stats median
 #' @export
 mean_or_mode <- function(x) {
     if (is.factor(x) || is.logical(x) || is.ordered(x)) {

@@ -5,7 +5,6 @@
 #' @param \dots Ignored.
 #' @return A list of data.frames.
 #' @author Thomas J. Leeper
-#' @seealso \code{\link{margins}}
 #' @examples
 #' # basic examples
 #' require("datasets")
