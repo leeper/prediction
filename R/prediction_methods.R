@@ -125,7 +125,7 @@ prediction.Arima <- function(model, data, ...) {
     }
     
     # extract predicted value at input value
-    pred <- predict(object = model, newdata = data, se.fit = TRUE, ...)
+    pred <- predict(object = model, se.fit = TRUE, ...)
     names(pred) <- c("fit", "se.fit")
     class(pred[["fit"]]) <- c("fit", "numeric")
     class(pred[["se.fit"]]) <- c("se.fit", "numeric")
@@ -285,7 +285,7 @@ prediction.polr <- function(model, data = find_data(model, parent.frame()), type
     data <- data
     
     if (!is.null(type)) {
-        warning("'type' is ignored for models of class 'polr'")
+        warning("'type' is ignored for models of class 'polr' and 'multinom'")
     }
     
     # extract predicted value at input value (value can only be 1 number)
@@ -305,6 +305,10 @@ prediction.polr <- function(model, data = find_data(model, parent.frame()), type
               model.class = class(model),
               type = NULL)
 }
+
+#' @rdname prediction
+#' @export
+prediction.multinom <- prediction.polr
 
 #' @rdname prediction
 #' @export
