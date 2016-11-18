@@ -1,3 +1,7 @@
+# CHANGES TO prediction 0.1.7
+
+* Added `prediction()` and `find_data()` methods for `"merMod"` objects from **lme4**. (#1)
+
 # CHANGES TO prediction 0.1.6
 
 * Moved the `seq_range()` function from **margins** to **prediction**.

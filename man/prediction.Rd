@@ -13,6 +13,7 @@
 \alias{prediction.ivreg}
 \alias{prediction.lm}
 \alias{prediction.loess}
+\alias{prediction.merMod}
 \alias{prediction.multinom}
 \alias{prediction.nls}
 \alias{prediction.polr}
@@ -66,6 +67,9 @@ prediction(model, data, ...)
   type = NULL, ...)
 
 \method{prediction}{clm}(model, data = find_data(model, parent.frame()), ...)
+
+\method{prediction}{merMod}(model, data = find_data(model),
+  type = c("response", "link"), ...)
 }
 \arguments{
 \item{model}{A model object, perhaps returned by \code{\link[stats]{lm}} or \code{\link[stats]{glm}}.}

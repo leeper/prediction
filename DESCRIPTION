@@ -3,8 +3,8 @@ Type: Package
 Title: Tidy, Type-Safe 'prediction()' Methods
 Description: A one-function package containing 'prediction()', a type-safe alternative to 'predict()' that always returns a data frame.
 License: MIT + file LICENSE
-Version: 0.1.5
-Date: 2016-11-11
+Version: 0.1.7
+Date: 2016-11-18
 Authors@R: c(person("Thomas J.", "Leeper",
                     role = c("aut", "cre"),
                     email = "thosjleeper@gmail.com"),
@@ -21,6 +21,7 @@ Suggests:
     testthat
 Enhances:
     survival,
+    lme4,
     nlme,
     AER,
     ordinal,
