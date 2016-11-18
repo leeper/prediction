@@ -41,7 +41,7 @@
 #' 
 #' @keywords models
 #' @seealso \code{\link{mean_or_mode}}
-#' @importFrom stats predict get_all_vars
+#' @importFrom stats predict get_all_vars model.frame
 #' @export
 prediction <- function(model, data, ...) {
     UseMethod("prediction")
