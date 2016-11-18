@@ -46,3 +46,11 @@ find_data.svyglm <- function(model, ...) {
 find_data.merMod <- function(model, env = parent.frame(), ...) {
     model.frame(model)
 }
+
+#' @rdname find_data
+#' @export
+find_data.crch <- find_data.merMod
+
+#' @rdname find_data
+#' @export
+find_data.hxlr <- find_data.merMod
