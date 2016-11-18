@@ -2,8 +2,10 @@
 % Please edit documentation in R/find_data.R
 \name{find_data}
 \alias{find_data}
+\alias{find_data.crch}
 \alias{find_data.default}
 \alias{find_data.glm}
+\alias{find_data.hxlr}
 \alias{find_data.lm}
 \alias{find_data.merMod}
 \alias{find_data.svyglm}
@@ -20,6 +22,10 @@ find_data(model, ...)
 \method{find_data}{svyglm}(model, ...)
 
 \method{find_data}{merMod}(model, env = parent.frame(), ...)
+
+\method{find_data}{crch}(model, env = parent.frame(), ...)
+
+\method{find_data}{hxlr}(model, env = parent.frame(), ...)
 }
 \arguments{
 \item{model}{The model object.}

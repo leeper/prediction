@@ -23,6 +23,8 @@
 #'   \item \dQuote{coxph}, see \code{\link[survival]{coxph}}
 #'   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}
 #'   \item \dQuote{svm}, see \code{\link[e1071]{svm}}
+#'   \item \dQuote{crch}, see \code{\link[crch]{crch}}
+#'   \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
 #' }
 #' 
 #' @return A data.frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, where each row is an observation and the first two columns represent fitted/predicted values (\code{fitted}) and the standard errors thereof (\code{se.fitted}). Additional columns may be reported depending on the object class.
