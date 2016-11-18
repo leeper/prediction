@@ -7,9 +7,11 @@
 \alias{prediction.arima0}
 \alias{prediction.clm}
 \alias{prediction.coxph}
+\alias{prediction.crch}
 \alias{prediction.default}
 \alias{prediction.glm}
 \alias{prediction.gls}
+\alias{prediction.hxlr}
 \alias{prediction.ivreg}
 \alias{prediction.lm}
 \alias{prediction.loess}
@@ -70,6 +72,12 @@ prediction(model, data, ...)
 
 \method{prediction}{merMod}(model, data = find_data(model),
   type = c("response", "link"), ...)
+
+\method{prediction}{crch}(model, data = find_data(model),
+  type = c("response", "location", "scale", "quantile"), ...)
+
+\method{prediction}{hxlr}(model, data = find_data(model), type = c("class",
+  "probability", "cumprob", "location", "scale"), ...)
 }
 \arguments{
 \item{model}{A model object, perhaps returned by \code{\link[stats]{lm}} or \code{\link[stats]{glm}}.}
@@ -115,6 +123,8 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{coxph}, see \code{\link[survival]{coxph}}
   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}
   \item \dQuote{svm}, see \code{\link[e1071]{svm}}
+  \item \dQuote{crch}, see \code{\link[crch]{crch}}
+  \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
 }
 }
 \seealso{
