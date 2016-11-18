@@ -26,5 +26,6 @@ Enhances:
     AER,
     ordinal,
     survey (>= 3.31-5),
-    e1071
+    e1071,
+    crch
 RoxygenNote: 5.0.1
