@@ -2,6 +2,9 @@
 % Please edit documentation in R/prediction.R, R/prediction_methods.R
 \name{prediction}
 \alias{prediction}
+\alias{prediction.Arima}
+\alias{prediction.ar}
+\alias{prediction.arima0}
 \alias{prediction.clm}
 \alias{prediction.coxph}
 \alias{prediction.default}
@@ -10,9 +13,12 @@
 \alias{prediction.ivreg}
 \alias{prediction.lm}
 \alias{prediction.loess}
+\alias{prediction.merMod}
+\alias{prediction.multinom}
 \alias{prediction.nls}
 \alias{prediction.polr}
 \alias{prediction.survreg}
+\alias{prediction.svm}
 \alias{prediction.svyglm}
 \title{Extract Predictions from a Model Object}
 \usage{
@@ -33,6 +39,12 @@ prediction(model, data, ...)
 \method{prediction}{loess}(model, data = find_data(model, parent.frame()),
   type = "response", ...)
 
+\method{prediction}{ar}(model, data, ...)
+
+\method{prediction}{arima0}(model, data, ...)
+
+\method{prediction}{Arima}(model, data, ...)
+
 \method{prediction}{ivreg}(model, data = find_data(model, parent.frame()),
   ...)
 
@@ -46,9 +58,18 @@ prediction(model, data, ...)
 
 \method{prediction}{gls}(model, data, ...)
 
-\method{prediction}{polr}(model, data = find_data(model, parent.frame()), ...)
+\method{prediction}{svm}(model, data = find_data(model, parent.frame()), ...)
+
+\method{prediction}{polr}(model, data = find_data(model, parent.frame()),
+  type = NULL, ...)
+
+\method{prediction}{multinom}(model, data = find_data(model, parent.frame()),
+  type = NULL, ...)
 
 \method{prediction}{clm}(model, data = find_data(model, parent.frame()), ...)
+
+\method{prediction}{merMod}(model, data = find_data(model),
+  type = c("response", "link"), ...)
 }
 \arguments{
 \item{model}{A model object, perhaps returned by \code{\link[stats]{lm}} or \code{\link[stats]{glm}}.}
@@ -62,8 +83,15 @@ prediction(model, data, ...)
 \value{
 A data.frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, where each row is an observation and the first two columns represent fitted/predicted values (\code{fitted}) and the standard errors thereof (\code{se.fitted}). Additional columns may be reported depending on the object class.
 require("datasets")
-x <- lm(mpg ~ cyl * hp + wt, data = mtcars)
+x <- lm(Petal.Width ~ Sepal.Length * Sepal.Width * Species, data = iris)
+# prediction for every case
 prediction(x)
+
+# prediction for first case
+prediction(x, iris[1,])
+
+# prediction at means/modes of input variables
+prediction(x, lapply(iris, mean_or_mode))
 }
 \description{
 Extract predicted values via \code{\link[stats]{predict}} from a model object, conditional on data
@@ -75,6 +103,10 @@ Methods are currently implemented for the following object classes:
 \itemize{
   \item \dQuote{lm}, see \code{\link[stats]{lm}}
   \item \dQuote{glm}, see \code{\link[stats]{glm}}, \code{\link[MASS]{glm.nb}}
+  \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}
+  \item \dQuote{ar}, see \code{\link[stats]{ar}}
+  \item \dQuote{Arima}, see \code{\link[stats]{arima}}
+  \item \dQuote{arima0}, see \code{\link[stats]{arima0}}
   \item \dQuote{loess}, see \code{\link[stats]{loess}}
   \item \dQuote{polr}, see \code{\link[MASS]{polr}}
   \item \dQuote{gls}, see \code{\link[nlme]{gls}}
@@ -82,7 +114,11 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{nls}, see \code{\link[stats]{nls}}
   \item \dQuote{coxph}, see \code{\link[survival]{coxph}}
   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}
+  \item \dQuote{svm}, see \code{\link[e1071]{svm}}
 }
+}
+\seealso{
+\code{\link{mean_or_mode}}
 }
 \keyword{models}
 

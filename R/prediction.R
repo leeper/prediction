@@ -11,6 +11,10 @@
 #' \itemize{
 #'   \item \dQuote{lm}, see \code{\link[stats]{lm}}
 #'   \item \dQuote{glm}, see \code{\link[stats]{glm}}, \code{\link[MASS]{glm.nb}}
+#'   \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}
+#'   \item \dQuote{ar}, see \code{\link[stats]{ar}}
+#'   \item \dQuote{Arima}, see \code{\link[stats]{arima}}
+#'   \item \dQuote{arima0}, see \code{\link[stats]{arima0}}
 #'   \item \dQuote{loess}, see \code{\link[stats]{loess}}
 #'   \item \dQuote{polr}, see \code{\link[MASS]{polr}}
 #'   \item \dQuote{gls}, see \code{\link[nlme]{gls}}
@@ -18,14 +22,23 @@
 #'   \item \dQuote{nls}, see \code{\link[stats]{nls}}
 #'   \item \dQuote{coxph}, see \code{\link[survival]{coxph}}
 #'   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}
+#'   \item \dQuote{svm}, see \code{\link[e1071]{svm}}
 #' }
 #' 
 #' @return A data.frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, where each row is an observation and the first two columns represent fitted/predicted values (\code{fitted}) and the standard errors thereof (\code{se.fitted}). Additional columns may be reported depending on the object class.
 #' require("datasets")
-#' x <- lm(mpg ~ cyl * hp + wt, data = mtcars)
+#' x <- lm(Petal.Width ~ Sepal.Length * Sepal.Width * Species, data = iris)
+#' # prediction for every case
 #' prediction(x)
 #' 
+#' # prediction for first case
+#' prediction(x, iris[1,])
+#' 
+#' # prediction at means/modes of input variables
+#' prediction(x, lapply(iris, mean_or_mode))
+#' 
 #' @keywords models
+#' @seealso \code{\link{mean_or_mode}}
 #' @importFrom stats predict get_all_vars
 #' @export
 prediction <- function(model, data, ...) {

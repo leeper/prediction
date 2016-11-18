@@ -5,23 +5,28 @@
 \alias{find_data.default}
 \alias{find_data.glm}
 \alias{find_data.lm}
+\alias{find_data.merMod}
 \alias{find_data.svyglm}
 \title{Extract data from a model object}
 \usage{
-find_data(model, env = parent.frame())
+find_data(model, ...)
 
-\method{find_data}{default}(model, env = parent.frame())
+\method{find_data}{default}(model, env = parent.frame(), ...)
 
-\method{find_data}{lm}(model, env = parent.frame())
+\method{find_data}{lm}(model, env = parent.frame(), ...)
 
-\method{find_data}{glm}(model, env = parent.frame())
+\method{find_data}{glm}(model, env = parent.frame(), ...)
 
-\method{find_data}{svyglm}(model, env = parent.frame())
+\method{find_data}{svyglm}(model, ...)
+
+\method{find_data}{merMod}(model, env = parent.frame(), ...)
 }
 \arguments{
 \item{model}{The model object.}
 
 \item{env}{An environment in which to look for the \code{data} argument to the modelling call.}
+
+\item{\dots}{Additional arguments passed to methods.}
 }
 \value{
 A data.frame, typically with one column unless the variable is a factor with more than two levels.
