@@ -49,8 +49,8 @@ find_data.merMod <- function(model, env = parent.frame(), ...) {
 
 #' @rdname find_data
 #' @export
-find_data.crch <- find_data.merMod
+find_data.crch <- find_data.default
 
 #' @rdname find_data
 #' @export
-find_data.hxlr <- find_data.merMod
+find_data.hxlr <- find_data.default
