@@ -30,6 +30,9 @@ str(build_datalist(head(mtcars, at = list(cyl = c(4,6), wt = c(1,2,3)))))
 \author{
 Thomas J. Leeper
 }
+\seealso{
+\code{\link{find_data}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
+}
 \keyword{data}
 \keyword{manip}
 

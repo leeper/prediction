@@ -1,5 +1,9 @@
 # CHANGES TO prediction 0.1.7
 
+* Added `prediction()` and `find_data()` methods for `"crch"` `"hxlr"` objects from **crch**. (#4, h/t Carl Ganz)
+
+# CHANGES TO prediction 0.1.7
+
 * Added `prediction()` and `find_data()` methods for `"merMod"` objects from **lme4**. (#1)
 
 # CHANGES TO prediction 0.1.6

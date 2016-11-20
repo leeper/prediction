@@ -9,7 +9,7 @@
 #' x <- lm(mpg ~ cyl * hp + wt, data = head(mtcars))
 #' find_data(x)
 #' 
-#' @seealso \code{\link{prediction}}
+#' @seealso \code{\link{prediction}}, \code{\link{build_datalist}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
 #' @export
 find_data <- function(model, ...) {
     UseMethod("find_data")
@@ -40,8 +40,8 @@ find_data.svyglm <- function(model, ...) {
     data <- model[["data"]]
     data
 }
-
 #' @rdname find_data
+#' @importFrom stats model.frame
 #' @export
 find_data.merMod <- function(model, env = parent.frame(), ...) {
     model.frame(model)

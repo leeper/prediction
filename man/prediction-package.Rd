@@ -2,7 +2,6 @@
 % Please edit documentation in R/prediction-package.R
 \docType{package}
 \name{prediction-package}
-\alias{margins-package}
 \alias{prediction-package}
 \title{Tidy, Type-safe \code{prediction()} Methods}
 \description{

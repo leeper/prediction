@@ -28,6 +28,7 @@
 #' }
 #' 
 #' @return A data.frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, where each row is an observation and the first two columns represent fitted/predicted values (\code{fitted}) and the standard errors thereof (\code{se.fitted}). Additional columns may be reported depending on the object class.
+#' @examples
 #' require("datasets")
 #' x <- lm(Petal.Width ~ Sepal.Length * Sepal.Width * Species, data = iris)
 #' # prediction for every case
@@ -40,11 +41,34 @@
 #' prediction(x, lapply(iris, mean_or_mode))
 #' 
 #' @keywords models
+<<<<<<< HEAD
 #' @seealso \code{\link{mean_or_mode}}
+=======
+#' @seealso \code{\link{find_data}}, \code{\link{build_datalist}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
+>>>>>>> upstream/master
 #' @importFrom stats predict get_all_vars model.frame
 #' @export
 prediction <- function(model, data, ...) {
     UseMethod("prediction")
+}
+
+#' @rdname prediction
+#' @export
+prediction.default <- function(model, data = find_data(model, parent.frame()), type = "response", ...) {
+    # setup data
+    data <- data
+    
+    # extract predicted value at input value (value can only be 1 number)
+    pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
+    class(pred[["fit"]]) <- c("fit", "numeric")
+    class(pred[["se.fit"]]) <- c("se.fit", "numeric")
+    
+    # obs-x-2 data.frame of predictions
+    structure(list(fitted = pred[["fit"]], 
+                   se.fitted = pred[["se.fit"]]), 
+              class = c("prediction", "data.frame"), 
+              row.names = seq_len(length(pred[["fit"]])),
+              type = type)
 }
 
 #' @importFrom utils head
