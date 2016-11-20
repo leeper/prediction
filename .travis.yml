@@ -3,5 +3,12 @@ sudo: false
 cache: packages
 r_packages:
 - covr
+- survival
+- lme4
+- nlme
+- AER
+- ordinal
+- survey
+- e1071
 after_success:
 - Rscript -e 'library("covr");codecov()'

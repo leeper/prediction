@@ -22,7 +22,7 @@ Some specific types of changes that you might make are:
  
  3. New functionality. This is fine, but should be discussed on [the GitHub issues page](https://github.com/leeper/prediction/issues) before submitting a pull request. Note, in particular, that contributions of new `prediction()` methods, should comply with following:
  
-   - Methods should be added to the [`R/prediction_methods.R`](https://github.com/leeper/prediction/blob/master/R/prediction_methods.R) file.
+   - Methods should be added to their own file in the [`R/`](https://github.com/leeper/prediction/tree/master/R/) directory, with a file name corresponding to the function name.
    - Any packages that these methods work for should be added to the `Enhances` field of the [`DESCRIPTION`](https://github.com/leeper/prediction/blob/master/DESCRIPTION) file. If methods require imports from a package they are supporting, they should still be listed in `Enhances` and call code should be made conditional on a `requireNamespace()` statement in the method.
    - If tests are added, these should similarly be conditional on a `requireNamespace()` statement and the required packages should be added to [`.travis.yml`](https://github.com/leeper/prediction/blob/master/.travis.yml) under the `r_packages:` heading so that they can be used during testing on Travis-CI.
  

@@ -23,6 +23,8 @@
 #'   \item \dQuote{coxph}, see \code{\link[survival]{coxph}}
 #'   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}
 #'   \item \dQuote{svm}, see \code{\link[e1071]{svm}}
+#'   \item \dQuote{crch}, see \code{\link[crch]{crch}}
+#'   \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
 #' }
 #' 
 #' @return A data.frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, where each row is an observation and the first two columns represent fitted/predicted values (\code{fitted}) and the standard errors thereof (\code{se.fitted}). Additional columns may be reported depending on the object class.
@@ -39,10 +41,29 @@
 #' 
 #' @keywords models
 #' @seealso \code{\link{mean_or_mode}}
-#' @importFrom stats predict get_all_vars
+#' @importFrom stats predict get_all_vars model.frame
 #' @export
 prediction <- function(model, data, ...) {
     UseMethod("prediction")
+}
+
+#' @rdname prediction
+#' @export
+prediction.default <- function(model, data = find_data(model, parent.frame()), type = "response", ...) {
+    # setup data
+    data <- data
+    
+    # extract predicted value at input value (value can only be 1 number)
+    pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
+    class(pred[["fit"]]) <- c("fit", "numeric")
+    class(pred[["se.fit"]]) <- c("se.fit", "numeric")
+    
+    # obs-x-2 data.frame of predictions
+    structure(list(fitted = pred[["fit"]], 
+                   se.fitted = pred[["se.fit"]]), 
+              class = c("prediction", "data.frame"), 
+              row.names = seq_len(length(pred[["fit"]])),
+              type = type)
 }
 
 #' @importFrom utils head
