@@ -78,12 +78,6 @@ prediction(model, data, ...)
 
 \method{prediction}{svyglm}(model, data = find_data(model, parent.frame()),
   type = c("response", "link"), ...)
-
-\method{prediction}{crch}(model, data = find_data(model),
-  type = c("response", "location", "scale", "quantile"), ...)
-
-\method{prediction}{hxlr}(model, data = find_data(model), type = c("class",
-  "probability", "cumprob", "location", "scale"), ...)
 }
 \arguments{
 \item{model}{A model object, perhaps returned by \code{\link[stats]{lm}} or \code{\link[stats]{glm}}.}

@@ -41,11 +41,7 @@
 #' prediction(x, lapply(iris, mean_or_mode))
 #' 
 #' @keywords models
-<<<<<<< HEAD
-#' @seealso \code{\link{mean_or_mode}}
-=======
 #' @seealso \code{\link{find_data}}, \code{\link{build_datalist}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
->>>>>>> upstream/master
 #' @importFrom stats predict get_all_vars model.frame
 #' @export
 prediction <- function(model, data, ...) {
