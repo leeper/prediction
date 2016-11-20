@@ -28,6 +28,7 @@
 #' }
 #' 
 #' @return A data.frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, where each row is an observation and the first two columns represent fitted/predicted values (\code{fitted}) and the standard errors thereof (\code{se.fitted}). Additional columns may be reported depending on the object class.
+#' @examples
 #' require("datasets")
 #' x <- lm(Petal.Width ~ Sepal.Length * Sepal.Width * Species, data = iris)
 #' # prediction for every case
@@ -40,7 +41,7 @@
 #' prediction(x, lapply(iris, mean_or_mode))
 #' 
 #' @keywords models
-#' @seealso \code{\link{mean_or_mode}}
+#' @seealso \code{\link{find_data}}, \code{\link{build_datalist}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
 #' @importFrom stats predict get_all_vars model.frame
 #' @export
 prediction <- function(model, data, ...) {

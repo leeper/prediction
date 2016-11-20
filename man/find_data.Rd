@@ -47,6 +47,6 @@ find_data(x)
 
 }
 \seealso{
-\code{\link{prediction}}
+\code{\link{prediction}}, \code{\link{build_datalist}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
 }
 
