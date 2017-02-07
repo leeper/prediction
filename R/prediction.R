@@ -4,6 +4,7 @@
 #' @param model A model object, perhaps returned by \code{\link[stats]{lm}} or \code{\link[stats]{glm}}.
 #' @param data A data.frame over which to calculate marginal effects. If missing, \code{\link{find_data}} is used to specify the data frame.
 #' @param type A character string indicating the type of marginal effects to estimate. Mostly relevant for non-linear models, where the reasonable options are \dQuote{response} (the default) or \dQuote{link} (i.e., on the scale of the linear predictor in a GLM). For models of class \dQuote{polr} (from \code{\link[MASS]{polr}}), possible values are \dQuote{class} or \dQuote{probs}; both are returned.
+#' @param bind A boolean indicating whether the dataset used should be bound the predicted values.
 #' @param \dots Additional arguments passed to \code{\link[stats]{predict}} methods.
 #' @details This function is simply a wrapper around \code{\link[stats]{predict}} that returns a data frame containing predicted values with respect to all variables specified in \code{data}.
 #' 
@@ -40,12 +41,26 @@
 #' # prediction at means/modes of input variables
 #' prediction(x, lapply(iris, mean_or_mode))
 #' 
+#' # bind predictions to data used for predictions
+#' prediction(x, bind=TRUE)
+#' 
 #' @keywords models
 #' @seealso \code{\link{find_data}}, \code{\link{build_datalist}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
 #' @importFrom stats predict get_all_vars model.frame
 #' @export
-prediction <- function(model, data, ...) {
-    UseMethod("prediction")
+prediction <- function(model, data, bind = FALSE, ...) {
+   # wrap prediction_() with additional logic
+   predictions <- prediction_(model, data, ...)
+   
+   # bind the results to the original data 
+   if (bind == T){
+      predictions <- cbind(data, predictions)
+    } 
+   predictions
+}
+
+prediction_ <- function(model, data, ...){
+  UseMethod("prediction")
 }
 
 #' @rdname prediction
