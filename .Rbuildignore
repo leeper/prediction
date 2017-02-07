@@ -17,3 +17,5 @@ CONTRIBUTING.md
 /vignettes/*.sty
 /vignettes/*.tex
 ^data-raw$
+^.*\.Rproj$
+^\.Rproj\.user$

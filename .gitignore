@@ -9,3 +9,4 @@ README.html
 /vignettes/*.blg
 /vignettes/figure/
 /vignettes/*.bib.bak
+.Rproj.user
