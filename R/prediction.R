@@ -48,7 +48,7 @@
 #' @seealso \code{\link{find_data}}, \code{\link{build_datalist}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
 #' @importFrom stats predict get_all_vars model.frame
 #' @export
-prediction <- function(model, data, bind = FALSE, ...) {
+prediction <- function(model, data, bind = TRUE, ...) {
    # wrap prediction_() with additional logic
    predictions <- prediction_(model, data, ...)
    
