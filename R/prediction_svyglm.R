@@ -14,8 +14,8 @@ prediction.svyglm <- function(model, data = find_data(model, parent.frame()), ty
     class(pred[["fitted"]]) <- c("fit", "numeric")
     class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     
-    # obs-x-2 data.frame of predictions
-    structure(pred, 
+    # obs-x-(ncol(data)+2) data.frame of predictions
+    structure(cbind(data, pred), 
               class = c("prediction", "data.frame"), 
               row.names = seq_len(length(pred[["fitted"]])),
               model.class = class(model),

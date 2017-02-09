@@ -20,12 +20,13 @@ Suggests:
     datasets,
     testthat
 Enhances:
-    survival,
+    AER,
+    crch,
+    e1071,
+    glmx,
     lme4,
     nlme,
-    AER,
     ordinal,
     survey (>= 3.31-5),
-    e1071,
-    crch
+    survival
 RoxygenNote: 5.0.1
