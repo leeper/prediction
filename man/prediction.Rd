@@ -124,21 +124,25 @@ This function is simply a wrapper around \code{\link[stats]{predict}} that retur
 Methods are currently implemented for the following object classes:
 \itemize{
   \item \dQuote{lm}, see \code{\link[stats]{lm}}
-  \item \dQuote{glm}, see \code{\link[stats]{glm}}, \code{\link[MASS]{glm.nb}}
-  \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}
+  \item \dQuote{glm}, see \code{\link[stats]{glm}}, \code{\link[MASS]{glm.nb}}, \code{\link[glmx]{glmx}}, \code{\link[glmx]{hetglm}}
   \item \dQuote{ar}, see \code{\link[stats]{ar}}
   \item \dQuote{Arima}, see \code{\link[stats]{arima}}
   \item \dQuote{arima0}, see \code{\link[stats]{arima0}}
-  \item \dQuote{loess}, see \code{\link[stats]{loess}}
-  \item \dQuote{polr}, see \code{\link[MASS]{polr}}
-  \item \dQuote{gls}, see \code{\link[nlme]{gls}}
-  \item \dQuote{ivreg}, see \code{\link[AER]{ivreg}}
-  \item \dQuote{nls}, see \code{\link[stats]{nls}}
+  \item \dQuote{betareg}, see \code{\link[betareg]{betareg}}
   \item \dQuote{coxph}, see \code{\link[survival]{coxph}}
+  \item \dQuote{crch}, see \code{\link[crch]{crch}}
+  \item \dQuote{gam}, see \code{\link[gam]{gam}}
+  \item \dQuote{gls}, see \code{\link[nlme]{gls}}
+  \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
+  \item \dQuote{ivreg}, see \code{\link[AER]{ivreg}}
+  \item \dQuote{loess}, see \code{\link[stats]{loess}}
+  \item \dQuote{nls}, see \code{\link[stats]{nls}}
+  \item \dQuote{polr}, see \code{\link[MASS]{polr}}
+  \item \dQuote{rq}, see \code{\link[quantreg]{rq}}
+  \item \dQuote{selection}, see \code{\link[sampleSelection]{selection}}
   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}
   \item \dQuote{svm}, see \code{\link[e1071]{svm}}
-  \item \dQuote{crch}, see \code{\link[crch]{crch}}
-  \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
+  \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}
 }
 }
 \examples{

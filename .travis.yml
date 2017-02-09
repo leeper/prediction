@@ -2,13 +2,19 @@ language: r
 sudo: false
 cache: packages
 r_packages:
+- AER
+- betareg
 - covr
-- survival
+- crch
+- e1071
+- gam
+- glmx
 - lme4
 - nlme
-- AER
 - ordinal
+- quantreg
+- sampleSelection
 - survey
-- e1071
+- survival
 after_success:
 - Rscript -e 'library("covr");codecov()'

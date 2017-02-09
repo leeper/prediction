@@ -37,7 +37,7 @@
 
 # CHANGES TO prediction 0.1.2
 
-* Added support for "svglm" class from the **survey** package. (#1)
+* Added support for "svyglm" class from the **survey** package. (#1)
 * Added tentative support for "clm" class from the **ordinal** package. (#1)
 
 # CHANGES TO prediction 0.1.0
