@@ -1,6 +1,9 @@
 # CHANGES TO prediction 0.1.9
 
+* `prediction()` methods now return the value of `data` as part of the response data frame. (#8, h/t Ben Whalley)
 * Slight change to `find_data()` methods for `"crch"` and `"hxlr"`. (#5)
+* Added `prediction.glmx()` and `prediction.hetglm()` methods from **glmx**. (#1)
+* Expanded basic test suite.
 
 # CHANGES TO prediction 0.1.8
 
