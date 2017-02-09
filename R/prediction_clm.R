@@ -21,7 +21,7 @@ prediction.clm <- function(model, data = find_data(model, parent.frame()), ...) 
     names(probs.se) <- paste0("se.Pr(", seq_len(ncol(probs)), ")")    
     
     # obs-x-(ncol(data)+2) data.frame of predictions
-    structure(cbind(data, pred, probs, probs.se),
+    structure(if (missing(data)) cbind(pred, probs, probs.se) else cbind(data, pred, probs, probs.se),
               class = c("prediction", "data.frame"), 
               row.names = seq_len(length(pred[["fitted"]])),
               model.class = class(model),

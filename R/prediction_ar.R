@@ -14,7 +14,7 @@ prediction.ar <- function(model, data, ...) {
     class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     
     # obs-x-(ncol(data)+2) data.frame of predictions
-    structure(cbind(data, pred), 
+    structure(if (missing(data)) data.frame(pred) else cbind(data, pred), 
               class = c("prediction", "data.frame"), 
               row.names = seq_len(length(pred[["fitted"]])),
               model.class = class(model),

@@ -23,7 +23,7 @@ prediction.polr <- function(model, data = find_data(model, parent.frame()), type
     names(probs) <- paste0("Pr(", names(probs), ")")
     
     # obs-x-(ncol(data)+2+nlevels(outcome)) data.frame of predictions
-    structure(cbind(data, pred, probs),
+    structure(if (missing(data)) cbind(pred, probs) else cbind(data, pred, probs),
               class = c("prediction", "data.frame"), 
               row.names = seq_len(length(pred[["fitted"]])),
               model.class = class(model),
