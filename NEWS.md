@@ -1,4 +1,8 @@
-# CHANGES TO prediction 0.1.7
+# CHANGES TO prediction 0.1.9
+
+* Slight change to `find_data()` methods for `"crch"` and `"hxlr"`. (#5)
+
+# CHANGES TO prediction 0.1.8
 
 * Added `prediction()` and `find_data()` methods for `"crch"` `"hxlr"` objects from **crch**. (#4, h/t Carl Ganz)
 
