@@ -28,7 +28,6 @@ library("prediction")
 p <- prediction(x)
 class(p)
 head(p)
-str(p)
 ```
 
 The output always contains the original data (i.e., either data found using the `find_data()` function or passed to the `data` argument to `prediction()`). This makes it much simpler to pass predictions to, e.g., further summary or plotting functions.

@@ -2,7 +2,10 @@
 
 * `prediction()` methods now return the value of `data` as part of the response data frame. (#8, h/t Ben Whalley)
 * Slight change to `find_data()` methods for `"crch"` and `"hxlr"`. (#5)
-* Added `prediction.glmx()` and `prediction.hetglm()` methods from **glmx**. (#1)
+* Added `prediction.glmx()` and `prediction.hetglm()` methods for "glmx" and "hetglm" objects from **glmx**. (#1)
+* Added `prediction.betareg()` method for "betareg" objects from **betareg**. (#1)
+* Added `prediction.rq()` method for "rq" objects from **quantreg**. (#1)
+* Added `prediction.gam()` method for "gam" objects from **gam**. (#1)
 * Expanded basic test suite.
 
 # CHANGES TO prediction 0.1.8

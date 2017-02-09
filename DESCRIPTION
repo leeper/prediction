@@ -29,6 +29,8 @@ Enhances:
     lme4,
     nlme,
     ordinal,
+    quantreg,
+    sampleSelection,
     survey (>= 3.31-5),
     survival
 RoxygenNote: 5.0.1
