@@ -1,10 +1,14 @@
 #' @rdname prediction
 #' @export
-prediction.gam <- function(model, data = find_data(model, parent.frame()), type = c("response", "link", "terms"), ...) {
+prediction.gam <- 
+function(model, 
+         data = find_data(model, parent.frame()), 
+         type = c("response", "link", "terms"), 
+         ...) {
     
     type <- match.arg(type)
     
-    # extract predicted value at input value (value can only be 1 number)
+    # extract predicted value
     if (missing(data)) {
         pred <- predict(model, type = type, se.fit = TRUE, ...)
         pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["fit"]])
@@ -13,7 +17,6 @@ prediction.gam <- function(model, data = find_data(model, parent.frame()), type 
         pred <- data.frame(fitted = predict(model, newdata = data, type = type, se.fit = FALSE, ...), 
                            se.fitted = NA_real_)
     }
-    names(pred) <- c("fitted", "se.fitted")
     class(pred[["fitted"]]) <- c("fit", "numeric")
     class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     

@@ -51,11 +51,14 @@ prediction <- function(model, data, ...) {
 #' @rdname prediction
 #' @export
 prediction.default <- function(model, data = find_data(model, parent.frame()), type = "response", ...) {
-    # setup data
-    data <- data
     
-    # extract predicted value at input value (value can only be 1 number)
-    pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
+    # extract predicted values
+    if (missing(data)) {
+        pred <- predict(model, type = type, se.fit = TRUE, ...)
+    } else {
+        data <- data
+        pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
+    }
     class(pred[["fit"]]) <- c("fit", "numeric")
     class(pred[["se.fit"]]) <- c("se.fit", "numeric")
     names(pred)[names(pred) == "fit"] <- "fitted"
@@ -64,7 +67,7 @@ prediction.default <- function(model, data = find_data(model, parent.frame()), t
     # obs-x-(ncol(data)+2) data.frame of predictions
     structure(cbind(data, pred), 
               class = c("prediction", "data.frame"), 
-              row.names = seq_len(length(pred[["fit"]])),
+              row.names = seq_len(length(pred[["fitted"]])),
               type = type)
 }
 

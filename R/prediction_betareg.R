@@ -8,15 +8,15 @@ function(model,
     
     type <- match.arg(type)
     
-    # extract predicted value at input value (value can only be 1 number)
+    # extract predicted value
     if (missing(data)) {
-        pred <- data.frame(fitted = predict(model, type = type, ...), se.fitted = NA_real_)
+        pred <- data.frame(fitted = predict(model, type = type, ...), 
+                           se.fitted = NA_real_)
     } else {
         data <- data
         pred <- data.frame(fitted = predict(model, newdata = data, type = type, ...), 
                            se.fitted = NA_real_)
     }
-    names(pred) <- c("fitted", "se.fitted")
     class(pred[["fitted"]]) <- c("fit", "numeric")
     class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     

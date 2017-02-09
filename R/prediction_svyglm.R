@@ -1,13 +1,20 @@
 #' @rdname prediction
 #' @export
-prediction.svyglm <- function(model, data = find_data(model, parent.frame()), type = c("response", "link"), ...) {
-    # setup data
-    data <- data
+prediction.svyglm <- 
+function(model, 
+         data = find_data(model, parent.frame()), 
+         type = c("response", "link"), 
+         ...) {
     
     type <- match.arg(type)
     
-    # extract predicted value at input value (value can only be 1 number)
-    pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
+    # extract predicted values
+    if (missing(data)) {
+        pred <- predict(model, type = type, se.fit = TRUE, ...)
+    } else {
+        data <- data
+        pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
+    }
     pred <- list(fitted = unclass(pred), 
                  se.fitted = sqrt(unname(attributes(pred)[["var"]])))
     attributes(pred[["fitted"]]) <- NULL
