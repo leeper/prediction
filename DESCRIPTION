@@ -21,8 +21,10 @@ Suggests:
     testthat
 Enhances:
     AER,
+    betareg,
     crch,
     e1071,
+    gam,
     glmx,
     lme4,
     nlme,
