@@ -129,6 +129,7 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{Arima}, see \code{\link[stats]{arima}}
   \item \dQuote{arima0}, see \code{\link[stats]{arima0}}
   \item \dQuote{betareg}, see \code{\link[betareg]{betareg}}
+  \item \dQuote{clm}, see \code{\link[ordinal]{clm}}
   \item \dQuote{coxph}, see \code{\link[survival]{coxph}}
   \item \dQuote{crch}, see \code{\link[crch]{crch}}
   \item \dQuote{gam}, see \code{\link[gam]{gam}}

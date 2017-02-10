@@ -57,6 +57,32 @@ head(p)
 
 The output always contains the original data (i.e., either data found using the `find_data()` function or passed to the `data` argument to `prediction()`). This makes it much simpler to pass predictions to, e.g., further summary or plotting functions.
 
+## Supported model classes
+
+The currently supported model classes are:
+
+ - "lm" from `stats::lm()`
+ - "glm" from `stats::glm()`, `MASS::glm.nb()`, `glmx::glmx()`, `glmx::hetglm()`
+ - "ar" from `stats::ar()`
+ - "Arima" from `stats::arima()`
+ - "arima0" from `stats::arima0()`
+ - "betareg" from `betareg::betareg()`
+ - "clm" from `ordinal::clm()`
+ - "coxph" from `survival::coxph()`
+ - "crch" from `crch::crch()`
+ - "gam" from `gam::gam()`
+ - "gls" from `nlme::gls()`
+ - "hxlr" from `crch::hxlr()`
+ - "ivreg" from `AER::ivreg()`
+ - "loess" from `stats::loess()`
+ - "nls" from `stats::nls()`
+ - "polr" from `MASS::polr()`
+ - "rq" from `quantreg::rq()`
+ - "selection" from `sampleSelection::selection()`
+ - "survreg" from `survival::survreg()`
+ - "svm" from `e1071::svm()`
+ - "svyglm" from `survey::svyglm()`
+
 ## Requirements and Installation
 
 [![CRAN](http://www.r-pkg.org/badges/version/prediction)](https://cran.r-project.org/package=prediction)
