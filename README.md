@@ -76,6 +76,7 @@ The currently supported model classes are:
  - "ivreg" from `AER::ivreg()`
  - "loess" from `stats::loess()`
  - "nls" from `stats::nls()`
+ - "nnet" from `nnet::nnet()`, `nnet::multinom()`
  - "polr" from `MASS::polr()`
  - "rq" from `quantreg::rq()`
  - "selection" from `sampleSelection::selection()`

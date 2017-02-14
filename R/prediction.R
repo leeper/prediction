@@ -24,6 +24,7 @@
 #'   \item \dQuote{ivreg}, see \code{\link[AER]{ivreg}}
 #'   \item \dQuote{loess}, see \code{\link[stats]{loess}}
 #'   \item \dQuote{nls}, see \code{\link[stats]{nls}}
+#'   \item \dQuote{nnet}, see \code{\link[nnet]{nnet}}
 #'   \item \dQuote{polr}, see \code{\link[MASS]{polr}}
 #'   \item \dQuote{rq}, see \code{\link[quantreg]{rq}}
 #'   \item \dQuote{selection}, see \code{\link[sampleSelection]{selection}}

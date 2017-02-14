@@ -1,3 +1,7 @@
+# CHANGES TO prediction 0.1.10
+
+* Added `prediction.nnet()` method for "nnet" and "multinom" objects from **nnet**. (#1)
+
 # CHANGES TO prediction 0.1.9
 
 * `prediction()` methods now return the value of `data` as part of the response data frame. (#8, h/t Ben Whalley)
