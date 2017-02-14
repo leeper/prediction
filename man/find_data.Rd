@@ -2,13 +2,13 @@
 % Please edit documentation in R/find_data.R
 \name{find_data}
 \alias{find_data}
-\alias{find_data.crch}
 \alias{find_data.default}
-\alias{find_data.glm}
-\alias{find_data.hxlr}
 \alias{find_data.lm}
-\alias{find_data.merMod}
+\alias{find_data.glm}
 \alias{find_data.svyglm}
+\alias{find_data.merMod}
+\alias{find_data.crch}
+\alias{find_data.hxlr}
 \title{Extract data from a model object}
 \usage{
 find_data(model, ...)
@@ -30,9 +30,9 @@ find_data(model, ...)
 \arguments{
 \item{model}{The model object.}
 
-\item{env}{An environment in which to look for the \code{data} argument to the modelling call.}
-
 \item{\dots}{Additional arguments passed to methods.}
+
+\item{env}{An environment in which to look for the \code{data} argument to the modelling call.}
 }
 \value{
 A data.frame, typically with one column unless the variable is a factor with more than two levels.
@@ -49,4 +49,3 @@ find_data(x)
 \seealso{
 \code{\link{prediction}}, \code{\link{build_datalist}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
 }
-

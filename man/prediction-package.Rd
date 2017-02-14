@@ -7,11 +7,10 @@
 \description{
 This package provides tidy utilities for dealing with model predictions. The main function is \code{\link{prediction}}, a type-safe wrapper around \code{\link[stats]{predict}} that always returns a data frame. Other functions, such as \code{\link{find_data}}, \code{\link{mean_or_mode}}, and so forth provide some convenience tools for generating predictions.
 }
-\author{
-Thomas J. Leeper
-}
 \seealso{
 \code{\link{prediction}}
 }
+\author{
+Thomas J. Leeper
+}
 \keyword{package}
-

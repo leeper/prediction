@@ -20,4 +20,3 @@ Define a sequence of evenly spaced values from the minimum to the maximum of a v
 \examples{
 seq_range(1:5, n = 2)
 }
-

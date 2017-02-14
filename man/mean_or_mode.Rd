@@ -30,4 +30,3 @@ lapply(iris, mean_or_mode)
 \seealso{
 \code{\link{prediction}}
 }
-
