@@ -46,13 +46,13 @@ head(p)
 ```
 
 ```
-##     fitted se.fitted
-## 1 21.90488 0.6927034
-## 2 21.10933 0.6266557
-## 3 25.64753 0.6652076
-## 4 20.04859 0.6041400
-## 5 17.25445 0.7436172
-## 6 19.53360 0.6436862
+##    mpg cyl disp  hp drat    wt  qsec vs am gear carb   fitted se.fitted
+## 1 21.0   6  160 110 3.90 2.620 16.46  0  1    4    4 21.90488 0.6927034
+## 2 21.0   6  160 110 3.90 2.875 17.02  0  1    4    4 21.10933 0.6266557
+## 3 22.8   4  108  93 3.85 2.320 18.61  1  1    4    1 25.64753 0.6652076
+## 4 21.4   6  258 110 3.08 3.215 19.44  1  0    3    1 20.04859 0.6041400
+## 5 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2 17.25445 0.7436172
+## 6 18.1   6  225 105 2.76 3.460 20.22  1  0    3    1 19.53360 0.6436862
 ```
 
 The output always contains the original data (i.e., either data found using the `find_data()` function or passed to the `data` argument to `prediction()`). This makes it much simpler to pass predictions to, e.g., further summary or plotting functions.
