@@ -6,7 +6,6 @@ prediction.ar <- function(model, data, ...) {
     if (missing(data)) {
         pred <- predict(object = model, se.fit = TRUE, ...)
     } else {
-        data <- data
         pred <- predict(object = model, newdata = data, se.fit = TRUE, ...)
     }
     names(pred) <- c("fitted", "se.fitted")
@@ -14,7 +13,8 @@ prediction.ar <- function(model, data, ...) {
     class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     
     # obs-x-(ncol(data)+2) data.frame of predictions
-    structure(if (missing(data)) data.frame(pred) else cbind(data, pred), 
+    data <- data
+    structure(if (!length(data)) data.frame(pred) else cbind(data, pred), 
               class = c("prediction", "data.frame"), 
               row.names = seq_len(length(pred[["fitted"]])),
               model.class = class(model),

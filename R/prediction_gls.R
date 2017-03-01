@@ -7,7 +7,6 @@ prediction.gls <- function(model, data, ...) {
         pred <- data.frame(fitted = predict(model, type = "class", ...),
                            se.fitted = NA_real_)
     } else {
-        data <- data
         pred <- data.frame(fitted = predict(model, newdata = data, type = "class", ...),
                            se.fitted = NA_real_)
     }
@@ -15,7 +14,8 @@ prediction.gls <- function(model, data, ...) {
     class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     
     # obs-x-(ncol(data)+2) data.frame of predictions
-    structure(if (missing(data)) pred else cbind(data, pred),
+    data <- data
+    structure(if (!length(data)) pred else cbind(data, pred),
               class = c("prediction", "data.frame"), 
               row.names = seq_len(length(pred[["fitted"]])),
               model.class = class(model),

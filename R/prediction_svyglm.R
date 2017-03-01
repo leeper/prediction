@@ -12,7 +12,6 @@ function(model,
     if (missing(data)) {
         pred <- predict(model, type = type, se.fit = TRUE, ...)
     } else {
-        data <- data
         pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
     }
     pred <- list(fitted = unclass(pred), 
@@ -22,7 +21,8 @@ function(model,
     class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     
     # obs-x-(ncol(data)+2) data.frame of predictions
-    structure(if (missing(data)) data.frame(pred) else cbind(data, pred), 
+    data <- data
+    structure(if (!length(data)) data.frame(pred) else cbind(data, pred), 
               class = c("prediction", "data.frame"), 
               row.names = seq_len(length(pred[["fitted"]])),
               model.class = class(model),

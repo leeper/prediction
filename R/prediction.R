@@ -62,7 +62,6 @@ prediction.default <- function(model, data = find_data(model, parent.frame()), t
     if (missing(data)) {
         pred <- predict(model, type = type, se.fit = TRUE, ...)
     } else {
-        data <- data
         pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
     }
     class(pred[["fit"]]) <- c("fit", "numeric")
@@ -71,10 +70,11 @@ prediction.default <- function(model, data = find_data(model, parent.frame()), t
     names(pred)[names(pred) == "se.fit"] <- "se.fitted"
     
     # obs-x-(ncol(data)+2) data.frame of predictions
-    structure(if (missing(data)) {
+    data <- data
+    structure(if (!length(data)) {
                   data.frame(pred[c("fitted", "se.fitted"), drop = FALSE]) 
               } else { 
-                  cbind(data, pred[c("fitted", "se.fitted"), drop = FALSE])
+                  cbind(data, data.frame(pred[c("fitted", "se.fitted"), drop = FALSE]))
               }, 
               class = c("prediction", "data.frame"), 
               row.names = seq_len(length(pred[["fitted"]])),
