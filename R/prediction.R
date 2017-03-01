@@ -71,7 +71,11 @@ prediction.default <- function(model, data = find_data(model, parent.frame()), t
     names(pred)[names(pred) == "se.fit"] <- "se.fitted"
     
     # obs-x-(ncol(data)+2) data.frame of predictions
-    structure(if (missing(data)) data.frame(pred) else cbind(data, pred), 
+    structure(if (missing(data)) {
+                  data.frame(pred[c("fitted", "se.fitted"), drop = FALSE]) 
+              } else { 
+                  cbind(data, pred[c("fitted", "se.fitted"), drop = FALSE])
+              }, 
               class = c("prediction", "data.frame"), 
               row.names = seq_len(length(pred[["fitted"]])),
               type = type)
