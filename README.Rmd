@@ -1,6 +1,13 @@
-# prediction
+# Tidy, Type-Safe 'prediction()' Methods
 
-**prediction** is a one-function package that provides type-safe methods for generating predictions from fitted regression models. It provides an S3 generic, `prediction()`, and associated methods, which always return a `"data.frame"` class object rather than the mix of vectors, lists, etc. that are returned by the `predict()` method for many model types. It provides a key piece of infrastructure for the **margins** package.
+**prediction** is a package focused on one function - `prediction()` - that provides type-safe methods for generating predictions from fitted regression models. `prediction()` is an S3 generic, which always return a `"data.frame"` class object rather than the mix of vectors, lists, etc. that are returned by the `predict()` method for many model types. It provides a key piece of infrastructure for the **margins** package.
+
+In addition to `prediction()`, the package provides a number of utility functions for generating useful predictions:
+
+ - `find_data()`, an S3 generic with methods that find the data frame used to estimate a regression model
+ - `mean_or_mode()` and `median_or_mode()`, which provide a convenient way to compute the data needed for predicted values *at means* (or *at medians*), respecting the differences between factor and numeric variables.
+ - `seq_range()`, which generates a vector of *n* values based upon the range of values in a variable
+ - `build_datalist()`, which generates a list of data frames from an input data frame and a specified set of replacement `at` values (mimicking the `atlist` option of Stata's `margins` command)
 
 ## Simple code examples
 
