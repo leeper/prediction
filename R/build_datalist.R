@@ -96,13 +96,11 @@ check_at_names <- function(names, at) {
 # data.frame builder, given specified `at` values
 set_data_to_at <- function(data, at = NULL) {
     # expand `at` combinations
-    e <- expand.grid(at)
+    e <- expand.grid(at, KEEP.OUT.ATTRS = FALSE)
     e <- split(e, unique(e))
     data_out <- lapply(e, function(atvals) {
         dat <- data
-        dat <- `[<-`(dat, , names(atvals), value = atvals)
-        
-        # return data, with `at` attribute
+        dat <- `[<-`(dat, , names(atvals), value = as.list(atvals))
         structure(dat, at = atvals)
     })
     return(data_out)

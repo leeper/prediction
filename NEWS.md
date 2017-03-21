@@ -1,3 +1,7 @@
+# CHANGES TO prediction 0.1.11
+
+* `build_datalist()` now returns `at` value combinations as a list.
+
 # CHANGES TO prediction 0.1.10
 
 * Added `prediction.nnet()` method for "nnet" and "multinom" objects from **nnet**. (#1)
