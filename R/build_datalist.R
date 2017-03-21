@@ -100,8 +100,8 @@ set_data_to_at <- function(data, at = NULL) {
     e <- split(e, unique(e))
     data_out <- lapply(e, function(atvals) {
         dat <- data
-        dat <- `[<-`(dat, , names(atvals), value = as.list(atvals))
-        structure(dat, at = atvals)
+        dat <- `[<-`(dat, , names(atvals), value = atvals)
+        structure(dat, at = as.list(atvals))
     })
     return(data_out)
 }
