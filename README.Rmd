@@ -56,6 +56,7 @@ The currently supported model classes are:
  - "gls" from `nlme::gls()`
  - "hxlr" from `crch::hxlr()`
  - "ivreg" from `AER::ivreg()`
+ - "lda" from `MASS:lda()`
  - "loess" from `stats::loess()`
  - "nls" from `stats::nls()`
  - "nnet" from `nnet::nnet()`, `nnet::multinom()`
