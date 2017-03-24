@@ -1,0 +1,28 @@
+# @rdname prediction
+# @export
+prediction.qda <- function(model, data = find_data(model, parent.frame()), ...) {
+    
+    # extract predicted values
+    if (missing(data)) {
+        pred <- predict(model, ...)
+    } else {
+        pred <- predict(model, newdata = data, ...)
+    }
+    names(pred[["posterior"]]) <- paste0("Pr(", names(pred[["posterior"]]), ")")
+    
+    # obs-x-(ncol(data)+...) data.frame of predictions
+    data <- data
+    structure(if (!length(data)) {
+                data.frame(pred)
+              } else {
+                cbind(data, 
+                      class = pred[["class"]], 
+                      pred[["posterior"]], 
+                      fitted = rep(NA_real_, length(pred[["clas"]])),
+                      se.fitted = rep(NA_real_, length(pred[["clas"]])))
+              }, 
+              class = c("prediction", "data.frame"), 
+              row.names = seq_len(length(pred[["fitted"]])),
+              model.class = class(model),
+              type = NA_character_)
+}
