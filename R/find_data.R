@@ -18,12 +18,37 @@ find_data <- function(model, ...) {
 #' @rdname find_data
 #' @export
 find_data.default <- function(model, env = parent.frame(), ...) {
-    if (!is.null(model[["call"]][["data"]])) {
-        data <- eval(model[["call"]][["data"]], env) 
-    } else { 
-        data <- get_all_vars(model[["terms"]], data = model[["model"]])
+    #form <- try(terms(model), silent = TRUE)
+    # if no terms, then model was created without a formula interface
+    if (!is.null(model[["call"]])) {
+        data_start <- eval(model[["call"]][["data"]], env)
+        dat <- try(get_all_vars(model, data = data_start), silent = TRUE)
+        if (inherits(dat, "try-error")) {
+            dat <- get_all_vars(model, data = model[["call"]][["data"]])
+        }
+        # handle subset
+        if (!is.null(model[["call"]][["subset"]])) {
+            dat <- subset(dat, model[["call"]][["subset"]])
+        }
+        # handle na.action
+        if (!is.null(model[["na.action"]])) {
+            dat <- dat[-model[["na.action"]], , drop = FALSE]
+        }
+    } else {
+        stop("'find_data()' requires a formula call")
     }
-    data
+    dat
+}
+
+#' @rdname find_data
+#' @export
+find_data.data.frame <- function(model, ...) {
+}
+
+#' @rdname find_data
+#' @export
+find_data.formula <- function(model, data = env, ...) {
+    get_all_vars(model, data)
 }
 
 #' @rdname find_data
