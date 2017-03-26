@@ -3,6 +3,7 @@
 #' @description Extract predicted values via \code{\link[stats]{predict}} from a model object, conditional on data
 #' @param model A model object, perhaps returned by \code{\link[stats]{lm}} or \code{\link[stats]{glm}}.
 #' @param data A data.frame over which to calculate marginal effects. If missing, \code{\link{find_data}} is used to specify the data frame.
+#' @param at A list of one or more named vectors, specifically values at which to calculate the predictions. These are used to modify the value of \code{data} (see \code{\link{build_datalist}} for details on use).
 #' @param type A character string indicating the type of marginal effects to estimate. Mostly relevant for non-linear models, where the reasonable options are \dQuote{response} (the default) or \dQuote{link} (i.e., on the scale of the linear predictor in a GLM). For models of class \dQuote{polr} (from \code{\link[MASS]{polr}}), possible values are \dQuote{class} or \dQuote{probs}; both are returned.
 #' @param \dots Additional arguments passed to \code{\link[stats]{predict}} methods.
 #' @details This function is simply a wrapper around \code{\link[stats]{predict}} that returns a data frame containing the value of \code{data} and the predicted values with respect to all variables specified in \code{data}.
@@ -56,48 +57,48 @@ prediction <- function(model, data, ...) {
 
 #' @rdname prediction
 #' @export
-prediction.default <- function(model, data = find_data(model, parent.frame()), type = "response", ...) {
+prediction.default <- function(model, data = find_data(model, parent.frame()), at = NULL, type = "response", ...) {
     
     # extract predicted values
     if (missing(data)) {
         pred <- predict(model, type = type, se.fit = TRUE, ...)
     } else {
-        pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
+        # reduce memory profile
+        model[["model"]] <- NULL
+        attr(model[["terms"]], ".Environment") <- NULL
+    
+        # setup data
+        data_list <- build_datalist(data, at = at)
+        if (is.null(names(data_list))) {
+            names(data_list) <- NA_character_
+        }
+        out <- list()
+        for (i in seq_along(data_list)) {
+            out[[i]] <- cbind(data_list[[i]],
+                              predict(model, 
+                                      data = data_list[[i]], 
+                                      type = type, 
+                                      se.fit = TRUE,
+                                      ...)
+                              )
+        }
+        pred <- do.call("rbind", out)
     }
-    class(pred[["fit"]]) <- c("fit", "numeric")
-    class(pred[["se.fit"]]) <- c("se.fit", "numeric")
     names(pred)[names(pred) == "fit"] <- "fitted"
     names(pred)[names(pred) == "se.fit"] <- "se.fitted"
+    class(pred[["fitted"]]) <- c("fit", "numeric")
+    class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     
     # obs-x-(ncol(data)+2) data.frame of predictions
-    data <- data
     structure(if (!length(data)) {
-                  data.frame(pred[c("fitted", "se.fitted"), drop = FALSE]) 
+                  data.frame(pred[c("fitted", "se.fitted")])
               } else { 
-                  cbind(data, data.frame(pred[c("fitted", "se.fitted"), drop = FALSE]))
+                  pred
               }, 
-              class = c("prediction", "data.frame"), 
+              class = c("prediction", "data.frame"),
               row.names = seq_len(length(pred[["fitted"]])),
+              at = at, 
               type = type)
-}
-
-#' @importFrom utils head
-#' @export
-print.prediction <- function(x, digits = 4, ...) {
-    f <- x[["fitted"]]
-    if (is.numeric(f)) {
-        m <- mean(x[["fitted"]], na.rm = TRUE)
-        m <- sprintf(paste0("%0.", digits, "f"), m)
-        message(paste0("Average prediction: ", m, ", for ", length(f), " ", ngettext(length(f), "observation", "observations")))
-    } else if (is.factor(f)) {
-        m <- sort(table(x[["fitted"]]), decreasing = TRUE)[1]
-        message(paste0("Modal prediction: ", shQuote(names(m)), " for ", m, " of ", length(f), " ", 
-                ngettext(length(f), "observation", "observations"),
-                " with total ", nlevels(f), " ", ngettext(nlevels(f), "level", "levels") ))
-    } else {
-        print(head(x), ...)
-    }
-    invisible(x)
 }
 
 #' @importFrom utils head
