@@ -1,3 +1,9 @@
+# CHANGES TO prediction 0.1.12
+
+* `find_data()` now respects the `subset` argument in an original model call. (#15)
+* `find_data()` now respects the `na.action` argument in an original model call. (#15)
+* `find_data()` now gracefully fails when a model is specified without a formula. (#16)
+
 # CHANGES TO prediction 0.1.11
 
 * `build_datalist()` now returns `at` value combinations as a list.
