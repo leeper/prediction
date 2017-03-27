@@ -23,8 +23,17 @@ test_that("Test head() and tail()", {
                 label = "tail() works")
 })
 
+context("Test utilities")
+test_that("Test seq_range()", {
+    expect_true(identical(range(mtcars$wt), seq_range(mtcars$wt, 2)), label = "seq_range() is correct")
+    expect_true(length(seq_range(mtcars$wt, 5)) == 5, label = "seq_range() length is correct")
+})
 
-context("Test `build_data_list()` behavior")
-test_that("Test build_datalist()", {
-    expect_true(inherits(build_datalist(mtcars, at = list(cyl = 4)), "list"), label = "build_datalist() works")
+test_that("Test mean_or_mode()/median_or_mode()", {
+    expect_true(mean_or_mode(mtcars$wt) == mean(mtcars$wt), label = "mean_or_mode.numeric() is correct")
+    expect_true(median_or_mode(mtcars$wt) == median(mtcars$wt), label = "median_or_mode.numeric() is correct")
+
+    mtcars$cyl <- factor(mtcars$cyl)
+    expect_true(mean_or_mode(mtcars$cyl) == 8, label = "mean_or_mode.default() is correct")
+    expect_true(median_or_mode(mtcars$cyl) == 8, label = "mean_or_mode.default() is correct")
 })

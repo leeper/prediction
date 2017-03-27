@@ -2,18 +2,30 @@
 % Please edit documentation in R/mean_or_mode.R
 \name{mean_or_mode}
 \alias{mean_or_mode}
+\alias{mean_or_mode.default}
+\alias{mean_or_mode.numeric}
 \alias{median_or_mode}
+\alias{median_or_mode.default}
+\alias{median_or_mode.numeric}
 \title{Class-dependent variable aggregation}
 \usage{
 mean_or_mode(x)
 
+\method{mean_or_mode}{default}(x)
+
+\method{mean_or_mode}{numeric}(x)
+
 median_or_mode(x)
+
+\method{median_or_mode}{default}(x)
+
+\method{median_or_mode}{numeric}(x)
 }
 \arguments{
 \item{x}{A vector.}
 }
 \value{
-A numeric vector of length 1.
+A numeric or factor vector of length 1.
 }
 \description{
 Summarize a vector/variable into a single number, either a mean (median) for numeric vectors or the mode for categorical (factor or logical) vectors. Useful for aggregation.

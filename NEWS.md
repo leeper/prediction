@@ -1,3 +1,9 @@
+# CHANGES TO prediction 0.1.13
+
+* Added an `at` argument to `prediction()` methods. (#13)
+* Made `mean_or_mode()` and `median_or_mode()` S3 generics.
+* Fixed a bug in `mean_or_mode()` and `median_or_mode()` where incorrect factor levels were being returned.
+
 # CHANGES TO prediction 0.1.12
 
 * Added `prediction.princomp()` method for "princomp" objects from **stats**. (#1)
