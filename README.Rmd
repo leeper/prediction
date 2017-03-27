@@ -58,6 +58,7 @@ The currently supported model classes are:
  - "ivreg" from `AER::ivreg()`
  - "lda" from `MASS:lda()`
  - "loess" from `stats::loess()`
+ - "naiveBayes" from `e1071::naiveBayes()`
  - "nls" from `stats::nls()`
  - "nnet" from `nnet::nnet()`, `nnet::multinom()`
  - "polr" from `MASS::polr()`
