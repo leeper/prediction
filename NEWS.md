@@ -1,6 +1,7 @@
 # CHANGES TO prediction 0.1.12
 
 * Added `prediction.princomp()` method for "princomp" objects from **stats**. (#1)
+* Added `prediction.ppr()` method for "ppr" objects from **stats**. (#1)
 * Added `prediction.naiveBayes()` method for "naiveBayes" objects from **e1071**. (#1)
 * Added `prediction.rlm()` method for "rlm" objects from **MASS**. (#1)
 * Added `prediction.qda()` method for "qda" objects from **MASS**. (#1)
