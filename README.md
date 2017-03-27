@@ -81,10 +81,16 @@ The currently supported model classes are:
  - "gls" from `nlme::gls()`
  - "hxlr" from `crch::hxlr()`
  - "ivreg" from `AER::ivreg()`
+ - "lda" from `MASS:lda()`
  - "loess" from `stats::loess()`
+ - "naiveBayes" from `e1071::naiveBayes()`
  - "nls" from `stats::nls()`
  - "nnet" from `nnet::nnet()`, `nnet::multinom()`
  - "polr" from `MASS::polr()`
+ - "ppr" from `stats::ppr()`
+ - "princomp" from `stats::princomp()`
+ - "qda" from `MASS:qda()`
+ - "rlm" from `MASS::rlm()`
  - "rq" from `quantreg::rq()`
  - "selection" from `sampleSelection::selection()`
  - "survreg" from `survival::survreg()`

@@ -38,10 +38,13 @@ find_data(model, ...)
 \item{env}{An environment in which to look for the \code{data} argument to the modelling call.}
 }
 \value{
-A data.frame, typically with one column unless the variable is a factor with more than two levels.
+A data frame, typically with one column unless the variable is a factor with more than two levels.
 }
 \description{
-Find a model frame in a model object or try to reconstruct one
+Attempt to reconstruct the data used to create a model object
+}
+\details{
+This typically requires that a model object be specified using a formula interface and an explicit \code{data} argument. Models that can be specified using variables from the \code{.GlobalEnv} or with a non-formula interface (e.g., a matrix of data) will tend to generate errors.
 }
 \examples{
 require("datasets")
