@@ -26,6 +26,7 @@
 #'   \item \dQuote{ivreg}, see \code{\link[AER]{ivreg}}
 #'   \item \dQuote{lda}, see \code{\link[MASS]{lda}}
 #'   \item \dQuote{loess}, see \code{\link[stats]{loess}}
+#'   \item \dQuote{naiveBayes}, see \code{\link[e1071]{naiveBayes}}
 #'   \item \dQuote{nls}, see \code{\link[stats]{nls}}
 #'   \item \dQuote{nnet}, see \code{\link[nnet]{nnet}}
 #'   \item \dQuote{polr}, see \code{\link[MASS]{polr}}
