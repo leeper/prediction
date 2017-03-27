@@ -17,8 +17,6 @@ function(model,
     pred <- list(fitted = unclass(pred), 
                  se.fitted = sqrt(unname(attributes(pred)[["var"]])))
     attributes(pred[["fitted"]]) <- NULL
-    class(pred[["fitted"]]) <- c("fit", "numeric")
-    class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     
     # obs-x-(ncol(data)+2) data.frame of predictions
     data <- data

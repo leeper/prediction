@@ -14,8 +14,6 @@ prediction.naiveBayes <- function(model, data = find_data(model, parent.frame())
     pred <- data.frame(fitted = predict(model, newdata = data, type = "class", ...),
                        se.fitted = NA_real_)
     probs <- as.data.frame(predict(model, newdata = data, type = "raw", ...))
-    #class(pred[["fitted"]]) <- c("fit", class(pred[["fit"]]))
-    class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     
     names(probs) <- paste0("Pr(", names(probs), ")")
     

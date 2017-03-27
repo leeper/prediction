@@ -9,8 +9,6 @@ prediction.ar <- function(model, data, ...) {
         pred <- predict(object = model, newdata = data, se.fit = TRUE, ...)
     }
     names(pred) <- c("fitted", "se.fitted")
-    class(pred[["fitted"]]) <- c("fit", "numeric")
-    class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     
     # obs-x-(ncol(data)+2) data.frame of predictions
     data <- data

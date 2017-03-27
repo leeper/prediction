@@ -6,6 +6,7 @@
 * `find_data()` now respects the `subset` argument in an original model call. (#15)
 * `find_data()` now respects the `na.action` argument in an original model call. (#15)
 * `find_data()` now gracefully fails when a model is specified without a formula. (#16)
+* `prediction()` methods no longer add a "fit" or "se.fit" class to any columns. Fitted values are identifiable by the column name only.
 
 # CHANGES TO prediction 0.1.11
 

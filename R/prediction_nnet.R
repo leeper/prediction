@@ -14,8 +14,6 @@ prediction.nnet <- function(model, data = find_data(model, parent.frame()), ...)
         probs <- data.frame(predict(model, newdata = data, type = "raw", ...))
         names(probs) <- paste0("Pr(", seq_len(ncol(probs)), ")")
     }
-    class(pred[["fitted"]]) <- c("fit", class(pred[["fit"]]))
-    class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     
     # obs-x-(ncol(data)+2+nlevels(outcome)) data.frame of predictions
     data <- data

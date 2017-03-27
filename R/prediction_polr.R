@@ -16,9 +16,6 @@ prediction.polr <- function(model, data = find_data(model, parent.frame()), type
                            se.fitted = NA_real_)
         probs <- as.data.frame(predict(model, newdata = data, type = "probs", ...))
     }
-    class(pred[["fitted"]]) <- c("fit", class(pred[["fit"]]))
-    class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
-    
     names(probs) <- paste0("Pr(", names(probs), ")")
     
     # obs-x-(ncol(data)+2+nlevels(outcome)) data.frame of predictions

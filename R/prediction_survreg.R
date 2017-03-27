@@ -14,8 +14,6 @@ function(model,
     } else {
         pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
     }
-    class(pred[["fit"]]) <- c("fit", "numeric")
-    class(pred[["se.fit"]]) <- c("se.fit", "numeric")
     names(pred)[names(pred) == "fit"] <- "fitted"
     names(pred)[names(pred) == "se.fit"] <- "se.fitted"
     
