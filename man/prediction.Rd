@@ -137,7 +137,7 @@ prediction(model, data, ...)
 \item{type}{A character string indicating the type of marginal effects to estimate. Mostly relevant for non-linear models, where the reasonable options are \dQuote{response} (the default) or \dQuote{link} (i.e., on the scale of the linear predictor in a GLM). For models of class \dQuote{polr} (from \code{\link[MASS]{polr}}), possible values are \dQuote{class} or \dQuote{probs}; both are returned.}
 }
 \value{
-A data.frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, where each row is an observation and the last two columns represent fitted/predicted values (\code{fitted}) and the standard errors thereof (\code{se.fitted}). Additional columns may be reported depending on the object class.
+A data frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, where each row is an observation and the last two columns represent fitted/predicted values (\code{fitted}) and the standard errors thereof (\code{se.fitted}). Additional columns may be reported depending on the object class.
 }
 \description{
 Extract predicted values via \code{\link[stats]{predict}} from a model object, conditional on data, and return a data frame.

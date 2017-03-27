@@ -41,7 +41,7 @@
 #'   \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}
 #' }
 #' 
-#' @return A data.frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, where each row is an observation and the last two columns represent fitted/predicted values (\code{fitted}) and the standard errors thereof (\code{se.fitted}). Additional columns may be reported depending on the object class.
+#' @return A data frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, where each row is an observation and the last two columns represent fitted/predicted values (\code{fitted}) and the standard errors thereof (\code{se.fitted}). Additional columns may be reported depending on the object class.
 #' @examples
 #' require("datasets")
 #' x <- lm(Petal.Width ~ Sepal.Length * Sepal.Width * Species, data = iris)
