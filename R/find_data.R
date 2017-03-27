@@ -28,7 +28,7 @@ find_data.default <- function(model, env = parent.frame(), ...) {
         }
         # handle subset
         if (!is.null(model[["call"]][["subset"]])) {
-            dat <- subset(dat, model[["call"]][["subset"]])
+            dat <- dat[eval(model[["call"]][["subset"]], data_start), , drop = FALSE]
         }
         # handle na.action
         if (!is.null(model[["na.action"]])) {
@@ -43,12 +43,7 @@ find_data.default <- function(model, env = parent.frame(), ...) {
 #' @rdname find_data
 #' @export
 find_data.data.frame <- function(model, ...) {
-}
-
-#' @rdname find_data
-#' @export
-find_data.formula <- function(model, data = env, ...) {
-    get_all_vars(model, data)
+    model
 }
 
 #' @rdname find_data
