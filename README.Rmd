@@ -62,6 +62,7 @@ The currently supported model classes are:
  - "nls" from `stats::nls()`
  - "nnet" from `nnet::nnet()`, `nnet::multinom()`
  - "polr" from `MASS::polr()`
+ - "ppr" from `stats::ppr()`
  - "princomp" from `stats::princomp()`
  - "qda" from `MASS:qda()`
  - "rlm" from `MASS::rlm()`
