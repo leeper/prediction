@@ -1,7 +1,7 @@
 Package: prediction
 Type: Package
 Title: Tidy, Type-Safe 'prediction()' Methods
-Description: A one-function package containing 'prediction()', a type-safe alternative to 'predict()' that always returns a data frame.
+Description: A one-function package containing 'prediction()', a type-safe alternative to 'predict()' that always returns a data frame. The package currently supports common model types (e.g., "lm", "glm") from the 'stats' package, as well as numerous other model classes from other add-on packages. See the README or main package documentation page for a complete listing.
 License: MIT + file LICENSE
 Version: 0.1.12
 Date: 2017-03-26
@@ -27,6 +27,7 @@ Enhances:
     gam,
     glmx,
     lme4,
+    MASS,
     nlme,
     nnet,
     ordinal,
