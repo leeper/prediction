@@ -61,6 +61,7 @@ The currently supported model classes are:
  - "nls" from `stats::nls()`
  - "nnet" from `nnet::nnet()`, `nnet::multinom()`
  - "polr" from `MASS::polr()`
+ - "qda" from `MASS:qda()`
  - "rq" from `quantreg::rq()`
  - "selection" from `sampleSelection::selection()`
  - "survreg" from `survival::survreg()`
