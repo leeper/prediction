@@ -2,6 +2,7 @@
 
 * Added `prediction.princomp()` method for "princomp" objects from **stats**. (#1)
 * Added `prediction.naiveBayes()` method for "naiveBayes" objects from **e1071**. (#1)
+* Added `prediction.rlm()` method for "rlm" objects from **MASS**. (#1)
 * Added `prediction.qda()` method for "qda" objects from **MASS**. (#1)
 * Added `prediction.lda()` method for "lda" objects from **MASS**. (#1)
 * `find_data()` now respects the `subset` argument in an original model call. (#15)
