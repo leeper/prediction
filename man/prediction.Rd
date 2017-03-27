@@ -6,8 +6,8 @@
 %   R/prediction_hetglm.R, R/prediction_hxlr.R, R/prediction_ivreg.R,
 %   R/prediction_lm.R, R/prediction_loess.R, R/prediction_merMod.R,
 %   R/prediction_nls.R, R/prediction_nnet.R, R/prediction_polr.R,
-%   R/prediction_rq.R, R/prediction_selection.R, R/prediction_survreg.R,
-%   R/prediction_svm.R, R/prediction_svyglm.R
+%   R/prediction_princomp.R, R/prediction_rq.R, R/prediction_selection.R,
+%   R/prediction_survreg.R, R/prediction_svm.R, R/prediction_svyglm.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -33,6 +33,7 @@
 \alias{prediction.nnet}
 \alias{prediction.polr}
 \alias{prediction.multinom}
+\alias{prediction.princomp}
 \alias{prediction.rq}
 \alias{prediction.selection}
 \alias{prediction.survreg}
@@ -101,6 +102,9 @@ prediction(model, data, ...)
 \method{prediction}{multinom}(model, data = find_data(model, parent.frame()),
   type = NULL, ...)
 
+\method{prediction}{princomp}(model, data = find_data(model, parent.frame()),
+  ...)
+
 \method{prediction}{rq}(model, data = find_data(model, parent.frame()),
   type = NULL, ...)
 
@@ -154,6 +158,7 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{nls}, see \code{\link[stats]{nls}}
   \item \dQuote{nnet}, see \code{\link[nnet]{nnet}}
   \item \dQuote{polr}, see \code{\link[MASS]{polr}}
+  \item \dQuote{princomp}, see \code{\link[stats]{princomp}}
   \item \dQuote{qda}, see \code{\link[MASS]{qda}}
   \item \dQuote{rq}, see \code{\link[quantreg]{rq}}
   \item \dQuote{selection}, see \code{\link[sampleSelection]{selection}}
