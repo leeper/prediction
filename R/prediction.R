@@ -1,6 +1,7 @@
 #' @rdname prediction
+#' @name prediction-package
 #' @title Extract Predictions from a Model Object
-#' @description Extract predicted values via \code{\link[stats]{predict}} from a model object, conditional on data
+#' @description Extract predicted values via \code{\link[stats]{predict}} from a model object, conditional on data, and return a data frame.
 #' @param model A model object, perhaps returned by \code{\link[stats]{lm}} or \code{\link[stats]{glm}}.
 #' @param data A data.frame over which to calculate marginal effects. If missing, \code{\link{find_data}} is used to specify the data frame.
 #' @param at A list of one or more named vectors, specifically values at which to calculate the predictions. These are used to modify the value of \code{data} (see \code{\link{build_datalist}} for details on use).
@@ -23,10 +24,12 @@
 #'   \item \dQuote{gls}, see \code{\link[nlme]{gls}}
 #'   \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
 #'   \item \dQuote{ivreg}, see \code{\link[AER]{ivreg}}
+#'   \item \dQuote{lda}, see \code{\link[MASS]{lda}}
 #'   \item \dQuote{loess}, see \code{\link[stats]{loess}}
 #'   \item \dQuote{nls}, see \code{\link[stats]{nls}}
 #'   \item \dQuote{nnet}, see \code{\link[nnet]{nnet}}
 #'   \item \dQuote{polr}, see \code{\link[MASS]{polr}}
+#'   \item \dQuote{qda}, see \code{\link[MASS]{qda}}
 #'   \item \dQuote{rq}, see \code{\link[quantreg]{rq}}
 #'   \item \dQuote{selection}, see \code{\link[sampleSelection]{selection}}
 #'   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}

@@ -8,7 +8,7 @@ prediction.lda <- function(model, data = find_data(model, parent.frame()), ...) 
     } else {
         pred <- predict(model, newdata = data, ...)
     }
-    names(pred[["posterior"]]) <- paste0("Pr(", names(pred[["posterior"]]), ")")
+    colnames(pred[["posterior"]]) <- paste0("Pr(", colnames(pred[["posterior"]]), ")")
     
     # obs-x-(ncol(data)+...) data.frame of predictions
     data <- data
@@ -19,8 +19,8 @@ prediction.lda <- function(model, data = find_data(model, parent.frame()), ...) 
                       class = pred[["class"]], 
                       pred[["posterior"]], 
                       pred[["x"]], 
-                      fitted = rep(NA_real_, length(pred[["clas"]])),
-                      se.fitted = rep(NA_real_, length(pred[["clas"]])))
+                      fitted = rep(NA_real_, length(pred[["class"]])),
+                      se.fitted = rep(NA_real_, length(pred[["class"]])))
               }, 
               class = c("prediction", "data.frame"), 
               row.names = seq_len(length(pred[["fitted"]])),
