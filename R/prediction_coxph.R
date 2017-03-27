@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.coxph <- function(model, data = find_data(model, parent.frame()), type = c("risk", "expected", "lp"), ...) {
+prediction.coxph <- function(model, data = find_data(model, parent.frame()), at = NULL, type = c("risk", "expected", "lp"), ...) {
     
     type <- match.arg(type)
     

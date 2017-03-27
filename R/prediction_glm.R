@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.glm <- function(model, data = find_data(model, parent.frame()), type = c("response", "link"), ...) {
+prediction.glm <- function(model, data = find_data(model, parent.frame()), at = NULL, type = c("response", "link"), ...) {
     type <- match.arg(type)
     
     # extract predicted values

@@ -3,6 +3,7 @@
 prediction.gam <- 
 function(model, 
          data = find_data(model, parent.frame()), 
+         at = NULL, 
          type = c("response", "link", "terms"), 
          ...) {
     

@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.svm <- function(model, data = find_data(model, parent.frame()), ...) {
+prediction.svm <- function(model, data = find_data(model, parent.frame()), at = NULL, ...) {
 
     # extract predicted value
     if (any(grepl("prob.+", names(model)))) {
@@ -32,4 +32,3 @@ prediction.svm <- function(model, data = find_data(model, parent.frame()), ...) 
               model.class = class(model),
               type = NULL)
 }
-

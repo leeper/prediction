@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.glmx <- function(model, data = find_data(model, parent.frame()), type = c("response", "link"), ...) {
+prediction.glmx <- function(model, data = find_data(model, parent.frame()), at = NULL, type = c("response", "link"), ...) {
     # setup data
     data <- data
     

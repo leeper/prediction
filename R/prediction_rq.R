@@ -3,6 +3,7 @@
 prediction.rq <- 
 function(model, 
          data = find_data(model, parent.frame()), 
+         at = NULL, 
          type = NULL, 
          ...) {
     

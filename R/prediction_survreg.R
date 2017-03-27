@@ -3,6 +3,7 @@
 prediction.survreg <- 
 function(model, 
          data = find_data(model, parent.frame()), 
+         at = NULL, 
          type = c("response", "lp", "quantile", "uquantile"), 
          ...) {
     

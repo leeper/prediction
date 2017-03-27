@@ -44,100 +44,108 @@
 \alias{prediction.svyglm}
 \title{Extract Predictions from a Model Object}
 \usage{
-prediction(model, data, ...)
+prediction(model, ...)
 
 \method{prediction}{default}(model, data = find_data(model, parent.frame()),
-  type = "response", ...)
+  at = NULL, type = "response", ...)
 
-\method{prediction}{Arima}(model, data, ...)
+\method{prediction}{Arima}(model, ...)
 
-\method{prediction}{ar}(model, data, ...)
+\method{prediction}{ar}(model, data, at = NULL, ...)
 
-\method{prediction}{arima0}(model, data, ...)
+\method{prediction}{arima0}(model, data, at = NULL, ...)
 
 \method{prediction}{betareg}(model, data = find_data(model, parent.frame()),
-  type = c("response", "link", "precision", "variance", "quantile"), ...)
+  at = NULL, type = c("response", "link", "precision", "variance",
+  "quantile"), ...)
 
-\method{prediction}{clm}(model, data = find_data(model, parent.frame()), ...)
+\method{prediction}{clm}(model, data = find_data(model, parent.frame()),
+  at = NULL, ...)
 
 \method{prediction}{coxph}(model, data = find_data(model, parent.frame()),
-  type = c("risk", "expected", "lp"), ...)
+  at = NULL, type = c("risk", "expected", "lp"), ...)
 
-\method{prediction}{crch}(model, data = find_data(model),
+\method{prediction}{crch}(model, data = find_data(model), at = NULL,
   type = c("response", "location", "scale", "quantile"), ...)
 
 \method{prediction}{gam}(model, data = find_data(model, parent.frame()),
-  type = c("response", "link", "terms"), ...)
+  at = NULL, type = c("response", "link", "terms"), ...)
 
 \method{prediction}{glm}(model, data = find_data(model, parent.frame()),
-  type = c("response", "link"), ...)
+  at = NULL, type = c("response", "link"), ...)
 
 \method{prediction}{glmx}(model, data = find_data(model, parent.frame()),
-  type = c("response", "link"), ...)
+  at = NULL, type = c("response", "link"), ...)
 
-\method{prediction}{gls}(model, data, ...)
+\method{prediction}{gls}(model, data, at = NULL, ...)
 
 \method{prediction}{hetglm}(model, data = find_data(model, parent.frame()),
-  type = c("response", "link", "scale"), ...)
+  at = NULL, type = c("response", "link", "scale"), ...)
 
-\method{prediction}{hxlr}(model, data = find_data(model), type = c("class",
-  "probability", "cumprob", "location", "scale"), ...)
+\method{prediction}{hxlr}(model, data = find_data(model), at = NULL,
+  type = c("class", "probability", "cumprob", "location", "scale"), ...)
 
 \method{prediction}{ivreg}(model, data = find_data(model, parent.frame()),
-  ...)
+  at = NULL, ...)
 
 \method{prediction}{lm}(model, data = find_data(model, parent.frame()),
-  type = "response", ...)
+  at = NULL, type = "response", ...)
 
 \method{prediction}{loess}(model, data = find_data(model, parent.frame()),
-  type = "response", ...)
+  at = NULL, type = "response", ...)
 
-\method{prediction}{merMod}(model, data = find_data(model),
+\method{prediction}{merMod}(model, data = find_data(model), at = NULL,
   type = c("response", "link"), ...)
 
-\method{prediction}{nls}(model, data = find_data(model, parent.frame()), ...)
+\method{prediction}{nls}(model, data = find_data(model, parent.frame()),
+  at = NULL, ...)
 
-\method{prediction}{nnet}(model, data = find_data(model, parent.frame()), ...)
+\method{prediction}{nnet}(model, data = find_data(model, parent.frame()),
+  at = NULL, ...)
 
 \method{prediction}{polr}(model, data = find_data(model, parent.frame()),
-  type = NULL, ...)
+  at = NULL, type = NULL, ...)
 
 \method{prediction}{multinom}(model, data = find_data(model, parent.frame()),
-  type = NULL, ...)
+  at = NULL, type = NULL, ...)
 
-\method{prediction}{ppr}(model, data = find_data(model, parent.frame()), ...)
+\method{prediction}{ppr}(model, data = find_data(model, parent.frame()),
+  at = NULL, ...)
 
 \method{prediction}{princomp}(model, data = find_data(model, parent.frame()),
-  ...)
+  at = NULL, ...)
 
 \method{prediction}{rlm}(model, data = find_data(model, parent.frame()),
-  type = "response", ...)
+  at = NULL, type = "response", ...)
 
 \method{prediction}{rq}(model, data = find_data(model, parent.frame()),
-  type = NULL, ...)
+  at = NULL, type = NULL, ...)
 
 \method{prediction}{selection}(model, data = find_data(model, parent.frame()),
-  type = "response", ...)
+  at = NULL, type = "response", ...)
 
 \method{prediction}{survreg}(model, data = find_data(model, parent.frame()),
-  type = c("response", "lp", "quantile", "uquantile"), ...)
+  at = NULL, type = c("response", "lp", "quantile", "uquantile"), ...)
 
-\method{prediction}{svm}(model, data = find_data(model, parent.frame()), ...)
+\method{prediction}{svm}(model, data = find_data(model, parent.frame()),
+  at = NULL, ...)
 
 \method{prediction}{svyglm}(model, data = find_data(model, parent.frame()),
-  type = c("response", "link"), ...)
+  at = NULL, type = c("response", "link"), ...)
 }
 \arguments{
 \item{model}{A model object, perhaps returned by \code{\link[stats]{lm}} or \code{\link[stats]{glm}}.}
 
+\item{\dots}{Additional arguments passed to \code{\link[stats]{predict}} methods.}
+
 \item{data}{A data.frame over which to calculate marginal effects. If missing, \code{\link{find_data}} is used to specify the data frame.}
 
-\item{\dots}{Additional arguments passed to \code{\link[stats]{predict}} methods.}
+\item{at}{A list of one or more named vectors, specifically values at which to calculate the predictions. These are used to modify the value of \code{data} (see \code{\link{build_datalist}} for details on use).}
 
 \item{type}{A character string indicating the type of marginal effects to estimate. Mostly relevant for non-linear models, where the reasonable options are \dQuote{response} (the default) or \dQuote{link} (i.e., on the scale of the linear predictor in a GLM). For models of class \dQuote{polr} (from \code{\link[MASS]{polr}}), possible values are \dQuote{class} or \dQuote{probs}; both are returned.}
 }
 \value{
-A data frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, where each row is an observation and the last two columns represent fitted/predicted values (\code{fitted}) and the standard errors thereof (\code{se.fitted}). Additional columns may be reported depending on the object class.
+A data frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, or a multiple thereof, if \code{!is.null(at)}. The return value contains \code{data} (possibly modified by \code{at} using \code{\link{build_datalist}}), plus a column containing fitted/predicted values (\code{"fitted"}) and a column containing the standard errors thereof (\code{"se.fitted"}). Additional columns may be reported depending on the object class.
 }
 \description{
 Extract predicted values via \code{\link[stats]{predict}} from a model object, conditional on data, and return a data frame.
@@ -186,8 +194,11 @@ prediction(x)
 # prediction for first case
 prediction(x, iris[1,])
 
+# basic use of 'at' argument
+prediction(x, at = list(Species = c("setosa", "virginica")))
+
 # prediction at means/modes of input variables
-prediction(x, lapply(iris, mean_or_mode))
+prediction(x, at = lapply(iris, mean_or_mode))
 
 }
 \seealso{

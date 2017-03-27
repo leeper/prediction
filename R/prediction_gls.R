@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.gls <- function(model, data, ...) {
+prediction.gls <- function(model, data, at = NULL, ...) {
     
     # extract predicted values
     if (missing(data)) {

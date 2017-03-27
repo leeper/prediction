@@ -10,11 +10,28 @@ test_that("Test prediction()", {
     expect_true(inherits(prediction(lm(mpg ~ cyl, data = mtcars)), "data.frame"), label = "prediction() works w/o data arg (LM)")
     expect_true(inherits(prediction(glm(mpg ~ cyl, data = mtcars)), "data.frame"), label = "prediction() works w/o data arg (GLM)")
 })
+test_that("Test prediction(at = )", {
+    m <- lm(mpg ~ cyl, data = mtcars)
+    p1 <- prediction(m, at = list(cyl = 4))
+    expect_true(inherits(p1, "data.frame"), label = "prediction(at = list(cyl = 4)) works")
+    expect_true(nrow(p1) == nrow(mtcars), label = "prediction(at = list(cyl = 4)) works")
+    
+    p2 <- prediction(m, at = list(cyl = c(4, 6)))
+    expect_true(inherits(p2, "data.frame"), label = "prediction(at = list(cyl = c(4, 6))) works")
+    expect_true(nrow(p2) == 2*nrow(mtcars), label = "prediction(at = list(cyl = c(4, 6))) works")
+    
+    p3 <- prediction(m, at = list(cyl = c(4, 6), wt = 2:3))
+    expect_true(inherits(p3, "data.frame"), label = "prediction(at = list(cyl = c(4, 6), wt = 2:3)) works")
+    expect_true(nrow(p3) == 4*nrow(mtcars), label = "prediction(at = list(cyl = c(4, 6), wt = 2:3)) works")
+    
+    mtcars$cyl <- factor(mtcars$cyl)
+    expect_error(prediction(m, at = list(cyl = 3)), label = "prediction(at = list(cyl = 3)) errors")
+})
 
 context("Test behavior of 'prediction' class methods")
 test_that("Test print()", {
     expect_true(inherits(print(prediction(lm(mpg ~ cyl, data = mtcars), data = mtcars)), "data.frame"), 
-                label = "print() works")
+                label = "print() works with numeric outcome")
 })
 test_that("Test head() and tail()", {
     expect_true(inherits(head(prediction(lm(mpg ~ cyl, data = mtcars), data = mtcars)), "data.frame"), 

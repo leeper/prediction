@@ -1,4 +1,4 @@
-prediction.mlogit <- function(model, data = find_data(model, parent.frame()), ...) {
+prediction.mlogit <- function(model, data = find_data(model, parent.frame()), at = NULL, ...) {
     
     # extract predicted values
     data <- data

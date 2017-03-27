@@ -3,6 +3,7 @@
 prediction.hxlr <- 
 function(model, 
          data = find_data(model), 
+         at = NULL, 
          type = c("class", "probability", "cumprob", "location", "scale"), 
          ...) {
     

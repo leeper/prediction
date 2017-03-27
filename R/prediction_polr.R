@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.polr <- function(model, data = find_data(model, parent.frame()), type = NULL, ...) {
+prediction.polr <- function(model, data = find_data(model, parent.frame()), at = NULL, type = NULL, ...) {
     
     if (!is.null(type)) {
         warning("'type' is ignored for models of class 'polr' and 'multinom'")

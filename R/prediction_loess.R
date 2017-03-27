@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.loess <- function(model, data = find_data(model, parent.frame()), type = "response", ...) {
+prediction.loess <- function(model, data = find_data(model, parent.frame()), at = NULL, type = "response", ...) {
     
     type <- match.arg(type)
     

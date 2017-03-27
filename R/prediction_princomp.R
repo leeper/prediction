@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.princomp <- function(model, data = find_data(model, parent.frame()), ...) {
+prediction.princomp <- function(model, data = find_data(model, parent.frame()), at = NULL, ...) {
     
     # extract predicted values
     if (missing(data)) {

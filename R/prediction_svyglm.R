@@ -3,6 +3,7 @@
 prediction.svyglm <- 
 function(model, 
          data = find_data(model, parent.frame()), 
+         at = NULL, 
          type = c("response", "link"), 
          ...) {
     
@@ -26,4 +27,3 @@ function(model,
               model.class = class(model),
               type = type)
 }
-

@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.merMod <- function(model, data = find_data(model), type = c("response", "link"), ...) {
+prediction.merMod <- function(model, data = find_data(model), at = NULL, type = c("response", "link"), ...) {
     
     type <- match.arg(type)
     

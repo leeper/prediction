@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.selection <- function(model, data = find_data(model, parent.frame()), type = "response", ...) {
+prediction.selection <- function(model, data = find_data(model, parent.frame()), at = NULL, type = "response", ...) {
     
     # extract predicted value at input value
     if (missing(data)) {
