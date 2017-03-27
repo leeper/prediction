@@ -30,6 +30,7 @@
 #'   \item \dQuote{nls}, see \code{\link[stats]{nls}}
 #'   \item \dQuote{nnet}, see \code{\link[nnet]{nnet}}
 #'   \item \dQuote{polr}, see \code{\link[MASS]{polr}}
+#'   \item \dQuote{princomp}, see \code{\link[stats]{princomp}}
 #'   \item \dQuote{qda}, see \code{\link[MASS]{qda}}
 #'   \item \dQuote{rq}, see \code{\link[quantreg]{rq}}
 #'   \item \dQuote{selection}, see \code{\link[sampleSelection]{selection}}
