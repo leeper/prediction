@@ -10,8 +10,6 @@ prediction.nls <- function(model, data = find_data(model, parent.frame()), ...) 
         pred <- data.frame(fitted = predict(model, newdata = data, ...),
                            se.fitted = NA_real_)
     }
-    class(pred[["fitted"]]) <- c("fit", "numeric")
-    class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     
     # obs-x-(ncol(data)+2) data.frame of predictions
     data <- data

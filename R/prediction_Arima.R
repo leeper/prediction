@@ -6,8 +6,6 @@ prediction.Arima <- function(model, data, ...) {
     if (missing(data)) {
         pred <- predict(object = model, se.fit = TRUE, ...)
         names(pred) <- c("fitted", "se.fitted")
-        class(pred[["fitted"]]) <- c("fit", "numeric")
-        class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     } else {
         stop("There is no 'data' argument for objects of class 'Arima'")
     }

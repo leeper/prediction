@@ -10,8 +10,6 @@ prediction.clm <- function(model, data = find_data(model, parent.frame()), ...) 
         pred <- data.frame(fitted = predict(model, newdata = data, type = "class", se.fit = FALSE, ...),
                            se.fitted = NA_real_)
     }
-    class(pred[["fitted"]]) <- c("fit", class(pred[["fit"]]))
-    class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     
     problist <- predict(model, newdata = data, type = "prob", se.fit = TRUE, ...)
     probs <- as.data.frame(problist[["fit"]])

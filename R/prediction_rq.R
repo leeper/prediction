@@ -14,8 +14,6 @@ function(model,
                            se.fitted = NA_real_)
     }
     names(pred) <- c("fitted", "se.fitted")
-    class(pred[["fitted"]]) <- c("fit", "numeric")
-    class(pred[["se.fitted"]]) <- c("se.fit", "numeric")
     
     # obs-x-(ncol(data)+2) data.frame of predictions
     data <- data
