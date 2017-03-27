@@ -3,6 +3,7 @@
 \name{find_data}
 \alias{find_data}
 \alias{find_data.default}
+\alias{find_data.data.frame}
 \alias{find_data.lm}
 \alias{find_data.glm}
 \alias{find_data.svyglm}
@@ -14,6 +15,8 @@
 find_data(model, ...)
 
 \method{find_data}{default}(model, env = parent.frame(), ...)
+
+\method{find_data}{data.frame}(model, ...)
 
 \method{find_data}{lm}(model, env = parent.frame(), ...)
 
