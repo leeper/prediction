@@ -61,7 +61,7 @@ prediction(model, ...)
   "quantile"), ...)
 
 \method{prediction}{clm}(model, data = find_data(model, parent.frame()),
-  at = NULL, ...)
+  at = NULL, category, ...)
 
 \method{prediction}{coxph}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("risk", "expected", "lp"), ...)
@@ -105,13 +105,13 @@ prediction(model, ...)
   at = NULL, ...)
 
 \method{prediction}{nnet}(model, data = find_data(model, parent.frame()),
-  at = NULL, ...)
+  at = NULL, category, ...)
 
 \method{prediction}{polr}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = NULL, ...)
+  at = NULL, type = NULL, category, ...)
 
 \method{prediction}{multinom}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = NULL, ...)
+  at = NULL, type = NULL, category, ...)
 
 \method{prediction}{ppr}(model, data = find_data(model, parent.frame()),
   at = NULL, ...)
@@ -132,7 +132,7 @@ prediction(model, ...)
   at = NULL, type = c("response", "lp", "quantile", "uquantile"), ...)
 
 \method{prediction}{svm}(model, data = find_data(model, parent.frame()),
-  at = NULL, ...)
+  at = NULL, category, ...)
 
 \method{prediction}{svyglm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link"), ...)
@@ -147,6 +147,8 @@ prediction(model, ...)
 \item{at}{A list of one or more named vectors, specifically values at which to calculate the predictions. These are used to modify the value of \code{data} (see \code{\link{build_datalist}} for details on use).}
 
 \item{type}{A character string indicating the type of marginal effects to estimate. Mostly relevant for non-linear models, where the reasonable options are \dQuote{response} (the default) or \dQuote{link} (i.e., on the scale of the linear predictor in a GLM). For models of class \dQuote{polr} (from \code{\link[MASS]{polr}}), possible values are \dQuote{class} or \dQuote{probs}; both are returned.}
+
+\item{category}{For multi-level or multi-category outcome models (e.g., ordered probit, multinomial logit, etc.), a value specifying which of the outcome levels should be used for the \code{"fitted"} column. If missing, some default is chosen automatically.}
 }
 \value{
 A data frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, or a multiple thereof, if \code{!is.null(at)}. The return value contains \code{data} (possibly modified by \code{at} using \code{\link{build_datalist}}), plus a column containing fitted/predicted values (\code{"fitted"}) and a column containing the standard errors thereof (\code{"se.fitted"}). Additional columns may be reported depending on the object class.

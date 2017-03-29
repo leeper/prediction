@@ -6,6 +6,7 @@
 #' @param data A data.frame over which to calculate marginal effects. If missing, \code{\link{find_data}} is used to specify the data frame.
 #' @param at A list of one or more named vectors, specifically values at which to calculate the predictions. These are used to modify the value of \code{data} (see \code{\link{build_datalist}} for details on use).
 #' @param type A character string indicating the type of marginal effects to estimate. Mostly relevant for non-linear models, where the reasonable options are \dQuote{response} (the default) or \dQuote{link} (i.e., on the scale of the linear predictor in a GLM). For models of class \dQuote{polr} (from \code{\link[MASS]{polr}}), possible values are \dQuote{class} or \dQuote{probs}; both are returned.
+#' @param category For multi-level or multi-category outcome models (e.g., ordered probit, multinomial logit, etc.), a value specifying which of the outcome levels should be used for the \code{"fitted"} column. If missing, some default is chosen automatically.
 #' @param \dots Additional arguments passed to \code{\link[stats]{predict}} methods.
 #' @details This function is simply a wrapper around \code{\link[stats]{predict}} that returns a data frame containing the value of \code{data} and the predicted values with respect to all variables specified in \code{data}.
 #' 
@@ -67,7 +68,12 @@ prediction <- function(model, ...) {
 
 #' @rdname prediction
 #' @export
-prediction.default <- function(model, data = find_data(model, parent.frame()), at = NULL, type = "response", ...) {
+prediction.default <- 
+function(model, 
+         data = find_data(model, parent.frame()), 
+         at = NULL, 
+         type = "response", 
+         ...) {
     
     # extract predicted values
     data <- data
@@ -75,10 +81,6 @@ prediction.default <- function(model, data = find_data(model, parent.frame()), a
         pred <- predict(model, type = type, se.fit = TRUE, ...)
         pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
     } else {
-        # reduce memory profile
-        model[["model"]] <- NULL
-        attr(model[["terms"]], ".Environment") <- NULL
-    
         # setup data
         out <- build_datalist(data, at = at)
         for (i in seq_along(out)) {
