@@ -10,20 +10,31 @@ function(model,
     type <- match.arg(type)
     
     # extract predicted values
-    if (missing(data)) {
+    data <- data
+    if (missing(data) || is.null(data)) {
         pred <- predict(model, type = type, se.fit = TRUE, ...)
+        pred <- data.frame(fitted = unclass(pred), 
+                           se.fitted = sqrt(unname(attributes(pred)[["var"]])))
     } else {
-        pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
+        # setup data
+        out <- build_datalist(data, at = at)
+        for (i in seq_along(out)) {
+            tmp <- predict(model, 
+                           newdata = out[[i]], 
+                           type = type, 
+                           se.fit = TRUE,
+                           ...)
+            out[[i]] <- cbind(out[[i]], fitted = unclass(tmp), se.fitted = sqrt(unname(attributes(tmp)[["var"]])))
+            rm(tmp)
+        }
+        pred <- do.call("rbind", out)
     }
-    pred <- list(fitted = unclass(pred), 
-                 se.fitted = sqrt(unname(attributes(pred)[["var"]])))
-    attributes(pred[["fitted"]]) <- NULL
     
     # obs-x-(ncol(data)+2) data.frame of predictions
-    data <- data
-    structure(if (!length(data)) data.frame(pred) else cbind(data, pred), 
+    structure(pred, 
               class = c("prediction", "data.frame"), 
               row.names = seq_len(length(pred[["fitted"]])),
+              at = if (is.null(at)) at else names(at), 
               model.class = class(model),
               type = type)
 }

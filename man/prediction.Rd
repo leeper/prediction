@@ -119,7 +119,7 @@ prediction(model, ...)
   at = NULL, type = "response", ...)
 
 \method{prediction}{rq}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = NULL, ...)
+  at = NULL, ...)
 
 \method{prediction}{selection}(model, data = find_data(model, parent.frame()),
   at = NULL, type = "response", ...)

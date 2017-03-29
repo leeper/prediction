@@ -73,7 +73,7 @@ prediction.default <- function(model, data = find_data(model, parent.frame()), a
     data <- data
     if (missing(data) || is.null(data)) {
         pred <- predict(model, type = type, se.fit = TRUE, ...)
-        pred <- data.frame(fit = pred[["fit"]], se.fit = pred[["se.fit"]])
+        pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
     } else {
         # reduce memory profile
         model[["model"]] <- NULL
@@ -83,7 +83,7 @@ prediction.default <- function(model, data = find_data(model, parent.frame()), a
         out <- build_datalist(data, at = at)
         for (i in seq_along(out)) {
             tmp <- predict(model, 
-                           data = out[[i]], 
+                           newdata = out[[i]], 
                            type = type, 
                            se.fit = TRUE,
                            ...)
@@ -91,9 +91,9 @@ prediction.default <- function(model, data = find_data(model, parent.frame()), a
             rm(tmp)
         }
         pred <- do.call("rbind", out)
+        names(pred)[names(pred) == "fit"] <- "fitted"
+        names(pred)[names(pred) == "se.fit"] <- "se.fitted"
     }
-    names(pred)[names(pred) == "fit"] <- "fitted"
-    names(pred)[names(pred) == "se.fit"] <- "se.fitted"
     
     # obs-x-(ncol(data)+2) data.frame of predictions
     structure(pred, 
@@ -102,16 +102,4 @@ prediction.default <- function(model, data = find_data(model, parent.frame()), a
               at = if (is.null(at)) at else names(at), 
               model.class = class(model),
               type = type)
-}
-
-#' @importFrom utils head
-#' @export
-head.prediction <- function(x, ...) {
-    head(`class<-`(x, "data.frame"), ...)
-}
-
-#' @importFrom utils tail
-#' @export
-tail.prediction <- function(x, ...) {
-    tail(`class<-`(x, "data.frame"), ...)
 }

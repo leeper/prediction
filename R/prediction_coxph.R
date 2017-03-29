@@ -1,23 +1,39 @@
 #' @rdname prediction
 #' @export
-prediction.coxph <- function(model, data = find_data(model, parent.frame()), at = NULL, type = c("risk", "expected", "lp"), ...) {
+prediction.coxph <- 
+function(model, 
+         data = find_data(model, parent.frame()), 
+         at = NULL, 
+         type = c("risk", "expected", "lp"), 
+         ...) {
     
     type <- match.arg(type)
     
     # extract predicted values
-    if (missing(data)) {
+    data <- data
+    if (missing(data) || is.null(data)) {
         pred <- predict(model, type = type, se.fit = TRUE, ...)
+        pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
     } else {
-        pred <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
+        # setup data
+        out <- build_datalist(data, at = at)
+        for (i in seq_along(out)) {
+            tmp <- predict(model, 
+                           newdata = out[[i]], 
+                           type = type, 
+                           se.fit = TRUE,
+                           ...)
+            out[[i]] <- cbind(out[[i]], fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
+            rm(tmp)
+        }
+        pred <- do.call("rbind", out)
     }
-    names(pred)[names(pred) == "fit"] <- "fitted"
-    names(pred)[names(pred) == "se.fit"] <- "se.fitted"
     
     # obs-x-(ncol(data)+2) data.frame of predictions
-    data <- data
-    structure(if (!length(data)) data.frame(pred) else cbind(data, pred), 
+    structure(pred, 
               class = c("prediction", "data.frame"), 
               row.names = seq_len(length(pred[["fitted"]])),
+              at = if (is.null(at)) at else names(at), 
               model.class = class(model),
               type = type)
 }

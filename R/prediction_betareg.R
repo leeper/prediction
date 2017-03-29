@@ -11,7 +11,7 @@ function(model,
     
     # extract predicted value
     data <- data
-    if (missing(data)) {
+    if (missing(data) || is.null(data)) {
         pred <- data.frame(fitted = predict(model, type = type, ...), 
                            se.fitted = NA_real_)
     } else {
@@ -30,6 +30,8 @@ function(model,
             rm(tmp)
         }
         pred <- do.call("rbind", out)
+        names(pred)[names(pred) == "fit"] <- "fitted"
+        names(pred)[names(pred) == "se.fit"] <- "se.fitted"
     }
     
     # obs-x-(ncol(data)+2) data.frame of predictions

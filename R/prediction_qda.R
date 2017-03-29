@@ -3,7 +3,8 @@
 prediction.qda <- function(model, data = find_data(model, parent.frame()), at = NULL, ...) {
     
     # extract predicted values
-    if (missing(data)) {
+    data <- data
+    if (missing(data) || is.null(data)) {
         pred <- predict(model, ...)
     } else {
         pred <- predict(model, newdata = data, ...)
@@ -11,7 +12,6 @@ prediction.qda <- function(model, data = find_data(model, parent.frame()), at = 
     colnames(pred[["posterior"]]) <- paste0("Pr(", colnames(pred[["posterior"]]), ")")
     
     # obs-x-(ncol(data)+...) data.frame of predictions
-    data <- data
     structure(if (!length(data)) {
                 data.frame(pred)
               } else {
@@ -23,6 +23,7 @@ prediction.qda <- function(model, data = find_data(model, parent.frame()), at = 
               }, 
               class = c("prediction", "data.frame"), 
               row.names = seq_len(length(pred[["fitted"]])),
+              at = if (is.null(at)) at else names(at), 
               model.class = class(model),
               type = NA_character_)
 }

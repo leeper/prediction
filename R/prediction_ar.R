@@ -4,14 +4,10 @@ prediction.ar <- function(model, data, at = NULL, ...) {
     
     # extract predicted values
     data <- data
-    if (missing(data)) {
+    if (missing(data) || is.null(data)) {
         pred <- predict(object = model, se.fit = TRUE, ...)
         pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
     } else {
-        # reduce memory profile
-        model[["model"]] <- NULL
-        attr(model[["terms"]], ".Environment") <- NULL
-    
         # setup data
         out <- build_datalist(data, at = at)
         for (i in seq_along(out)) {
