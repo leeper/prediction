@@ -98,6 +98,9 @@ check_values <- function(data, at) {
 }
 
 check_at_names <- function(names, at) {
+    if (is.null(names)) {
+        return()
+    }
     b <- !names(at) %in% names
     if (any(b)) {
         e <- ngettext(sum(b), "Unrecognized variable name in 'at': ", "Unrecognized variable names in 'at': ")
