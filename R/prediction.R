@@ -58,6 +58,15 @@
 #' # prediction at means/modes of input variables
 #' prediction(x, at = lapply(iris, mean_or_mode))
 #' 
+#' # prediction with multi-category outcome
+#' if (require("mlogit")) {
+#'   data("Fishing", package = "mlogit")
+#'   Fish <- mlogit.data(Fishing, varying = c(2:9), shape = "wide", choice = "mode")
+#'   mod <- mlogit(mode ~ price + catch, data = Fish)
+#'   prediction(mod)
+#'   prediction(mod, category = 3)
+#' }
+#' 
 #' @keywords models
 #' @seealso \code{\link{find_data}}, \code{\link{build_datalist}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
 #' @importFrom stats predict get_all_vars model.frame
