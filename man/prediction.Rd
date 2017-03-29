@@ -206,6 +206,14 @@ prediction(x, at = list(Species = c("setosa", "virginica")))
 # prediction at means/modes of input variables
 prediction(x, at = lapply(iris, mean_or_mode))
 
+# prediction with multi-category outcome
+if (require("mlogit")) {
+  Fish <- mlogit.data(Fishing, varying = c(2:9), shape = "wide", choice = "mode")
+  mod <- mlogit(mode ~ price + catch, data = Fish)
+  prediction(mod)
+  prediction(mod, category = 3)
+}
+
 }
 \seealso{
 \code{\link{find_data}}, \code{\link{build_datalist}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}

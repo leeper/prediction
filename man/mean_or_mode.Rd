@@ -28,7 +28,7 @@ median_or_mode(x)
 A numeric or factor vector of length 1.
 }
 \description{
-Summarize a vector/variable into a single number, either a mean (median) for numeric vectors or the mode for categorical (factor or logical) vectors. Useful for aggregation.
+Summarize a vector/variable into a single number, either a mean (median) for numeric vectors or the mode for categorical (character, factor, ordered, or logical) vectors. Useful for aggregation.
 }
 \examples{
 require("datasets")
@@ -40,5 +40,5 @@ lapply(iris, mean_or_mode)
 
 }
 \seealso{
-\code{\link{prediction}}
+\code{\link{prediction}}, \code{\link{build_datalist}}, \code{\link{seq_range}}
 }
