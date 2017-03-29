@@ -97,11 +97,14 @@ check_values <- function(data, at) {
     }
 }
 
-check_at_names <- function(names, at) {
-    if (is.null(names)) {
+check_at_names <- function(namevec, at) {
+    if (is.null(namevec)) {
         return()
     }
-    b <- !names(at) %in% names
+    if (is.null(names(at)) || any(names(at) == "")) {
+        stop("'at' contains unnamed list elements")
+    }
+    b <- !names(at) %in% namevec
     if (any(b)) {
         e <- ngettext(sum(b), "Unrecognized variable name in 'at': ", "Unrecognized variable names in 'at': ")
         stop(paste0(e, paste0("(", which(b), ") ", gsub("", "<empty>", names(at)[b]), collapse = ", ")))
