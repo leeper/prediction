@@ -33,7 +33,7 @@ function(model,
         names(pred)[names(pred) == "se.fit"] <- "se.fitted"
     }
     
-    # obs-x-(ncol(data)+2) data.frame of predictions
+    # obs-x-(ncol(data)+2) data frame
     structure(pred, 
               class = c("prediction", "data.frame"),
               row.names = seq_len(nrow(pred)),

@@ -23,10 +23,10 @@ prediction.merMod <- function(model, data = find_data(model), at = NULL, type = 
         pred <- do.call("rbind", out)
     }
     
-    # obs-x-(ncol(data)+2) data.frame of predictions
+    # obs-x-(ncol(data)+2) data frame
     structure(pred, 
               class = c("prediction", "data.frame"), 
-              row.names = seq_len(length(pred[["fitted"]])),
+              row.names = seq_len(nrow(pred)),
               at = if (is.null(at)) at else names(at), 
               model.class = class(model),
               type = type)

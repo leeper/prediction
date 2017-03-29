@@ -22,7 +22,7 @@ prediction.ar <- function(model, data, at = NULL, ...) {
         pred <- do.call("rbind", out)
     }
     
-    # obs-x-(ncol(data)+2) data.frame of predictions
+    # obs-x-(ncol(data)+2) data frame
     structure(pred, 
               class = c("prediction", "data.frame"), 
               row.names = seq_len(nrow(pred)),
@@ -30,7 +30,3 @@ prediction.ar <- function(model, data, at = NULL, ...) {
               model.class = class(model),
               type = NULL)
 }
-
-#' @rdname prediction
-#' @export
-prediction.arima0 <- prediction.ar
