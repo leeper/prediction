@@ -1,20 +1,15 @@
 #' @rdname prediction
 #' @export
-prediction.Arima <- function(model, data, ...) {
+prediction.Arima <- function(model, ...) {
     
     # extract predicted values
-    if (missing(data)) {
-        pred <- predict(object = model, se.fit = TRUE, ...)
-        names(pred) <- c("fitted", "se.fitted")
-    } else {
-        stop("There is no 'data' argument for objects of class 'Arima'")
-    }
+    pred <- predict(object = model, se.fit = TRUE, ...)
     
-    # obs-x-(ncol(data)+2) data.frame of predictions
-    structure(if (missing(data)) data.frame(pred) else cbind(data, pred), 
+    # obs-x-(ncol(data)+2) data frame
+    structure(data.frame(fitted = pred[[1L]], se.fitted = pred[[2L]]), 
               class = c("prediction", "data.frame"), 
-              row.names = seq_len(length(pred[["fitted"]])),
+              row.names = seq_len(nrow(pred)),
+              at = NULL, 
               model.class = class(model),
               type = NULL)
 }
-

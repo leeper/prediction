@@ -1,6 +1,6 @@
-# @rdname prediction
-# @export
-prediction.naiveBayes <- 
+#' @rdname prediction
+#' @export
+prediction.multinom <- 
 function(model, 
          data = find_data(model, parent.frame()), 
          at = NULL, 
@@ -8,28 +8,28 @@ function(model,
          category, 
          ...) {
     
-    # extract predicted values
-    data <- data
-    if (missing(data) || is.null(data)) {
-        warning(sprintf("'data' is ignored for models of class '%s'", class(model)))
-    }
     if (!is.null(type)) {
         warning(sprintf("'type' is ignored for models of class '%s'", class(model)))
     }
     
-    # setup data
-    out <- build_datalist(data, at = at)
-    for (i in seq_along(out)) {
-        tmp <- predict(model, 
-                       newdata = out[[i]], 
-                       type = "class", 
-                       ...)
-        probs <- as.data.frame(predict(model, newdata = data, type = "raw", ...))
+    # extract predicted values
+    data <- data
+    if (missing(data) || is.null(data)) {
+        pred <- data.frame(fitted.class = predict(model, type = "class", ...))
+        probs <- as.data.frame(predict(model, type = "probs", ...))
         names(probs) <- paste0("Pr(", names(probs), ")")
-        out[[i]] <- cbind(out[[i]], probs, fitted.class = tmp)
-        rm(tmp, probs)
+        pred <- cbind(pred, probs)
+    } else {
+        out <- build_datalist(data, at = at)
+        for (i in seq_along(out)) {
+            tmp <- predict(model, newdata = out[[i]], type = "class", ...)
+            tmp_probs <- as.data.frame(predict(model, newdata = data, type = "probs", ...))
+            names(tmp_probs) <- paste0("Pr(", names(tmp_probs), ")")
+            out[[i]] <- cbind.data.frame(out[[i]], fitted.class = tmp, tmp_probs)
+            rm(tmp, tmp_probs)
+        }
+        pred <- do.call("rbind", out)
     }
-    pred <- do.call("rbind", out)
     
     # handle category argument
     if (missing(category)) {

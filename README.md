@@ -35,12 +35,19 @@ class(predict(x, se.fit = TRUE))
 ## [1] "list"
 ```
 
-**prediction** solves this issue by providing a wrapper around `predict()`, called `prediction()`, that always returns a tidy data frame:
+**prediction** solves this issue by providing a wrapper around `predict()`, called `prediction()`, that always returns a tidy data frame with a very simple `print()` method:
 
 
 ```r
 library("prediction")
-p <- prediction(x)
+(p <- prediction(x))
+```
+
+```
+## Average prediction for 32 observations: 20.0906
+```
+
+```r
 class(p)
 ```
 
@@ -63,6 +70,26 @@ head(p)
 ```
 
 The output always contains the original data (i.e., either data found using the `find_data()` function or passed to the `data` argument to `prediction()`). This makes it much simpler to pass predictions to, e.g., further summary or plotting functions.
+
+Additionally the vast majority of methods all the passing of an `at` argument, which can be used to obtain predicted values using modified version of `data` held to specific values:
+
+
+```r
+prediction(x, at = list(hp = seq_range(mtcars$hp, 5)))
+```
+
+```
+## Average predictions for 32 observations:
+```
+
+```
+##  at(hp)  value
+##    52.0 22.605
+##   122.8 19.328
+##   193.5 16.051
+##   264.2 12.774
+##   335.0  9.497
+```
 
 ## Supported model classes
 

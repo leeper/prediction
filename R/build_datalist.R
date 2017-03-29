@@ -78,25 +78,33 @@ check_values <- function(data, at) {
     # drop non-numeric variables from `dat` and `at`
     not_numeric <- !sapply(dat, class) %in% c("character", "factor", "ordered", "logical")
     at <- at[names(at) %in% names(dat)[not_numeric]]
-    dat <- dat[, -not_numeric, drop = FALSE]
-    
-    # calculate variable ranges
-    limits <- do.call(rbind, lapply(dat, range, na.rm = TRUE))
-    rownames(limits) <- names(dat)
-    
-    # check ranges
-    for (i in seq_along(at)) {
-        out <- (at[[i]] < limits[names(at)[i],1]) | (at[[i]] > limits[names(at)[i],2])
-        if (any( out ) ) {
-            datarange <- paste0("outside observed data range (", limits[names(at)[i],1], ",", limits[names(at)[i],2], ")!")
-            warning(ngettext(sum(out), paste0("A 'at' value for '", names(at)[i], "' is ", datarange),
-                                       paste0("Some 'at' values for '", names(at)[i], "' are ", datarange)))
+    dat <- dat[, not_numeric, drop = FALSE]
+
+    if (length(dat) > 0 & length(at) > 0) {
+        # calculate variable ranges
+        limits <- do.call(rbind, lapply(dat, range, na.rm = TRUE))
+        rownames(limits) <- names(dat)
+        
+        # check ranges
+        for (i in seq_along(at)) {
+            out <- (at[[i]] < limits[names(at)[i],1]) | (at[[i]] > limits[names(at)[i],2])
+            if (any( out ) ) {
+                datarange <- paste0("outside observed data range (", limits[names(at)[i],1], ",", limits[names(at)[i],2], ")!")
+                warning(ngettext(sum(out), paste0("A 'at' value for '", names(at)[i], "' is ", datarange),
+                                           paste0("Some 'at' values for '", names(at)[i], "' are ", datarange)))
+            }
         }
     }
 }
 
-check_at_names <- function(names, at) {
-    b <- !names(at) %in% names
+check_at_names <- function(namevec, at) {
+    if (is.null(namevec)) {
+        return()
+    }
+    if (is.null(names(at)) || any(names(at) == "")) {
+        stop("'at' contains unnamed list elements")
+    }
+    b <- !names(at) %in% namevec
     if (any(b)) {
         e <- ngettext(sum(b), "Unrecognized variable name in 'at': ", "Unrecognized variable names in 'at': ")
         stop(paste0(e, paste0("(", which(b), ") ", gsub("", "<empty>", names(at)[b]), collapse = ", ")))
