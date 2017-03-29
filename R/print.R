@@ -5,12 +5,12 @@ print.prediction <- function(x, digits = 4, ...) {
     if (is.null(attributes(x)[["at"]])) {
         if (is.numeric(f)) {
             m <- sprintf(paste0("%0.", digits, "f"), mean(f, na.rm = TRUE))
-            message(paste0("Average prediction: ", m, ", for ", length(f), " ", ngettext(length(f), "observation", "observations")))
+            message(paste0("Average prediction for ", length(f), " ", ngettext(length(f), "observation", "observations"), ": ", m))
         } else {
             m <- sort(table(x[["fitted"]]), decreasing = TRUE)[1L]
-            cat(paste0("Modal prediction: ", shQuote(names(m)), " for ", m, " of ", length(f), " ", 
+            cat(paste0("Modal prediction:  for ", m, " of ", length(f), " ", 
                 ngettext(length(f), "observation", "observations"),
-                " with total ", nlevels(f), " ", ngettext(nlevels(f), "level", "levels") ))
+                " with total ", nlevels(f), " ", ngettext(nlevels(f), "level", "levels"), ": ", shQuote(names(m)) ))
         }
     } else {
         xby <- x[ , attributes(x)[["at"]], drop = FALSE]
@@ -32,4 +32,3 @@ print.prediction <- function(x, digits = 4, ...) {
     }
     invisible(x)
 }
-
