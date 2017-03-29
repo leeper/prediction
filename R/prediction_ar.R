@@ -13,7 +13,6 @@ prediction.ar <- function(model, data, at = NULL, ...) {
         for (i in seq_along(out)) {
             tmp <- predict(model, 
                            newdata = out[[i]], 
-                           type = type, 
                            se.fit = TRUE,
                            ...)
             out[[i]] <- cbind(out[[i]], fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])

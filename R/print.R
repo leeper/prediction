@@ -1,4 +1,5 @@
 #' @importFrom utils head
+#' @importFrom stats aggregate
 #' @export
 print.prediction <- function(x, digits = 4, ...) {
     f <- x[["fitted"]]

@@ -59,7 +59,8 @@
 #' prediction(x, at = lapply(iris, mean_or_mode))
 #' 
 #' # prediction with multi-category outcome
-#' if (require("mlogit")) {
+#' \dontrun{
+#'   library("mlogit")
 #'   data("Fishing", package = "mlogit")
 #'   Fish <- mlogit.data(Fishing, varying = c(2:9), shape = "wide", choice = "mode")
 #'   mod <- mlogit(mode ~ price + catch, data = Fish)

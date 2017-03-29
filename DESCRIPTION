@@ -28,6 +28,7 @@ Enhances:
     glmx,
     lme4,
     MASS,
+    mlogit,
     nlme,
     nnet,
     ordinal,
