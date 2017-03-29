@@ -1,5 +1,6 @@
 # CHANGES TO prediction 0.1.13
 
+* Added a `category` argument to `prediction()` methods for models of multilevel outcomes (e.g., ordered probit, etc.) to be dictate which level is expressed as the `"fitted"` column. (#14)
 * Added an `at` argument to `prediction()` methods. (#13)
 * Made `mean_or_mode()` and `median_or_mode()` S3 generics.
 * Fixed a bug in `mean_or_mode()` and `median_or_mode()` where incorrect factor levels were being returned.
