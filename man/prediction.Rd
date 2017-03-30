@@ -2,15 +2,15 @@
 % Please edit documentation in R/prediction.R, R/prediction_Arima.R,
 %   R/prediction_ar.R, R/prediction_arima0.R, R/prediction_betareg.R,
 %   R/prediction_clm.R, R/prediction_coxph.R, R/prediction_crch.R,
-%   R/prediction_gam.R, R/prediction_glm.R, R/prediction_glmx.R,
-%   R/prediction_gls.R, R/prediction_hetglm.R, R/prediction_hxlr.R,
-%   R/prediction_ivreg.R, R/prediction_lm.R, R/prediction_loess.R,
-%   R/prediction_lqs.R, R/prediction_mca.R, R/prediction_mclogit.R,
-%   R/prediction_merMod.R, R/prediction_mnlogit.R, R/prediction_multinom.R,
-%   R/prediction_nls.R, R/prediction_nnet.R, R/prediction_polr.R,
-%   R/prediction_ppr.R, R/prediction_princomp.R, R/prediction_rlm.R,
-%   R/prediction_rq.R, R/prediction_selection.R, R/prediction_survreg.R,
-%   R/prediction_svm.R, R/prediction_svyglm.R
+%   R/prediction_gam.R, R/prediction_gee.R, R/prediction_glm.R,
+%   R/prediction_glmx.R, R/prediction_gls.R, R/prediction_hetglm.R,
+%   R/prediction_hxlr.R, R/prediction_ivreg.R, R/prediction_lm.R,
+%   R/prediction_loess.R, R/prediction_lqs.R, R/prediction_mca.R,
+%   R/prediction_mclogit.R, R/prediction_merMod.R, R/prediction_mnlogit.R,
+%   R/prediction_multinom.R, R/prediction_nls.R, R/prediction_nnet.R,
+%   R/prediction_polr.R, R/prediction_ppr.R, R/prediction_princomp.R,
+%   R/prediction_rlm.R, R/prediction_rq.R, R/prediction_selection.R,
+%   R/prediction_survreg.R, R/prediction_svm.R, R/prediction_svyglm.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -23,6 +23,7 @@
 \alias{prediction.coxph}
 \alias{prediction.crch}
 \alias{prediction.gam}
+\alias{prediction.gee}
 \alias{prediction.glm}
 \alias{prediction.glmx}
 \alias{prediction.gls}
@@ -76,6 +77,8 @@ prediction(model, ...)
 
 \method{prediction}{gam}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link", "terms"), ...)
+
+\method{prediction}{gee}(model, ...)
 
 \method{prediction}{glm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link"), ...)
@@ -182,6 +185,7 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{coxph}, see \code{\link[survival]{coxph}}
   \item \dQuote{crch}, see \code{\link[crch]{crch}}
   \item \dQuote{gam}, see \code{\link[gam]{gam}}
+  \item \dQuote{gee}, see \code{\link[gee]{gee}}
   \item \dQuote{gls}, see \code{\link[nlme]{gls}}
   \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
   \item \dQuote{ivreg}, see \code{\link[AER]{ivreg}}

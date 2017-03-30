@@ -59,6 +59,7 @@ The currently supported model classes are:
  - "coxph" from `survival::coxph()`
  - "crch" from `crch::crch()`
  - "gam" from `gam::gam()`
+ - "gee" from `gee::gee()`
  - "gls" from `nlme::gls()`
  - "hxlr" from `crch::hxlr()`
  - "ivreg" from `AER::ivreg()`

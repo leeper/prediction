@@ -22,6 +22,7 @@
 #'   \item \dQuote{coxph}, see \code{\link[survival]{coxph}}
 #'   \item \dQuote{crch}, see \code{\link[crch]{crch}}
 #'   \item \dQuote{gam}, see \code{\link[gam]{gam}}
+#'   \item \dQuote{gee}, see \code{\link[gee]{gee}}
 #'   \item \dQuote{gls}, see \code{\link[nlme]{gls}}
 #'   \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
 #'   \item \dQuote{ivreg}, see \code{\link[AER]{ivreg}}

@@ -27,6 +27,7 @@ Enhances:
     crch,
     e1071,
     gam,
+    gee,
     glmx,
     lme4,
     MASS,
