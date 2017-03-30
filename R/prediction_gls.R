@@ -2,7 +2,7 @@
 #' @export
 prediction.gls <- 
 function(model, 
-         data, 
+         data = find_data(model), 
          at = NULL, 
          ...) {
     

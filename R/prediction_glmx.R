@@ -12,13 +12,8 @@ function(model,
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        pred <- data.frame(fitted = predict(model, newdata = data, type = type, ...),
-                           se.fitted = NA_real_)
+        pred <- data.frame(fitted = predict(model, newdata = data, type = type, ...))
     } else {
-        # reduce memory profile
-        model[["model"]] <- NULL
-        attr(model[["terms"]], ".Environment") <- NULL
-    
         # setup data
         out <- build_datalist(data, at = at)
         for (i in seq_along(out)) {
@@ -26,11 +21,12 @@ function(model,
                            newdata = out[[i]], 
                            type = type, 
                            ...)
-            out[[i]] <- cbind(out[[i]], fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
+            out[[i]] <- cbind(out[[i]], fitted = tmp)
             rm(tmp)
         }
         pred <- do.call("rbind", out)
     }
+    pred[["se.fitted"]] <- NA_real_
     
     # obs-x-(ncol(data)+2) data frame
     structure(pred, 

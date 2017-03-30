@@ -12,8 +12,7 @@ function(model,
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        pred <- data.frame(fitted = predict(model, type = type, ...),
-                           se.fitted = NA_real_)
+        pred <- data.frame(fitted = predict(model, type = type, ...))
     } else {
         # setup data
         out <- build_datalist(data, at = at)
@@ -22,11 +21,12 @@ function(model,
                            newdata = out[[i]], 
                            type = type, 
                            ...)
-            out[[i]] <- cbind(out[[i]], fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
+            out[[i]] <- cbind(out[[i]], fitted = tmp)
             rm(tmp)
         }
         pred <- do.call("rbind", out)
     }
+    pred[["se.fitted"]] <- NA_real_
     
     # obs-x-(ncol(data)+2) data frame
     structure(pred, 

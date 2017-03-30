@@ -88,7 +88,7 @@ prediction(model, ...)
 \method{prediction}{glmx}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link"), ...)
 
-\method{prediction}{gls}(model, data, at = NULL, ...)
+\method{prediction}{gls}(model, data = find_data(model), at = NULL, ...)
 
 \method{prediction}{hetglm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link", "scale"), ...)

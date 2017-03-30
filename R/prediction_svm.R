@@ -17,7 +17,7 @@ function(model,
     }
     if (missing(data) || is.null(data)) {
         tmp <- predict(model, decision.values = TRUE, probability = probability, ...)
-        pred <- data.frame(fitted.class = pred)
+        pred <- data.frame(fitted.class = tmp)
         attributes(pred[["fitted.class"]]) <- NULL
         if (!is.null(attributes(tmp)[["probabilities"]])) {
             probs <- data.frame(attributes(tmp)[["probabilities"]])
@@ -31,7 +31,7 @@ function(model,
         }
     } else {
         tmp <- predict(model, newdata = data, decision.values = TRUE, probability = probability, ...)
-        pred <- cbind(data, fitted.class = pred)
+        pred <- cbind(data, fitted.class = tmp)
         attributes(pred[["fitted.class"]]) <- NULL
         if (!is.null(attributes(tmp)[["probabilities"]])) {
             probs <- data.frame(attributes(tmp)[["probabilities"]])

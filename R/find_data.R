@@ -24,13 +24,25 @@ find_data.default <- function(model, env = parent.frame(), ...) {
     if (inherits(form, "try-error") && is.null(model[["call"]])) {
         stop("'find_data()' requires a formula call")
     } else  {
-        dat <- eval(model[["call"]][["data"]], env)
-        if (inherits(dat, "try-error")) {
-            dat <- get_all_vars(model, data = model[["call"]][["data"]])
+        if (!is.null(model[["call"]][["data"]])) {
+            dat <- eval(model[["call"]][["data"]], env)
+            if (inherits(dat, "try-error")) {
+                dat <- get_all_vars(model, data = model[["call"]][["data"]])
+            }
+        } else {
+            dat <- get_all_vars(model, data = env)
         }
         # handle subset
         if (!is.null(model[["call"]][["subset"]])) {
-            dat <- dat[eval(model[["call"]][["subset"]], dat), , drop = FALSE]
+            subs <- try(eval(model[["call"]][["subset"]], dat), silent = TRUE)
+            if (inherits(subs, "try-error")) {
+                subs <- try(get("subs", env), silent = TRUE)
+                if (inherits(subs, "try-error")) {
+                    subs <- TRUE
+                    warning("'find_data()' cannot locate variable(s) used in 'subset'")
+                }
+            }
+            dat <- dat[subs, , drop = FALSE]
         }
         # handle na.action
         if (!is.null(model[["na.action"]])) {

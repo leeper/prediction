@@ -22,9 +22,11 @@ Some specific types of changes that you might make are:
  
  3. New functionality. This is fine, but should be discussed on [the GitHub issues page](https://github.com/leeper/prediction/issues) before submitting a pull request. Note, in particular, that contributions of new `prediction()` methods, should comply with following:
  
-   - Methods should be added to their own file in the [`R/`](https://github.com/leeper/prediction/tree/master/R/) directory, with a file name corresponding to the function name.
-   - Any packages that these methods work for should be added to the `Enhances` field of the [`DESCRIPTION`](https://github.com/leeper/prediction/blob/master/DESCRIPTION) file. If methods require imports from a package they are supporting, they should still be listed in `Enhances` and call code should be made conditional on a `requireNamespace()` statement in the method.
-   - If tests are added, these should similarly be conditional on a `requireNamespace()` statement and the required packages should be added to [`.travis.yml`](https://github.com/leeper/prediction/blob/master/.travis.yml) under the `r_packages:` heading so that they can be used during testing on Travis-CI.
+   - Methods should be added to their own file in the [`R/`](https://github.com/leeper/prediction/tree/master/R/) directory, with a file name corresponding to the function name (e.g., the `prediction.lm()` is saved in `R/prediction_lm.R`).
+   - Lists of supported class are included in two places: `README.Rmd` (do not edit `README.md` directly) and on the main documentation package page (generated from roxygen comments in `R/prediction.R`). New methods should be listed in both places; methods are listed alphabetically by model class.
+   - New methods should be supported by a simple test that is run conditional on the availability of the package that implements the model class. The tests should be added to the `tests/tests-methods.R` test file, under a conditional statement testing availability of package using `requireNamespace()`. Tests in this file are organized alphabetically, first by package and, within packages, by model class name.
+   - Any packages that these methods require should be added to the `Enhances` field of the [`DESCRIPTION`](https://github.com/leeper/prediction/blob/master/DESCRIPTION) file. If methods require imports from a package they are supporting, they should still be listed in `Enhances` and call code should be made conditional on a `requireNamespace()` statement in the method.
+   - The required packages should also be added to [`.travis.yml`](https://github.com/leeper/prediction/blob/master/.travis.yml) under the `r_packages:` heading so that they can be used during testing on Travis-CI.
  
  3. Changes requiring a new package dependency should also be discussed on [the GitHub issues page](https://github.com/leeper/prediction/issues) before submitting a pull request.
  

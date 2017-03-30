@@ -1,3 +1,8 @@
+# CHANGES TO prediction 0.1.15
+
+* Expanded test suite considerably and updated `CONTRIBUTING.md` to reflect expected test-driven development.
+* A few small code tweaks and bug fixes resulting from the updated test suite.
+
 # CHANGES TO prediction 0.1.14
 
 * Added `prediction.mnp()` method for "mnp" objects from **MNP**. (#1)
