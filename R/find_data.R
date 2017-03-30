@@ -77,3 +77,13 @@ find_data.crch <- find_data.default
 #' @rdname find_data
 #' @export
 find_data.hxlr <- find_data.default
+
+#' @rdname find_data
+#' @export
+find_data.vgam <- function(model, env = parent.frame(), ...) {
+    if (!requireNamespace("methods")) {
+        stop("'find_data.vgam()' requires the 'methods' package")
+    }
+    dat <- methods::slot(hfit, "misc")[["dataname"]]
+    get(dat, envir = env)
+}

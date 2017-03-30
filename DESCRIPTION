@@ -18,6 +18,7 @@ Imports:
     stats
 Suggests:
     datasets,
+    methods,
     testthat
 Enhances:
     AER,
@@ -35,5 +36,6 @@ Enhances:
     quantreg,
     sampleSelection,
     survey (>= 3.31-5),
-    survival
+    survival,
+    vgam
 RoxygenNote: 6.0.1
