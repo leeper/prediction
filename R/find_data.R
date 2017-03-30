@@ -87,3 +87,7 @@ find_data.vgam <- function(model, env = parent.frame(), ...) {
     dat <- methods::slot(hfit, "misc")[["dataname"]]
     get(dat, envir = env)
 }
+
+#' @rdname find_data
+#' @export
+find_data.vglm <- find_data.vgam
