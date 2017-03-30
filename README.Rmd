@@ -65,6 +65,7 @@ The currently supported model classes are:
  - "lda" from `MASS:lda()`
  - "loess" from `stats::loess()`
  - "lqs" from `MASS::lqs()`
+ - "mca" from `MASS::mca()`
  - "mclogit" from `mclogit::mclogit()`
  - "mlogit" from `mlogit::mlogit()`
  - "naiveBayes" from `e1071::naiveBayes()`

@@ -12,6 +12,7 @@
 \alias{find_data.hxlr}
 \alias{find_data.vgam}
 \alias{find_data.vglm}
+\alias{find_data.mca}
 \title{Extract data from a model object}
 \usage{
 find_data(model, ...)
@@ -35,6 +36,8 @@ find_data(model, ...)
 \method{find_data}{vgam}(model, env = parent.frame(), ...)
 
 \method{find_data}{vglm}(model, env = parent.frame(), ...)
+
+\method{find_data}{mca}(model, env = parent.frame(), ...)
 }
 \arguments{
 \item{model}{The model object.}

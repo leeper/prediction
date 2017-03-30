@@ -63,6 +63,7 @@ find_data.svyglm <- function(model, ...) {
     data <- model[["data"]]
     data
 }
+
 #' @rdname find_data
 #' @importFrom stats model.frame
 #' @export
@@ -91,3 +92,9 @@ find_data.vgam <- function(model, env = parent.frame(), ...) {
 #' @rdname find_data
 #' @export
 find_data.vglm <- find_data.vgam
+
+#' @rdname find_data
+#' @export
+find_data.mca <- function(model, env = parent.frame(), ...) {
+    eval(model[["call"]][["df"]], envir = env)
+}
