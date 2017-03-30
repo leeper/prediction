@@ -33,6 +33,7 @@
 #'   \item \dQuote{mclogit}, see \code{\link[mclogit]{mclogit}}
 #'   \item \dQuote{mlogit}, see \code{\link[mlogit]{mlogit}}
 #'   \item \dQuote{mnlogit}, see \code{\link[mnlogit]{mnlogit}}
+#'   \item \dQuote{mnp}, see \code{\link[MNP]{mnp}}
 #'   \item \dQuote{naiveBayes}, see \code{\link[e1071]{naiveBayes}}
 #'   \item \dQuote{nls}, see \code{\link[stats]{nls}}
 #'   \item \dQuote{nnet}, see \code{\link[nnet]{nnet}}

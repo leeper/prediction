@@ -21,10 +21,7 @@ find_data <- function(model, ...) {
 #' @export
 find_data.default <- function(model, env = parent.frame(), ...) {
     form <- try(terms(model), silent = TRUE)
-    if (inherits(form, "try-error")) {
-        # if no terms, then model was created without a formula interface
-        stop("'find_data()' requires a formula call")
-    } else if (is.null(model[["call"]])) {
+    if (inherits(form, "try-error") && is.null(model[["call"]])) {
         stop("'find_data()' requires a formula call")
     } else  {
         dat <- eval(model[["call"]][["data"]], env)

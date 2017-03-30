@@ -5,7 +5,7 @@ print.prediction <- function(x, digits = 4, ...) {
     f <- x[["fitted"]]
     fc <- x[["fitted.class"]]
     if (is.null(attributes(x)[["at"]])) {
-        if (!"fitted.class" %in% names(x)) {
+        if (!"fitted.class" %in% names(x) || is.list(fc)) {
             # numeric outcome
             m <- sprintf(paste0("%0.", digits, "f"), mean(f, na.rm = TRUE))
             message(paste0("Average prediction for ", length(f), " ", ngettext(length(f), "observation", "observations"), ": ", m))
@@ -17,7 +17,7 @@ print.prediction <- function(x, digits = 4, ...) {
         }
     } else {
         xby <- x[ , attributes(x)[["at"]], drop = FALSE]
-        if (!"fitted.class" %in% names(x)) {
+        if (!"fitted.class" %in% names(x) || is.list(fc)) {
             # numeric outcome
             out <- aggregate(x[["fitted"]], xby, FUN = mean, na.rm = TRUE)
             message(paste0("Average ", ngettext(nrow(out), "prediction", "predictions"), 
