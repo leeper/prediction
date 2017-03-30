@@ -23,6 +23,7 @@ Suggests:
 Enhances:
     AER,
     betareg,
+    brglm,
     crch,
     e1071,
     gam,

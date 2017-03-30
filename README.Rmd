@@ -50,7 +50,7 @@ prediction(x, at = list(hp = seq_range(mtcars$hp, 5)))
 The currently supported model classes are:
 
  - "lm" from `stats::lm()`
- - "glm" from `stats::glm()`, `MASS::glm.nb()`, `glmx::glmx()`, `glmx::hetglm()`
+ - "glm" from `stats::glm()`, `MASS::glm.nb()`, `glmx::glmx()`, `glmx::hetglm()`, `brglm::brglm()`
  - "ar" from `stats::ar()`
  - "Arima" from `stats::arima()`
  - "arima0" from `stats::arima0()`
