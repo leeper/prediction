@@ -33,7 +33,9 @@ function(model,
     
     # handle category argument
     if (missing(category)) {
-        pred[["fitted"]] <- pred[[grep("^Pr\\(", names(pred))[1L]]]
+        w <- grep("^Pr\\(", names(pred))[1L]
+        category <- names(pred)[w]
+        pred[["fitted"]] <- pred[[w]]
     } else {
         w <- which(names(pred) == paste0("Pr(", category, ")"))
         if (!length(w)) {
@@ -49,6 +51,6 @@ function(model,
               row.names = seq_len(nrow(pred)),
               at = if (is.null(at)) at else names(at), 
               model.class = class(model),
-              type = NA_character,
+              type = NA_character_,
               category = category)
 }

@@ -68,6 +68,7 @@ The currently supported model classes are:
  - "mca" from `MASS::mca()`
  - "mclogit" from `mclogit::mclogit()`
  - "mlogit" from `mlogit::mlogit()`
+ - "mnlogit" from `mnlogit::mnlogit()`
  - "naiveBayes" from `e1071::naiveBayes()`
  - "nls" from `stats::nls()`
  - "nnet" from `nnet::nnet()`, `nnet::multinom()`

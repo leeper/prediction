@@ -6,11 +6,11 @@
 %   R/prediction_gls.R, R/prediction_hetglm.R, R/prediction_hxlr.R,
 %   R/prediction_ivreg.R, R/prediction_lm.R, R/prediction_loess.R,
 %   R/prediction_lqs.R, R/prediction_mca.R, R/prediction_mclogit.R,
-%   R/prediction_merMod.R, R/prediction_multinom.R, R/prediction_nls.R,
-%   R/prediction_nnet.R, R/prediction_polr.R, R/prediction_ppr.R,
-%   R/prediction_princomp.R, R/prediction_rlm.R, R/prediction_rq.R,
-%   R/prediction_selection.R, R/prediction_survreg.R, R/prediction_svm.R,
-%   R/prediction_svyglm.R
+%   R/prediction_merMod.R, R/prediction_mnlogit.R, R/prediction_multinom.R,
+%   R/prediction_nls.R, R/prediction_nnet.R, R/prediction_polr.R,
+%   R/prediction_ppr.R, R/prediction_princomp.R, R/prediction_rlm.R,
+%   R/prediction_rq.R, R/prediction_selection.R, R/prediction_survreg.R,
+%   R/prediction_svm.R, R/prediction_svyglm.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -35,6 +35,7 @@
 \alias{prediction.mca}
 \alias{prediction.mclogit}
 \alias{prediction.merMod}
+\alias{prediction.mnlogit}
 \alias{prediction.multinom}
 \alias{prediction.nls}
 \alias{prediction.nnet}
@@ -108,6 +109,9 @@ prediction(model, ...)
 
 \method{prediction}{merMod}(model, data = find_data(model), at = NULL,
   type = c("response", "link"), ...)
+
+\method{prediction}{mnlogit}(model, data = find_data(model, parent.frame()),
+  at = NULL, category, ...)
 
 \method{prediction}{multinom}(model, data = find_data(model, parent.frame()),
   at = NULL, type = NULL, category, ...)
@@ -187,6 +191,7 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{mca}, see \code{\link[MASS]{mca}}
   \item \dQuote{mclogit}, see \code{\link[mclogit]{mclogit}}
   \item \dQuote{mlogit}, see \code{\link[mlogit]{mlogit}}
+  \item \dQuote{mnlogit}, see \code{\link[mnlogit]{mnlogit}}
   \item \dQuote{naiveBayes}, see \code{\link[e1071]{naiveBayes}}
   \item \dQuote{nls}, see \code{\link[stats]{nls}}
   \item \dQuote{nnet}, see \code{\link[nnet]{nnet}}

@@ -29,7 +29,9 @@ function(model,
 
     # handle category argument
     if (missing(category)) {
-        pred[["fitted"]] <- pred[[grep("^Pr\\(", names(pred))[1L]]]
+        w <- grep("^Pr\\(", names(pred))[1L]
+        category <- names(pred)[w]
+        pred[["fitted"]] <- pred[[w]]
     } else {
         w <- which(names(pred) == paste0("Pr(", category, ")"))
         if (!length(w)) {

@@ -35,7 +35,8 @@ function(model,
     
     # handle category argument
     if (missing(category)) {
-        pred[["fitted"]] <- names(pred)[!names(pred) %in% names(data)][1L]
+        category <- names(pred)[!names(pred) %in% names(data)][1L]
+        pred[["fitted"]] <- pred[[category]]
     } else {
         w <- grep(category, names(pred))
         if (!length(w)) {

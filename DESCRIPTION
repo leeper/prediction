@@ -30,6 +30,7 @@ Enhances:
     lme4,
     MASS,
     mlogit,
+    mnlogit,
     nlme,
     nnet,
     ordinal,
