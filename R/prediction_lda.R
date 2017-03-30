@@ -45,5 +45,6 @@ function(model,
               row.names = seq_len(nrow(pred)),
               at = if (is.null(at)) at else names(at), 
               model.class = class(model),
-              type = NA_character_)
+              type = NA_character_,
+              category = category)
 }

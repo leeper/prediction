@@ -1,25 +1,28 @@
 #' @rdname prediction
 #' @export
-prediction.ar <- function(model, data, at = NULL, ...) {
+prediction.lqs <- 
+function(model, 
+         data = find_data(model), 
+         at = NULL, 
+         ...) {
     
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        pred <- predict(object = model, se.fit = TRUE, ...)
-        pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
+        pred <- data.frame(fitted = predict(model, ...))
     } else {
         # setup data
         out <- build_datalist(data, at = at)
         for (i in seq_along(out)) {
             tmp <- predict(model, 
                            newdata = out[[i]], 
-                           se.fit = TRUE,
                            ...)
-            out[[i]] <- cbind(out[[i]], fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
+            out[[i]] <- cbind(out[[i]], fitted = tmp)
             rm(tmp)
         }
         pred <- do.call("rbind", out)
     }
+    pred[["se.fitted"]] <- NA_real_
     
     # obs-x-(ncol(data)+2) data frame
     structure(pred, 
@@ -27,5 +30,5 @@ prediction.ar <- function(model, data, at = NULL, ...) {
               row.names = seq_len(nrow(pred)),
               at = if (is.null(at)) at else names(at), 
               model.class = class(model),
-              type = NA_character)
+              type = NA_character_)
 }

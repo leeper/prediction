@@ -64,6 +64,7 @@ The currently supported model classes are:
  - "ivreg" from `AER::ivreg()`
  - "lda" from `MASS:lda()`
  - "loess" from `stats::loess()`
+ - "lqs" from `MASS::lqs()`
  - "mclogit" from `mclogit::mclogit()`
  - "mlogit" from `mlogit::mlogit()`
  - "naiveBayes" from `e1071::naiveBayes()`

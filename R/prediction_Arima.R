@@ -11,5 +11,5 @@ prediction.Arima <- function(model, ...) {
               row.names = seq_len(nrow(pred)),
               at = NULL, 
               model.class = class(model),
-              type = NULL)
+              type = NA_character_)
 }
