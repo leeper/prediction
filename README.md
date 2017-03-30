@@ -4,7 +4,7 @@
 
 In addition to `prediction()`, the package provides a number of utility functions for generating useful predictions:
 
- - `find_data()`, an S3 generic with methods that find the data frame used to estimate a regression model
+ - `find_data()`, an S3 generic with methods that find the data frame used to estimate a regression model. This is a wrapper around `get_all_vars()` that attempts to locate data as well as modify it according to `subset` and `na.action` arguments used in the original modelling call.
  - `mean_or_mode()` and `median_or_mode()`, which provide a convenient way to compute the data needed for predicted values *at means* (or *at medians*), respecting the differences between factor and numeric variables.
  - `seq_range()`, which generates a vector of *n* values based upon the range of values in a variable
  - `build_datalist()`, which generates a list of data frames from an input data frame and a specified set of replacement `at` values (mimicking the `atlist` option of Stata's `margins` command)
@@ -13,7 +13,7 @@ In addition to `prediction()`, the package provides a number of utility function
 
 
 
-A major downside of the `predict()` methods for common modelling classes is that the result is not typesafe. Consider the following simple example:
+A major downside of the `predict()` methods for common modelling classes is that the result is not type-safe. Consider the following simple example:
 
 
 ```r
@@ -71,7 +71,7 @@ head(p)
 
 The output always contains the original data (i.e., either data found using the `find_data()` function or passed to the `data` argument to `prediction()`). This makes it much simpler to pass predictions to, e.g., further summary or plotting functions.
 
-Additionally the vast majority of methods all the passing of an `at` argument, which can be used to obtain predicted values using modified version of `data` held to specific values:
+Additionally the vast majority of methods allow the passing of an `at` argument, which can be used to obtain predicted values using modified version of `data` held to specific values:
 
 
 ```r
@@ -91,12 +91,14 @@ prediction(x, at = list(hp = seq_range(mtcars$hp, 5)))
 ##   335.0  9.497
 ```
 
+This more or less serves as a direct R port of (the subset of functionality of) Stata's `margins` command that calculates predictive marginal means, etc. For calculation of marginal or partial effects, see the [**margins**](https://cran.r-project.org/package=margins) package.
+
 ## Supported model classes
 
 The currently supported model classes are:
 
  - "lm" from `stats::lm()`
- - "glm" from `stats::glm()`, `MASS::glm.nb()`, `glmx::glmx()`, `glmx::hetglm()`
+ - "glm" from `stats::glm()`, `MASS::glm.nb()`, `glmx::glmx()`, `glmx::hetglm()`, `brglm::brglm()`
  - "ar" from `stats::ar()`
  - "Arima" from `stats::arima()`
  - "arima0" from `stats::arima0()`
@@ -105,11 +107,17 @@ The currently supported model classes are:
  - "coxph" from `survival::coxph()`
  - "crch" from `crch::crch()`
  - "gam" from `gam::gam()`
+ - "gee" from `gee::gee()`
  - "gls" from `nlme::gls()`
  - "hxlr" from `crch::hxlr()`
  - "ivreg" from `AER::ivreg()`
  - "lda" from `MASS:lda()`
  - "loess" from `stats::loess()`
+ - "lqs" from `MASS::lqs()`
+ - "mca" from `MASS::mca()`
+ - "mclogit" from `mclogit::mclogit()`
+ - "mnlogit" from `mnlogit::mnlogit()`
+ - "mnp" from `MNP::mnp()`
  - "naiveBayes" from `e1071::naiveBayes()`
  - "nls" from `stats::nls()`
  - "nnet" from `nnet::nnet()`, `nnet::multinom()`

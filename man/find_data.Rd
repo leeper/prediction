@@ -47,13 +47,13 @@ find_data(model, ...)
 \item{env}{An environment in which to look for the \code{data} argument to the modelling call.}
 }
 \value{
-A data frame, typically with one column unless the variable is a factor with more than two levels.
+A data frame containing the original data used in a modelling call, modified according to the original model's `subset` and `na.action` arguments, if appropriate.
 }
 \description{
 Attempt to reconstruct the data used to create a model object
 }
 \details{
-This typically requires that a model object be specified using a formula interface and an explicit \code{data} argument. Models that can be specified using variables from the \code{.GlobalEnv} or with a non-formula interface (e.g., a matrix of data) will tend to generate errors.
+This is a convenience function and, as such, carries no guarantees. To behave well, it typically requires that a model object be specified using a formula interface and an explicit \code{data} argument. Models that can be specified using variables from the \code{.GlobalEnv} or with a non-formula interface (e.g., a matrix of data) will tend to generate errors. \code{find_data} is an S3 generic so it is possible to expand it with new methods.
 }
 \examples{
 require("datasets")

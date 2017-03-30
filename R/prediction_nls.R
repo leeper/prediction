@@ -26,6 +26,6 @@ prediction.nls <- function(model, data = find_data(model, parent.frame()), at = 
               row.names = seq_len(nrow(pred)),
               at = if (is.null(at)) at else names(at), 
               model.class = class(model),
-              type = NA_character)
+              type = NA_character_)
 }
 

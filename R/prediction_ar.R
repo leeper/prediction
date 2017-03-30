@@ -27,5 +27,5 @@ prediction.ar <- function(model, data, at = NULL, ...) {
               row.names = seq_len(nrow(pred)),
               at = if (is.null(at)) at else names(at), 
               model.class = class(model),
-              type = NA_character)
+              type = NA_character_)
 }

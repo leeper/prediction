@@ -31,7 +31,6 @@
 #'   \item \dQuote{lqs}, see \code{\link[MASS]{lqs}}
 #'   \item \dQuote{mca}, see \code{\link[MASS]{mca}}
 #'   \item \dQuote{mclogit}, see \code{\link[mclogit]{mclogit}}
-#'   \item \dQuote{mlogit}, see \code{\link[mlogit]{mlogit}}
 #'   \item \dQuote{mnlogit}, see \code{\link[mnlogit]{mnlogit}}
 #'   \item \dQuote{mnp}, see \code{\link[MNP]{mnp}}
 #'   \item \dQuote{naiveBayes}, see \code{\link[e1071]{naiveBayes}}

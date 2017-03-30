@@ -1,3 +1,12 @@
+# CHANGES TO prediction 0.1.14
+
+* Added `prediction.mnp()` method for "mnp" objects from **MNP**. (#1)
+* Added `prediction.mnlogit()` method for "mnlogit" objects from **mnlogit**. (#1)
+* Added `prediction.gee()` method for "gee" objects from **gee**. (#1)
+* Added `prediction.lqs()` method for "lqs" objects from **MASS**. (#1)
+* Added `prediction.mca()` method for "mca" objects from **MASS**. (#1)
+* Noted (built-in) support for "brglm" objects from **brglm** via the `prediction.glm()` method. (#1)
+
 # CHANGES TO prediction 0.1.13
 
 * Added a `category` argument to `prediction()` methods for models of multilevel outcomes (e.g., ordered probit, etc.) to be dictate which level is expressed as the `"fitted"` column. (#14)
