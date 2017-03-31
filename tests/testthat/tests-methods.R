@@ -11,27 +11,27 @@ if (requireNamespace("AER")) {
         CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
         CigarettesSW$rincome <- with(CigarettesSW, income/population/cpi)
         CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
-        fm <- AER::ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
-                         data = CigarettesSW, subset = year == "1995")
-        expect_true(inherits(prediction(fm), "prediction"))
+        m <- AER::ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
+                        data = CigarettesSW, subset = year == "1995")
+        expect_true(inherits(prediction(m), "prediction"))
     })
 }
 
 if (requireNamespace("betareg")) {
     test_that("Test prediction() for 'betareg'", {
         data("GasolineYield", package = "betareg")
-        gy <- betareg::betareg(yield ~ batch + temp, data = GasolineYield)
-        expect_true(inherits(prediction(gy), "prediction"))
+        m <- betareg::betareg(yield ~ batch + temp, data = GasolineYield)
+        expect_true(inherits(prediction(m), "prediction"))
     })
 }
 
 if (requireNamespace("brglm")) {
     test_that("Test prediction() for 'brglm'", {
         data("lizards", package = "brglm")
-        lizards.brglm <- brglm::brglm(cbind(grahami, opalinus) ~ height + diameter +
-                                      light + time, family = binomial(logit), data=lizards,
-                                      method = "brglm.fit")
-        expect_true(inherits(prediction(lizards.brglm), "prediction"))
+        m <- brglm::brglm(cbind(grahami, opalinus) ~ height + diameter +
+                          light + time, family = binomial(logit), data=lizards,
+                          method = "brglm.fit")
+        expect_true(inherits(prediction(m), "prediction"))
     })
 }
 
@@ -41,9 +41,9 @@ if (requireNamespace("crch")) {
         data("RainIbk", package = "crch", envir = e)
         RainIbk <- e$RainIbk
         RainIbk$sqrtensmean <- apply(sqrt(RainIbk[,grep('^rainfc',names(RainIbk))]), 1, mean)
-        CRCH2 <- crch::crch(sqrt(rain) ~ sqrtensmean, data = RainIbk, 
-                            dist = "gaussian", left = 0)
-        expect_true(inherits(prediction(CRCH2, data = RainIbk), "prediction"))
+        m <- crch::crch(sqrt(rain) ~ sqrtensmean, data = RainIbk, 
+                        dist = "gaussian", left = 0)
+        expect_true(inherits(prediction(m, data = RainIbk), "prediction"))
     })
     test_that("Test prediction() for 'hxlr'", {
         e <- new.env()
@@ -52,36 +52,36 @@ if (requireNamespace("crch")) {
         RainIbk$sqrtensmean <- 
           apply(sqrt(RainIbk[,grep('^rainfc',names(RainIbk))]), 1, mean)
         q <- unique(quantile(RainIbk$rain, seq(0.1, 0.9, 0.1)))
-        XLR <- crch::hxlr(sqrt(rain) ~ sqrtensmean, data = RainIbk, thresholds = sqrt(q))
-        expect_true(inherits(prediction(XLR, data = RainIbk), "prediction"))
+        m <- crch::hxlr(sqrt(rain) ~ sqrtensmean, data = RainIbk, thresholds = sqrt(q))
+        expect_true(inherits(prediction(m, data = RainIbk), "prediction"))
     })
 }
 
 if (requireNamespace("e1071")) {
     test_that("Test prediction() for 'naiveBayes'", {
         data("Titanic")
-        model <- e1071::naiveBayes(Survived ~ ., data = Titanic)
-        expect_true(inherits(prediction(model), "prediction"))
+        m <- e1071::naiveBayes(Survived ~ ., data = Titanic)
+        expect_true(inherits(prediction(m), "prediction"))
     })
     test_that("Test prediction() for 'svm'", {
-        model <- e1071::svm(Species ~ ., data = iris)
-        expect_true(inherits(prediction(model), "prediction"))
+        m <- e1071::svm(Species ~ ., data = iris)
+        expect_true(inherits(prediction(m), "prediction"))
     })
 }
 
 if (requireNamespace("gam")) {
     test_that("Test prediction() for 'gam'", {
         data("gam.data", package = "gam")
-        gam.object <- gam::gam(y ~ gam::s(x,6) + z,data=gam.data)
-        expect_true(inherits(prediction(gam.object), "prediction"))
+        m <- gam::gam(y ~ gam::s(x,6) + z,data=gam.data)
+        expect_true(inherits(prediction(m), "prediction"))
     })
 }
 
 if (requireNamespace("gee")) {
     test_that("Test prediction() for 'gee'", {
         data("warpbreaks")
-        g <- gee::gee(breaks ~ tension, id=wool, data=warpbreaks, corstr="exchangeable")
-        expect_true(inherits(prediction(g), "prediction"))
+        m <- gee::gee(breaks ~ tension, id=wool, data=warpbreaks, corstr="exchangeable")
+        expect_true(inherits(prediction(m), "prediction"))
     })
 }
 
@@ -89,27 +89,61 @@ if (requireNamespace("glmx") ) {
     test_that("Test prediction() for 'glmx()'", {
         d <- data.frame(x = runif(200, -1, 1))
         d$y <- rnbinom(200, mu = exp(0 + 3 * d$x), size = 1)
-        m_nb1 <- glmx::glmx(y ~ x, data = d, family = MASS::negative.binomial, xlink = "log", xstart = 0)
-        expect_true(inherits(prediction(m_nb1), "prediction"))
+        m <- glmx::glmx(y ~ x, data = d, family = MASS::negative.binomial, xlink = "log", xstart = 0)
+        expect_true(inherits(prediction(m), "prediction"))
     })
     test_that("Test prediction() for 'hetglm()'", {
         n <- 200
         x <- rnorm(n)
         ystar <- 1 + x +  rnorm(n, sd = exp(x))
         y  <- factor(ystar > 0)
-        m0b <- glmx::hetglm(y ~ x | 1)
-        expect_true(inherits(prediction(m0b), "prediction"))
+        m <- glmx::hetglm(y ~ x | 1)
+        expect_true(inherits(prediction(m), "prediction"))
     })
 }
 
 if (requireNamespace("MASS")) {
-    #test_that("Test prediction() for 'glm.nb'", {})
-    #test_that("Test prediction() for 'lda'", {})
-    #test_that("Test prediction() for 'lqs'", {})
-    #test_that("Test prediction() for 'mca'", {})
-    #test_that("Test prediction() for 'polr'", {})
-    #test_that("Test prediction() for 'qda'", {})
-    #test_that("Test prediction() for 'rlm'", {})
+    test_that("Test prediction() for 'glm.nb'", {
+        data("quine", package = "MASS")
+        m <- MASS::glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
+        expect_true(inherits(prediction(m), "prediction"))
+    })
+    test_that("Test prediction() for 'lda'", {
+        data("iris3", package = "datasets")
+        tr <- sample(1:50, 25)
+        train <- rbind(iris3[tr,,1], iris3[tr,,2], iris3[tr,,3])
+        cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
+        m <- MASS::lda(train, cl)
+        expect_true(inherits(prediction(m, data = train), "prediction"))
+    })
+    test_that("Test prediction() for 'lqs'", {
+        data("stackloss", package = "datasets")
+        m <- MASS::lqs(stack.loss ~ ., data = stackloss, method = "S", nsamp = "exact")
+        expect_true(inherits(prediction(m), "prediction"))
+    })
+    test_that("Test prediction() for 'mca'", {
+        data("farms", package = "MASS")
+        m <- MASS::mca(farms, abbrev=TRUE)
+        expect_true(inherits(prediction(m), "prediction"))
+    })
+    test_that("Test prediction() for 'polr'", {
+        data("housing", package = "MASS")
+        m <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
+        expect_true(inherits(prediction(m), "prediction"))
+    })
+    test_that("Test prediction() for 'qda'", {
+        data("iris3", package = "datasets")
+        tr <- sample(1:50, 25)
+        train <- rbind(iris3[tr,,1], iris3[tr,,2], iris3[tr,,3])
+        cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
+        m <- MASS::qda(train, cl)
+        expect_true(inherits(prediction(m, data = train), "prediction"))
+    })
+    test_that("Test prediction() for 'rlm'", {
+        data("stackloss", package = "datasets")
+        m <- MASS::rlm(stack.loss ~ ., stackloss)
+        expect_true(inherits(prediction(m), "prediction"))
+    })
 }
 
 if (requireNamespace("mclogit")) {
@@ -123,25 +157,25 @@ if (requireNamespace("mclogit")) {
 if (requireNamespace("mnlogit")) {
     test_that("Test prediction() for 'mnlogit'", {
         data("Fish", package = "mnlogit")
-        fit <- mnlogit::mnlogit(mode ~ price | income | catch, Fish, ncores = 1)
-        expect_true(inherits(prediction(fit), "prediction"))
+        m <- mnlogit::mnlogit(mode ~ price | income | catch, Fish, ncores = 1)
+        expect_true(inherits(prediction(m), "prediction"))
     })
 }
 
 if (requireNamespace("MNP")) {
     test_that("Test prediction() for 'mnp'", {
         data("japan", package = "MNP")
-        res2 <- MNP::mnp(cbind(LDP, NFP, SKG, JCP) ~ gender + education + age, data = head(japan, 100), verbose = FALSE)
-        expect_true(inherits(prediction(res2), "prediction"))
+        m <- MNP::mnp(cbind(LDP, NFP, SKG, JCP) ~ gender + education + age, data = head(japan, 100), verbose = FALSE)
+        expect_true(inherits(prediction(m), "prediction"))
     })
 }
 
 if (requireNamespace("nlme")) {
     test_that("Test prediction() for 'gls'", {
         data("Ovary", package = "nlme")
-        fm1 <- nlme::gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
+        m <- nlme::gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
                          correlation = nlme::corAR1(form = ~ 1 | Mare), verbose = FALSE)
-        expect_true(inherits(prediction(fm1), "prediction"))
+        expect_true(inherits(prediction(m), "prediction"))
     })
 }
 
@@ -152,17 +186,17 @@ if (requireNamespace("nnet")) {
         ird <- data.frame(rbind(iris3[,,1], iris3[,,2], iris3[,,3]),
                           species = factor(c(rep("s",50), rep("c", 50), rep("v", 50))))
         samp <- c(sample(1:50,25), sample(51:100,25), sample(101:150,25))
-        ir.nn2 <- nnet::nnet(species ~ ., data = ird, subset = samp, size = 2, rang = 0.1,
-                             decay = 5e-4, maxit = 200, trace = FALSE)
-        expect_true(inherits(prediction(ir.nn2), "prediction"))
+        m <- nnet::nnet(species ~ ., data = ird, subset = samp, size = 2, rang = 0.1,
+                        decay = 5e-4, maxit = 200, trace = FALSE)
+        expect_true(inherits(prediction(m), "prediction"))
     })
 }
 
 if (requireNamespace("ordinal")) {
     test_that("Test prediction() for 'clm'", {
         data("wine", package = "ordinal")
-        fm1 <- ordinal::clm(rating ~ temp * contact, data = wine)
-        expect_true(inherits(prediction(fm1), "prediction"))
+        m <- ordinal::clm(rating ~ temp * contact, data = wine)
+        expect_true(inherits(prediction(m), "prediction"))
     })
 }
 
@@ -181,21 +215,47 @@ if (requireNamespace("sampleSelection")) {
 }
 
 if (requireNamespace("stats")) {
-    #test_that("Test prediction() for 'ar'", {})
-    #test_that("Test prediction() for 'arima'", {})
-    #test_that("Test prediction() for 'arima0'", {})
-    #test_that("Test prediction() for 'loess'", {})
-    #test_that("Test prediction() for 'nls'", {})
-    #test_that("Test prediction() for 'ppr'", {})
-    #test_that("Test prediction() for 'princomp'", {})
+    test_that("Test prediction() for 'ar'", {
+        data("sunspot.year", package = "datasets")
+        m <- stats::ar(sunspot.year)
+        expect_true(inherits(prediction(m, data = sunspot.year), "prediction"))
+    })
+    test_that("Test prediction() for 'Arima'", {
+        expect_true(inherits(prediction(stats::arima(lh, order = c(3,0,0)), n.ahead = 12), "prediction"))
+    })
+    test_that("Test prediction() for 'arima0'", {
+        m <- stats::arima0(lh, order = c(1,0,1))
+        expect_true(inherits(prediction(m, data = lh, n.ahead = 12), "prediction"))
+    })
+    test_that("Test prediction() for 'loess'", {
+        m <- stats::loess(dist ~ speed, cars)
+        expect_true(inherits(prediction(m), "prediction"))
+    })
+    test_that("Test prediction() for 'nls'", {
+        m <- stats::nls(demand ~ SSasympOrig(Time, A, lrc), data = BOD)
+        expect_true(inherits(prediction(m), "prediction"))
+    })
+    test_that("Test prediction() for 'ppr'", {
+        data("rock", package = "datasets")
+        rock$area1 <- rock$area/10000
+        rock$peri1 <- rock$peri/10000
+        m <- stats::ppr(log(perm) ~ area1 + peri1 + shape,
+                        data = rock, nterms = 2, max.terms = 5)
+        expect_true(inherits(prediction(m), "prediction"))
+    })
+    test_that("Test prediction() for 'princomp'", {
+        data("USArrests", package = "datasets")
+        m <- stats::princomp(~ ., data = USArrests, cor = TRUE)
+        expect_true(inherits(prediction(m), "prediction"))
+    })
 }
 
 if (requireNamespace("survey")) {
     test_that("Test prediction() for 'svyglm'", {
         data("api", package = "survey")
         dstrat <- survey::svydesign(id=~1,strata=~stype, weights=~pw, data=apistrat, fpc=~fpc)
-        api.reg <- survey::svyglm(api.stu~enroll, design=dstrat)
-        expect_true(inherits(prediction(api.reg), "prediction"))
+        m <- survey::svyglm(api.stu~enroll, design=dstrat)
+        expect_true(inherits(prediction(m), "prediction"))
     })
 }
 

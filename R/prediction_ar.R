@@ -3,23 +3,13 @@
 prediction.ar <- function(model, data, at = NULL, ...) {
     
     # extract predicted values
-    data <- data
     if (missing(data) || is.null(data)) {
-        pred <- predict(object = model, se.fit = TRUE, ...)
-        pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
+        tmp <- predict(object = model, se.fit = TRUE, ...)
+        
     } else {
-        # setup data
-        out <- build_datalist(data, at = at)
-        for (i in seq_along(out)) {
-            tmp <- predict(model, 
-                           newdata = out[[i]], 
-                           se.fit = TRUE,
-                           ...)
-            out[[i]] <- cbind(out[[i]], fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
-            rm(tmp)
-        }
-        pred <- do.call("rbind", out)
+        tmp <- predict(model, newdata = data, se.fit = TRUE, ...)
     }
+    pred <- data.frame(fitted = tmp[[1L]], se.fitted = tmp[[2L]])
     
     # obs-x-(ncol(data)+2) data frame
     structure(pred, 
