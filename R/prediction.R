@@ -36,6 +36,7 @@
 #'   \item \dQuote{naiveBayes}, see \code{\link[e1071]{naiveBayes}}
 #'   \item \dQuote{nls}, see \code{\link[stats]{nls}}
 #'   \item \dQuote{nnet}, see \code{\link[nnet]{nnet}}
+#'   \item \dQuote{plm}, see \code{\link[plm]{plm}}
 #'   \item \dQuote{polr}, see \code{\link[MASS]{polr}}
 #'   \item \dQuote{ppr}, see \code{\link[stats]{ppr}}
 #'   \item \dQuote{princomp}, see \code{\link[stats]{princomp}}

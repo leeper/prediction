@@ -1,3 +1,7 @@
+# CHANGES TO prediction 0.1.16
+
+* Added `prediction.plm()` method for "plm" objects from **plm**. (#1)
+
 # CHANGES TO prediction 0.1.15
 
 * Expanded test suite considerably and updated `CONTRIBUTING.md` to reflect expected test-driven development.

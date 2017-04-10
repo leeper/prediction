@@ -8,10 +8,10 @@
 %   R/prediction_loess.R, R/prediction_lqs.R, R/prediction_mca.R,
 %   R/prediction_mclogit.R, R/prediction_merMod.R, R/prediction_mnlogit.R,
 %   R/prediction_mnp.R, R/prediction_multinom.R, R/prediction_nls.R,
-%   R/prediction_nnet.R, R/prediction_polr.R, R/prediction_ppr.R,
-%   R/prediction_princomp.R, R/prediction_rlm.R, R/prediction_rq.R,
-%   R/prediction_selection.R, R/prediction_survreg.R, R/prediction_svm.R,
-%   R/prediction_svyglm.R
+%   R/prediction_nnet.R, R/prediction_plm.R, R/prediction_polr.R,
+%   R/prediction_ppr.R, R/prediction_princomp.R, R/prediction_rlm.R,
+%   R/prediction_rq.R, R/prediction_selection.R, R/prediction_survreg.R,
+%   R/prediction_svm.R, R/prediction_svyglm.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -42,6 +42,7 @@
 \alias{prediction.multinom}
 \alias{prediction.nls}
 \alias{prediction.nnet}
+\alias{prediction.plm}
 \alias{prediction.polr}
 \alias{prediction.ppr}
 \alias{prediction.princomp}
@@ -130,6 +131,9 @@ prediction(model, ...)
 \method{prediction}{nnet}(model, data = find_data(model, parent.frame()),
   at = NULL, type = NULL, category, ...)
 
+\method{prediction}{plm}(model, data = find_data(model, parent.frame()),
+  at = NULL, ...)
+
 \method{prediction}{polr}(model, data = find_data(model, parent.frame()),
   at = NULL, type = NULL, category, ...)
 
@@ -204,6 +208,7 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{naiveBayes}, see \code{\link[e1071]{naiveBayes}}
   \item \dQuote{nls}, see \code{\link[stats]{nls}}
   \item \dQuote{nnet}, see \code{\link[nnet]{nnet}}
+  \item \dQuote{plm}, see \code{\link[plm]{plm}}
   \item \dQuote{polr}, see \code{\link[MASS]{polr}}
   \item \dQuote{ppr}, see \code{\link[stats]{ppr}}
   \item \dQuote{princomp}, see \code{\link[stats]{princomp}}

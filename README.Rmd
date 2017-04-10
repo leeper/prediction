@@ -75,6 +75,7 @@ The currently supported model classes are:
  - "naiveBayes" from `e1071::naiveBayes()`
  - "nls" from `stats::nls()`
  - "nnet" from `nnet::nnet()`, `nnet::multinom()`
+ - "plm" from `plm::plm()`
  - "polr" from `MASS::polr()`
  - "ppr" from `stats::ppr()`
  - "princomp" from `stats::princomp()`

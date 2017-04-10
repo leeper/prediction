@@ -200,6 +200,14 @@ if (requireNamespace("ordinal")) {
     })
 }
 
+if (requireNamespace("plm")) {
+    test_that("Test prediction() for 'plm'", {
+        data("Grunfeld", package = "plm")
+        m <- plm::plm(inv ~ value + capital, data = Grunfeld, model = "pooling")
+        expect_true(inherits(prediction(m), "prediction"))
+    })
+}
+
 if (requireNamespace("quantreg")) {
     #test_that("Test prediction() for 'rq'", {})
 }
