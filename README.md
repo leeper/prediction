@@ -135,6 +135,7 @@ The currently supported model classes are:
 ## Requirements and Installation
 
 [![CRAN](http://www.r-pkg.org/badges/version/prediction)](https://cran.r-project.org/package=prediction)
+![Downloads](http://cranlogs.r-pkg.org/badges/prediction)
 [![Build Status](https://travis-ci.org/leeper/prediction.svg?branch=master)](https://travis-ci.org/leeper/prediction)
 [![Build status](https://ci.appveyor.com/api/projects/status/a4tebeoa98cq07gy/branch/master?svg=true)](https://ci.appveyor.com/project/leeper/prediction/branch/master)
 [![codecov.io](http://codecov.io/github/leeper/prediction/coverage.svg?branch=master)](http://codecov.io/github/leeper/prediction?branch=master)
