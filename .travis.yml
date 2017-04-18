@@ -20,6 +20,8 @@ r_packages:
 - nlme
 - nnet
 - ordinal
+- plm
+- pscl
 - quantreg
 - sampleSelection
 - survey

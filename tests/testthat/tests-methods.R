@@ -208,6 +208,22 @@ if (requireNamespace("plm")) {
     })
 }
 
+if (requireNamespace("pscl")) {
+    test_that("Test prediction() for 'hurdle'", {
+        data("bioChemists", package = "pscl")
+        m <- hurdle::hurdle(art ~ ., data = bioChemists)
+        expect_true(inherits(prediction(m), "prediction"))
+    })
+    test_that("Test prediction() for 'zeroinfl'", {
+        data("bioChemists", package = "pscl")
+        m <- hurdle::zeroinfl(art ~ ., data = bioChemists)
+        expect_true(inherits(prediction(m), "prediction"))
+    })
+    #test_that("Test prediction() for 'ideal'", {
+    #    expect_true(inherits(prediction(m), "prediction"))
+    #})
+}
+
 if (requireNamespace("quantreg")) {
     #test_that("Test prediction() for 'rq'", {})
 }

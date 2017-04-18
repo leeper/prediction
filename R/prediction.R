@@ -24,6 +24,7 @@
 #'   \item \dQuote{gam}, see \code{\link[gam]{gam}}
 #'   \item \dQuote{gee}, see \code{\link[gee]{gee}}
 #'   \item \dQuote{gls}, see \code{\link[nlme]{gls}}
+#'   \item \dQuote{hurdle}, see \code{\link[pscl]{hurdle}}
 #'   \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
 #'   \item \dQuote{ivreg}, see \code{\link[AER]{ivreg}}
 #'   \item \dQuote{lda}, see \code{\link[MASS]{lda}}
@@ -47,6 +48,7 @@
 #'   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}
 #'   \item \dQuote{svm}, see \code{\link[e1071]{svm}}
 #'   \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}
+#'   \item \dQuote{zeroinfl}, see \code{\link[pscl]{zeroinfl}}
 #' }
 #' 
 #' @return A data frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, or a multiple thereof, if \code{!is.null(at)}. The return value contains \code{data} (possibly modified by \code{at} using \code{\link{build_datalist}}), plus a column containing fitted/predicted values (\code{"fitted"}) and a column containing the standard errors thereof (\code{"se.fitted"}). Additional columns may be reported depending on the object class.

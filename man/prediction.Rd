@@ -4,14 +4,15 @@
 %   R/prediction_clm.R, R/prediction_coxph.R, R/prediction_crch.R,
 %   R/prediction_gam.R, R/prediction_gee.R, R/prediction_glm.R,
 %   R/prediction_glmx.R, R/prediction_gls.R, R/prediction_hetglm.R,
-%   R/prediction_hxlr.R, R/prediction_ivreg.R, R/prediction_lm.R,
-%   R/prediction_loess.R, R/prediction_lqs.R, R/prediction_mca.R,
-%   R/prediction_mclogit.R, R/prediction_merMod.R, R/prediction_mnlogit.R,
-%   R/prediction_mnp.R, R/prediction_multinom.R, R/prediction_nls.R,
-%   R/prediction_nnet.R, R/prediction_plm.R, R/prediction_polr.R,
-%   R/prediction_ppr.R, R/prediction_princomp.R, R/prediction_rlm.R,
-%   R/prediction_rq.R, R/prediction_selection.R, R/prediction_survreg.R,
-%   R/prediction_svm.R, R/prediction_svyglm.R
+%   R/prediction_hurdle.R, R/prediction_hxlr.R, R/prediction_ivreg.R,
+%   R/prediction_lm.R, R/prediction_loess.R, R/prediction_lqs.R,
+%   R/prediction_mca.R, R/prediction_mclogit.R, R/prediction_merMod.R,
+%   R/prediction_mnlogit.R, R/prediction_mnp.R, R/prediction_multinom.R,
+%   R/prediction_nls.R, R/prediction_nnet.R, R/prediction_plm.R,
+%   R/prediction_polr.R, R/prediction_ppr.R, R/prediction_princomp.R,
+%   R/prediction_rlm.R, R/prediction_rq.R, R/prediction_selection.R,
+%   R/prediction_survreg.R, R/prediction_svm.R, R/prediction_svyglm.R,
+%   R/prediction_zeroinfl.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -29,6 +30,7 @@
 \alias{prediction.glmx}
 \alias{prediction.gls}
 \alias{prediction.hetglm}
+\alias{prediction.hurdle}
 \alias{prediction.hxlr}
 \alias{prediction.ivreg}
 \alias{prediction.lm}
@@ -52,6 +54,7 @@
 \alias{prediction.survreg}
 \alias{prediction.svm}
 \alias{prediction.svyglm}
+\alias{predict.zeroinfl}
 \title{Extract Predictions from a Model Object}
 \usage{
 prediction(model, ...)
@@ -93,6 +96,9 @@ prediction(model, ...)
 
 \method{prediction}{hetglm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link", "scale"), ...)
+
+\method{prediction}{hurdle}(model, data = find_data(model, parent.frame()),
+  at = NULL, type = c("response", "count", "prob", "zero"), ...)
 
 \method{prediction}{hxlr}(model, data = find_data(model), at = NULL,
   type = c("class", "probability", "cumprob", "location", "scale"), ...)
@@ -159,6 +165,9 @@ prediction(model, ...)
 
 \method{prediction}{svyglm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link"), ...)
+
+\method{predict}{zeroinfl}(model, data = find_data(model, parent.frame()),
+  at = NULL, type = c("response", "count", "prob", "zero"), ...)
 }
 \arguments{
 \item{model}{A model object, perhaps returned by \code{\link[stats]{lm}} or \code{\link[stats]{glm}}.}
@@ -196,6 +205,7 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{gam}, see \code{\link[gam]{gam}}
   \item \dQuote{gee}, see \code{\link[gee]{gee}}
   \item \dQuote{gls}, see \code{\link[nlme]{gls}}
+  \item \dQuote{hurdle}, see \code{\link[pscl]{hurdle}}
   \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
   \item \dQuote{ivreg}, see \code{\link[AER]{ivreg}}
   \item \dQuote{lda}, see \code{\link[MASS]{lda}}
@@ -219,6 +229,7 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}
   \item \dQuote{svm}, see \code{\link[e1071]{svm}}
   \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}
+  \item \dQuote{zeroinfl}, see \code{\link[pscl]{zeroinfl}}
 }
 }
 \examples{

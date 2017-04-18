@@ -109,6 +109,7 @@ The currently supported model classes are:
  - "gam" from `gam::gam()`
  - "gee" from `gee::gee()`
  - "gls" from `nlme::gls()`
+ - "hurdle" from `pscl::hurdle()`
  - "hxlr" from `crch::hxlr()`
  - "ivreg" from `AER::ivreg()`
  - "lda" from `MASS:lda()`
@@ -132,6 +133,7 @@ The currently supported model classes are:
  - "survreg" from `survival::survreg()`
  - "svm" from `e1071::svm()`
  - "svyglm" from `survey::svyglm()`
+ - "zeroinfl" from `pscl::zeroinfl()`
 
 ## Requirements and Installation
 
