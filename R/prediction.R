@@ -28,13 +28,16 @@
 #'   \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
 #'   \item \dQuote{ivreg}, see \code{\link[AER]{ivreg}}
 #'   \item \dQuote{lda}, see \code{\link[MASS]{lda}}
+#'   \item \dQuote{lme}, see \code{\link[nlme]{lme}}
 #'   \item \dQuote{loess}, see \code{\link[stats]{loess}}
 #'   \item \dQuote{lqs}, see \code{\link[MASS]{lqs}}
 #'   \item \dQuote{mca}, see \code{\link[MASS]{mca}}
 #'   \item \dQuote{mclogit}, see \code{\link[mclogit]{mclogit}}
+#'   \item \dQuote{merMod}, see \code{\link[lme4]{lmer}}, \code{\link[lme4]{glmer}}
 #'   \item \dQuote{mnlogit}, see \code{\link[mnlogit]{mnlogit}}
 #'   \item \dQuote{mnp}, see \code{\link[MNP]{mnp}}
 #'   \item \dQuote{naiveBayes}, see \code{\link[e1071]{naiveBayes}}
+#'   \item \dQuote{nlme}, see \code{\link[nlme]{nlme}}
 #'   \item \dQuote{nls}, see \code{\link[stats]{nls}}
 #'   \item \dQuote{nnet}, see \code{\link[nnet]{nnet}}
 #'   \item \dQuote{plm}, see \code{\link[plm]{plm}}

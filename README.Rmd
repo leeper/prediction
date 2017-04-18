@@ -67,13 +67,16 @@ The currently supported model classes are:
  - "hxlr" from `crch::hxlr()`
  - "ivreg" from `AER::ivreg()`
  - "lda" from `MASS:lda()`
+ - "lme" from `nlme::lme()`
  - "loess" from `stats::loess()`
  - "lqs" from `MASS::lqs()`
  - "mca" from `MASS::mca()`
  - "mclogit" from `mclogit::mclogit()`
+ - "merMod" from `lme4::lmer()` and `lme4::glmer()`
  - "mnlogit" from `mnlogit::mnlogit()`
  - "mnp" from `MNP::mnp()`
  - "naiveBayes" from `e1071::naiveBayes()`
+ - "nlme" from `nlme::nlme()`
  - "nls" from `stats::nls()`
  - "nnet" from `nnet::nnet()`, `nnet::multinom()`
  - "plm" from `plm::plm()`

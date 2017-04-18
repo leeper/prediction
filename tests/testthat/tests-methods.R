@@ -102,6 +102,14 @@ if (requireNamespace("glmx") ) {
     })
 }
 
+if (requireNamespace("lme4")) {
+    test_that("Test prediction() for 'merMod'", {
+        data("cbpp", package = "lme4")
+        m <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 |herd), cbpp, binomial)
+        expect_true(inherits(prediction(m), "prediction"))
+    })
+}
+
 if (requireNamespace("MASS")) {
     test_that("Test prediction() for 'glm.nb'", {
         data("quine", package = "MASS")
@@ -177,6 +185,11 @@ if (requireNamespace("nlme")) {
                          correlation = nlme::corAR1(form = ~ 1 | Mare), verbose = FALSE)
         expect_true(inherits(prediction(m), "prediction"))
     })
+    test_that("Test prediction() for 'lme'", {
+        data("Orthodont", package = "nlme")
+        m <- nlme::lme(distance ~ age, Orthodont, random = ~ age | Subject)
+        expect_true(inherits(prediction(m), "prediction"))
+    })
 }
 
 if (requireNamespace("nnet")) {
@@ -211,12 +224,12 @@ if (requireNamespace("plm")) {
 if (requireNamespace("pscl")) {
     test_that("Test prediction() for 'hurdle'", {
         data("bioChemists", package = "pscl")
-        m <- hurdle::hurdle(art ~ ., data = bioChemists)
+        m <- pscl::hurdle(art ~ ., data = bioChemists)
         expect_true(inherits(prediction(m), "prediction"))
     })
     test_that("Test prediction() for 'zeroinfl'", {
         data("bioChemists", package = "pscl")
-        m <- hurdle::zeroinfl(art ~ ., data = bioChemists)
+        m <- pscl::zeroinfl(art ~ ., data = bioChemists)
         expect_true(inherits(prediction(m), "prediction"))
     })
     #test_that("Test prediction() for 'ideal'", {

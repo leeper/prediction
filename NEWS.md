@@ -2,6 +2,8 @@
 
 * Added `prediction.zeroinfl()` method for "zeroinfl" objects from **pscl**. (#1)
 * Added `prediction.hurdle()` method for "hurdle" objects from **pscl**. (#1)
+* Added `prediction.lme()` method for "lme" and "nlme" objects from **nlme**. (#1)
+* Documented `prediction.merMod()`.
 
 # CHANGES TO prediction 0.1.16
 

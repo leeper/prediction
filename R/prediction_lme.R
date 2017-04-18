@@ -1,21 +1,18 @@
 #' @rdname prediction
 #' @export
-prediction.merMod <- 
-function(model, data = find_data(model), at = NULL, type = c("response", "link"), ...) {
-    
-    type <- match.arg(type)
+prediction.lme <- 
+function(model, data = find_data(model), at = NULL, ...) {
     
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        pred <- data.frame(fitted = predict(model, type = type, ...))
+        pred <- data.frame(fitted = predict(model, ...))
     } else {
         # setup data
         out <- build_datalist(data, at = at)
         for (i in seq_along(out)) {
             tmp <- predict(model, 
                            newdata = out[[i]], 
-                           type = type, 
                            ...)
             out[[i]] <- cbind(out[[i]], fitted = tmp)
             rm(tmp)
@@ -30,5 +27,5 @@ function(model, data = find_data(model), at = NULL, type = c("response", "link")
               row.names = seq_len(nrow(pred)),
               at = if (is.null(at)) at else names(at), 
               model.class = class(model),
-              type = type)
+              type = NULL)
 }

@@ -5,14 +5,14 @@
 %   R/prediction_gam.R, R/prediction_gee.R, R/prediction_glm.R,
 %   R/prediction_glmx.R, R/prediction_gls.R, R/prediction_hetglm.R,
 %   R/prediction_hurdle.R, R/prediction_hxlr.R, R/prediction_ivreg.R,
-%   R/prediction_lm.R, R/prediction_loess.R, R/prediction_lqs.R,
-%   R/prediction_mca.R, R/prediction_mclogit.R, R/prediction_merMod.R,
-%   R/prediction_mnlogit.R, R/prediction_mnp.R, R/prediction_multinom.R,
-%   R/prediction_nls.R, R/prediction_nnet.R, R/prediction_plm.R,
-%   R/prediction_polr.R, R/prediction_ppr.R, R/prediction_princomp.R,
-%   R/prediction_rlm.R, R/prediction_rq.R, R/prediction_selection.R,
-%   R/prediction_survreg.R, R/prediction_svm.R, R/prediction_svyglm.R,
-%   R/prediction_zeroinfl.R
+%   R/prediction_lm.R, R/prediction_lme.R, R/prediction_loess.R,
+%   R/prediction_lqs.R, R/prediction_mca.R, R/prediction_mclogit.R,
+%   R/prediction_merMod.R, R/prediction_mnlogit.R, R/prediction_mnp.R,
+%   R/prediction_multinom.R, R/prediction_nls.R, R/prediction_nnet.R,
+%   R/prediction_plm.R, R/prediction_polr.R, R/prediction_ppr.R,
+%   R/prediction_princomp.R, R/prediction_rlm.R, R/prediction_rq.R,
+%   R/prediction_selection.R, R/prediction_survreg.R, R/prediction_svm.R,
+%   R/prediction_svyglm.R, R/prediction_zeroinfl.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -34,6 +34,7 @@
 \alias{prediction.hxlr}
 \alias{prediction.ivreg}
 \alias{prediction.lm}
+\alias{prediction.lme}
 \alias{prediction.loess}
 \alias{prediction.lqs}
 \alias{prediction.mca}
@@ -54,7 +55,7 @@
 \alias{prediction.survreg}
 \alias{prediction.svm}
 \alias{prediction.svyglm}
-\alias{predict.zeroinfl}
+\alias{prediction.zeroinfl}
 \title{Extract Predictions from a Model Object}
 \usage{
 prediction(model, ...)
@@ -108,6 +109,8 @@ prediction(model, ...)
 
 \method{prediction}{lm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = "response", ...)
+
+\method{prediction}{lme}(model, data = find_data(model), at = NULL, ...)
 
 \method{prediction}{loess}(model, data = find_data(model, parent.frame()),
   at = NULL, type = "response", ...)
@@ -166,7 +169,7 @@ prediction(model, ...)
 \method{prediction}{svyglm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link"), ...)
 
-\method{predict}{zeroinfl}(model, data = find_data(model, parent.frame()),
+\method{prediction}{zeroinfl}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "count", "prob", "zero"), ...)
 }
 \arguments{
@@ -209,13 +212,16 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
   \item \dQuote{ivreg}, see \code{\link[AER]{ivreg}}
   \item \dQuote{lda}, see \code{\link[MASS]{lda}}
+  \item \dQuote{lme}, see \code{\link[nlme]{lme}}
   \item \dQuote{loess}, see \code{\link[stats]{loess}}
   \item \dQuote{lqs}, see \code{\link[MASS]{lqs}}
   \item \dQuote{mca}, see \code{\link[MASS]{mca}}
   \item \dQuote{mclogit}, see \code{\link[mclogit]{mclogit}}
+  \item \dQuote{merMod}, see \code{\link[lme4]{lmer}}, \code{\link[lme4]{glmer}}
   \item \dQuote{mnlogit}, see \code{\link[mnlogit]{mnlogit}}
   \item \dQuote{mnp}, see \code{\link[MNP]{mnp}}
   \item \dQuote{naiveBayes}, see \code{\link[e1071]{naiveBayes}}
+  \item \dQuote{nlme}, see \code{\link[nlme]{nlme}}
   \item \dQuote{nls}, see \code{\link[stats]{nls}}
   \item \dQuote{nnet}, see \code{\link[nnet]{nnet}}
   \item \dQuote{plm}, see \code{\link[plm]{plm}}
