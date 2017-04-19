@@ -4,9 +4,11 @@
 \alias{mean_or_mode}
 \alias{mean_or_mode.default}
 \alias{mean_or_mode.numeric}
+\alias{mean_or_mode.data.frame}
 \alias{median_or_mode}
 \alias{median_or_mode.default}
 \alias{median_or_mode.numeric}
+\alias{median_or_mode.data.frame}
 \title{Class-dependent variable aggregation}
 \usage{
 mean_or_mode(x)
@@ -15,11 +17,15 @@ mean_or_mode(x)
 
 \method{mean_or_mode}{numeric}(x)
 
+\method{mean_or_mode}{data.frame}(x)
+
 median_or_mode(x)
 
 \method{median_or_mode}{default}(x)
 
 \method{median_or_mode}{numeric}(x)
+
+\method{median_or_mode}{data.frame}(x)
 }
 \arguments{
 \item{x}{A vector.}
@@ -33,10 +39,12 @@ Summarize a vector/variable into a single number, either a mean (median) for num
 \examples{
 require("datasets")
 # mean for numerics
-lapply(iris, mean_or_mode)
+mean_or_mode(iris)
+mean_or_mode(iris[["Sepal.Length"]])
+mean_or_mode(iris[["Species"]])
 
 # median for numerics
-lapply(iris, mean_or_mode)
+median_or_mode(iris)
 
 }
 \seealso{

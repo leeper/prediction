@@ -9,6 +9,7 @@ test_that("Test prediction()", {
     expect_true(inherits(prediction(glm(mpg ~ cyl, data = mtcars), data = mtcars), "data.frame"), label = "prediction() works w data arg (GLM)")
     expect_true(inherits(prediction(lm(mpg ~ cyl, data = mtcars)), "data.frame"), label = "prediction() works w/o data arg (LM)")
     expect_true(inherits(prediction(glm(mpg ~ cyl, data = mtcars)), "data.frame"), label = "prediction() works w/o data arg (GLM)")
+    expect_true(inherits(prediction(lm(mpg ~ cyl, data = mtcars), data = NULL), "data.frame"), label = "prediction() works w/ NULL data arg (LM)")
 })
 test_that("Test prediction(at = )", {
     m <- lm(mpg ~ cyl, data = mtcars)
@@ -32,6 +33,8 @@ context("Test behavior of 'prediction' class methods")
 test_that("Test print()", {
     expect_true(inherits(print(prediction(lm(mpg ~ cyl, data = mtcars), data = mtcars)), "data.frame"), 
                 label = "print() works with numeric outcome")
+    expect_true(inherits(print(prediction(lm(mpg ~ cyl, data = mtcars), data = mtcars, at = list(cyl = c(4,6,8)))), "data.frame"), 
+                label = "print() works with numeric outcome")
 })
 test_that("Test head() and tail()", {
     expect_true(inherits(head(prediction(lm(mpg ~ cyl, data = mtcars), data = mtcars)), "data.frame"), 
@@ -53,4 +56,7 @@ test_that("Test mean_or_mode()/median_or_mode()", {
     mtcars$cyl <- factor(mtcars$cyl)
     expect_true(mean_or_mode(mtcars$cyl) == 8, label = "mean_or_mode.default() is correct")
     expect_true(median_or_mode(mtcars$cyl) == 8, label = "mean_or_mode.default() is correct")
+    
+    expect_true(identical(mean_or_mode(mtcars), lapply(mtcars, mean_or_mode)), label = "mean_or_mode.data.frame() is correct")
+    expect_true(identical(median_or_mode(mtcars), lapply(mtcars, median_or_mode)), label = "median_or_mode.data.frame() is correct")
 })

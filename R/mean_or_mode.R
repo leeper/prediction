@@ -6,13 +6,15 @@
 #' @examples
 #' require("datasets")
 #' # mean for numerics
-#' lapply(iris, mean_or_mode)
+#' mean_or_mode(iris)
+#' mean_or_mode(iris[["Sepal.Length"]])
+#' mean_or_mode(iris[["Species"]])
 #'
 #' # median for numerics
-#' lapply(iris, mean_or_mode)
+#' median_or_mode(iris)
 #' 
 #' @seealso \code{\link{prediction}}, \code{\link{build_datalist}}, \code{\link{seq_range}}
-#' @importFrom stats median
+#' @importFrom stats median setNames
 #' @export
 mean_or_mode <- function(x) {
     UseMethod("mean_or_mode")
@@ -35,6 +37,12 @@ mean_or_mode.numeric <- function(x) {
 
 #' @rdname mean_or_mode
 #' @export
+mean_or_mode.data.frame <- function(x) {
+    setNames(lapply(x, mean_or_mode), names(x))
+}
+
+#' @rdname mean_or_mode
+#' @export
 median_or_mode <- function(x) {
     UseMethod("median_or_mode")
 }
@@ -52,4 +60,10 @@ median_or_mode.default <- function(x) {
 #' @export
 median_or_mode.numeric <- function(x) {
     median(x, na.rm = TRUE)
+}
+
+#' @rdname mean_or_mode
+#' @export
+median_or_mode.data.frame <- function(x) {
+    setNames(lapply(x, median_or_mode), names(x))
 }
