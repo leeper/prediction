@@ -5,7 +5,7 @@ library("datasets")
 
 context("Test `prediction()` methods, conditional on package availability")
 
-if (requireNamespace("AER")) {
+if (require("AER", quietly = TRUE)) {
     test_that("Test prediction() for 'ivreg'", {
         data("CigarettesSW", package = "AER")
         CigarettesSW$rprice <- with(CigarettesSW, price/cpi)
@@ -17,7 +17,7 @@ if (requireNamespace("AER")) {
     })
 }
 
-if (requireNamespace("betareg")) {
+if (require("betareg", quietly = TRUE)) {
     test_that("Test prediction() for 'betareg'", {
         data("GasolineYield", package = "betareg")
         m <- betareg::betareg(yield ~ batch + temp, data = GasolineYield)
@@ -25,7 +25,7 @@ if (requireNamespace("betareg")) {
     })
 }
 
-if (requireNamespace("brglm")) {
+if (require("brglm", quietly = TRUE)) {
     test_that("Test prediction() for 'brglm'", {
         data("lizards", package = "brglm")
         m <- brglm::brglm(cbind(grahami, opalinus) ~ height + diameter +
@@ -35,29 +35,28 @@ if (requireNamespace("brglm")) {
     })
 }
 
-if (requireNamespace("crch")) {
+if (require("crch", quietly = TRUE)) {
     test_that("Test prediction() for 'crch'", {
         e <- new.env()
         data("RainIbk", package = "crch", envir = e)
         RainIbk <- e$RainIbk
         RainIbk$sqrtensmean <- apply(sqrt(RainIbk[,grep('^rainfc',names(RainIbk))]), 1, mean)
-        m <- crch::crch(sqrt(rain) ~ sqrtensmean, data = RainIbk, 
-                        dist = "gaussian", left = 0)
+        m <- crch::crch(sqrt(rain) ~ sqrtensmean, data = RainIbk, dist = "gaussian", left = 0)
         expect_true(inherits(prediction(m, data = RainIbk), "prediction"))
     })
-    test_that("Test prediction() for 'hxlr'", {
-        e <- new.env()
-        data("RainIbk", package = "crch", envir = e)
-        RainIbk <- e$RainIbk
-        RainIbk$sqrtensmean <- 
-          apply(sqrt(RainIbk[,grep('^rainfc',names(RainIbk))]), 1, mean)
-        q <- unique(quantile(RainIbk$rain, seq(0.1, 0.9, 0.1)))
-        m <- crch::hxlr(sqrt(rain) ~ sqrtensmean, data = RainIbk, thresholds = sqrt(q))
-        expect_true(inherits(prediction(m, data = RainIbk), "prediction"))
-    })
+#    test_that("Test prediction() for 'hxlr'", {
+#        e <- new.env()
+#        data("RainIbk", package = "crch", envir = e)
+#        RainIbk <- e$RainIbk
+#        RainIbk$sqrtensmean <- 
+#          apply(sqrt(RainIbk[,grep('^rainfc',names(RainIbk))]), 1, mean)
+#        q <- unique(quantile(RainIbk$rain, seq(0.1, 0.9, 0.1)))
+#        m <- crch::hxlr(sqrt(rain) ~ sqrtensmean, data = RainIbk, thresholds = sqrt(q))
+#        expect_true(inherits(prediction(m, data = RainIbk), "prediction"))
+#    })
 }
 
-if (requireNamespace("e1071")) {
+if (require("e1071", quietly = TRUE)) {
     test_that("Test prediction() for 'naiveBayes'", {
         data("Titanic")
         m <- e1071::naiveBayes(Survived ~ ., data = Titanic)
@@ -69,7 +68,7 @@ if (requireNamespace("e1071")) {
     })
 }
 
-if (requireNamespace("gam")) {
+if (require("gam", quietly = TRUE)) {
     test_that("Test prediction() for 'gam'", {
         data("gam.data", package = "gam")
         m <- gam::gam(y ~ gam::s(x,6) + z,data=gam.data)
@@ -77,7 +76,7 @@ if (requireNamespace("gam")) {
     })
 }
 
-if (requireNamespace("gee")) {
+if (require("gee", quietly = TRUE)) {
     test_that("Test prediction() for 'gee'", {
         data("warpbreaks")
         m <- gee::gee(breaks ~ tension, id=wool, data=warpbreaks, corstr="exchangeable")
@@ -85,7 +84,7 @@ if (requireNamespace("gee")) {
     })
 }
 
-if (requireNamespace("glmx") ) {
+if (require("glmx", quietly = TRUE) ) {
     test_that("Test prediction() for 'glmx()'", {
         d <- data.frame(x = runif(200, -1, 1))
         d$y <- rnbinom(200, mu = exp(0 + 3 * d$x), size = 1)
@@ -102,7 +101,7 @@ if (requireNamespace("glmx") ) {
     })
 }
 
-if (requireNamespace("lme4")) {
+if (require("lme4", quietly = TRUE)) {
     test_that("Test prediction() for 'merMod'", {
         data("cbpp", package = "lme4")
         m <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 |herd), cbpp, binomial)
@@ -110,7 +109,7 @@ if (requireNamespace("lme4")) {
     })
 }
 
-if (requireNamespace("MASS")) {
+if (require("MASS", quietly = TRUE)) {
     test_that("Test prediction() for 'glm.nb'", {
         data("quine", package = "MASS")
         m <- MASS::glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
@@ -154,7 +153,7 @@ if (requireNamespace("MASS")) {
     })
 }
 
-if (requireNamespace("mclogit")) {
+if (require("mclogit", quietly = TRUE)) {
     test_that("Test prediction() for 'mclogit'", {
         data("Transport", package = "mclogit")
         m <- mclogit::mclogit(cbind(resp,suburb)~distance+cost, data = Transport, trace = FALSE)
@@ -162,7 +161,7 @@ if (requireNamespace("mclogit")) {
     })
 }
 
-if (requireNamespace("mnlogit")) {
+if (require("mnlogit", quietly = TRUE)) {
     test_that("Test prediction() for 'mnlogit'", {
         data("Fish", package = "mnlogit")
         m <- mnlogit::mnlogit(mode ~ price | income | catch, Fish, ncores = 1)
@@ -170,7 +169,7 @@ if (requireNamespace("mnlogit")) {
     })
 }
 
-if (requireNamespace("MNP")) {
+if (require("MNP", quietly = TRUE)) {
     test_that("Test prediction() for 'mnp'", {
         data("japan", package = "MNP")
         m <- MNP::mnp(cbind(LDP, NFP, SKG, JCP) ~ gender + education + age, data = head(japan, 100), verbose = FALSE)
@@ -178,7 +177,7 @@ if (requireNamespace("MNP")) {
     })
 }
 
-if (requireNamespace("nlme")) {
+if (require("nlme", quietly = TRUE)) {
     test_that("Test prediction() for 'gls'", {
         data("Ovary", package = "nlme")
         m <- nlme::gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
@@ -192,7 +191,7 @@ if (requireNamespace("nlme")) {
     })
 }
 
-if (requireNamespace("nnet")) {
+if (require("nnet", quietly = TRUE)) {
     #test_that("Test prediction() for 'multinom'", { })
     test_that("Test prediction() for 'nnet'", {
         data("iris3", package = "datasets")
@@ -205,7 +204,7 @@ if (requireNamespace("nnet")) {
     })
 }
 
-if (requireNamespace("ordinal")) {
+if (require("ordinal", quietly = TRUE)) {
     test_that("Test prediction() for 'clm'", {
         data("wine", package = "ordinal")
         m <- ordinal::clm(rating ~ temp * contact, data = wine)
@@ -213,7 +212,7 @@ if (requireNamespace("ordinal")) {
     })
 }
 
-if (requireNamespace("plm")) {
+if (require("plm", quietly = TRUE)) {
     test_that("Test prediction() for 'plm'", {
         data("Grunfeld", package = "plm")
         m <- plm::plm(inv ~ value + capital, data = Grunfeld, model = "pooling")
@@ -221,7 +220,7 @@ if (requireNamespace("plm")) {
     })
 }
 
-if (requireNamespace("pscl")) {
+if (require("pscl", quietly = TRUE)) {
     test_that("Test prediction() for 'hurdle'", {
         data("bioChemists", package = "pscl")
         m <- pscl::hurdle(art ~ ., data = bioChemists)
@@ -237,11 +236,11 @@ if (requireNamespace("pscl")) {
     #})
 }
 
-if (requireNamespace("quantreg")) {
-    #test_that("Test prediction() for 'rq'", {})
-}
+#if (require("quantreg", quietly = TRUE)) {
+#    test_that("Test prediction() for 'rq'", {})
+#}
 
-if (requireNamespace("sampleSelection")) {
+if (require("sampleSelection", quietly = TRUE)) {
     test_that("Test prediction() for 'selection'", {
         data("Mroz87", package = "sampleSelection")
         Mroz87$kids  <- (Mroz87$kids5 + Mroz87$kids618 > 0)
@@ -251,7 +250,7 @@ if (requireNamespace("sampleSelection")) {
     })
 }
 
-if (requireNamespace("stats")) {
+if (require("stats", quietly = TRUE)) {
     test_that("Test prediction() for 'ar'", {
         data("sunspot.year", package = "datasets")
         m <- stats::ar(sunspot.year)
@@ -287,7 +286,7 @@ if (requireNamespace("stats")) {
     })
 }
 
-if (requireNamespace("survey")) {
+if (require("survey", quietly = TRUE)) {
     test_that("Test prediction() for 'svyglm'", {
         data("api", package = "survey")
         dstrat <- survey::svydesign(id=~1,strata=~stype, weights=~pw, data=apistrat, fpc=~fpc)
@@ -296,7 +295,7 @@ if (requireNamespace("survey")) {
     })
 }
 
-if (requireNamespace("survival")) {
+if (require("survival", quietly = TRUE)) {
     test_that("Test prediction() for 'coxph'", {
         test1 <- list(time=c(4,3,1,1,2,2,3), 
               status=c(1,1,1,0,1,1,0), 

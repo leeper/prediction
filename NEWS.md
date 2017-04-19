@@ -1,3 +1,8 @@
+# CHANGES TO prediction 0.2.0
+
+* CRAN Release.
+* Added `mean_or_mode.data.frame()` and `median_or_mode.data.frame()` methods.
+
 # CHANGES TO prediction 0.1.17
 
 * Added `prediction.zeroinfl()` method for "zeroinfl" objects from **pscl**. (#1)

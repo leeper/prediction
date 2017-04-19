@@ -7,6 +7,8 @@ test_that("Test build_datalist()", {
     expect_true(length(build_datalist(mtcars, at = list(cyl = c(4, 6), wt = 2:3))) == 4, label = "build_datalist() length")
     
     expect_error(build_datalist(mtcars, at = list(foo = 1)), label = "build_datalist(at = foo) errors")
+    expect_error(build_datalist(mtcars, at = list(1)), label = "build_datalist() unnamed list errors")
+    expect_warning(build_datalist(mtcars, at = list(cyl = 2)), label = "build_datalist() range warning")
 })
 
 test_that("Factors in build_datalist()", {
