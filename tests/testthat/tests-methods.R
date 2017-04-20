@@ -35,6 +35,18 @@ if (require("brglm", quietly = TRUE)) {
     })
 }
 
+if (require("caret", quietly = TRUE)) {
+    test_that("Test prediction() for 'knnreg'", {
+        data("BloodBrain", package = "caret")
+        inTrain <- createDataPartition(logBBB, p = .8)[[1]]
+        trainX <- bbbDescr[inTrain,]
+        trainY <- logBBB[inTrain]
+        testX <- bbbDescr[-inTrain,]
+        m <- knnreg(trainX, trainY, k = 3)
+        expect_true(inherits(prediction(m, data = testX), "prediction"))
+    })
+}
+
 if (require("crch", quietly = TRUE)) {
     test_that("Test prediction() for 'crch'", {
         e <- new.env()

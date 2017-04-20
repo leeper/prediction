@@ -6,6 +6,7 @@ r_packages:
 - AER
 - betareg
 - brglm
+- caret
 - crch
 - e1071
 - earth

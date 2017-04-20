@@ -24,6 +24,7 @@ Enhances:
     AER,
     betareg,
     brglm,
+    caret,
     crch,
     e1071,
     earth,
