@@ -4,6 +4,7 @@ travis-tool.sh
 README.Rmd
 README.html
 CONTRIBUTING.md
+LICENSE.md
 Makefile
 /inst/standarderrors.pdf
 /figure/*

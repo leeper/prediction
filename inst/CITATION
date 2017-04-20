@@ -4,12 +4,12 @@ citHeader("To cite package 'prediction' in publications use:")
  vers <- paste("R package version", meta$Version)
  
  citEntry(entry="Manual",
-		  title = "prediction: Tidy, Type-Safe 'prediction()' Methods",
-		  author = personList(as.person("Thomas J. Leeper")),
-		  year = year,
-		  note = vers,
-		  textVersion =
-		  paste("Thomas J. Leeper (",
-				year,
-				"). prediction: Tidy, Type-Safe 'prediction()' Methods. ",
-				vers, ".", sep=""))
+          title = "prediction: Tidy, Type-Safe 'prediction()' Methods",
+          author = personList(as.person("Thomas J. Leeper")),
+          year = year,
+          note = vers,
+          textVersion =
+          paste("Thomas J. Leeper (",
+                year,
+                "). prediction: Tidy, Type-Safe 'prediction()' Methods. ",
+                vers, ".", sep=""))
