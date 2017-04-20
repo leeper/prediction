@@ -1,14 +1,14 @@
 #' @rdname prediction
 #' @export
-prediction.ar <- function(model, data, at = NULL, ...) {
+prediction.kqr <- function(model, data, at = NULL, ...) {
     
     # extract predicted values
     if (missing(data) || is.null(data)) {
-        tmp <- predict(object = model, se.fit = TRUE, ...)
+        pred <- data.frame(fitted = predict(object = model, ...)[,1L])
     } else {
-        tmp <- predict(model, newdata = data, se.fit = TRUE, ...)
+        pred <- data.frame(fitted = predict(model, newdata = data,...)[,1L])
     }
-    pred <- data.frame(fitted = tmp[[1L]], se.fitted = tmp[[2L]])
+    pred[["se.fitted"]] <- NA_real_
     
     # obs-x-(ncol(data)+2) data frame
     structure(pred, 
