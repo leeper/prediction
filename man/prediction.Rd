@@ -5,15 +5,15 @@
 %   R/prediction_earth.R, R/prediction_gam.R, R/prediction_gee.R,
 %   R/prediction_glm.R, R/prediction_glmx.R, R/prediction_gls.R,
 %   R/prediction_hetglm.R, R/prediction_hurdle.R, R/prediction_hxlr.R,
-%   R/prediction_ivreg.R, R/prediction_lm.R, R/prediction_lme.R,
-%   R/prediction_loess.R, R/prediction_lqs.R, R/prediction_mca.R,
-%   R/prediction_mclogit.R, R/prediction_merMod.R, R/prediction_mnlogit.R,
-%   R/prediction_mnp.R, R/prediction_multinom.R, R/prediction_nls.R,
-%   R/prediction_nnet.R, R/prediction_plm.R, R/prediction_polr.R,
-%   R/prediction_ppr.R, R/prediction_princomp.R, R/prediction_rlm.R,
-%   R/prediction_rpart.R, R/prediction_rq.R, R/prediction_selection.R,
-%   R/prediction_survreg.R, R/prediction_svm.R, R/prediction_svyglm.R,
-%   R/prediction_zeroinfl.R
+%   R/prediction_ivreg.R, R/prediction_ksvm.R, R/prediction_lm.R,
+%   R/prediction_lme.R, R/prediction_loess.R, R/prediction_lqs.R,
+%   R/prediction_mca.R, R/prediction_mclogit.R, R/prediction_merMod.R,
+%   R/prediction_mnlogit.R, R/prediction_mnp.R, R/prediction_multinom.R,
+%   R/prediction_nls.R, R/prediction_nnet.R, R/prediction_plm.R,
+%   R/prediction_polr.R, R/prediction_ppr.R, R/prediction_princomp.R,
+%   R/prediction_rlm.R, R/prediction_rpart.R, R/prediction_rq.R,
+%   R/prediction_selection.R, R/prediction_survreg.R, R/prediction_svm.R,
+%   R/prediction_svyglm.R, R/prediction_zeroinfl.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -35,6 +35,7 @@
 \alias{prediction.hurdle}
 \alias{prediction.hxlr}
 \alias{prediction.ivreg}
+\alias{prediction.ksvm}
 \alias{prediction.lm}
 \alias{prediction.lme}
 \alias{prediction.loess}
@@ -112,6 +113,9 @@ prediction(model, ...)
 
 \method{prediction}{ivreg}(model, data = find_data(model, parent.frame()),
   at = NULL, ...)
+
+\method{prediction}{ksvm}(model, data, at = NULL, type = NULL, category,
+  ...)
 
 \method{prediction}{lm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = "response", ...)
@@ -221,6 +225,7 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{hurdle}, see \code{\link[pscl]{hurdle}}
   \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
   \item \dQuote{ivreg}, see \code{\link[AER]{ivreg}}
+  \item \dQuote{ksvm}, see \code{\link[kernlab]{ksvm}}
   \item \dQuote{lda}, see \code{\link[MASS]{lda}}
   \item \dQuote{lme}, see \code{\link[nlme]{lme}}
   \item \dQuote{loess}, see \code{\link[stats]{loess}}

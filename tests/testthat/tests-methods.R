@@ -109,6 +109,18 @@ if (require("glmx", quietly = TRUE) ) {
     })
 }
 
+if (require("kernlab", quietly = TRUE)) {
+    test_that("Test prediction() for 'gausspr'", {
+        data("promotergene", package = "kernlab")
+        ind <- sample(1:dim(promotergene)[1],20)
+        genetrain <- promotergene[-ind, ]
+        genetest <- promotergene[ind, ]
+        m <- ksvm(Class~., data = genetrain, kernel = "rbfdot",
+                  kpar = list(sigma = 0.015), C = 70, cross = 4, prob.model = TRUE)
+        expect_true(inherits(prediction(m, data = genetrain), "prediction"))
+    })
+}
+
 if (require("lme4", quietly = TRUE)) {
     test_that("Test prediction() for 'merMod'", {
         data("cbpp", package = "lme4")

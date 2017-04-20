@@ -30,6 +30,7 @@ Enhances:
     gam,
     gee,
     glmx,
+    kernlab,
     lme4,
     MASS,
     mclogit,

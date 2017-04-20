@@ -12,6 +12,7 @@ r_packages:
 - gam
 - gee
 - glmx
+- kernlab
 - lme4
 - MASS
 - mclogit

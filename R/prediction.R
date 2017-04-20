@@ -28,6 +28,7 @@
 #'   \item \dQuote{hurdle}, see \code{\link[pscl]{hurdle}}
 #'   \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
 #'   \item \dQuote{ivreg}, see \code{\link[AER]{ivreg}}
+#'   \item \dQuote{ksvm}, see \code{\link[kernlab]{ksvm}}
 #'   \item \dQuote{lda}, see \code{\link[MASS]{lda}}
 #'   \item \dQuote{lme}, see \code{\link[nlme]{lme}}
 #'   \item \dQuote{loess}, see \code{\link[stats]{loess}}

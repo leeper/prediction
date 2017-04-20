@@ -1,5 +1,6 @@
 # CHANGES TO prediction 0.2.1
 
+* Added `prediction.ksvm()` method for "ksvm" objects from **kernlab**. (#1)
 * Added `prediction.earth()` method for "earth" objects from **earth**. (#1)
 * Added `prediction.rpart()` method for "rpart" objects from **rpart**. (#1)
 

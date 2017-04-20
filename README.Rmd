@@ -67,6 +67,7 @@ The currently supported model classes are:
  - "hurdle" from `pscl::hurdle()`
  - "hxlr" from `crch::hxlr()`
  - "ivreg" from `AER::ivreg()`
+ - "ksvm" from `kernlab::ksvm()`
  - "lda" from `MASS:lda()`
  - "lme" from `nlme::lme()`
  - "loess" from `stats::loess()`
