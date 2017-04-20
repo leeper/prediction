@@ -240,6 +240,14 @@ if (require("pscl", quietly = TRUE)) {
 #    test_that("Test prediction() for 'rq'", {})
 #}
 
+if (require("rpart", quietly = TRUE)) {
+    test_that("Test prediction() for 'rpart'", {
+        data("kyphosis", package = "rpart")
+        m <- rpart::rpart(Kyphosis ~ Age + Number + Start, data = kyphosis)
+        expect_true(inherits(prediction(m), "prediction"))
+    })
+}
+
 if (require("sampleSelection", quietly = TRUE)) {
     test_that("Test prediction() for 'selection'", {
         data("Mroz87", package = "sampleSelection")

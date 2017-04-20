@@ -46,6 +46,7 @@
 #'   \item \dQuote{princomp}, see \code{\link[stats]{princomp}}
 #'   \item \dQuote{qda}, see \code{\link[MASS]{qda}}
 #'   \item \dQuote{rlm}, see \code{\link[MASS]{rlm}}
+#'   \item \dQuote{rpart}, see \code{\link[rpart]{rpart}}
 #'   \item \dQuote{rq}, see \code{\link[quantreg]{rq}}
 #'   \item \dQuote{selection}, see \code{\link[sampleSelection]{selection}}
 #'   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}

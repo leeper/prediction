@@ -41,6 +41,7 @@ Enhances:
     plm,
     pscl,
     quantreg,
+    rpart,
     sampleSelection,
     survey (>= 3.31-5),
     survival,

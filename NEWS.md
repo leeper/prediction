@@ -1,3 +1,7 @@
+# CHANGES TO prediction 0.2.1
+
+* Added `prediction.rpart()` method for "rpart" objects from **rpart**. (#1)
+
 # CHANGES TO prediction 0.2.0
 
 * CRAN Release.

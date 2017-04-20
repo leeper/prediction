@@ -23,6 +23,7 @@ r_packages:
 - plm
 - pscl
 - quantreg
+- rpart
 - sampleSelection
 - survey
 - survival

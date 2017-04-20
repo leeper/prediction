@@ -131,6 +131,7 @@ The currently supported model classes are:
  - "princomp" from `stats::princomp()`
  - "qda" from `MASS:qda()`
  - "rlm" from `MASS::rlm()`
+ - "rpart" from `rpart::rpart()`
  - "rq" from `quantreg::rq()`
  - "selection" from `sampleSelection::selection()`
  - "survreg" from `survival::survreg()`
