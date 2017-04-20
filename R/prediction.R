@@ -23,6 +23,7 @@
 #'   \item \dQuote{crch}, see \code{\link[crch]{crch}}
 #'   \item \dQuote{earth}, see \code{\link[earth]{earth}}
 #'   \item \dQuote{gam}, see \code{\link[gam]{gam}}
+#'   \item \dQuote{gausspr}, see \code{\link[kernlab]{gausspr}}
 #'   \item \dQuote{gee}, see \code{\link[gee]{gee}}
 #'   \item \dQuote{gls}, see \code{\link[nlme]{gls}}
 #'   \item \dQuote{hurdle}, see \code{\link[pscl]{hurdle}}

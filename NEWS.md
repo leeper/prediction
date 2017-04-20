@@ -1,5 +1,6 @@
 # CHANGES TO prediction 0.2.1
 
+* Added `prediction.gausspr()` method for "gausspr" objects from **kernlab**. (#1)
 * Added `prediction.ksvm()` method for "ksvm" objects from **kernlab**. (#1)
 * Added `prediction.kqr()` method for "kqr" objects from **kernlab**. (#1)
 * Added `prediction.earth()` method for "earth" objects from **earth**. (#1)
