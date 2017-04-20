@@ -21,6 +21,7 @@
 #'   \item \dQuote{clm}, see \code{\link[ordinal]{clm}}
 #'   \item \dQuote{coxph}, see \code{\link[survival]{coxph}}
 #'   \item \dQuote{crch}, see \code{\link[crch]{crch}}
+#'   \item \dQuote{earth}, see \code{\link[earth]{earth}}
 #'   \item \dQuote{gam}, see \code{\link[gam]{gam}}
 #'   \item \dQuote{gee}, see \code{\link[gee]{gee}}
 #'   \item \dQuote{gls}, see \code{\link[nlme]{gls}}

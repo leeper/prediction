@@ -60,6 +60,7 @@ The currently supported model classes are:
  - "clm" from `ordinal::clm()`
  - "coxph" from `survival::coxph()`
  - "crch" from `crch::crch()`
+ - "earth" from `earth::earth()`
  - "gam" from `gam::gam()`
  - "gee" from `gee::gee()`
  - "gls" from `nlme::gls()`

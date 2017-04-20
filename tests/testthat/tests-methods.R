@@ -68,6 +68,14 @@ if (require("e1071", quietly = TRUE)) {
     })
 }
 
+if (require("earth", quietly = TRUE)) {
+    test_that("Test prediction() for 'earth'", {
+        data("trees", package = "datasets")
+        m <- earth::earth(Volume ~ ., data = trees)
+        expect_true(inherits(prediction(m), "prediction"))
+    })
+}
+
 if (require("gam", quietly = TRUE)) {
     test_that("Test prediction() for 'gam'", {
         data("gam.data", package = "gam")

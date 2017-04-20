@@ -26,6 +26,7 @@ Enhances:
     brglm,
     crch,
     e1071,
+    earth,
     gam,
     gee,
     glmx,

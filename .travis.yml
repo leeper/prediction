@@ -8,6 +8,7 @@ r_packages:
 - brglm
 - crch
 - e1071
+- earth
 - gam
 - gee
 - glmx
