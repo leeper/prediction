@@ -122,7 +122,8 @@ if (require("glmx", quietly = TRUE) ) {
 }
 
 if (require("kernlab", quietly = TRUE)) {
-    test_that("Test prediction() for 'ksvm'", {
+    require("methods", quietly = TRUE)
+    test_that("Test prediction() for 'gausspr'", {
         data("promotergene", package = "kernlab")
         ind <- sample(1:dim(promotergene)[1],20)
         genetrain <- promotergene[-ind, ]
@@ -131,7 +132,7 @@ if (require("kernlab", quietly = TRUE)) {
                               kpar = list(sigma = 0.015))
         expect_true(inherits(prediction(m, data = genetrain), "prediction"))
     })
-    test_that("Test prediction() for 'ksvm'", {
+    test_that("Test prediction() for 'kqr'", {
         x <- sort(runif(300))
         y <- sin(pi*x) + rnorm(300,0,sd=exp(sin(2*pi*x)))
         m <- kernlab::kqr(x, y, tau = 0.5, C=0.15)
