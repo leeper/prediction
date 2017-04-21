@@ -48,8 +48,13 @@ function(model,
     # handle category argument
     if (missing(category)) {
         w <- grep("^Pr\\(", names(pred))[1L]
-        category <- names(pred)[w]
-        pred[["fitted"]] <- pred[[w]]
+        if (is.na(w)) {
+            pred[["fitted"]] <- NA_real_
+            category <- NULL
+        } else {
+            category <- names(pred)[w]
+            pred[["fitted"]] <- pred[[w]]
+        }
     } else {
         w <- which(names(pred) == paste0("Pr(", category, ")"))
         if (!length(w)) {
@@ -57,7 +62,6 @@ function(model,
         }
         pred[["fitted"]] <- pred[[ w[1L] ]]
     }
-    
     pred[["se.fitted"]] <- NA_real_
     
     # obs-x-(ncol(data)+2+nlevels(outcome)) data.frame of predictions

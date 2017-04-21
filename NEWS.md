@@ -1,3 +1,8 @@
+# CHANGES TO prediction 0.2.2
+
+* Expanded test suite scope and fixed a few small bugs.
+* Added a `summary.prediction()` method to interact with the average predicted values that are printed when `at != NULL`.
+
 # CHANGES TO prediction 0.2.1
 
 * Added `prediction.knnreg()` method for "knnreg" objects from **caret**. (#1)

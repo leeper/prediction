@@ -16,7 +16,7 @@ function(model,
         pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
     } else {
         # setup data
-        out <- build_datalist(data, at = at)
+        out <- build_datalist(data.frame(data), at = at)
         for (i in seq_along(out)) {
             tmp <- predict(model, 
                            newdata = out[[i]], 
@@ -26,7 +26,7 @@ function(model,
             out[[i]] <- cbind(out[[i]], fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
             rm(tmp)
         }
-        pred <- do.call("rbind", out)
+        pred <- do.call("rbind.data.frame", out)
     }
     
     # obs-x-(ncol(data)+2) data frame
@@ -37,4 +37,3 @@ function(model,
               model.class = class(model),
               type = type)
 }
-

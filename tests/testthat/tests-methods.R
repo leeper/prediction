@@ -13,7 +13,9 @@ if (require("AER", quietly = TRUE)) {
         CigarettesSW$tdiff <- with(CigarettesSW, (taxs - tax)/cpi)
         m <- AER::ivreg(log(packs) ~ log(rprice) + log(rincome) | log(rincome) + tdiff + I(tax/cpi),
                         data = CigarettesSW, subset = year == "1995")
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -21,7 +23,9 @@ if (require("betareg", quietly = TRUE)) {
     test_that("Test prediction() for 'betareg'", {
         data("GasolineYield", package = "betareg")
         m <- betareg::betareg(yield ~ batch + temp, data = GasolineYield)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -31,7 +35,9 @@ if (require("brglm", quietly = TRUE)) {
         m <- brglm::brglm(cbind(grahami, opalinus) ~ height + diameter +
                           light + time, family = binomial(logit), data=lizards,
                           method = "brglm.fit")
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -43,7 +49,9 @@ if (require("caret", quietly = TRUE)) {
         trainY <- logBBB[inTrain]
         testX <- bbbDescr[-inTrain,]
         m <- knnreg(trainX, trainY, k = 3)
-        expect_true(inherits(prediction(m, data = testX), "prediction"))
+        p <- prediction(m, data = testX)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -54,7 +62,9 @@ if (require("crch", quietly = TRUE)) {
         RainIbk <- e$RainIbk
         RainIbk$sqrtensmean <- apply(sqrt(RainIbk[,grep('^rainfc',names(RainIbk))]), 1, mean)
         m <- crch::crch(sqrt(rain) ~ sqrtensmean, data = RainIbk, dist = "gaussian", left = 0)
-        expect_true(inherits(prediction(m, data = RainIbk), "prediction"))
+        p <- prediction(m, data = RainIbk)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 #    test_that("Test prediction() for 'hxlr'", {
 #        e <- new.env()
@@ -72,11 +82,15 @@ if (require("e1071", quietly = TRUE)) {
     test_that("Test prediction() for 'naiveBayes'", {
         data("Titanic")
         m <- e1071::naiveBayes(Survived ~ ., data = Titanic)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'svm'", {
         m <- e1071::svm(Species ~ ., data = iris)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -84,7 +98,9 @@ if (require("earth", quietly = TRUE)) {
     test_that("Test prediction() for 'earth'", {
         data("trees", package = "datasets")
         m <- earth::earth(Volume ~ ., data = trees)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -92,7 +108,9 @@ if (require("gam", quietly = TRUE)) {
     test_that("Test prediction() for 'gam'", {
         data("gam.data", package = "gam")
         m <- gam::gam(y ~ gam::s(x,6) + z,data=gam.data)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -100,7 +118,9 @@ if (require("gee", quietly = TRUE)) {
     test_that("Test prediction() for 'gee'", {
         data("warpbreaks")
         m <- gee::gee(breaks ~ tension, id=wool, data=warpbreaks, corstr="exchangeable")
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -109,7 +129,9 @@ if (require("glmx", quietly = TRUE) ) {
         d <- data.frame(x = runif(200, -1, 1))
         d$y <- rnbinom(200, mu = exp(0 + 3 * d$x), size = 1)
         m <- glmx::glmx(y ~ x, data = d, family = MASS::negative.binomial, xlink = "log", xstart = 0)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'hetglm()'", {
         n <- 200
@@ -117,7 +139,9 @@ if (require("glmx", quietly = TRUE) ) {
         ystar <- 1 + x +  rnorm(n, sd = exp(x))
         y  <- factor(ystar > 0)
         m <- glmx::hetglm(y ~ x | 1)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -130,13 +154,17 @@ if (require("kernlab", quietly = TRUE)) {
         genetest <- promotergene[ind, ]
         m <- kernlab::gausspr(Class~., data = genetrain, kernel = "rbfdot",
                               kpar = list(sigma = 0.015))
-        expect_true(inherits(prediction(m, data = genetrain), "prediction"))
+        p <- prediction(m, data = genetrain)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'kqr'", {
         x <- sort(runif(300))
         y <- sin(pi*x) + rnorm(300,0,sd=exp(sin(2*pi*x)))
         m <- kernlab::kqr(x, y, tau = 0.5, C=0.15)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'ksvm'", {
         data("promotergene", package = "kernlab")
@@ -145,7 +173,9 @@ if (require("kernlab", quietly = TRUE)) {
         genetest <- promotergene[ind, ]
         m <- kernlab::ksvm(Class~., data = genetrain, kernel = "rbfdot",
                            kpar = list(sigma = 0.015), C = 70, cross = 4, prob.model = TRUE)
-        expect_true(inherits(prediction(m, data = genetrain), "prediction"))
+        p <- prediction(m, data = genetrain)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -153,7 +183,9 @@ if (require("lme4", quietly = TRUE)) {
     test_that("Test prediction() for 'merMod'", {
         data("cbpp", package = "lme4")
         m <- lme4::glmer(cbind(incidence, size - incidence) ~ period + (1 |herd), cbpp, binomial)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -161,7 +193,9 @@ if (require("MASS", quietly = TRUE)) {
     test_that("Test prediction() for 'glm.nb'", {
         data("quine", package = "MASS")
         m <- MASS::glm.nb(Days ~ Sex/(Age + Eth*Lrn), data = quine)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'lda'", {
         data("iris3", package = "datasets")
@@ -169,22 +203,30 @@ if (require("MASS", quietly = TRUE)) {
         train <- rbind(iris3[tr,,1], iris3[tr,,2], iris3[tr,,3])
         cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
         m <- MASS::lda(train, cl)
-        expect_true(inherits(prediction(m, data = train), "prediction"))
+        p <- prediction(m, data = train)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'lqs'", {
         data("stackloss", package = "datasets")
         m <- MASS::lqs(stack.loss ~ ., data = stackloss, method = "S", nsamp = "exact")
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'mca'", {
         data("farms", package = "MASS")
         m <- MASS::mca(farms, abbrev=TRUE)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'polr'", {
         data("housing", package = "MASS")
         m <- MASS::polr(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'qda'", {
         data("iris3", package = "datasets")
@@ -192,12 +234,16 @@ if (require("MASS", quietly = TRUE)) {
         train <- rbind(iris3[tr,,1], iris3[tr,,2], iris3[tr,,3])
         cl <- factor(c(rep("s",25), rep("c",25), rep("v",25)))
         m <- MASS::qda(train, cl)
-        expect_true(inherits(prediction(m, data = train), "prediction"))
+        p <- prediction(m, data = train)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'rlm'", {
         data("stackloss", package = "datasets")
         m <- MASS::rlm(stack.loss ~ ., stackloss)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -205,7 +251,9 @@ if (require("mclogit", quietly = TRUE)) {
     test_that("Test prediction() for 'mclogit'", {
         data("Transport", package = "mclogit")
         m <- mclogit::mclogit(cbind(resp,suburb)~distance+cost, data = Transport, trace = FALSE)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -213,7 +261,9 @@ if (require("mnlogit", quietly = TRUE)) {
     test_that("Test prediction() for 'mnlogit'", {
         data("Fish", package = "mnlogit")
         m <- mnlogit::mnlogit(mode ~ price | income | catch, Fish, ncores = 1)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -221,7 +271,9 @@ if (require("MNP", quietly = TRUE)) {
     test_that("Test prediction() for 'mnp'", {
         data("japan", package = "MNP")
         m <- MNP::mnp(cbind(LDP, NFP, SKG, JCP) ~ gender + education + age, data = head(japan, 100), verbose = FALSE)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -230,12 +282,16 @@ if (require("nlme", quietly = TRUE)) {
         data("Ovary", package = "nlme")
         m <- nlme::gls(follicles ~ sin(2*pi*Time) + cos(2*pi*Time), Ovary,
                          correlation = nlme::corAR1(form = ~ 1 | Mare), verbose = FALSE)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'lme'", {
         data("Orthodont", package = "nlme")
         m <- nlme::lme(distance ~ age, Orthodont, random = ~ age | Subject)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -248,7 +304,9 @@ if (require("nnet", quietly = TRUE)) {
         samp <- c(sample(1:50,25), sample(51:100,25), sample(101:150,25))
         m <- nnet::nnet(species ~ ., data = ird, subset = samp, size = 2, rang = 0.1,
                         decay = 5e-4, maxit = 200, trace = FALSE)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -256,7 +314,9 @@ if (require("ordinal", quietly = TRUE)) {
     test_that("Test prediction() for 'clm'", {
         data("wine", package = "ordinal")
         m <- ordinal::clm(rating ~ temp * contact, data = wine)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -264,7 +324,9 @@ if (require("plm", quietly = TRUE)) {
     test_that("Test prediction() for 'plm'", {
         data("Grunfeld", package = "plm")
         m <- plm::plm(inv ~ value + capital, data = Grunfeld, model = "pooling")
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -272,12 +334,16 @@ if (require("pscl", quietly = TRUE)) {
     test_that("Test prediction() for 'hurdle'", {
         data("bioChemists", package = "pscl")
         m <- pscl::hurdle(art ~ ., data = bioChemists)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'zeroinfl'", {
         data("bioChemists", package = "pscl")
         m <- pscl::zeroinfl(art ~ ., data = bioChemists)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     #test_that("Test prediction() for 'ideal'", {
     #    expect_true(inherits(prediction(m), "prediction"))
@@ -292,7 +358,9 @@ if (require("rpart", quietly = TRUE)) {
     test_that("Test prediction() for 'rpart'", {
         data("kyphosis", package = "rpart")
         m <- rpart::rpart(Kyphosis ~ Age + Number + Start, data = kyphosis)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -302,7 +370,9 @@ if (require("sampleSelection", quietly = TRUE)) {
         Mroz87$kids  <- (Mroz87$kids5 + Mroz87$kids618 > 0)
         m <- sampleSelection::heckit(lfp ~ age + I( age^2 ) + faminc + kids + educ, 
                                      wage ~ exper + I( exper^2 ) + educ + city, Mroz87)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -310,7 +380,9 @@ if (require("stats", quietly = TRUE)) {
     test_that("Test prediction() for 'ar'", {
         data("sunspot.year", package = "datasets")
         m <- stats::ar(sunspot.year)
-        expect_true(inherits(prediction(m, data = sunspot.year), "prediction"))
+        p <- prediction(m, data = sunspot.year)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'Arima'", {
         expect_true(inherits(prediction(stats::arima(lh, order = c(3,0,0)), n.ahead = 12), "prediction"))
@@ -321,11 +393,15 @@ if (require("stats", quietly = TRUE)) {
     })
     test_that("Test prediction() for 'loess'", {
         m <- stats::loess(dist ~ speed, cars)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'nls'", {
         m <- stats::nls(demand ~ SSasympOrig(Time, A, lrc), data = BOD)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'ppr'", {
         data("rock", package = "datasets")
@@ -333,12 +409,16 @@ if (require("stats", quietly = TRUE)) {
         rock$peri1 <- rock$peri/10000
         m <- stats::ppr(log(perm) ~ area1 + peri1 + shape,
                         data = rock, nterms = 2, max.terms = 5)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'princomp'", {
         data("USArrests", package = "datasets")
         m <- stats::princomp(~ ., data = USArrests, cor = TRUE)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -347,7 +427,9 @@ if (require("survey", quietly = TRUE)) {
         data("api", package = "survey")
         dstrat <- survey::svydesign(id=~1,strata=~stype, weights=~pw, data=apistrat, fpc=~fpc)
         m <- survey::svyglm(api.stu~enroll, design=dstrat)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
 
@@ -358,12 +440,15 @@ if (require("survival", quietly = TRUE)) {
               x=c(0,2,1,1,1,0,0), 
               sex=c(0,0,0,0,1,1,1)) 
         m <- survival::coxph(survival::Surv(time, status) ~ x + survival::strata(sex), test1) 
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'survreg'", {
         data("ovarian", package = "survival")
         m <- survival::survreg(survival::Surv(futime, fustat) ~ ecog.ps + rx, ovarian, dist='weibull', scale=1)
-        expect_true(inherits(prediction(m), "prediction"))
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
-
