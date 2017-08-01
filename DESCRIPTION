@@ -49,4 +49,5 @@ Enhances:
     survey (>= 3.31-5),
     survival,
     VGAM
+ByteCompile: true
 RoxygenNote: 6.0.1
