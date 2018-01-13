@@ -26,20 +26,20 @@ function(model,
         pred <- probs
         rm(probs, tmp)
     } else {
-        out <- build_datalist(data, at = at)
-        for (i in seq_along(out)) {
-            tmp_probs <- as.data.frame(predict(model, newdata = data, type = "prob", ...)[["p"]])
-            names(tmp_probs) <- paste0("Pr(", names(tmp_probs), ")")
-            tmp <- predict(model, newdata = out[[i]], type = "choice", ...)[["y"]]
-            d <- dim(tmp)
-            if (length(d) == 3) {
-                stop("'prediction.mnp' only works when 'n.draws = 1'")
-            }
-            tmp_probs[["fitted.class"]] <- lapply(seq_len(d[1L]), function(i) tmp[i,])
-            out[[i]] <- cbind(out[[i]], tmp_probs)
-            rm(tmp, tmp_probs)
+        # setup data
+        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        # calculate predictions
+        tmp_probs <- as.data.frame(predict(model, newdata = out, type = "prob", ...)[["p"]])
+        names(tmp_probs) <- paste0("Pr(", names(tmp_probs), ")")
+        tmp <- predict(model, newdata = out, type = "choice", ...)[["y"]]
+        d <- dim(tmp)
+        if (length(d) == 3) {
+            stop("'prediction.mnp' only works when 'n.draws = 1'")
         }
-        pred <- do.call("rbind", out)
+        tmp_probs[["fitted.class"]] <- lapply(seq_len(d[1L]), function(i) tmp[i,])
+        # cbind back together
+        pred <- cbind(out, tmp_probs)
+        rm(tmp, tmp_probs)
     }
     
     # handle category argument

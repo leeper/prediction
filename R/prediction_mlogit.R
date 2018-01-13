@@ -13,15 +13,14 @@ function(model,
         warning(sprintf("'data' is ignored for models of class '%s'", class(model)))
     }
     # setup data
-    out <- build_datalist(data, at = at)
-    for (i in seq_along(out)) {
-        tmp <- data.frame(predict(model, newdata = out[[i]], ...))
-        names(tmp) <- paste0("Pr(", seq_len(ncol(tmp)), ")")
-        out[[i]] <- cbind(out[[i]], tmp)
-        rm(tmp)
-    }
-    pred <- do.call("rbind", out)
-
+    out <- build_datalist(data, at = at, as.data.frame = TRUE)
+    # calculate predictions
+    tmp <- data.frame(predict(model, newdata = out, ...))
+    names(tmp) <- paste0("Pr(", seq_len(ncol(tmp)), ")")
+    # cbind back together
+    pred <- cbind(out, tmp)
+    rm(tmp)
+    
     # handle category argument
     if (missing(category)) {
         w <- grep("^Pr\\(", names(pred))[1L]

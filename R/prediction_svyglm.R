@@ -17,17 +17,15 @@ function(model,
                            se.fitted = sqrt(unname(attributes(pred)[["var"]])))
     } else {
         # setup data
-        out <- build_datalist(data, at = at)
-        for (i in seq_along(out)) {
-            tmp <- predict(model, 
-                           newdata = out[[i]], 
-                           type = type, 
-                           se.fit = TRUE,
-                           ...)
-            out[[i]] <- cbind(out[[i]], fitted = unclass(tmp), se.fitted = sqrt(unname(attributes(tmp)[["var"]])))
-            rm(tmp)
-        }
-        pred <- do.call("rbind", out)
+        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        # calculate predictions
+        tmp <- predict(model, 
+                       newdata = out, 
+                       type = type, 
+                       se.fit = TRUE,
+                       ...)
+        # cbind back together
+        pred <- cbind(out, fitted = unclass(tmp), se.fitted = sqrt(unname(attributes(tmp)[["var"]])))
     }
     
     # obs-x-(ncol(data)+2) data frame

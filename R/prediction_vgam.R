@@ -16,22 +16,19 @@ function(model,
         pred <- as.data.frame(predict(model, type = type, se.fit = FALSE, ...))
     } else {
         # setup data
-        out <- build_datalist(data, at = at)
-        for (i in seq_along(out)) {
-            tmp <- predict(model, 
-                           newdata = out[[i]], 
-                           type = type, 
-                           se.fit = FALSE,
-                           ...)
-            if (!is.null(dim(tmp))) {
-                tmp <- as.matrix(tmp, ncol = 1)
-            }
-            out[[i]] <- cbind(out[[i]], fitted = data.frame(tmp))
-            rm(tmp)
+        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        # calculate predictions
+        tmp <- predict(model, 
+                       newdata = out, 
+                       type = type, 
+                       se.fit = FALSE,
+                       ...)
+        if (!is.null(dim(tmp))) {
+            tmp <- as.matrix(tmp, ncol = 1)
         }
-        pred <- do.call("rbind", out)
+        # cbind back together
+        pred <- cbind(out, fitted = data.frame(tmp), se.fitted = rep(NA_real_, nrow(out)))
     }
-    pred[["se.fitted"]] <- NA_real_
     
     # handle category argument
     if (missing(category)) {

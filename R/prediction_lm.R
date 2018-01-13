@@ -18,19 +18,15 @@ function(model,
         attr(model[["terms"]], ".Environment") <- NULL
     
         # setup data
-        out <- build_datalist(data, at = at)
-        for (i in seq_along(out)) {
-            tmp <- predict(model, 
-                           newdata = out[[i]], 
-                           type = type, 
-                           se.fit = TRUE,
-                           ...)
-            out[[i]] <- cbind(out[[i]], fit = tmp[["fit"]], se.fit = tmp[["se.fit"]])
-            rm(tmp)
-        }
-        pred <- do.call("rbind", out)
-        names(pred)[names(pred) == "fit"] <- "fitted"
-        names(pred)[names(pred) == "se.fit"] <- "se.fitted"
+        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        # calculate predictions
+        tmp <- predict(model, 
+                       newdata = out, 
+                       type = type, 
+                       se.fit = TRUE,
+                       ...)
+        # cbind back together
+        pred <- cbind(out, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
     }
     
     # obs-x-(ncol(data)+2) data frame

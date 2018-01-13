@@ -24,22 +24,21 @@ function(model,
         pred <- cbind(pred, probs, probs.se)
     } else {
         # setup data
-        out <- build_datalist(data, at = at)
-        for (i in seq_along(out)) {
-            tmp <- predict(model, 
-                           newdata = out[[i]], 
-                           type = "class", 
-                           se.fit = FALSE,
-                           ...)[["fit"]]
-            problist <- predict(model, newdata = out[[i]], type = "prob", se.fit = TRUE, ...)
-            probs <- as.data.frame(problist[["fit"]])
-            probs.se <- as.data.frame(problist[["se.fit"]])
-            names(probs) <- paste0("Pr(", seq_len(ncol(probs)), ")")
-            names(probs.se) <- paste0("se.Pr(", seq_len(ncol(probs)), ")")    
-            out[[i]] <- cbind(out[[i]], fitted.class = tmp, probs, probs.se)
-            rm(tmp, problist, probs, probs.se)
-        }
-        pred <- do.call("rbind", out)
+        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        # calculate predictions
+        tmp <- predict(model, 
+                       newdata = out, 
+                       type = "class", 
+                       se.fit = FALSE,
+                       ...)[["fit"]]
+        problist <- predict(model, newdata = out, type = "prob", se.fit = TRUE, ...)
+        probs <- as.data.frame(problist[["fit"]])
+        probs.se <- as.data.frame(problist[["se.fit"]])
+        names(probs) <- paste0("Pr(", seq_len(ncol(probs)), ")")
+        names(probs.se) <- paste0("se.Pr(", seq_len(ncol(probs)), ")")    
+        # cbind back together
+        pred <- cbind(out, fitted.class = tmp, probs, probs.se)
+        rm(tmp, problist, probs, probs.se)
     }
     
     # handle category argument

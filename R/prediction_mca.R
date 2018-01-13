@@ -8,15 +8,13 @@ function(model,
     
     # extract predicted values
     # setup data
-    out <- build_datalist(data, at = at)
-    for (i in seq_along(out)) {
-        tmp <- predict(model, 
-                       newdata = out[[i]], 
-                       ...)
-        out[[i]] <- cbind(out[[i]], tmp)
-        rm(tmp)
-    }
-    pred <- do.call("rbind", out)
+    out <- build_datalist(data, at = at, as.data.frame = TRUE)
+    # calculate predictions
+    tmp <- predict(model, 
+                   newdata = out, 
+                   ...)
+    # cbind back together
+    pred <- cbind(out, tmp)
     pred[["fitted"]] <- NA_real_
     pred[["se.fitted"]] <- NA_real_
     

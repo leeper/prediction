@@ -1,3 +1,7 @@
+# CHANGES TO prediction 0.2.3
+
+* `build_datalist()` gains an `as.data.frame` argument, which - if `TRUE` - returns a stacked data frame rather than a list. This argument is now used internally in most `prediction()` functions in an effort to improve performance. (#18)
+
 # CHANGES TO prediction 0.2.2
 
 * Expanded test suite scope and fixed a few small bugs.

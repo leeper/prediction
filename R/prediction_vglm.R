@@ -22,24 +22,24 @@ function(model,
         }
     } else {
         # setup data
-        out <- build_datalist(data, at = at)
-        for (i in seq_along(out)) {
-            if ("se.fit" %in% names(arg)) {
-                tmp <- predict(model, 
-                               newdata = out[[i]], 
-                               type = type, 
-                               ...)
-                out[[i]] <- cbind(out[[i]], tmp[["fitted.values"]], tmp[["se.fit"]])
-            } else {
-                tmp <- predict(model, 
-                               newdata = out[[i]], 
-                               type = type, 
-                               ...)
-                out[[i]] <- cbind(out[[i]], tmp[["fitted.values"]])
-            }
-            rm(tmp)
+        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        # calculate predictions
+        if ("se.fit" %in% names(arg)) {
+            tmp <- predict(model, 
+                           newdata = out,
+                           type = type, 
+                           ...)
+            # cbind back together
+            pred <- cbind(out, tmp[["fitted.values"]], se.fitted = tmp[["se.fit"]])
+        } else {
+            tmp <- predict(model, 
+                           newdata = out, 
+                           type = type, 
+                           ...)
+            # cbind back together
+            pred <- cbind(out, tmp[["fitted.values"]], se.fitted = rep(NA_real_, nrow(out)))
         }
-        pred <- do.call("rbind", out)
+        rm(tmp)
     }
     
     # handle category argument

@@ -2,8 +2,9 @@
 #' @description Construct a list of data.frames based upon an input data.frame and a list of one or more \code{at} values
 #' @param data A data.frame containing the original data.
 #' @param at A list of one or more named vectors of values, which will be used to specify values of variables in \code{data}. See examples.
+#' @param as.data.frame A logical indicating whether to return a single stacked data frame rather than a list of data frames
 #' @param \dots Ignored.
-#' @return A list of data.frames.
+#' @return A list of data.frames, unless \code{as.data.frame = TRUE} in which case a single, stacked data frame is returned.
 #' @author Thomas J. Leeper
 #' @examples
 #' # basic examples
@@ -14,19 +15,29 @@
 #'
 #' @keywords data manip
 #' @seealso \code{\link{find_data}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
+#' @importFrom data.table rbindlist
 #' @export
 build_datalist <- 
 function(data,
          at = NULL, 
+         as.data.frame = FALSE,
          ...){
     
-    #names(data) <- clean_terms(names(data))
+    # check for `at` specification and `as.data.frame` arguments
     if (!is.null(at) && length(at) > 0) {
         # check `at` specification against data
         check_at(data, at)
         
         # setup list of data.frames based on at
         data_out <- set_data_to_at(data, at = at)
+        
+        if (isTRUE(as.data.frame)) {
+            data_out <- data.table::rbindlist(data_out)
+        }
+        
+    } else if (isTRUE(as.data.frame)) {
+        # if `at` empty and `as.data.frame = TRUE`, simply return original data
+        data_out <- data
     } else {
         # if `at` empty, simply setup data.frame and return
         data_out <- list(data)

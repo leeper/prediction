@@ -16,14 +16,13 @@ function(model,
                            pred[["posterior"]], 
                            check.names = FALSE)
     } else {
-        out <- build_datalist(data, at = at)
-        for (i in seq_along(out)) {
-            tmp <- predict(model, newdata = out[[i]], ...)
-            colnames(tmp[["posterior"]]) <- paste0("Pr(", colnames(tmp[["posterior"]]), ")")
-            out[[i]] <- cbind.data.frame(out[[i]], fitted.class = tmp[["class"]], tmp[["posterior"]])
-            rm(tmp)
-        }
-        pred <- do.call("rbind", out)
+        # setup data
+        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        # calculate predictions
+        tmp <- predict(model, newdata = out, ...)
+        colnames(tmp[["posterior"]]) <- paste0("Pr(", colnames(tmp[["posterior"]]), ")")
+        # cbind back together
+        pred <- cbind.data.frame(out, fitted.class = tmp[["class"]], tmp[["posterior"]], se.fitted = rep(NA_real_, nrow (out)))
     }
 
     # handle category argument
@@ -38,7 +37,6 @@ function(model,
         }
         pred[["fitted"]] <- pred[[ w[1L] ]]
     }
-    pred[["se.fitted"]] <- NA_real_
     
     # obs-x-(ncol(data)+k_classes+3) data frame
     structure(pred, 

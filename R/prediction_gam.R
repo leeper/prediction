@@ -16,18 +16,15 @@ function(model,
         pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]][,1L])
     } else {
         # setup data
-        out <- build_datalist(data, at = at)
-        for (i in seq_along(out)) {
-            # no standard errors when using `newdata`
-            tmp <- predict(model, 
-                           newdata = out[[i]], 
-                           type = type, 
-                           se.fit = FALSE,
-                           ...)
-            out[[i]] <- cbind(out[[i]], fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
-            rm(tmp)
-        }
-        pred <- do.call("rbind", out)
+        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        # calculate predictions
+        tmp <- predict(model, 
+                       newdata = out, 
+                       type = type, 
+                       se.fit = FALSE,
+                       ...)
+        # cbind back together
+        pred <- cbind(out, fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
     }
     
     # obs-x-(ncol(data)+2) data frame

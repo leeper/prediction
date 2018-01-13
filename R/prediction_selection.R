@@ -9,16 +9,14 @@ prediction.selection <- function(model, data = find_data(model, parent.frame()),
                            se.fitted = NA_real_)
     } else {
         # setup data
-        out <- build_datalist(data, at = at)
-        for (i in seq_along(out)) {
-            tmp <- predict(model, 
-                           newdata = out[[i]], 
-                           type = type, 
-                           ...)
-            out[[i]] <- cbind(out[[i]], fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
-            rm(tmp)
-        }
-        pred <- do.call("rbind", out)
+        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        # calculate predictions
+        tmp <- predict(model, 
+                       newdata = out, 
+                       type = type, 
+                       ...)
+        # cbind back together
+        pred <- cbind(out, fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
     }
     
     # obs-x-(ncol(data)+2) data frame

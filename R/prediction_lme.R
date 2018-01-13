@@ -9,17 +9,14 @@ function(model, data = find_data(model), at = NULL, ...) {
         pred <- data.frame(fitted = predict(model, ...))
     } else {
         # setup data
-        out <- build_datalist(data, at = at)
-        for (i in seq_along(out)) {
-            tmp <- predict(model, 
-                           newdata = out[[i]], 
-                           ...)
-            out[[i]] <- cbind(out[[i]], fitted = tmp)
-            rm(tmp)
-        }
-        pred <- do.call("rbind", out)
+        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        # calculate predictions
+        tmp <- predict(model, 
+                       newdata = out, 
+                       ...)
+        # cbind back together
+        pred <- cbind(out, fitted = tmp, se.fitted = rep(NA_real_, nrow(out)))
     }
-    pred[["se.fitted"]] <- NA_real_
     
     # obs-x-(ncol(data)+2) data frame
     structure(pred, 

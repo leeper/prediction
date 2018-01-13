@@ -18,19 +18,17 @@ function(model,
         # reduce memory profile
         model[["model"]] <- NULL
         attr(model[["terms"]], ".Environment") <- NULL
-    
+        
         # setup data
-        out <- build_datalist(data, at = at)
-        for (i in seq_along(out)) {
-            tmp <- predict(model, 
-                           newdata = out[[i]], 
-                           type = type, 
-                           se.fit = TRUE,
-                           ...)
-            out[[i]] <- cbind(out[[i]], fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
-            rm(tmp)
-        }
-        pred <- do.call("rbind", out)
+        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        # calculate predictions
+        tmp <- predict(model, 
+                       newdata = out, 
+                       type = type, 
+                       se.fit = TRUE,
+                       ...)
+        # cbind back together
+        pred <- cbind(out, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
     }
     
     # obs-x-(ncol(data)+2) data frame

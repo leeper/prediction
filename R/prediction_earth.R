@@ -18,16 +18,19 @@ function(model,
         names(probs) <- paste0("Pr(", names(probs), ")")
         pred <- cbind(pred, probs)
     } else {
-        out <- build_datalist(data, at = at)
-        for (i in seq_along(out)) {
-            tmp <- predict(model, newdata = out[[i]], type = "class", ...)
-            colnames(tmp) <- "fitted.class"
-            tmp_probs <- as.data.frame(predict(model, newdata = data, type = type, ...))
-            names(tmp_probs) <- paste0("Pr(", names(tmp_probs), ")")
-            out[[i]] <- cbind.data.frame(out[[i]], tmp, tmp_probs)
-            rm(tmp, tmp_probs)
-        }
-        pred <- do.call("rbind", out)
+        # setup data
+        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        # calculate predictions
+        tmp <- predict(model, 
+                       newdata = out, 
+                       type = "class", 
+                       ...)
+        colnames(tmp) <- "fitted.class"
+        tmp_probs <- as.data.frame(predict(model, newdata = out, type = type, ...))
+        names(tmp_probs) <- paste0("Pr(", names(tmp_probs), ")")
+        # cbind back together
+        pred <- cbind.data.frame(out, tmp, tmp_probs)
+        pred[["se.fitted"]] <- NA_real_
     }
     
     # handle category argument
@@ -42,7 +45,6 @@ function(model,
         }
         pred[["fitted"]] <- pred[[ w[1L] ]]
     }
-    pred[["se.fitted"]] <- NA_real_
     
     # obs-x-(ncol(data)+2+nlevels(outcome)) data.frame of predictions
     structure(pred,

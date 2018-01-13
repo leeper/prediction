@@ -4,17 +4,19 @@
 \alias{build_datalist}
 \title{Build list of data.frames}
 \usage{
-build_datalist(data, at = NULL, ...)
+build_datalist(data, at = NULL, as.data.frame = FALSE, ...)
 }
 \arguments{
 \item{data}{A data.frame containing the original data.}
 
 \item{at}{A list of one or more named vectors of values, which will be used to specify values of variables in \code{data}. See examples.}
 
+\item{as.data.frame}{A logical indicating whether to return a single stacked data frame rather than a list of data frames}
+
 \item{\dots}{Ignored.}
 }
 \value{
-A list of data.frames.
+A list of data.frames, unless \code{as.data.frame = TRUE} in which case a single, stacked data frame is returned.
 }
 \description{
 Construct a list of data.frames based upon an input data.frame and a list of one or more \code{at} values
