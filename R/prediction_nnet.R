@@ -5,6 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = NULL, 
+         se.fitted = TRUE,
          category, 
          ...) {
     
@@ -21,7 +22,11 @@ function(model,
         pred <- cbind(pred, probs)
     } else {
         # setup data
-        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        if (is.null(at)) {
+            out <- data
+        } else {
+            out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        }
         # calculate predictions
         tmp <- predict(model, newdata = out, type = "class", ...)
         tmp_probs <- as.data.frame(predict(model, newdata = out, type = "raw", ...))

@@ -1,10 +1,16 @@
 #' @rdname prediction
 #' @export
-prediction.Arima <- function(model, ...) {
+prediction.Arima <- function(model, se.fitted = TRUE,...) {
     
     # extract predicted values
-    pred <- predict(object = model, se.fit = TRUE, ...)
-    pred <- data.frame(fitted = pred[[1L]], se.fitted = pred[[2L]])
+    if (isTRUE(se.fitted)) {
+        tmp <- predict(object = model, se.fit = TRUE, ...)
+        pred <- data.frame(fitted = tmp[[1L]], se.fitted = tmp[[2L]])
+    } else {
+        tmp <- predict(object = model, se.fit = FALSE, ...)
+        pred <- data.frame(fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
+    }
+    
     
     # obs-x-(ncol(data)+2) data frame
     structure(pred, 

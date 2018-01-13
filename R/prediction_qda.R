@@ -4,6 +4,7 @@ prediction.qda <-
 function(model, 
          data = find_data(model, parent.frame()), 
          at = NULL, 
+         se.fitted = TRUE,
          category, 
          ...) {
     
@@ -17,7 +18,11 @@ function(model,
                            check.names = FALSE)
     } else {
         # setup data
-        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        if (is.null(at)) {
+            out <- data
+        } else {
+            out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        }
         # calculate predictions
         tmp <- predict(model, newdata = out, ...)
         colnames(tmp[["posterior"]]) <- paste0("Pr(", colnames(tmp[["posterior"]]), ")")

@@ -38,6 +38,7 @@ function(data,
     } else if (isTRUE(as.data.frame)) {
         # if `at` empty and `as.data.frame = TRUE`, simply return original data
         data_out <- data
+        attr(data_out, "at") <- NULL
     } else {
         # if `at` empty, simply setup data.frame and return
         data_out <- list(data)

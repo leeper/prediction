@@ -5,6 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = c("response", "link"), 
+         se.fitted = TRUE,
          category,
          ...) {
     
@@ -16,7 +17,11 @@ function(model,
         pred <- as.data.frame(predict(model, type = type, se.fit = FALSE, ...))
     } else {
         # setup data
-        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        if (is.null(at)) {
+            out <- data
+        } else {
+            out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        }
         # calculate predictions
         tmp <- predict(model, 
                        newdata = out, 

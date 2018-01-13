@@ -5,6 +5,7 @@ function(model,
          data = find_data(model), 
          at = NULL, 
          type = c("class", "probability", "cumprob", "location", "scale"), 
+         se.fitted = TRUE,
          ...) {
     
     type <- match.arg(type)
@@ -16,7 +17,11 @@ function(model,
                            se.fitted = NA_real_)
     } else {
         # setup data
-        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        if (is.null(at)) {
+            out <- data
+        } else {
+            out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        }
         # calculate predictions
         tmp <- predict(model, 
                        newdata = out, 

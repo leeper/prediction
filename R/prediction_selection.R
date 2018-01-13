@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.selection <- function(model, data = find_data(model, parent.frame()), at = NULL, type = "response", ...) {
+prediction.selection <- function(model, data = find_data(model, parent.frame()), at = NULL, type = "response", se.fitted = TRUE, ...) {
     
     # extract predicted value at input value
     data <- data
@@ -9,7 +9,11 @@ prediction.selection <- function(model, data = find_data(model, parent.frame()),
                            se.fitted = NA_real_)
     } else {
         # setup data
-        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        if (is.null(at)) {
+            out <- data
+        } else {
+            out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        }
         # calculate predictions
         tmp <- predict(model, 
                        newdata = out, 

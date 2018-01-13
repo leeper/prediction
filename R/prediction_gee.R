@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.gee <- function(model, ...) {
+prediction.gee <- function(model, se.fitted = TRUE, ...) {
     
     pred <- data.frame(fitted = predict(model, ...))
     pred[["se.fitted"]] <- NA_real_

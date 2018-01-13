@@ -4,11 +4,16 @@ prediction.mca <-
 function(model, 
          data = find_data(model), 
          at = NULL, 
+         se.fitted = TRUE,
          ...) {
     
     # extract predicted values
     # setup data
-    out <- build_datalist(data, at = at, as.data.frame = TRUE)
+    if (is.null(at)) {
+        out <- data
+    } else {
+        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+    }
     # calculate predictions
     tmp <- predict(model, 
                    newdata = out, 

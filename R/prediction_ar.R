@@ -1,14 +1,25 @@
 #' @rdname prediction
 #' @export
-prediction.ar <- function(model, data, at = NULL, ...) {
+prediction.ar <- function(model, data, at = NULL, se.fitted = TRUE,...) {
     
     # extract predicted values
     if (missing(data) || is.null(data)) {
-        tmp <- predict(object = model, se.fit = TRUE, ...)
+        if (isTRUE(se.fitted)) {
+            tmp <- predict(object = model, se.fit = TRUE, ...)
+            pred <- data.frame(fitted = tmp[[1L]], se.fitted = tmp[[2L]])
+        } else {
+            tmp <- predict(object = model, se.fit = FALSE, ...)
+            pred <- data.frame(fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
+        }
     } else {
-        tmp <- predict(model, newdata = data, se.fit = TRUE, ...)
+        if (isTRUE(se.fitted)) {
+            tmp <- predict(model, newdata = data, se.fit = TRUE, ...)
+            pred <- data.frame(fitted = tmp[[1L]], se.fitted = tmp[[2L]])
+        } else {
+            tmp <- predict(model, newdata = data, se.fit = FALSE, ...)
+            pred <- data.frame(fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
+        }
     }
-    pred <- data.frame(fitted = tmp[[1L]], se.fitted = tmp[[2L]])
     
     # obs-x-(ncol(data)+2) data frame
     structure(pred, 

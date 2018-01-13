@@ -5,6 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = c("response", "link"), 
+         se.fitted = TRUE,
          ...) {
     
     type <- match.arg(type)
@@ -12,8 +13,13 @@ function(model,
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        pred <- predict(model, type = type, se.fit = TRUE, ...)
-        pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
+        if (isTRUE(se.fitted)) {
+            pred <- predict(model, type = type, se.fit = TRUE, ...)
+            pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
+        } else {
+            pred <- predict(model, type = type, se.fit = FALSE, ...)
+            pred <- data.frame(fitted = pred, se.fitted = rep(NA_real_, length(pred)))
+        }
     } else {
         # reduce memory profile
         model[["model"]] <- NULL
@@ -22,13 +28,15 @@ function(model,
         # setup data
         out <- build_datalist(data, at = at, as.data.frame = TRUE)
         # calculate predictions
-        tmp <- predict(model, 
-                       newdata = out, 
-                       type = type, 
-                       se.fit = TRUE,
-                       ...)
-        # cbind back together
-        pred <- cbind(out, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
+        if (isTRUE(se.fitted)) {
+            tmp <- predict(model, newdata = out, type = type, se.fit = TRUE, ...)
+            # cbind back together
+            pred <- cbind(out, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
+        } else {
+            tmp <- predict(model, newdata = out, type = type, se.fit = FALSE, ...)
+            # cbind back together
+            pred <- cbind(out, fitted = tmp, se.fitted = rep(NA_real_, nrow(out)))
+        }
     }
     
     # obs-x-(ncol(data)+2) data frame

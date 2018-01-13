@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.princomp <- function(model, data = find_data(model, parent.frame()), at = NULL, ...) {
+prediction.princomp <- function(model, data = find_data(model, parent.frame()), at = NULL, se.fitted = TRUE, ...) {
     
     # extract predicted values
     data <- data
@@ -8,7 +8,11 @@ prediction.princomp <- function(model, data = find_data(model, parent.frame()), 
         pred <- data.frame(predict(model, ...))
     } else {
         # setup data
-        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        if (is.null(at)) {
+            out <- data
+        } else {
+            out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        }
         # calculate predictions
         tmp <- predict(model, 
                        newdata = out, 

@@ -4,6 +4,7 @@ prediction.mlogit <-
 function(model, 
          data = find_data(model, parent.frame()), 
          at = NULL, 
+         se.fitted = TRUE,
          category, 
          ...) {
     
@@ -13,7 +14,11 @@ function(model,
         warning(sprintf("'data' is ignored for models of class '%s'", class(model)))
     }
     # setup data
-    out <- build_datalist(data, at = at, as.data.frame = TRUE)
+    if (is.null(at)) {
+        out <- data
+    } else {
+        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+    }
     # calculate predictions
     tmp <- data.frame(predict(model, newdata = out, ...))
     names(tmp) <- paste0("Pr(", seq_len(ncol(tmp)), ")")

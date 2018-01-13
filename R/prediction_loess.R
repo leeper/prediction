@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.loess <- function(model, data = find_data(model, parent.frame()), at = NULL, type = "response", ...) {
+prediction.loess <- function(model, data = find_data(model, parent.frame()), at = NULL, type = "response", se.fitted = TRUE, ...) {
     
     type <- match.arg(type)
     
@@ -11,7 +11,11 @@ prediction.loess <- function(model, data = find_data(model, parent.frame()), at 
         pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
     } else {
         # setup data
-        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        if (is.null(at)) {
+            out <- data
+        } else {
+            out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        }
         # calculate predictions
         tmp <- predict(model, 
                        newdata = out, 

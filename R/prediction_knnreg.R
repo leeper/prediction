@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.knnreg <- function(model, data, at = NULL, ...) {
+prediction.knnreg <- function(model, data, at = NULL, se.fitted = TRUE, ...) {
     
     # extract predicted values
     pred <- data.frame(fitted = predict(model, newdata = data, ...))

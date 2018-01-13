@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.kqr <- function(model, data, at = NULL, ...) {
+prediction.kqr <- function(model, data, at = NULL, se.fitted = TRUE, ...) {
     
     # extract predicted values
     if (missing(data) || is.null(data)) {

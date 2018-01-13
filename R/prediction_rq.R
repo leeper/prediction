@@ -4,6 +4,7 @@ prediction.rq <-
 function(model, 
          data = find_data(model, parent.frame()), 
          at = NULL, 
+         se.fitted = TRUE,
          ...) {
     
     # extract predicted value at input value
@@ -13,7 +14,11 @@ function(model,
                            se.fitted = NA_real_)
     } else {
         # setup data
-        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        if (is.null(at)) {
+            out <- data
+        } else {
+            out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        }
         # calculate predictions
         tmp <- predict(model, 
                        newdata = out, 

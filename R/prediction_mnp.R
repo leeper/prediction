@@ -5,6 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = NULL, 
+         se.fitted = TRUE,
          category, 
          ...) {
     
@@ -27,7 +28,11 @@ function(model,
         rm(probs, tmp)
     } else {
         # setup data
-        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        if (is.null(at)) {
+            out <- data
+        } else {
+            out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        }
         # calculate predictions
         tmp_probs <- as.data.frame(predict(model, newdata = out, type = "prob", ...)[["p"]])
         names(tmp_probs) <- paste0("Pr(", names(tmp_probs), ")")

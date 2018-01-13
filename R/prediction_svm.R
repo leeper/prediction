@@ -4,6 +4,7 @@ prediction.svm <-
 function(model, 
          data = NULL, 
          at = NULL, 
+         se.fitted = TRUE,
          category, 
          ...) {
 
@@ -30,8 +31,13 @@ function(model,
             pred <- cbind(pred, dvs)
         }
     } else {
-        tmp <- predict(model, newdata = data, decision.values = TRUE, probability = probability, ...)
-        pred <- cbind(data, fitted.class = tmp)
+        if (is.null(at)) {
+            out <- data
+        } else {
+            out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        }
+        tmp <- predict(model, newdata = out, decision.values = TRUE, probability = probability, ...)
+        pred <- cbind(out, fitted.class = tmp)
         attributes(pred[["fitted.class"]]) <- NULL
         if (!is.null(attributes(tmp)[["probabilities"]])) {
             probs <- data.frame(attributes(tmp)[["probabilities"]])

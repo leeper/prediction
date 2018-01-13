@@ -1,7 +1,7 @@
 #' @rdname prediction
 #' @export
 prediction.merMod <- 
-function(model, data = find_data(model), at = NULL, type = c("response", "link"), ...) {
+function(model, data = find_data(model), at = NULL, type = c("response", "link"), se.fitted = TRUE, ...) {
     
     type <- match.arg(type)
     
@@ -11,7 +11,11 @@ function(model, data = find_data(model), at = NULL, type = c("response", "link")
         pred <- data.frame(fitted = predict(model, type = type, ...))
     } else {
         # setup data
-        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        if (is.null(at)) {
+            out <- data
+        } else {
+            out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        }
         # calculate predictions
         tmp <- predict(model, 
                        newdata = out, 

@@ -69,132 +69,143 @@
 prediction(model, ...)
 
 \method{prediction}{default}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = "response", ...)
+  at = NULL, type = "response", se.fitted = TRUE, ...)
 
-\method{prediction}{Arima}(model, ...)
+\method{prediction}{Arima}(model, se.fitted = TRUE, ...)
 
-\method{prediction}{ar}(model, data, at = NULL, ...)
+\method{prediction}{ar}(model, data, at = NULL, se.fitted = TRUE, ...)
 
-\method{prediction}{arima0}(model, data, at = NULL, ...)
+\method{prediction}{arima0}(model, data, at = NULL, se.fitted = TRUE, ...)
 
 \method{prediction}{betareg}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link", "precision", "variance",
   "quantile"), ...)
 
 \method{prediction}{clm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = NULL, category, ...)
+  at = NULL, type = NULL, se.fitted = TRUE, category, ...)
 
 \method{prediction}{coxph}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("risk", "expected", "lp"), ...)
+  at = NULL, type = c("risk", "expected", "lp"), se.fitted = TRUE, ...)
 
 \method{prediction}{crch}(model, data = find_data(model), at = NULL,
-  type = c("response", "location", "scale", "quantile"), ...)
+  type = c("response", "location", "scale", "quantile"), se.fitted = TRUE,
+  ...)
 
 \method{prediction}{earth}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link"), category, ...)
+  at = NULL, type = c("response", "link"), se.fitted = TRUE, category,
+  ...)
 
 \method{prediction}{gam}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link", "terms"), ...)
+  at = NULL, type = c("response", "link", "terms"), se.fitted = TRUE, ...)
 
-\method{prediction}{gausspr}(model, data, at = NULL, type = NULL, category,
-  ...)
+\method{prediction}{gausspr}(model, data, at = NULL, type = NULL,
+  se.fitted = TRUE, category, ...)
 
-\method{prediction}{gee}(model, ...)
+\method{prediction}{gee}(model, se.fitted = TRUE, ...)
 
 \method{prediction}{glm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link"), ...)
+  at = NULL, type = c("response", "link"), se.fitted = TRUE, ...)
 
 \method{prediction}{glmx}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link"), ...)
+  at = NULL, type = c("response", "link"), se.fitted = TRUE, ...)
 
-\method{prediction}{gls}(model, data = find_data(model), at = NULL, ...)
+\method{prediction}{gls}(model, data = find_data(model), at = NULL,
+  se.fitted = TRUE, ...)
 
 \method{prediction}{hetglm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link", "scale"), ...)
+  at = NULL, type = c("response", "link", "scale"), se.fitted = TRUE, ...)
 
 \method{prediction}{hurdle}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "count", "prob", "zero"), ...)
+  at = NULL, type = c("response", "count", "prob", "zero"),
+  se.fitted = TRUE, ...)
 
 \method{prediction}{hxlr}(model, data = find_data(model), at = NULL,
-  type = c("class", "probability", "cumprob", "location", "scale"), ...)
+  type = c("class", "probability", "cumprob", "location", "scale"),
+  se.fitted = TRUE, ...)
 
 \method{prediction}{ivreg}(model, data = find_data(model, parent.frame()),
-  at = NULL, ...)
+  at = NULL, se.fitted = TRUE, ...)
 
-\method{prediction}{knnreg}(model, data, at = NULL, ...)
+\method{prediction}{knnreg}(model, data, at = NULL, se.fitted = TRUE, ...)
 
-\method{prediction}{kqr}(model, data, at = NULL, ...)
+\method{prediction}{kqr}(model, data, at = NULL, se.fitted = TRUE, ...)
 
-\method{prediction}{ksvm}(model, data, at = NULL, type = NULL, category,
-  ...)
+\method{prediction}{ksvm}(model, data, at = NULL, type = NULL,
+  se.fitted = TRUE, category, ...)
 
 \method{prediction}{lm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = "response", ...)
+  at = NULL, type = "response", se.fitted = TRUE, ...)
 
-\method{prediction}{lme}(model, data = find_data(model), at = NULL, ...)
+\method{prediction}{lme}(model, data = find_data(model), at = NULL,
+  se.fitted = TRUE, ...)
 
 \method{prediction}{loess}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = "response", ...)
+  at = NULL, type = "response", se.fitted = TRUE, ...)
 
-\method{prediction}{lqs}(model, data = find_data(model), at = NULL, ...)
+\method{prediction}{lqs}(model, data = find_data(model), at = NULL,
+  se.fitted = TRUE, ...)
 
-\method{prediction}{mca}(model, data = find_data(model), at = NULL, ...)
+\method{prediction}{mca}(model, data = find_data(model), at = NULL,
+  se.fitted = TRUE, ...)
 
 \method{prediction}{mclogit}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link"), ...)
+  at = NULL, type = c("response", "link"), se.fitted = TRUE, ...)
 
 \method{prediction}{merMod}(model, data = find_data(model), at = NULL,
-  type = c("response", "link"), ...)
+  type = c("response", "link"), se.fitted = TRUE, ...)
 
 \method{prediction}{mnlogit}(model, data = find_data(model, parent.frame()),
-  at = NULL, category, ...)
+  at = NULL, se.fitted = TRUE, category, ...)
 
 \method{prediction}{mnp}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = NULL, category, ...)
+  at = NULL, type = NULL, se.fitted = TRUE, category, ...)
 
 \method{prediction}{multinom}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = NULL, category, ...)
+  at = NULL, type = NULL, se.fitted = TRUE, category, ...)
 
 \method{prediction}{nls}(model, data = find_data(model, parent.frame()),
-  at = NULL, ...)
+  at = NULL, se.fitted = TRUE, ...)
 
 \method{prediction}{nnet}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = NULL, category, ...)
+  at = NULL, type = NULL, se.fitted = TRUE, category, ...)
 
 \method{prediction}{plm}(model, data = find_data(model, parent.frame()),
-  at = NULL, ...)
+  at = NULL, se.fitted = TRUE, ...)
 
 \method{prediction}{polr}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = NULL, category, ...)
+  at = NULL, type = NULL, se.fitted = TRUE, category, ...)
 
 \method{prediction}{ppr}(model, data = find_data(model, parent.frame()),
-  at = NULL, ...)
+  at = NULL, se.fitted = TRUE, ...)
 
 \method{prediction}{princomp}(model, data = find_data(model, parent.frame()),
-  at = NULL, ...)
+  at = NULL, se.fitted = TRUE, ...)
 
 \method{prediction}{rlm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = "response", ...)
+  at = NULL, type = "response", se.fitted = TRUE, ...)
 
 \method{prediction}{rpart}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = NULL, category, ...)
+  at = NULL, type = NULL, se.fitted = TRUE, category, ...)
 
 \method{prediction}{rq}(model, data = find_data(model, parent.frame()),
-  at = NULL, ...)
+  at = NULL, se.fitted = TRUE, ...)
 
 \method{prediction}{selection}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = "response", ...)
+  at = NULL, type = "response", se.fitted = TRUE, ...)
 
 \method{prediction}{survreg}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "lp", "quantile", "uquantile"), ...)
+  at = NULL, type = c("response", "lp", "quantile", "uquantile"),
+  se.fitted = TRUE, ...)
 
-\method{prediction}{svm}(model, data = NULL, at = NULL, category, ...)
+\method{prediction}{svm}(model, data = NULL, at = NULL, se.fitted = TRUE,
+  category, ...)
 
 \method{prediction}{svyglm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link"), ...)
+  at = NULL, type = c("response", "link"), se.fitted = TRUE, ...)
 
 \method{prediction}{zeroinfl}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "count", "prob", "zero"), ...)
+  at = NULL, type = c("response", "count", "prob", "zero"),
+  se.fitted = TRUE, ...)
 }
 \arguments{
 \item{model}{A model object, perhaps returned by \code{\link[stats]{lm}} or \code{\link[stats]{glm}}.}
@@ -206,6 +217,8 @@ prediction(model, ...)
 \item{at}{A list of one or more named vectors, specifically values at which to calculate the predictions. These are used to modify the value of \code{data} (see \code{\link{build_datalist}} for details on use).}
 
 \item{type}{A character string indicating the type of marginal effects to estimate. Mostly relevant for non-linear models, where the reasonable options are \dQuote{response} (the default) or \dQuote{link} (i.e., on the scale of the linear predictor in a GLM). For models of class \dQuote{polr} (from \code{\link[MASS]{polr}}), possible values are \dQuote{class} or \dQuote{probs}; both are returned.}
+
+\item{se.fitted}{A logical indicating whether to calculate standard errors (if possible). The output will always contain a \dQuote{se.fitted} column regardless of this value; this only controls the calculation of standard errors. Setting it to \code{FALSE} may improve speed.}
 
 \item{category}{For multi-level or multi-category outcome models (e.g., ordered probit, multinomial logit, etc.), a value specifying which of the outcome levels should be used for the \code{"fitted"} column. If missing, some default is chosen automatically.}
 }

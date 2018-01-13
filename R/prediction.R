@@ -6,6 +6,7 @@
 #' @param data A data.frame over which to calculate marginal effects. If missing, \code{\link{find_data}} is used to specify the data frame.
 #' @param at A list of one or more named vectors, specifically values at which to calculate the predictions. These are used to modify the value of \code{data} (see \code{\link{build_datalist}} for details on use).
 #' @param type A character string indicating the type of marginal effects to estimate. Mostly relevant for non-linear models, where the reasonable options are \dQuote{response} (the default) or \dQuote{link} (i.e., on the scale of the linear predictor in a GLM). For models of class \dQuote{polr} (from \code{\link[MASS]{polr}}), possible values are \dQuote{class} or \dQuote{probs}; both are returned.
+#' @param se.fitted A logical indicating whether to calculate standard errors (if possible). The output will always contain a \dQuote{se.fitted} column regardless of this value; this only controls the calculation of standard errors. Setting it to \code{FALSE} may improve speed.
 #' @param category For multi-level or multi-category outcome models (e.g., ordered probit, multinomial logit, etc.), a value specifying which of the outcome levels should be used for the \code{"fitted"} column. If missing, some default is chosen automatically.
 #' @param \dots Additional arguments passed to \code{\link[stats]{predict}} methods.
 #' @details This function is simply a wrapper around \code{\link[stats]{predict}} that returns a data frame containing the value of \code{data} and the predicted values with respect to all variables specified in \code{data}.
@@ -101,24 +102,36 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = "response", 
+         se.fitted = TRUE,
          ...) {
     
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        pred <- predict(model, type = type, se.fit = TRUE, ...)
-        pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
+        if (isTRUE(se.fitted)) {
+            pred <- predict(model, type = type, se.fit = TRUE, ...)
+            pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
+        } else {
+            pred <- predict(model, type = type, se.fit = FALSE, ...)
+            pred <- data.frame(fitted = pred, se.fitted = rep(NA_real_, length(pred)))
+        }
     } else {
         # setup data
-        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        if (is.null(at)) {
+            out <- data
+        } else {
+            out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        }
         # calculate predictions
-        tmp <- predict(model, 
-                       newdata = out, 
-                       type = type, 
-                       se.fit = TRUE,
-                       ...)
-        # cbind back together
-        pred <- cbind(out, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
+        if (isTRUE(se.fitted)) {
+            tmp <- predict(model, newdata = out, type = type, se.fit = TRUE, ...)
+            # cbind back together
+            pred <- cbind(out, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
+        } else {
+            tmp <- predict(model, newdata = out, type = type, se.fit = FALSE, ...)
+            # cbind back together
+            pred <- cbind(out, fitted = tmp, se.fitted = rep(NA_real_, nrow(out)))
+        }
     }
     
     # obs-x-(ncol(data)+2) data.frame of predictions
