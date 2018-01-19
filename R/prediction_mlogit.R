@@ -20,10 +20,10 @@ function(model,
         out <- build_datalist(data, at = at, as.data.frame = TRUE)
     }
     # calculate predictions
-    tmp <- data.frame(predict(model, newdata = out, ...))
+    tmp <- make_data_frame(predict(model, newdata = out, ...))
     names(tmp) <- paste0("Pr(", seq_len(ncol(tmp)), ")")
     # cbind back together
-    pred <- cbind(out, tmp)
+    pred <- make_data_frame(out, tmp)
     rm(tmp)
     
     # handle category argument

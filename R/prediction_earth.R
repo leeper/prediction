@@ -14,10 +14,10 @@ function(model,
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        pred <- data.frame(fitted.class = predict(model, type = "class", ...)[,1L])
-        probs <- as.data.frame(predict(model, type = type, ...))
+        pred <- make_data_frame(fitted.class = predict(model, type = "class", ...)[,1L])
+        probs <- make_data_frame(predict(model, type = type, ...))
         names(probs) <- paste0("Pr(", names(probs), ")")
-        pred <- cbind(pred, probs)
+        pred <- make_data_frame(pred, probs)
     } else {
         # setup data
         if (is.null(at)) {
@@ -31,10 +31,10 @@ function(model,
                        type = "class", 
                        ...)
         colnames(tmp) <- "fitted.class"
-        tmp_probs <- as.data.frame(predict(model, newdata = out, type = type, ...))
+        tmp_probs <- make_data_frame(predict(model, newdata = out, type = type, ...))
         names(tmp_probs) <- paste0("Pr(", names(tmp_probs), ")")
         # cbind back together
-        pred <- cbind.data.frame(out, tmp, tmp_probs)
+        pred <- make_data_frame(out, tmp, tmp_probs)
         pred[["se.fitted"]] <- NA_real_
     }
     

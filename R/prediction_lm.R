@@ -5,18 +5,18 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = "response", 
-         se.fitted = TRUE,
+         calculate_se = TRUE,
          ...) {
     
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        if (isTRUE(se.fitted)) {
+        if (isTRUE(calculate_se)) {
             pred <- predict(model, type = type, se.fit = TRUE, ...)
-            pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
+            pred <- make_data_frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
         } else {
             pred <- predict(model, type = type, se.fit = FALSE, ...)
-            pred <- data.frame(fitted = pred, se.fitted = rep(NA_real_, length(pred)))
+            pred <- make_data_frame(fitted = pred, se.fitted = rep(NA_real_, length(pred)))
         }
     } else {
         # reduce memory profile
@@ -24,16 +24,16 @@ function(model,
         attr(model[["terms"]], ".Environment") <- NULL
         
         # setup data
-        out <- build_datalist(data, at = at, as.data.frame = TRUE)
+        data <- build_datalist(data, at = at, as.data.frame = TRUE)
         # calculate predictions
-        if (isTRUE(se.fitted)) {
-            tmp <- predict(model, newdata = out, type = type, se.fit = TRUE, ...)
+        if (isTRUE(calculate_se)) {
+            tmp <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
             # cbind back together
-            pred <- cbind(out, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
+            pred <- make_data_frame(data, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
         } else {
-            tmp <- predict(model, newdata = out, type = type, se.fit = FALSE, ...)
+            tmp <- predict(model, newdata = data, type = type, se.fit = FALSE, ...)
             # cbind back together
-            pred <- cbind(out, fitted = tmp, se.fitted = rep(NA_real_, nrow(out)))
+            pred <- make_data_frame(data, fitted = tmp, se.fitted = rep(NA_real_, nrow(data)))
         }
     }
     

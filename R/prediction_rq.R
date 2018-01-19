@@ -24,7 +24,7 @@ function(model,
                        newdata = out, 
                        ...)
         # cbind back together
-        pred <- cbind(out, fitted = tmp, se.fitted = rep(NA_real_, nrow(out)))
+        pred <- make_data_frame(out, fitted = tmp, se.fitted = rep(NA_real_, nrow(out)))
     }
     
     # obs-x-(ncol(data)+2) data frame

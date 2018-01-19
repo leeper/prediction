@@ -5,8 +5,8 @@ prediction.selection <- function(model, data = find_data(model, parent.frame()),
     # extract predicted value at input value
     data <- data
     if (missing(data) || is.null(data)) {
-        pred <- data.frame(fitted = predict(model, type = type, ...), 
-                           se.fitted = NA_real_)
+        pred <- make_data_frame(fitted = predict(model, type = type, ...), 
+                                se.fitted = NA_real_)
     } else {
         # setup data
         if (is.null(at)) {
@@ -20,7 +20,7 @@ prediction.selection <- function(model, data = find_data(model, parent.frame()),
                        type = type, 
                        ...)
         # cbind back together
-        pred <- cbind(out, fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
+        pred <- make_data_frame(out, fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
     }
     
     # obs-x-(ncol(data)+2) data frame

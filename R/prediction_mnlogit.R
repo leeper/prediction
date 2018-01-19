@@ -11,10 +11,10 @@ function(model,
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        pred <- data.frame(fitted.class = predict(model, probability = FALSE, ...))
-        probs <- as.data.frame(predict(model, probability = TRUE, ...))
+        pred <- make_data_frame(fitted.class = predict(model, probability = FALSE, ...))
+        probs <- make_data_frame(predict(model, probability = TRUE, ...))
         names(probs) <- paste0("Pr(", names(probs), ")")
-        pred <- cbind(pred, probs)
+        pred <- make_data_frame(pred, probs)
     } else {
         # setup data
         if (is.null(at)) {
@@ -24,10 +24,10 @@ function(model,
         }
         # calculate predictions
         tmp <- predict(model, newdata = out, probability = FALSE, ...)
-        tmp_probs <- as.data.frame(predict(model, newdata = out, probability = TRUE, ...))
+        tmp_probs <- make_data_frame(predict(model, newdata = out, probability = TRUE, ...))
         names(tmp_probs) <- paste0("Pr(", names(tmp_probs), ")")
         # cbind back together
-        pred <- cbind.data.frame(out, fitted.class = tmp, tmp_probs)
+        pred <- make_data_frame(out, fitted.class = tmp, tmp_probs)
         rm(tmp, tmp_probs)
     }
     

@@ -30,7 +30,7 @@ function(model,
                        se.fit = TRUE,
                        ...)
         # cbind back together
-        pred <- cbind(out, fitted = unclass(tmp), se.fitted = sqrt(unname(attributes(tmp)[["var"]])))
+        pred <- make_data_frame(out, fitted = unclass(tmp), se.fitted = sqrt(unname(attributes(tmp)[["var"]])))
     }
     
     # obs-x-(ncol(data)+2) data frame

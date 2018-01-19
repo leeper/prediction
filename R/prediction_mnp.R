@@ -16,7 +16,7 @@ function(model,
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        probs <- as.data.frame(predict(model, type = "prob", ...)[["p"]])
+        probs <- make_data_frame(predict(model, type = "prob", ...)[["p"]])
         names(probs) <- paste0("Pr(", names(probs), ")")
         tmp <- predict(model, type = "choice", ...)[["y"]]
         d <- dim(tmp)
@@ -34,7 +34,7 @@ function(model,
             out <- build_datalist(data, at = at, as.data.frame = TRUE)
         }
         # calculate predictions
-        tmp_probs <- as.data.frame(predict(model, newdata = out, type = "prob", ...)[["p"]])
+        tmp_probs <- make_data_frame(predict(model, newdata = out, type = "prob", ...)[["p"]])
         names(tmp_probs) <- paste0("Pr(", names(tmp_probs), ")")
         tmp <- predict(model, newdata = out, type = "choice", ...)[["y"]]
         d <- dim(tmp)
@@ -43,7 +43,7 @@ function(model,
         }
         tmp_probs[["fitted.class"]] <- lapply(seq_len(d[1L]), function(i) tmp[i,])
         # cbind back together
-        pred <- cbind(out, tmp_probs)
+        pred <- make_data_frame(out, tmp_probs)
         rm(tmp, tmp_probs)
     }
     

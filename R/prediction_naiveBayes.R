@@ -29,10 +29,10 @@ function(model,
                    newdata = out, 
                    type = "class", 
                    ...)
-    probs <- as.data.frame(predict(model, newdata = out, type = "raw", ...))
+    probs <- make_data_frame(predict(model, newdata = out, type = "raw", ...))
     names(probs) <- paste0("Pr(", names(probs), ")")
     # cbind back together
-    pred <- cbind(out, probs, fitted.class = tmp, se.fitted = rep(NA_real_, nrow(out)))
+    pred <- make_data_frame(out, probs, fitted.class = tmp, se.fitted = rep(NA_real_, nrow(out)))
     rm(tmp, probs)
     
     # handle category argument

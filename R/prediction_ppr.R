@@ -5,8 +5,8 @@ prediction.ppr <- function(model, data = find_data(model, parent.frame()), at = 
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        pred <- data.frame(fitted = predict(model, ...),
-                           se.fitted = NA_real_)
+        pred <- make_data_frame(fitted = predict(model, ...),
+                                se.fitted = NA_real_)
     } else {
         # setup data
         if (is.null(at)) {
@@ -19,7 +19,7 @@ prediction.ppr <- function(model, data = find_data(model, parent.frame()), at = 
                        newdata = out, 
                        ...)
         # cbind back together
-        pred <- cbind(out, fitted = tmp, se.fitted = rep(NA_real_, nrow(out)))
+        pred <- make_data_frame(out, fitted = tmp, se.fitted = rep(NA_real_, nrow(out)))
     }
     
     # obs-x-(ncol(data)+2) data frame

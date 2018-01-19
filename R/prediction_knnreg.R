@@ -3,7 +3,7 @@
 prediction.knnreg <- function(model, data, at = NULL, se.fitted = TRUE, ...) {
     
     # extract predicted values
-    pred <- data.frame(fitted = predict(model, newdata = data, ...))
+    pred <- make_data_frame(fitted = predict(model, newdata = data, ...))
     pred[["se.fitted"]] <- NA_real_
     
     # obs-x-(ncol(data)+2) data frame

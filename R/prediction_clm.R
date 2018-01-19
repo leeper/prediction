@@ -16,13 +16,13 @@ function(model,
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        pred <- data.frame(fitted.class = predict(model, type = "class", se.fit = FALSE, ...)[["fit"]])
+        pred <- make_data_frame(fitted.class = predict(model, type = "class", se.fit = FALSE, ...)[["fit"]])
         problist <- predict(model, newdata = data, type = "prob", se.fit = TRUE, ...)
-        probs <- as.data.frame(problist[["fit"]])
-        probs.se <- as.data.frame(problist[["se.fit"]])
+        probs <- make_data_frame(problist[["fit"]])
+        probs.se <- make_data_frame(problist[["se.fit"]])
         names(probs) <- paste0("Pr(", seq_len(ncol(probs)), ")")
         names(probs.se) <- paste0("se.Pr(", seq_len(ncol(probs)), ")")
-        pred <- cbind(pred, probs, probs.se)
+        pred <- make_data_frame(pred, probs, probs.se)
     } else {
         # setup data
         if (is.null(at)) {
@@ -37,12 +37,12 @@ function(model,
                        se.fit = FALSE,
                        ...)[["fit"]]
         problist <- predict(model, newdata = out, type = "prob", se.fit = TRUE, ...)
-        probs <- as.data.frame(problist[["fit"]])
-        probs.se <- as.data.frame(problist[["se.fit"]])
+        probs <- make_data_frame(problist[["fit"]])
+        probs.se <- make_data_frame(problist[["se.fit"]])
         names(probs) <- paste0("Pr(", seq_len(ncol(probs)), ")")
         names(probs.se) <- paste0("se.Pr(", seq_len(ncol(probs)), ")")    
         # cbind back together
-        pred <- cbind(out, fitted.class = tmp, probs, probs.se)
+        pred <- make_data_frame(out, fitted.class = tmp, probs, probs.se)
         rm(tmp, problist, probs, probs.se)
     }
     

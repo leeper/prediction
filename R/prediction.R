@@ -6,7 +6,7 @@
 #' @param data A data.frame over which to calculate marginal effects. If missing, \code{\link{find_data}} is used to specify the data frame.
 #' @param at A list of one or more named vectors, specifically values at which to calculate the predictions. These are used to modify the value of \code{data} (see \code{\link{build_datalist}} for details on use).
 #' @param type A character string indicating the type of marginal effects to estimate. Mostly relevant for non-linear models, where the reasonable options are \dQuote{response} (the default) or \dQuote{link} (i.e., on the scale of the linear predictor in a GLM). For models of class \dQuote{polr} (from \code{\link[MASS]{polr}}), possible values are \dQuote{class} or \dQuote{probs}; both are returned.
-#' @param se.fitted A logical indicating whether to calculate standard errors (if possible). The output will always contain a \dQuote{se.fitted} column regardless of this value; this only controls the calculation of standard errors. Setting it to \code{FALSE} may improve speed.
+#' @param calculate_se A logical indicating whether to calculate standard errors (if possible). The output will always contain a \dQuote{calculate_se} column regardless of this value; this only controls the calculation of standard errors. Setting it to \code{FALSE} may improve speed.
 #' @param category For multi-level or multi-category outcome models (e.g., ordered probit, multinomial logit, etc.), a value specifying which of the outcome levels should be used for the \code{"fitted"} column. If missing, some default is chosen automatically.
 #' @param \dots Additional arguments passed to \code{\link[stats]{predict}} methods.
 #' @details This function is simply a wrapper around \code{\link[stats]{predict}} that returns a data frame containing the value of \code{data} and the predicted values with respect to all variables specified in \code{data}.
@@ -61,7 +61,7 @@
 #'   \item \dQuote{zeroinfl}, see \code{\link[pscl]{zeroinfl}}
 #' }
 #' 
-#' @return A data frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, or a multiple thereof, if \code{!is.null(at)}. The return value contains \code{data} (possibly modified by \code{at} using \code{\link{build_datalist}}), plus a column containing fitted/predicted values (\code{"fitted"}) and a column containing the standard errors thereof (\code{"se.fitted"}). Additional columns may be reported depending on the object class.
+#' @return A data frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, or a multiple thereof, if \code{!is.null(at)}. The return value contains \code{data} (possibly modified by \code{at} using \code{\link{build_datalist}}), plus a column containing fitted/predicted values (\code{"fitted"}) and a column containing the standard errors thereof (\code{"calculate_se"}). Additional columns may be reported depending on the object class.
 #' @examples
 #' require("datasets")
 #' x <- lm(Petal.Width ~ Sepal.Length * Sepal.Width * Species, data = iris)
@@ -102,35 +102,35 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = "response", 
-         se.fitted = TRUE,
+         calculate_se = TRUE,
          ...) {
     
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        if (isTRUE(se.fitted)) {
+        if (isTRUE(calculate_se)) {
             pred <- predict(model, type = type, se.fit = TRUE, ...)
-            pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
+            pred <- make_data_frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
         } else {
             pred <- predict(model, type = type, se.fit = FALSE, ...)
-            pred <- data.frame(fitted = pred, se.fitted = rep(NA_real_, length(pred)))
+            pred <- make_data_frame(fitted = pred, se.fitted = rep(NA_real_, length(pred)))
         }
     } else {
         # setup data
         if (is.null(at)) {
-            out <- data
+            data <- data
         } else {
-            out <- build_datalist(data, at = at, as.data.frame = TRUE)
+            data <- build_datalist(data, at = at, as.data.frame = TRUE)
         }
         # calculate predictions
-        if (isTRUE(se.fitted)) {
-            tmp <- predict(model, newdata = out, type = type, se.fit = TRUE, ...)
+        if (isTRUE(calculate_se)) {
+            tmp <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
             # cbind back together
-            pred <- cbind(out, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
+            pred <- make_data_frame(data, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
         } else {
-            tmp <- predict(model, newdata = out, type = type, se.fit = FALSE, ...)
+            tmp <- predict(model, newdata = data, type = type, se.fit = FALSE, ...)
             # cbind back together
-            pred <- cbind(out, fitted = tmp, se.fitted = rep(NA_real_, nrow(out)))
+            pred <- make_data_frame(data, fitted = tmp, se.fitted = rep(NA_real_, nrow(data)))
         }
     }
     

@@ -14,7 +14,7 @@ function(model,
     data <- data
     if (missing(data) || is.null(data)) {
         pred <- predict(model, type = type, ...)
-        pred <- data.frame(fitted = pred[["fit"]])
+        pred <- make_data_frame(fitted = pred[["fit"]])
     } else {
         # setup data
         if (is.null(at)) {
@@ -29,7 +29,7 @@ function(model,
                        se.fit = TRUE,
                        ...)
         # cbind back together
-        pred <- cbind(out, fitted = tmp, se.fitted = rep(NA_real_, nrow(out)))
+        pred <- make_data_frame(out, fitted = tmp, se.fitted = rep(NA_real_, nrow(out)))
     }
     
     # obs-x-(ncol(data)+2) data frame

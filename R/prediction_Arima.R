@@ -5,10 +5,10 @@ prediction.Arima <- function(model, se.fitted = TRUE,...) {
     # extract predicted values
     if (isTRUE(se.fitted)) {
         tmp <- predict(object = model, se.fit = TRUE, ...)
-        pred <- data.frame(fitted = tmp[[1L]], se.fitted = tmp[[2L]])
+        pred <- make_data_frame(fitted = tmp[[1L]], se.fitted = tmp[[2L]])
     } else {
         tmp <- predict(object = model, se.fit = FALSE, ...)
-        pred <- data.frame(fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
+        pred <- make_data_frame(fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
     }
     
     

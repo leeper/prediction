@@ -5,7 +5,7 @@ prediction.princomp <- function(model, data = find_data(model, parent.frame()), 
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        pred <- data.frame(predict(model, ...))
+        pred <- make_data_frame(predict(model, ...))
     } else {
         # setup data
         if (is.null(at)) {
@@ -18,7 +18,7 @@ prediction.princomp <- function(model, data = find_data(model, parent.frame()), 
                        newdata = out, 
                        ...)
         # cbind back together
-        pred <- cbind(out, tmp, fitted = rep(NA_real_, nrow(out)), se.fitted = rep(NA_real_, nrow(out)))
+        pred <- make_data_frame(out, tmp, fitted = rep(NA_real_, nrow(out)), se.fitted = rep(NA_real_, nrow(out)))
     }
     
     # obs-x-(ncol(data)+2) data frame

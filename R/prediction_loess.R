@@ -8,7 +8,7 @@ prediction.loess <- function(model, data = find_data(model, parent.frame()), at 
     data <- data
     if (missing(data) || is.null(data)) {
         pred <- predict(model, type = type, se = TRUE, ...)
-        pred <- data.frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
+        pred <- make_data_frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]])
     } else {
         # setup data
         if (is.null(at)) {
@@ -23,7 +23,7 @@ prediction.loess <- function(model, data = find_data(model, parent.frame()), at 
                        se = TRUE,
                        ...)
         # cbind back together
-        pred <- cbind(out, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
+        pred <- make_data_frame(out, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
     }
     
     # obs-x-(ncol(data)+2) data frame

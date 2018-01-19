@@ -2,7 +2,7 @@
 #' @export
 prediction.gee <- function(model, se.fitted = TRUE, ...) {
     
-    pred <- data.frame(fitted = predict(model, ...))
+    pred <- make_data_frame(fitted = predict(model, ...))
     pred[["se.fitted"]] <- NA_real_
     
     # obs-x-(ncol(data)+2) data frame

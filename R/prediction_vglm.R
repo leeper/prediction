@@ -17,9 +17,9 @@ function(model,
     if (missing(data) || is.null(data)) {
         if ("se.fit" %in% names(arg)) {
             tmp <- predict(model, type = type, ...)
-            pred <- as.data.frame(tmp[["fitted.values"]], tmp[["se.fit"]])
+            pred <- make_data_frame(tmp[["fitted.values"]], se.fitted = tmp[["se.fit"]])
         } else {
-            pred <- as.data.frame(predict(model, type = type, se.fit = FALSE, ...))
+            pred <- make_data_frame(predict(model, type = type, se.fit = FALSE, ...))
         }
     } else {
         # setup data
@@ -35,14 +35,14 @@ function(model,
                            type = type, 
                            ...)
             # cbind back together
-            pred <- cbind(out, tmp[["fitted.values"]], se.fitted = tmp[["se.fit"]])
+            pred <- make_data_frame(out, tmp[["fitted.values"]], se.fitted = tmp[["se.fit"]])
         } else {
             tmp <- predict(model, 
                            newdata = out, 
                            type = type, 
                            ...)
             # cbind back together
-            pred <- cbind(out, tmp[["fitted.values"]], se.fitted = rep(NA_real_, nrow(out)))
+            pred <- make_data_frame(out, tmp[["fitted.values"]], se.fitted = rep(NA_real_, nrow(out)))
         }
         rm(tmp)
     }

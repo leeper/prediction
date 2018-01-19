@@ -13,10 +13,9 @@ function(model,
     if (missing(data) || is.null(data)) {
         pred <- predict(model, ...)
         colnames(pred[["posterior"]]) <- paste0("Pr(", colnames(pred[["posterior"]]), ")")
-        pred <- data.frame(class = pred[["class"]], 
-                           pred[["x"]],
-                           pred[["posterior"]], 
-                           check.names = FALSE)
+        pred <- make_data_frame(class = pred[["class"]], 
+                                pred[["x"]],
+                                pred[["posterior"]])
     } else {
         # setup data
         if (is.null(at)) {
@@ -28,7 +27,7 @@ function(model,
         tmp <- predict(model, newdata = out, ...)
         colnames(tmp[["posterior"]]) <- paste0("Pr(", colnames(tmp[["posterior"]]), ")")
         # cbind back together
-        pred <- cbind.data.frame(out, data.frame(tmp[["x"]]), class = tmp[["class"]], tmp[["posterior"]])
+        pred <- make_data_frame(out, make_data_frame(tmp[["x"]]), class = tmp[["class"]], tmp[["posterior"]])
         pred[["se.fitted"]] <- NA_real_
     }
 

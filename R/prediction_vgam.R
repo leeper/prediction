@@ -14,7 +14,7 @@ function(model,
     # extract predicted values
     data <- data
     if (missing(data) || is.null(data)) {
-        pred <- as.data.frame(predict(model, type = type, se.fit = FALSE, ...))
+        pred <- make_data_frame(predict(model, type = type, se.fit = FALSE, ...))
     } else {
         # setup data
         if (is.null(at)) {
@@ -32,7 +32,7 @@ function(model,
             tmp <- as.matrix(tmp, ncol = 1)
         }
         # cbind back together
-        pred <- cbind(out, fitted = data.frame(tmp), se.fitted = rep(NA_real_, nrow(out)))
+        pred <- make_data_frame(out, fitted = make_data_frame(tmp), se.fitted = rep(NA_real_, nrow(out)))
     }
     
     # handle category argument

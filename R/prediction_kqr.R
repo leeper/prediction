@@ -4,9 +4,9 @@ prediction.kqr <- function(model, data, at = NULL, se.fitted = TRUE, ...) {
     
     # extract predicted values
     if (missing(data) || is.null(data)) {
-        pred <- data.frame(fitted = predict(object = model, ...)[,1L])
+        pred <- make_data_frame(fitted = predict(object = model, ...)[,1L])
     } else {
-        pred <- data.frame(fitted = predict(model, newdata = data,...)[,1L])
+        pred <- make_data_frame(fitted = predict(model, newdata = data,...)[,1L])
     }
     pred[["se.fitted"]] <- NA_real_
     

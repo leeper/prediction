@@ -19,7 +19,7 @@ function(model,
                    newdata = out, 
                    ...)
     # cbind back together
-    pred <- cbind(out, tmp)
+    pred <- make_data_frame(out, tmp)
     pred[["fitted"]] <- NA_real_
     pred[["se.fitted"]] <- NA_real_
     

@@ -23,12 +23,12 @@ function(model,
         if (!is.null(attributes(tmp)[["probabilities"]])) {
             probs <- data.frame(attributes(tmp)[["probabilities"]])
             names(probs) <- paste0("Pr(", names(probs), ")")
-            pred <- cbind(pred, probs)
+            pred <- make_data_frame(pred, probs)
         }
         if (!is.null(attributes(tmp)[["decision.values"]])) {
             dvs <- data.frame(attributes(tmp)[["decision.values"]])
             names(dvs) <- paste0("dv(", names(dvs), ")")
-            pred <- cbind(pred, dvs)
+            pred <- make_data_frame(pred, dvs)
         }
     } else {
         if (is.null(at)) {
@@ -37,17 +37,17 @@ function(model,
             out <- build_datalist(data, at = at, as.data.frame = TRUE)
         }
         tmp <- predict(model, newdata = out, decision.values = TRUE, probability = probability, ...)
-        pred <- cbind(out, fitted.class = tmp)
+        pred <- make_data_frame(out, fitted.class = tmp)
         attributes(pred[["fitted.class"]]) <- NULL
         if (!is.null(attributes(tmp)[["probabilities"]])) {
             probs <- data.frame(attributes(tmp)[["probabilities"]])
             names(probs) <- paste0("Pr(", names(probs), ")")
-            pred <- cbind(pred, probs)
+            pred <- make_data_frame(pred, probs)
         }
         if (!is.null(attributes(tmp)[["decision.values"]])) {
             dvs <- data.frame(attributes(tmp)[["decision.values"]])
             names(dvs) <- paste0("dv(", names(dvs), ")")
-            pred <- cbind(pred, dvs)
+            pred <- make_data_frame(pred, dvs)
         }
     }
     

@@ -13,9 +13,8 @@ function(model,
     if (missing(data) || is.null(data)) {
         pred <- predict(model, ...)
         colnames(pred[["posterior"]]) <- paste0("Pr(", colnames(pred[["posterior"]]), ")")
-        pred <- data.frame(fitted.class = pred[["class"]], 
-                           pred[["posterior"]], 
-                           check.names = FALSE)
+        pred <- make_data_frame(fitted.class = pred[["class"]], 
+                                pred[["posterior"]])
     } else {
         # setup data
         if (is.null(at)) {
@@ -27,7 +26,7 @@ function(model,
         tmp <- predict(model, newdata = out, ...)
         colnames(tmp[["posterior"]]) <- paste0("Pr(", colnames(tmp[["posterior"]]), ")")
         # cbind back together
-        pred <- cbind.data.frame(out, fitted.class = tmp[["class"]], tmp[["posterior"]], se.fitted = rep(NA_real_, nrow (out)))
+        pred <- make_data_frame(out, fitted.class = tmp[["class"]], tmp[["posterior"]], se.fitted = rep(NA_real_, nrow (out)))
     }
 
     # handle category argument
