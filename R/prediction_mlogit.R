@@ -4,7 +4,7 @@ prediction.mlogit <-
 function(model, 
          data = find_data(model, parent.frame()), 
          at = NULL, 
-         se.fitted = TRUE,
+         calculate_se = FALSE,
          category, 
          ...) {
     

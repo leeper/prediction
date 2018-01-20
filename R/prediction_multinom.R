@@ -5,7 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = NULL, 
-         se.fitted = TRUE,
+         calculate_se = FALSE,
          category, 
          ...) {
     

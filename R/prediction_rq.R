@@ -4,7 +4,7 @@ prediction.rq <-
 function(model, 
          data = find_data(model, parent.frame()), 
          at = NULL, 
-         se.fitted = TRUE,
+         calculate_se = TRUE,
          ...) {
     
     # extract predicted value at input value

@@ -5,7 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = NULL, 
-         se.fitted = TRUE,
+         calculate_se = TRUE,
          category, 
          ...) {
     
@@ -17,12 +17,19 @@ function(model,
     data <- data
     if (missing(data) || is.null(data)) {
         pred <- make_data_frame(fitted.class = predict(model, type = "class", se.fit = FALSE, ...)[["fit"]])
-        problist <- predict(model, newdata = data, type = "prob", se.fit = TRUE, ...)
-        probs <- make_data_frame(problist[["fit"]])
-        probs.se <- make_data_frame(problist[["se.fit"]])
-        names(probs) <- paste0("Pr(", seq_len(ncol(probs)), ")")
-        names(probs.se) <- paste0("se.Pr(", seq_len(ncol(probs)), ")")
-        pred <- make_data_frame(pred, probs, probs.se)
+        if (isTRUE(calculate_se)) {
+            problist <- predict(model, newdata = data, type = "prob", se.fit = TRUE, ...)
+            probs <- make_data_frame(problist[["fit"]])
+            probs.se <- make_data_frame(problist[["se.fit"]])
+            names(probs) <- paste0("Pr(", seq_len(ncol(probs)), ")")
+            names(probs.se) <- paste0("se.Pr(", seq_len(ncol(probs)), ")")
+            pred <- make_data_frame(pred, probs, probs.se)
+        } else {
+            problist <- predict(model, newdata = data, type = "prob", se.fit = FALSE, ...)
+            probs <- make_data_frame(problist[["fit"]])
+            names(probs) <- paste0("Pr(", seq_len(ncol(probs)), ")")
+            pred <- make_data_frame(pred, probs)
+        }
     } else {
         # setup data
         if (is.null(at)) {
@@ -31,19 +38,20 @@ function(model,
             out <- build_datalist(data, at = at, as.data.frame = TRUE)
         }
         # calculate predictions
-        tmp <- predict(model, 
-                       newdata = out, 
-                       type = "class", 
-                       se.fit = FALSE,
-                       ...)[["fit"]]
-        problist <- predict(model, newdata = out, type = "prob", se.fit = TRUE, ...)
-        probs <- make_data_frame(problist[["fit"]])
-        probs.se <- make_data_frame(problist[["se.fit"]])
-        names(probs) <- paste0("Pr(", seq_len(ncol(probs)), ")")
-        names(probs.se) <- paste0("se.Pr(", seq_len(ncol(probs)), ")")    
-        # cbind back together
-        pred <- make_data_frame(out, fitted.class = tmp, probs, probs.se)
-        rm(tmp, problist, probs, probs.se)
+        pred <- predict(model, newdata = out, type = "class", se.fit = FALSE, ...)[["fit"]]
+        if (isTRUE(calculate_se)) {
+            problist <- predict(model, newdata = out, type = "prob", se.fit = TRUE, ...)
+            probs <- make_data_frame(problist[["fit"]])
+            probs.se <- make_data_frame(problist[["se.fit"]])
+            names(probs) <- paste0("Pr(", seq_len(ncol(probs)), ")")
+            names(probs.se) <- paste0("se.Pr(", seq_len(ncol(probs)), ")")    
+            pred <- make_data_frame(out, fitted.class = pred, probs, probs.se)
+        } else {
+            problist <- predict(model, newdata = out, type = "prob", se.fit = FALSE, ...)
+            probs <- make_data_frame(problist[["fit"]])
+            names(probs) <- paste0("Pr(", seq_len(ncol(probs)), ")")
+            pred <- make_data_frame(out, fitted.class = pred, probs)
+        }
     }
     
     # handle category argument

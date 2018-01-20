@@ -1,7 +1,7 @@
 #' @rdname prediction
 #' @export
 prediction.lme <- 
-function(model, data = find_data(model), at = NULL, se.fitted = TRUE, ...) {
+function(model, data = find_data(model), at = NULL, calculate_se = FALSE, ...) {
     
     # extract predicted values
     data <- data

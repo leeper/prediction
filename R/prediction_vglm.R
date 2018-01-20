@@ -5,7 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = c("response", "link"), 
-         se.fitted = TRUE,
+         calculate_se = TRUE,
          category,
          ...) {
     
@@ -30,17 +30,11 @@ function(model,
         }
         # calculate predictions
         if ("se.fit" %in% names(arg)) {
-            tmp <- predict(model, 
-                           newdata = out,
-                           type = type, 
-                           ...)
+            tmp <- predict(model, newdata = out, type = type, ...)
             # cbind back together
             pred <- make_data_frame(out, tmp[["fitted.values"]], se.fitted = tmp[["se.fit"]])
         } else {
-            tmp <- predict(model, 
-                           newdata = out, 
-                           type = type, 
-                           ...)
+            tmp <- predict(model, newdata = out, type = type, ...)
             # cbind back together
             pred <- make_data_frame(out, tmp[["fitted.values"]], se.fitted = rep(NA_real_, nrow(out)))
         }

@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.nls <- function(model, data = find_data(model, parent.frame()), at = NULL, se.fitted = TRUE, ...) {
+prediction.nls <- function(model, data = find_data(model, parent.frame()), at = NULL, calculate_se = FALSE, ...) {
     
     # extract predicted values
     data <- data

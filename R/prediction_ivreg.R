@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.ivreg <- function(model, data = find_data(model, parent.frame()), at = NULL, se.fitted = TRUE, ...) {
+prediction.ivreg <- function(model, data = find_data(model, parent.frame()), at = NULL, calculate_se = FALSE, ...) {
     
     # extract predicted values
     data <- data
@@ -15,9 +15,7 @@ prediction.ivreg <- function(model, data = find_data(model, parent.frame()), at 
             out <- build_datalist(data, at = at, as.data.frame = TRUE)
         }
         # calculate predictions
-        tmp <- predict(model, 
-                       newdata = out, 
-                       ...)
+        tmp <- predict(model, newdata = out, ...)
         # cbind back together
         pred <- make_data_frame(out, fitted = tmp, se.fitted = rep(NA_real_, nrow(out)))
     }

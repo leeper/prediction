@@ -4,7 +4,7 @@ prediction.lqs <-
 function(model, 
          data = find_data(model), 
          at = NULL, 
-         se.fitted = TRUE,
+         calculate_se = FALSE,
          ...) {
     
     # extract predicted values

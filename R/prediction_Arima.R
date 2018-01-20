@@ -1,9 +1,9 @@
 #' @rdname prediction
 #' @export
-prediction.Arima <- function(model, se.fitted = TRUE,...) {
+prediction.Arima <- function(model, calculate_se = TRUE,...) {
     
     # extract predicted values
-    if (isTRUE(se.fitted)) {
+    if (isTRUE(calculate_se)) {
         tmp <- predict(object = model, se.fit = TRUE, ...)
         pred <- make_data_frame(fitted = tmp[[1L]], se.fitted = tmp[[2L]])
     } else {

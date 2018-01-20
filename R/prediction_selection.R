@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.selection <- function(model, data = find_data(model, parent.frame()), at = NULL, type = "response", se.fitted = TRUE, ...) {
+prediction.selection <- function(model, data = find_data(model, parent.frame()), at = NULL, type = "response", calculate_se = FALSE, ...) {
     
     # extract predicted value at input value
     data <- data

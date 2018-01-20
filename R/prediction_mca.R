@@ -4,7 +4,7 @@ prediction.mca <-
 function(model, 
          data = find_data(model), 
          at = NULL, 
-         se.fitted = TRUE,
+         calculate_se = FALSE,
          ...) {
     
     # extract predicted values
@@ -15,9 +15,7 @@ function(model,
         out <- build_datalist(data, at = at, as.data.frame = TRUE)
     }
     # calculate predictions
-    tmp <- predict(model, 
-                   newdata = out, 
-                   ...)
+    tmp <- predict(model, newdata = out, ...)
     # cbind back together
     pred <- make_data_frame(out, tmp)
     pred[["fitted"]] <- NA_real_

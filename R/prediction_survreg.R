@@ -5,7 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = c("response", "lp", "quantile", "uquantile"), 
-         se.fitted = TRUE,
+         calculate_se = TRUE,
          ...) {
     
     type <- match.arg(type)
@@ -23,11 +23,7 @@ function(model,
             out <- build_datalist(data, at = at, as.data.frame = TRUE)
         }
         # calculate predictions
-        tmp <- predict(model, 
-                       newdata = out, 
-                       type = type, 
-                       se.fit = TRUE,
-                       ...)
+        tmp <- predict(model, newdata = out, type = type, se.fit = TRUE, ...)
         # cbind back together
         pred <- make_data_frame(out, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
     }

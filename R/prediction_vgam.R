@@ -5,7 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = c("response", "link"), 
-         se.fitted = TRUE,
+         calculate_se = FALSE,
          category,
          ...) {
     
@@ -23,11 +23,7 @@ function(model,
             out <- build_datalist(data, at = at, as.data.frame = TRUE)
         }
         # calculate predictions
-        tmp <- predict(model, 
-                       newdata = out, 
-                       type = type, 
-                       se.fit = FALSE,
-                       ...)
+        tmp <- predict(model, newdata = out, type = type, se.fit = FALSE, ...)
         if (!is.null(dim(tmp))) {
             tmp <- as.matrix(tmp, ncol = 1)
         }

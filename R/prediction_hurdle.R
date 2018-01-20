@@ -5,7 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = c("response", "count", "prob", "zero"), 
-         se.fitted = TRUE,
+         calculate_se = FALSE,
          ...) {
     
     type <- match.arg(type)
@@ -23,13 +23,8 @@ function(model,
             out <- build_datalist(data, at = at, as.data.frame = TRUE)
         }
         # calculate predictions
-        tmp <- predict(model, 
-                       newdata = out, 
-                       type = type, 
-                       se.fit = TRUE,
-                       ...)
-        # cbind back together
-        pred <- make_data_frame(out, fitted = tmp, se.fitted = rep(NA_real_, nrow(out)))
+        pred <- predict(model, newdata = out, type = type, ...)
+        pred <- make_data_frame(out, fitted = pred, se.fitted = rep(NA_real_, nrow(out)))
     }
     
     # obs-x-(ncol(data)+2) data frame

@@ -4,7 +4,7 @@ prediction.svm <-
 function(model, 
          data = NULL, 
          at = NULL, 
-         se.fitted = TRUE,
+         calculate_se = TRUE,
          category, 
          ...) {
 

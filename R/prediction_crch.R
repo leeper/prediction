@@ -5,7 +5,7 @@ function(model,
          data = find_data(model), 
          at = NULL, 
          type = c("response", "location", "scale", "quantile"), 
-         se.fitted = TRUE,
+         calculate_se = FALSE,
          ...) {
     
     type <- match.arg(type)
@@ -23,10 +23,7 @@ function(model,
             out <- build_datalist(data, at = at, as.data.frame = TRUE)
         }
         # calculate predictions
-        tmp <- predict(model, 
-                       newdata = out, 
-                       type = type, 
-                       ...)
+        tmp <- predict(model, newdata = out, type = type, ...)
         # cbind back together
         pred <- make_data_frame(out, fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
     }

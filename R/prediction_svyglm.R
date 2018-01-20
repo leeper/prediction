@@ -5,7 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = c("response", "link"), 
-         se.fitted = TRUE,
+         calculate_se = TRUE,
          ...) {
     
     type <- match.arg(type)
@@ -24,12 +24,7 @@ function(model,
             out <- build_datalist(data, at = at, as.data.frame = TRUE)
         }
         # calculate predictions
-        tmp <- predict(model, 
-                       newdata = out, 
-                       type = type, 
-                       se.fit = TRUE,
-                       ...)
-        # cbind back together
+        tmp <- predict(model, newdata = out, type = type, se.fit = TRUE, ...)
         pred <- make_data_frame(out, fitted = unclass(tmp), se.fitted = sqrt(unname(attributes(tmp)[["var"]])))
     }
     

@@ -5,7 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = c("response", "link", "terms"), 
-         se.fitted = TRUE,
+         calculate_se = TRUE,
          ...) {
     
     type <- match.arg(type)
@@ -13,8 +13,13 @@ function(model,
     # extract predicted value
     data <- data
     if (missing(data) || is.null(data)) {
-        pred <- predict(model, type = type, se.fit = TRUE, ...)
-        pred <- make_data_frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]][,1L])
+        if (isTRUE(calculate_se)) {
+            pred <- predict(model, type = type, se.fit = TRUE, ...)
+            pred <- make_data_frame(fitted = pred[["fit"]], se.fitted = pred[["se.fit"]][,1L])
+        } else {
+            pred <- predict(model, type = type, se.fit = FALSE, ...)
+            pred <- make_data_frame(fitted = pred, se.fitted = rep(NA_real_, length(pred)))
+        }
     } else {
         # setup data
         if (is.null(at)) {
@@ -23,13 +28,13 @@ function(model,
             out <- build_datalist(data, at = at, as.data.frame = TRUE)
         }
         # calculate predictions
-        tmp <- predict(model, 
-                       newdata = out, 
-                       type = type, 
-                       se.fit = FALSE,
-                       ...)
-        # cbind back together
-        pred <- make_data_frame(out, fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
+        if (isTRUE(calculate_se)) {
+            pred <- predict(model, newdata = out, type = type, se.fit = FALSE, ...)
+            pred <- make_data_frame(out, fitted = pred, se.fitted = rep(NA_real_, length(pred)))
+        } else {
+            pred <- predict(model, newdata = out, type = type, se.fit = FALSE, ...)
+            pred <- make_data_frame(out, fitted = pred, se.fitted = rep(NA_real_, length(pred)))
+        }
     }
     
     # obs-x-(ncol(data)+2) data frame

@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.ppr <- function(model, data = find_data(model, parent.frame()), at = NULL, se.fitted = TRUE, ...) {
+prediction.ppr <- function(model, data = find_data(model, parent.frame()), at = NULL, calculate_se = FALSE, ...) {
     
     # extract predicted values
     data <- data

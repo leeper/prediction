@@ -5,7 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = c("response", "link", "scale"), 
-         se.fitted = TRUE,
+         calculate_se = FALSE,
          ...) {
     
     type <- match.arg(type)

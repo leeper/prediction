@@ -5,7 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = NULL, 
-         se.fitted = TRUE,
+         calculate_se = FALSE,
          category, 
          ...) {
     
@@ -25,15 +25,11 @@ function(model,
         out <- build_datalist(data, at = at, as.data.frame = TRUE)
     }
     # calculate predictions
-    tmp <- predict(model, 
-                   newdata = out, 
-                   type = "class", 
-                   ...)
+    pred <- predict(model, newdata = out, type = "class", ...)
     probs <- make_data_frame(predict(model, newdata = out, type = "raw", ...))
     names(probs) <- paste0("Pr(", names(probs), ")")
     # cbind back together
-    pred <- make_data_frame(out, probs, fitted.class = tmp, se.fitted = rep(NA_real_, nrow(out)))
-    rm(tmp, probs)
+    pred <- make_data_frame(out, probs, fitted.class = pred, se.fitted = rep(NA_real_, nrow(out)))
     
     # handle category argument
     if (missing(category)) {

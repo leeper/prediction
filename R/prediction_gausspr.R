@@ -5,7 +5,7 @@ function(model,
          data, 
          at = NULL, 
          type = NULL, 
-         se.fitted = TRUE,
+         calculate_se = TRUE,
          category, 
          ...) {
     

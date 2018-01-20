@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.princomp <- function(model, data = find_data(model, parent.frame()), at = NULL, se.fitted = TRUE, ...) {
+prediction.princomp <- function(model, data = find_data(model, parent.frame()), at = NULL, calculate_se = FALSE, ...) {
     
     # extract predicted values
     data <- data
