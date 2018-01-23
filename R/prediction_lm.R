@@ -4,9 +4,11 @@ prediction.lm <-
 function(model, 
          data = find_data(model, parent.frame()), 
          at = NULL, 
-         type = "response", 
+         type = "response",
          calculate_se = TRUE,
          ...) {
+    
+    type <- match.arg(type)
     
     # extract predicted values
     data <- data
