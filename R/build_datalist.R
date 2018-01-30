@@ -1,7 +1,7 @@
 #' @title Build list of data.frames
 #' @description Construct a list of data.frames based upon an input data.frame and a list of one or more \code{at} values
 #' @param data A data.frame containing the original data.
-#' @param at A list of one or more named vectors of values, which will be used to specify values of variables in \code{data}. See examples.
+#' @param at A list of one or more named vectors of values, which will be used to specify values of variables in \code{data}. All possible combinations are generated. Alternatively, this can be a data frame of combination levels if only a subset of combinations are desired. See examples.
 #' @param as.data.frame A logical indicating whether to return a single stacked data frame rather than a list of data frames
 #' @param \dots Ignored.
 #' @return A list of data.frames, unless \code{as.data.frame = TRUE} in which case a single, stacked data frame is returned.
@@ -11,7 +11,9 @@
 #' require("datasets")
 #' build_datalist(head(mtcars), at = list(cyl = c(4, 6)))
 #'
-#' str(build_datalist(head(mtcars, at = list(cyl = c(4,6), wt = c(1,2,3)))))
+#' str(build_datalist(head(mtcars), at = list(cyl = c(4,6), wt = c(2.75,3,3.25))), 1)
+#'
+#' str(build_datalist(head(mtcars), at = data.frame(cyl = c(4,4), wt = c(2.75,3))))
 #'
 #' @keywords data manip
 #' @seealso \code{\link{find_data}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
@@ -126,7 +128,11 @@ check_at_names <- function(namevec, at) {
 # data.frame builder, given specified `at` values
 set_data_to_at <- function(data, at = NULL) {
     # expand `at` combinations
-    e <- expand.grid(at, KEEP.OUT.ATTRS = FALSE)
+    if (inherits(at, "data.frame")) {
+        e <- at
+    } else {
+        e <- expand.grid(at, KEEP.OUT.ATTRS = FALSE)
+    }
     e <- split(e, unique(e))
     data_out <- lapply(e, function(atvals) {
         dat <- data

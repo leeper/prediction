@@ -9,7 +9,7 @@ build_datalist(data, at = NULL, as.data.frame = FALSE, ...)
 \arguments{
 \item{data}{A data.frame containing the original data.}
 
-\item{at}{A list of one or more named vectors of values, which will be used to specify values of variables in \code{data}. See examples.}
+\item{at}{A list of one or more named vectors of values, which will be used to specify values of variables in \code{data}. All possible combinations are generated. Alternatively, this can be a data frame of combination levels if only a subset of combinations are desired. See examples.}
 
 \item{as.data.frame}{A logical indicating whether to return a single stacked data frame rather than a list of data frames}
 
@@ -26,7 +26,9 @@ Construct a list of data.frames based upon an input data.frame and a list of one
 require("datasets")
 build_datalist(head(mtcars), at = list(cyl = c(4, 6)))
 
-str(build_datalist(head(mtcars, at = list(cyl = c(4,6), wt = c(1,2,3)))))
+str(build_datalist(head(mtcars), at = list(cyl = c(4,6), wt = c(2.75,3,3.25))), 1)
+
+str(build_datalist(head(mtcars), at = data.frame(cyl = c(4,4), wt = c(2.75,3))))
 
 }
 \seealso{

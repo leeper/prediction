@@ -1,3 +1,7 @@
+# CHANGES TO prediction 0.2.5
+
+* The `at` argument in `build_datalist()` now accepts a data frame of combinations for limiting the set of levels.
+
 # CHANGES TO prediction 0.2.3
 
 * Most `prediction()` methods gain a (experimental) `calculate_se` argument, which regulates whether to calculate standard errors for predictions. Setting to `FALSE` can improve performance if they are not needed.
