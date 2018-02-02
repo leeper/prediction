@@ -1,3 +1,7 @@
+# CHANGES TO prediction 0.2.6
+
+* Added `prediction.train()` method for "train" objects from **caret**. (#1)
+
 # CHANGES TO prediction 0.2.5
 
 * The `at` argument in `build_datalist()` now accepts a data frame of combinations for limiting the set of levels.

@@ -10,6 +10,7 @@
 \alias{find_data.merMod}
 \alias{find_data.crch}
 \alias{find_data.hxlr}
+\alias{find_data.train}
 \alias{find_data.vgam}
 \alias{find_data.vglm}
 \alias{find_data.mca}
@@ -32,6 +33,8 @@ find_data(model, ...)
 \method{find_data}{crch}(model, env = parent.frame(), ...)
 
 \method{find_data}{hxlr}(model, env = parent.frame(), ...)
+
+\method{find_data}{train}(model, ...)
 
 \method{find_data}{vgam}(model, env = parent.frame(), ...)
 

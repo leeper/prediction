@@ -137,6 +137,7 @@ The currently supported model classes are:
  - "survreg" from `survival::survreg()`
  - "svm" from `e1071::svm()`
  - "svyglm" from `survey::svyglm()`
+ - "train" from `caret::train()`
  - "zeroinfl" from `pscl::zeroinfl()`
 
 ## Requirements and Installation

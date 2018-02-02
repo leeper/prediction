@@ -93,6 +93,12 @@ find_data.hxlr <- find_data.default
 
 #' @rdname find_data
 #' @export
+find_data.train <- function(model, ...) {
+    model[["trainingData"]]
+}
+
+#' @rdname find_data
+#' @export
 find_data.vgam <- function(model, env = parent.frame(), ...) {
     if (!requireNamespace("methods")) {
         stop("'find_data.vgam()' requires the 'methods' package")

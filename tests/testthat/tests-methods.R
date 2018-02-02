@@ -53,6 +53,13 @@ if (require("caret", quietly = TRUE)) {
         expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
         expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
+    test_that("Test prediction() for 'train'", {
+        data("iris", package = "datasets")
+        m <- train(Sepal.Length ~ ., data = iris, method = "lm")
+        p <- prediction(m, data = iris)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
 }
 
 if (require("crch", quietly = TRUE)) {

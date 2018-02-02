@@ -14,7 +14,7 @@
 %   R/prediction_polr.R, R/prediction_ppr.R, R/prediction_princomp.R,
 %   R/prediction_rlm.R, R/prediction_rpart.R, R/prediction_rq.R,
 %   R/prediction_selection.R, R/prediction_survreg.R, R/prediction_svm.R,
-%   R/prediction_svyglm.R, R/prediction_zeroinfl.R
+%   R/prediction_svyglm.R, R/prediction_train.R, R/prediction_zeroinfl.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -63,6 +63,7 @@
 \alias{prediction.survreg}
 \alias{prediction.svm}
 \alias{prediction.svyglm}
+\alias{prediction.train}
 \alias{prediction.zeroinfl}
 \title{Extract Predictions from a Model Object}
 \usage{
@@ -207,6 +208,9 @@ prediction(model, ...)
 \method{prediction}{svyglm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link"), calculate_se = TRUE, ...)
 
+\method{prediction}{train}(model, data = find_data(model), at = NULL,
+  type = c("raw", "prob"), ...)
+
 \method{prediction}{zeroinfl}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "count", "prob", "zero"),
   calculate_se = FALSE, ...)
@@ -282,6 +286,7 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}
   \item \dQuote{svm}, see \code{\link[e1071]{svm}}
   \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}
+  \item \dQuote{train}, see \code{\link[caret]{train}}
   \item \dQuote{zeroinfl}, see \code{\link[pscl]{zeroinfl}}
 }
 }
