@@ -1,5 +1,9 @@
 # CHANGES TO prediction 0.2.6
 
+* Due to a change in gam_1.15, `prediction.gam()` is now `prediction.Gam()` for "Gam" objects from **gam**. (#1)
+
+# CHANGES TO prediction 0.2.6
+
 * Added `prediction.train()` method for "train" objects from **caret**. (#1)
 
 # CHANGES TO prediction 0.2.5

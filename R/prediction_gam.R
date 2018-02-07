@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.gam <- 
+prediction.Gam <- 
 function(model, 
          data = find_data(model, parent.frame()), 
          at = NULL, 

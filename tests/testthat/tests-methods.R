@@ -112,7 +112,7 @@ if (require("earth", quietly = TRUE)) {
 }
 
 if (require("gam", quietly = TRUE)) {
-    test_that("Test prediction() for 'gam'", {
+    test_that("Test prediction() for 'Gam'", {
         data("gam.data", package = "gam")
         m <- gam::gam(y ~ gam::s(x,6) + z,data=gam.data)
         p <- prediction(m)

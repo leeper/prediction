@@ -61,7 +61,7 @@ The currently supported model classes are:
  - "coxph" from `survival::coxph()`
  - "crch" from `crch::crch()`
  - "earth" from `earth::earth()`
- - "gam" from `gam::gam()`
+ - "Gam" from `gam::gam()`
  - "gausspr" from `kernlab::gausspr()`
  - "gee" from `gee::gee()`
  - "gls" from `nlme::gls()`
