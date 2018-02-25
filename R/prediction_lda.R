@@ -22,6 +22,7 @@ function(model,
             out <- data
         } else {
             out <- build_datalist(data, at = at, as.data.frame = TRUE)
+            at_specification <- attr(out, "at_specification")
         }
         # calculate predictions
         tmp <- predict(model, newdata = out, ...)
@@ -48,7 +49,7 @@ function(model,
     structure(pred, 
               class = c("prediction", "data.frame"), 
               row.names = seq_len(nrow(pred)),
-              at = if (is.null(at)) at else names(at), 
+              at = if (is.null(at)) at else at_specification,
               model.class = class(model),
               type = NA_character_,
               category = category)

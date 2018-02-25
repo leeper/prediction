@@ -4,10 +4,11 @@
 summary.prediction <- function(object, digits = 4, ...) {
     f <- object[["fitted"]]
     fc <- object[["fitted.class"]]
-    if (is.null(attributes(object)[["at"]])) {
+    at <- attributes(object)[["at"]]
+    if (is.null(at)) {
         objectby <- list(rep(1L, nrow(object)))
     } else {
-        objectby <- object[ , attributes(object)[["at"]], drop = FALSE]
+        objectby <- object[ , names(at), drop = FALSE]
     }
     if (!"fitted.class" %in% names(object) || is.list(fc)) {
         # numeric outcome
@@ -24,7 +25,7 @@ summary.prediction <- function(object, digits = 4, ...) {
     }
     names(out)[names(out) != "x"] <- paste0("at(", names(out)[names(out) != "x"], ")")
     names(out)[names(out) == "x"] <- "value"
-    if (is.null(attributes(object)[["at"]])) {
+    if (is.null(at)) {
         out <- out[, "value", drop = FALSE]
     }
     print(out, digits = digits, row.names = FALSE, ...)
@@ -35,7 +36,8 @@ summary.prediction <- function(object, digits = 4, ...) {
 print.prediction <- function(x, digits = 4, ...) {
     f <- x[["fitted"]]
     fc <- x[["fitted.class"]]
-    if (is.null(attributes(x)[["at"]])) {
+    at <- attributes(x)[["at"]]
+    if (is.null(at)) {
         if (!"fitted.class" %in% names(x) || is.list(fc)) {
             # numeric outcome
             m <- sprintf(paste0("%0.", digits, "f"), mean(f, na.rm = TRUE))

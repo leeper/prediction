@@ -35,6 +35,7 @@ function(model,
             out <- data
         } else {
             out <- build_datalist(data, at = at, as.data.frame = TRUE)
+            at_specification <- attr(out, "at_specification")
         }
         tmp <- predict(model, newdata = out, decision.values = TRUE, probability = probability, ...)
         pred <- make_data_frame(out, fitted.class = tmp)
@@ -74,7 +75,7 @@ function(model,
     structure(pred,
               class = c("prediction", "data.frame"), 
               row.names = seq_len(nrow(pred)),
-              at = if (is.null(at)) at else names(at), 
+              at = if (is.null(at)) at else at_specification,
               model.class = class(model),
               type = NULL,
               category = category)

@@ -17,6 +17,7 @@ function(model,
     } else {
         # setup data
         data <- build_datalist(data, at = at, as.data.frame = TRUE)
+        at_specification <- attr(data, "at_specification")
         # calculate predictions
         tmp <- predict(model, newdata = data, type = type, se.fit = FALSE, ...)
         # cbind back together
@@ -27,7 +28,7 @@ function(model,
     structure(pred, 
               class = c("prediction", "data.frame"),
               row.names = seq_len(nrow(pred)),
-              at = if (is.null(at)) at else names(at), 
+              at = if (is.null(at)) at else at_specification,
               model.class = class(model),
               type = type)
 }

@@ -32,6 +32,8 @@ function(data,
         
         # setup list of data.frames based on at
         data_out <- set_data_to_at(data, at = at)
+        at_specification <- data_out[["at"]]
+        data_out <- data_out[["data"]]
         
         if (isTRUE(as.data.frame)) {
             data_out <- data.table::rbindlist(data_out)
@@ -40,13 +42,13 @@ function(data,
     } else if (isTRUE(as.data.frame)) {
         # if `at` empty and `as.data.frame = TRUE`, simply return original data
         data_out <- data
-        attr(data_out, "at") <- NULL
+        at_specification <- NULL
     } else {
         # if `at` empty, simply setup data.frame and return
         data_out <- list(data)
-        attr(data_out[[1]], "at") <- NULL
+        at_specification <- NULL
     }
-    data_out
+    return(structure(data_out, at_specification = at_specification))
 }
 
 check_at <- function(data, at) {
@@ -126,18 +128,19 @@ check_at_names <- function(namevec, at) {
 }
 
 # data.frame builder, given specified `at` values
+## returns the `at` combination as a data frame
 set_data_to_at <- function(data, at = NULL) {
     # expand `at` combinations
     if (inherits(at, "data.frame")) {
-        e <- at
+        expanded <- at
     } else {
-        e <- expand.grid(at, KEEP.OUT.ATTRS = FALSE)
+        expanded <- expand.grid(at, KEEP.OUT.ATTRS = FALSE)
     }
-    e <- split(e, unique(e))
+    e <- split(expanded, unique(expanded))
     data_out <- lapply(e, function(atvals) {
         dat <- data
         dat <- `[<-`(dat, , names(atvals), value = atvals)
         structure(dat, at = as.list(atvals))
     })
-    return(data_out)
+    return(list(data = data_out, at = expanded))
 }

@@ -1,3 +1,7 @@
+# CHANGES TO prediction 0.2.8
+
+* Changed internal behavior of `build_datalist()`. The function now returns an an `at_specification` attribute, which is a data frame representation of the `at` argument.
+
 # CHANGES TO prediction 0.2.6
 
 * Due to a change in gam_1.15, `prediction.gam()` is now `prediction.Gam()` for "Gam" objects from **gam**. (#1)
