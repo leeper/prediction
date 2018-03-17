@@ -1,6 +1,7 @@
 # prediction 0.2.9
 
-* Added `prediction.biglm()` and `prediction.bigglm()` method` for "biglm" and "bigglm" objects from **biglm**. (#1)
+* Added `prediction.bigLm()` method for "bigLm" objects from **bigFastlm**. (#1)
+* Added `prediction.biglm()` and `prediction.bigglm()` methods for "biglm" and "bigglm" objects from **biglm**. (#1)
 
 # prediction 0.2.8
 

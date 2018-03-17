@@ -5,6 +5,7 @@ r_packages:
 - covr
 - AER
 - betareg
+- bigFastlm
 - biglm
 - brglm
 - caret

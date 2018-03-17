@@ -25,6 +25,7 @@ Suggests:
 Enhances:
     AER,
     betareg,
+    bigFastlm,
     biglm,
     brglm,
     caret,

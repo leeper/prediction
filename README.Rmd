@@ -58,6 +58,7 @@ The currently supported model classes are:
  - "arima0" from `stats::arima0()`
  - "bigglm" from `biglm::bigglm()`
  - "biglm" from `biglm::biglm()`
+ - "bigLm" from `bigLm::bigLm()`
  - "betareg" from `betareg::betareg()`
  - "clm" from `ordinal::clm()`
  - "coxph" from `survival::coxph()`
