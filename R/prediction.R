@@ -18,6 +18,8 @@
 #'   \item \dQuote{ar}, see \code{\link[stats]{ar}}
 #'   \item \dQuote{Arima}, see \code{\link[stats]{arima}}
 #'   \item \dQuote{arima0}, see \code{\link[stats]{arima0}}
+#'   \item \dQuote{bigglm}, see \code{\link[biglm]{bigglm}}
+#'   \item \dQuote{biglm}, see \code{\link[biglm]{biglm}}
 #'   \item \dQuote{betareg}, see \code{\link[betareg]{betareg}}
 #'   \item \dQuote{clm}, see \code{\link[ordinal]{clm}}
 #'   \item \dQuote{coxph}, see \code{\link[survival]{coxph}}

@@ -29,6 +29,23 @@ if (require("betareg", quietly = TRUE)) {
     })
 }
 
+if (require("biglm", quietly = TRUE)) {
+    test_that("Test prediction() for 'biglm'", {
+        data("trees", package = "datasets")
+        m <- biglm(log(Volume) ~ log(Girth) + log(Height), data=trees)
+        p <- prediction(m, calculate_se = FALSE) # temporary, while bug fixed upstream
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+    test_that("Test prediction() for 'bigglm'", {
+        data("trees", package = "datasets")
+        m <- bigglm(log(Volume) ~ log(Girth) + log(Height), data=trees, chunksize=10)
+        p <- prediction(m, calculate_se = FALSE) # temporary, while bug fixed upstream
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+}
+
 if (require("brglm", quietly = TRUE)) {
     test_that("Test prediction() for 'brglm'", {
         data("lizards", package = "brglm")

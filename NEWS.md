@@ -1,3 +1,7 @@
+# prediction 0.2.9
+
+* Added `prediction.biglm()` and `prediction.bigglm()` method` for "biglm" and "bigglm" objects from **biglm**. (#1)
+
 # prediction 0.2.8
 
 * Changed internal behavior of `build_datalist()`. The function now returns an an `at_specification` attribute, which is a data frame representation of the `at` argument.
