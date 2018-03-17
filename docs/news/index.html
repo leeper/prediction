@@ -90,6 +90,260 @@
     </div>
 
     <div class="contents">
+    <div id="prediction-0-2-8" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-2-8" class="anchor"></a>prediction 0.2.8<small> Unreleased </small>
+</h1>
+<ul>
+<li>Changed internal behavior of <code><a href="../reference/build_datalist.html">build_datalist()</a></code>. The function now returns an an <code>at_specification</code> attribute, which is a data frame representation of the <code>at</code> argument.</li>
+</ul>
+</div>
+    <div id="prediction-0-2-6" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-2-6" class="anchor"></a>prediction 0.2.6<small> Unreleased </small>
+</h1>
+<ul>
+<li>Due to a change in gam_1.15, <code>prediction.gam()</code> is now <code><a href="../reference/prediction.html">prediction.Gam()</a></code> for “Gam” objects from <strong>gam</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+</ul>
+</div>
+    <div id="prediction-0-2-6-1" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-2-6-1" class="anchor"></a>prediction 0.2.6<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added <code><a href="../reference/prediction.html">prediction.train()</a></code> method for “train” objects from <strong>caret</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+</ul>
+</div>
+    <div id="prediction-0-2-5" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-2-5" class="anchor"></a>prediction 0.2.5<small> Unreleased </small>
+</h1>
+<ul>
+<li>The <code>at</code> argument in <code><a href="../reference/build_datalist.html">build_datalist()</a></code> now accepts a data frame of combinations for limiting the set of levels.</li>
+</ul>
+</div>
+    <div id="prediction-0-2-3" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-2-3" class="anchor"></a>prediction 0.2.3<small> Unreleased </small>
+</h1>
+<ul>
+<li>Most <code><a href="../reference/prediction.html">prediction()</a></code> methods gain a (experimental) <code>calculate_se</code> argument, which regulates whether to calculate standard errors for predictions. Setting to <code>FALSE</code> can improve performance if they are not needed.</li>
+</ul>
+</div>
+    <div id="prediction-0-2-3-1" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-2-3-1" class="anchor"></a>prediction 0.2.3<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code><a href="../reference/build_datalist.html">build_datalist()</a></code> gains an <code>as.data.frame</code> argument, which - if <code>TRUE</code> - returns a stacked data frame rather than a list. This argument is now used internally in most <code><a href="../reference/prediction.html">prediction()</a></code> functions in an effort to improve performance. (<a href='https://github.com/leeper/prediction/issues/18'>#18</a>)</li>
+</ul>
+</div>
+    <div id="prediction-0-2-2" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-2-2" class="anchor"></a>prediction 0.2.2<small> Unreleased </small>
+</h1>
+<ul>
+<li>Expanded test suite scope and fixed a few small bugs.</li>
+<li>Added a <code>summary.prediction()</code> method to interact with the average predicted values that are printed when <code>at != NULL</code>.</li>
+</ul>
+</div>
+    <div id="prediction-0-2-1" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-2-1" class="anchor"></a>prediction 0.2.1<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added <code><a href="../reference/prediction.html">prediction.knnreg()</a></code> method for “knnreg” objects from <strong>caret</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.gausspr()</a></code> method for “gausspr” objects from <strong>kernlab</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.ksvm()</a></code> method for “ksvm” objects from <strong>kernlab</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.kqr()</a></code> method for “kqr” objects from <strong>kernlab</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.earth()</a></code> method for “earth” objects from <strong>earth</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.rpart()</a></code> method for “rpart” objects from <strong>rpart</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+</ul>
+</div>
+    <div id="prediction-0-2-0" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-2-0" class="anchor"></a>prediction 0.2.0<small> 2017-04-19 </small>
+</h1>
+<ul>
+<li>CRAN Release.</li>
+<li>Added <code><a href="../reference/mean_or_mode.html">mean_or_mode.data.frame()</a></code> and <code><a href="../reference/mean_or_mode.html">median_or_mode.data.frame()</a></code> methods.</li>
+</ul>
+</div>
+    <div id="prediction-0-1-17" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-17" class="anchor"></a>prediction 0.1.17<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added <code><a href="../reference/prediction.html">prediction.zeroinfl()</a></code> method for “zeroinfl” objects from <strong>pscl</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.hurdle()</a></code> method for “hurdle” objects from <strong>pscl</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.lme()</a></code> method for “lme” and “nlme” objects from <strong>nlme</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Documented <code><a href="../reference/prediction.html">prediction.merMod()</a></code>.</li>
+</ul>
+</div>
+    <div id="prediction-0-1-16" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-16" class="anchor"></a>prediction 0.1.16<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added <code><a href="../reference/prediction.html">prediction.plm()</a></code> method for “plm” objects from <strong>plm</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+</ul>
+</div>
+    <div id="prediction-0-1-15" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-15" class="anchor"></a>prediction 0.1.15<small> Unreleased </small>
+</h1>
+<ul>
+<li>Expanded test suite considerably and updated <code>CONTRIBUTING.md</code> to reflect expected test-driven development.</li>
+<li>A few small code tweaks and bug fixes resulting from the updated test suite.</li>
+</ul>
+</div>
+    <div id="prediction-0-1-14" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-14" class="anchor"></a>prediction 0.1.14<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added <code><a href="../reference/prediction.html">prediction.mnp()</a></code> method for “mnp” objects from <strong>MNP</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.mnlogit()</a></code> method for “mnlogit” objects from <strong>mnlogit</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.gee()</a></code> method for “gee” objects from <strong>gee</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.lqs()</a></code> method for “lqs” objects from <strong>MASS</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.mca()</a></code> method for “mca” objects from <strong>MASS</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Noted (built-in) support for “brglm” objects from <strong>brglm</strong> via the <code><a href="../reference/prediction.html">prediction.glm()</a></code> method. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+</ul>
+</div>
+    <div id="prediction-0-1-13" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-13" class="anchor"></a>prediction 0.1.13<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added a <code>category</code> argument to <code><a href="../reference/prediction.html">prediction()</a></code> methods for models of multilevel outcomes (e.g., ordered probit, etc.) to be dictate which level is expressed as the <code>"fitted"</code> column. (<a href='https://github.com/leeper/prediction/issues/14'>#14</a>)</li>
+<li>Added an <code>at</code> argument to <code><a href="../reference/prediction.html">prediction()</a></code> methods. (<a href='https://github.com/leeper/prediction/issues/13'>#13</a>)</li>
+<li>Made <code><a href="../reference/mean_or_mode.html">mean_or_mode()</a></code> and <code><a href="../reference/mean_or_mode.html">median_or_mode()</a></code> S3 generics.</li>
+<li>Fixed a bug in <code><a href="../reference/mean_or_mode.html">mean_or_mode()</a></code> and <code><a href="../reference/mean_or_mode.html">median_or_mode()</a></code> where incorrect factor levels were being returned.</li>
+</ul>
+</div>
+    <div id="prediction-0-1-12" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-12" class="anchor"></a>prediction 0.1.12<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added <code><a href="../reference/prediction.html">prediction.princomp()</a></code> method for “princomp” objects from <strong>stats</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.ppr()</a></code> method for “ppr” objects from <strong>stats</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code>prediction.naiveBayes()</code> method for “naiveBayes” objects from <strong>e1071</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.rlm()</a></code> method for “rlm” objects from <strong>MASS</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code>prediction.qda()</code> method for “qda” objects from <strong>MASS</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code>prediction.lda()</code> method for “lda” objects from <strong>MASS</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>
+<code><a href="../reference/find_data.html">find_data()</a></code> now respects the <code>subset</code> argument in an original model call. (<a href='https://github.com/leeper/prediction/issues/15'>#15</a>)</li>
+<li>
+<code><a href="../reference/find_data.html">find_data()</a></code> now respects the <code>na.action</code> argument in an original model call. (<a href='https://github.com/leeper/prediction/issues/15'>#15</a>)</li>
+<li>
+<code><a href="../reference/find_data.html">find_data()</a></code> now gracefully fails when a model is specified without a formula. (<a href='https://github.com/leeper/prediction/issues/16'>#16</a>)</li>
+<li>
+<code><a href="../reference/prediction.html">prediction()</a></code> methods no longer add a “fit” or “se.fit” class to any columns. Fitted values are identifiable by the column name only.</li>
+</ul>
+</div>
+    <div id="prediction-0-1-11" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-11" class="anchor"></a>prediction 0.1.11<small> 2017-03-22 </small>
+</h1>
+<ul>
+<li>
+<code><a href="../reference/build_datalist.html">build_datalist()</a></code> now returns <code>at</code> value combinations as a list.</li>
+</ul>
+</div>
+    <div id="prediction-0-1-10" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-10" class="anchor"></a>prediction 0.1.10<small> 2017-03-01 </small>
+</h1>
+<ul>
+<li>Added <code><a href="../reference/prediction.html">prediction.nnet()</a></code> method for “nnet” and “multinom” objects from <strong>nnet</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+</ul>
+</div>
+    <div id="prediction-0-1-9" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-9" class="anchor"></a>prediction 0.1.9<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code><a href="../reference/prediction.html">prediction()</a></code> methods now return the value of <code>data</code> as part of the response data frame. (<a href='https://github.com/leeper/prediction/issues/8'>#8</a>, h/t Ben Whalley)</li>
+<li>Slight change to <code><a href="../reference/find_data.html">find_data()</a></code> methods for <code>"crch"</code> and <code>"hxlr"</code>. (<a href='https://github.com/leeper/prediction/issues/5'>#5</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.glmx()</a></code> and <code><a href="../reference/prediction.html">prediction.hetglm()</a></code> methods for “glmx” and “hetglm” objects from <strong>glmx</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.betareg()</a></code> method for “betareg” objects from <strong>betareg</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction.rq()</a></code> method for “rq” objects from <strong>quantreg</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added <code>prediction.gam()</code> method for “gam” objects from <strong>gam</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Expanded basic test suite.</li>
+</ul>
+</div>
+    <div id="prediction-0-1-8" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-8" class="anchor"></a>prediction 0.1.8<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added <code><a href="../reference/prediction.html">prediction()</a></code> and <code><a href="../reference/find_data.html">find_data()</a></code> methods for <code>"crch"</code> <code>"hxlr"</code> objects from <strong>crch</strong>. (<a href='https://github.com/leeper/prediction/issues/4'>#4</a>, h/t Carl Ganz)</li>
+</ul>
+</div>
+    <div id="prediction-0-1-7" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-7" class="anchor"></a>prediction 0.1.7<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added <code><a href="../reference/prediction.html">prediction()</a></code> and <code><a href="../reference/find_data.html">find_data()</a></code> methods for <code>"merMod"</code> objects from <strong>lme4</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+</ul>
+</div>
+    <div id="prediction-0-1-6" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-6" class="anchor"></a>prediction 0.1.6<small> Unreleased </small>
+</h1>
+<ul>
+<li>Moved the <code><a href="../reference/seq_range.html">seq_range()</a></code> function from <strong>margins</strong> to <strong>prediction</strong>.</li>
+<li>Moved the <code><a href="../reference/build_datalist.html">build_datalist()</a></code> function from <strong>margins</strong> to <strong>prediction</strong>. This will simplify the ability to calculate arbitrary predictions.</li>
+</ul>
+</div>
+    <div id="prediction-0-1-5" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-5" class="anchor"></a>prediction 0.1.5<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added <code><a href="../reference/prediction.html">prediction.svm()</a></code> method for objects of class <code>"svm"</code> from <strong>e1071</strong>. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Fixed a bug in <code><a href="../reference/prediction.html">prediction.polr()</a></code> when attempting to pass a <code>type</code> argument, which is always ignored. A warning is now issued when attempting to override this.</li>
+</ul>
+</div>
+    <div id="prediction-0-1-4" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-4" class="anchor"></a>prediction 0.1.4<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added <code><a href="../reference/mean_or_mode.html">mean_or_mode()</a></code> and <code><a href="../reference/mean_or_mode.html">median_or_mode()</a></code> functions, which provide a simple way to aggregate a variable of factor or numeric type. (<a href='https://github.com/leeper/prediction/issues/3'>#3</a>)</li>
+<li>Added <code><a href="../reference/prediction.html">prediction()</a></code> methods for various time-series model classes: “ar”, “arima0”, and “Arima”.</li>
+</ul>
+</div>
+    <div id="prediction-0-1-3" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-3" class="anchor"></a>prediction 0.1.3<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code><a href="../reference/find_data.html">find_data()</a></code> is now a generic, methods for “lm”, “glm”, and “svyglm” classes. (<a href='https://github.com/leeper/prediction/issues/2'>#2</a>, h/t Carl Ganz)</li>
+</ul>
+</div>
+    <div id="prediction-0-1-2" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-2" class="anchor"></a>prediction 0.1.2<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added support for “svyglm” class from the <strong>survey</strong> package. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+<li>Added tentative support for “clm” class from the <strong>ordinal</strong> package. (<a href='https://github.com/leeper/prediction/issues/1'>#1</a>)</li>
+</ul>
+</div>
+    <div id="prediction-0-1-0" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-1-0" class="anchor"></a>prediction 0.1.0<small> Unreleased </small>
+</h1>
+<ul>
+<li>Initial package released.</li>
+</ul>
+</div>
     </div>
   </div>
 
@@ -97,6 +351,32 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#prediction-0-2-8">0.2.8</a></li>
+        <li><a href="#prediction-0-2-6">0.2.6</a></li>
+        <li><a href="#prediction-0-2-6-1">0.2.6</a></li>
+        <li><a href="#prediction-0-2-5">0.2.5</a></li>
+        <li><a href="#prediction-0-2-3">0.2.3</a></li>
+        <li><a href="#prediction-0-2-3-1">0.2.3</a></li>
+        <li><a href="#prediction-0-2-2">0.2.2</a></li>
+        <li><a href="#prediction-0-2-1">0.2.1</a></li>
+        <li><a href="#prediction-0-2-0">0.2.0</a></li>
+        <li><a href="#prediction-0-1-17">0.1.17</a></li>
+        <li><a href="#prediction-0-1-16">0.1.16</a></li>
+        <li><a href="#prediction-0-1-15">0.1.15</a></li>
+        <li><a href="#prediction-0-1-14">0.1.14</a></li>
+        <li><a href="#prediction-0-1-13">0.1.13</a></li>
+        <li><a href="#prediction-0-1-12">0.1.12</a></li>
+        <li><a href="#prediction-0-1-11">0.1.11</a></li>
+        <li><a href="#prediction-0-1-10">0.1.10</a></li>
+        <li><a href="#prediction-0-1-9">0.1.9</a></li>
+        <li><a href="#prediction-0-1-8">0.1.8</a></li>
+        <li><a href="#prediction-0-1-7">0.1.7</a></li>
+        <li><a href="#prediction-0-1-6">0.1.6</a></li>
+        <li><a href="#prediction-0-1-5">0.1.5</a></li>
+        <li><a href="#prediction-0-1-4">0.1.4</a></li>
+        <li><a href="#prediction-0-1-3">0.1.3</a></li>
+        <li><a href="#prediction-0-1-2">0.1.2</a></li>
+        <li><a href="#prediction-0-1-0">0.1.0</a></li>
       </ul>
     </div>
   </div>
