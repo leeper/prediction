@@ -14,8 +14,9 @@
 %   R/prediction_nls.R, R/prediction_nnet.R, R/prediction_plm.R,
 %   R/prediction_polr.R, R/prediction_ppr.R, R/prediction_princomp.R,
 %   R/prediction_rlm.R, R/prediction_rpart.R, R/prediction_rq.R,
-%   R/prediction_selection.R, R/prediction_survreg.R, R/prediction_svm.R,
-%   R/prediction_svyglm.R, R/prediction_train.R, R/prediction_zeroinfl.R
+%   R/prediction_selection.R, R/prediction_speedglm.R, R/prediction_speedlm.R,
+%   R/prediction_survreg.R, R/prediction_svm.R, R/prediction_svyglm.R,
+%   R/prediction_train.R, R/prediction_zeroinfl.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -64,6 +65,8 @@
 \alias{prediction.rpart}
 \alias{prediction.rq}
 \alias{prediction.selection}
+\alias{prediction.glm}
+\alias{prediction.speedlm}
 \alias{prediction.survreg}
 \alias{prediction.svm}
 \alias{prediction.svyglm}
@@ -119,7 +122,7 @@ prediction(model, ...)
 \method{prediction}{gee}(model, calculate_se = FALSE, ...)
 
 \method{prediction}{glm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link"), calculate_se = TRUE, ...)
+  at = NULL, type = c("response", "link"), calculate_se = FALSE, ...)
 
 \method{prediction}{glmx}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link"), calculate_se = FALSE, ...)
@@ -210,6 +213,12 @@ prediction(model, ...)
 \method{prediction}{selection}(model, data = find_data(model, parent.frame()),
   at = NULL, type = "response", calculate_se = FALSE, ...)
 
+\method{prediction}{glm}(model, data = find_data(model, parent.frame()),
+  at = NULL, type = c("response", "link"), calculate_se = FALSE, ...)
+
+\method{prediction}{speedlm}(model, data = find_data(model, parent.frame()),
+  at = NULL, calculate_se = FALSE, ...)
+
 \method{prediction}{survreg}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "lp", "quantile", "uquantile"),
   calculate_se = TRUE, ...)
@@ -298,6 +307,8 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{rpart}, see \code{\link[rpart]{rpart}}
   \item \dQuote{rq}, see \code{\link[quantreg]{rq}}
   \item \dQuote{selection}, see \code{\link[sampleSelection]{selection}}
+  \item \dQuote{speedglm}, see \code{\link[speedglm]{speedglm}}
+  \item \dQuote{speedlm}, see \code{\link[speedglm]{speedlm}}
   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}
   \item \dQuote{svm}, see \code{\link[e1071]{svm}}
   \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}

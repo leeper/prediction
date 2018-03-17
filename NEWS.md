@@ -1,5 +1,6 @@
 # prediction 0.2.9
 
+* Added `prediction.speedglm()` and `prediction.speedlm()` methods for "speedglm" and "speedlm" objects from **speedglm**. (#1)
 * Added `prediction.bigLm()` method for "bigLm" objects from **bigFastlm**. (#1)
 * Added `prediction.biglm()` and `prediction.bigglm()` methods for "biglm" and "bigglm" objects from **biglm**, including those based by `"ffdf"` from **ff**. (#1)
 

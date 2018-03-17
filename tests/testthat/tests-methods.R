@@ -434,6 +434,33 @@ if (require("sampleSelection", quietly = TRUE)) {
     })
 }
 
+if (require("speedglm", quietly = TRUE) ) {
+    test_that("Test prediction() for 'speedglm()'", {
+        n <- 1000
+        k <- 3
+        y <- rnorm(n)
+        x <- round(matrix(rnorm(n * k), n, k), digits = 3)
+        colnames(x) <- c("s1", "s2", "s3")
+        da <- data.frame(y, x)
+        m <- speedglm(y ~ s1 + s2 + s3, data = da)
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+    test_that("Test prediction() for 'speedlm()'", {
+        n <- 1000
+        k <- 3
+        y <- rnorm(n)
+        x <- round(matrix(rnorm(n * k), n, k), digits = 3)
+        colnames(x) <- c("s1", "s2", "s3")
+        da <- data.frame(y, x)
+        m <- speedlm(y ~ s1 + s2 + s3, data = da)
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+}
+
 if (require("stats", quietly = TRUE)) {
     test_that("Test prediction() for 'ar'", {
         data("sunspot.year", package = "datasets")

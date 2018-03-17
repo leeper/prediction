@@ -96,6 +96,8 @@ The currently supported model classes are:
  - "rpart" from `rpart::rpart()`
  - "rq" from `quantreg::rq()`
  - "selection" from `sampleSelection::selection()`
+ - "speedglm" from `speedglm::speedglm()`
+ - "speedlm" from `speedglm::speedlm()`
  - "survreg" from `survival::survreg()`
  - "svm" from `e1071::svm()`
  - "svyglm" from `survey::svyglm()`

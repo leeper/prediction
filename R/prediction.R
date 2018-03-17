@@ -58,6 +58,8 @@
 #'   \item \dQuote{rpart}, see \code{\link[rpart]{rpart}}
 #'   \item \dQuote{rq}, see \code{\link[quantreg]{rq}}
 #'   \item \dQuote{selection}, see \code{\link[sampleSelection]{selection}}
+#'   \item \dQuote{speedglm}, see \code{\link[speedglm]{speedglm}}
+#'   \item \dQuote{speedlm}, see \code{\link[speedglm]{speedlm}}
 #'   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}
 #'   \item \dQuote{svm}, see \code{\link[e1071]{svm}}
 #'   \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}

@@ -1,8 +1,9 @@
 #' @rdname prediction
 #' @export
-prediction.bigLm <- 
+prediction.speedlm <- 
 function(model, 
-         data = NULL,
+         data = find_data(model, parent.frame()), 
+         at = NULL, 
          calculate_se = FALSE,
          ...) {
     
@@ -13,8 +14,8 @@ function(model,
         pred <- make_data_frame(fitted = pred, se.fitted = rep(NA_real_, length(pred)))
     } else {
         # setup data
-        #data <- build_datalist(data, at = at, as.data.frame = TRUE)
-        #at_specification <- attr(data, "at_specification")
+        data <- build_datalist(data, at = at, as.data.frame = TRUE)
+        at_specification <- attr(data, "at_specification")
         # calculate predictions
         tmp <- predict(model, newdata = data, ...)
         # cbind back together
@@ -25,7 +26,7 @@ function(model,
     structure(pred, 
               class = c("prediction", "data.frame"),
               row.names = seq_len(nrow(pred)),
-              at = NULL,
+              at = if (is.null(at)) at else at_specification,
               model.class = class(model),
               type = "response")
 }

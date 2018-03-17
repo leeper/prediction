@@ -32,6 +32,7 @@ r_packages:
 - quantreg
 - rpart
 - sampleSelection
+- speedglm
 - survey
 - survival
 - VGAM
