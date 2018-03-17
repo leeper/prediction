@@ -32,6 +32,8 @@ Enhances:
     crch,
     e1071,
     earth,
+    ff,
+    ffbase,
     gam (>= 1.15),
     gee,
     glmx,

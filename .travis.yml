@@ -12,6 +12,8 @@ r_packages:
 - crch
 - e1071
 - earth
+- ff
+- ffbase
 - gam
 - gee
 - glmx

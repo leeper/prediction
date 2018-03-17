@@ -258,8 +258,8 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{ar}, see \code{\link[stats]{ar}}
   \item \dQuote{Arima}, see \code{\link[stats]{arima}}
   \item \dQuote{arima0}, see \code{\link[stats]{arima0}}
-  \item \dQuote{bigglm}, see \code{\link[biglm]{bigglm}}
-  \item \dQuote{biglm}, see \code{\link[biglm]{biglm}}
+  \item \dQuote{bigglm}, see \code{\link[biglm]{bigglm}} (including \dQuote{ffdf}-backed models provided by \code{\link[ffbase]{bigglm.ffdf}})
+  \item \dQuote{biglm}, see \code{\link[biglm]{biglm}} (including \dQuote{ffdf}-backed models provided by \code{\link[ffbase]{bigglm.ffdf}})
   \item \dQuote{bigLm}, see \code{\link[bigFastlm]{bigLm}}
   \item \dQuote{betareg}, see \code{\link[betareg]{betareg}}
   \item \dQuote{clm}, see \code{\link[ordinal]{clm}}

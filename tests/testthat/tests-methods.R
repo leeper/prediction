@@ -149,6 +149,19 @@ if (require("earth", quietly = TRUE)) {
     })
 }
 
+if (require("ffbase", quietly = TRUE)) {
+    test_that("Test prediction() for 'biglm'", {
+        stopifnot(require("ff"))
+        stopifnot(require("biglm"))
+        data("trees", package = "datasets")
+        x <- ff::as.ffdf(trees)
+        m <- biglm::bigglm(log(Volume)~log(Girth)+log(Height), data=x, chunksize=10, sandwich=TRUE)
+        p <- prediction(m, calculate_se = FALSE) # temporary, while bug fixed upstream
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+}
+
 if (require("gam", quietly = TRUE)) {
     test_that("Test prediction() for 'Gam'", {
         data("gam.data", package = "gam")
