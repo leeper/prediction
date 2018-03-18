@@ -2,21 +2,22 @@
 % Please edit documentation in R/prediction.R, R/prediction_Arima.R,
 %   R/prediction_Gam.R, R/prediction_ar.R, R/prediction_arima0.R,
 %   R/prediction_betareg.R, R/prediction_bigFastlm.R, R/prediction_bigglm.R,
-%   R/prediction_biglm.R, R/prediction_clm.R, R/prediction_coxph.R,
-%   R/prediction_crch.R, R/prediction_earth.R, R/prediction_gausspr.R,
-%   R/prediction_gee.R, R/prediction_glm.R, R/prediction_glmx.R,
-%   R/prediction_gls.R, R/prediction_hetglm.R, R/prediction_hurdle.R,
-%   R/prediction_hxlr.R, R/prediction_ivreg.R, R/prediction_knnreg.R,
-%   R/prediction_kqr.R, R/prediction_ksvm.R, R/prediction_lm.R,
-%   R/prediction_lme.R, R/prediction_loess.R, R/prediction_lqs.R,
+%   R/prediction_biglm.R, R/prediction_bruto.R, R/prediction_clm.R,
+%   R/prediction_coxph.R, R/prediction_crch.R, R/prediction_earth.R,
+%   R/prediction_fda.R, R/prediction_gausspr.R, R/prediction_gee.R,
+%   R/prediction_glm.R, R/prediction_glmx.R, R/prediction_gls.R,
+%   R/prediction_hetglm.R, R/prediction_hurdle.R, R/prediction_hxlr.R,
+%   R/prediction_ivreg.R, R/prediction_knnreg.R, R/prediction_kqr.R,
+%   R/prediction_ksvm.R, R/prediction_lm.R, R/prediction_lme.R,
+%   R/prediction_loess.R, R/prediction_lqs.R, R/prediction_mars.R,
 %   R/prediction_mca.R, R/prediction_mclogit.R, R/prediction_merMod.R,
 %   R/prediction_mnlogit.R, R/prediction_mnp.R, R/prediction_multinom.R,
 %   R/prediction_nls.R, R/prediction_nnet.R, R/prediction_plm.R,
-%   R/prediction_polr.R, R/prediction_ppr.R, R/prediction_princomp.R,
-%   R/prediction_rlm.R, R/prediction_rpart.R, R/prediction_rq.R,
-%   R/prediction_selection.R, R/prediction_speedglm.R, R/prediction_speedlm.R,
-%   R/prediction_survreg.R, R/prediction_svm.R, R/prediction_svyglm.R,
-%   R/prediction_train.R, R/prediction_zeroinfl.R
+%   R/prediction_polr.R, R/prediction_polyreg.R, R/prediction_ppr.R,
+%   R/prediction_princomp.R, R/prediction_rlm.R, R/prediction_rpart.R,
+%   R/prediction_rq.R, R/prediction_selection.R, R/prediction_speedglm.R,
+%   R/prediction_speedlm.R, R/prediction_survreg.R, R/prediction_svm.R,
+%   R/prediction_svyglm.R, R/prediction_train.R, R/prediction_zeroinfl.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -29,10 +30,12 @@
 \alias{prediction.bigLm}
 \alias{prediction.bigglm}
 \alias{prediction.biglm}
+\alias{prediction.bruto}
 \alias{prediction.clm}
 \alias{prediction.coxph}
 \alias{prediction.crch}
 \alias{prediction.earth}
+\alias{prediction.fda}
 \alias{prediction.gausspr}
 \alias{prediction.gee}
 \alias{prediction.glm}
@@ -49,6 +52,7 @@
 \alias{prediction.lme}
 \alias{prediction.loess}
 \alias{prediction.lqs}
+\alias{prediction.mars}
 \alias{prediction.mca}
 \alias{prediction.mclogit}
 \alias{prediction.merMod}
@@ -59,6 +63,7 @@
 \alias{prediction.nnet}
 \alias{prediction.plm}
 \alias{prediction.polr}
+\alias{prediction.polyreg}
 \alias{prediction.ppr}
 \alias{prediction.princomp}
 \alias{prediction.rlm}
@@ -102,6 +107,9 @@ prediction(model, ...)
 \method{prediction}{biglm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = "response", calculate_se = TRUE, ...)
 
+\method{prediction}{bruto}(model, data = NULL, at = NULL, type = "fitted",
+  calculate_se = FALSE, ...)
+
 \method{prediction}{clm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = NULL, calculate_se = TRUE, category, ...)
 
@@ -115,6 +123,9 @@ prediction(model, ...)
 \method{prediction}{earth}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link"), calculate_se = TRUE, category,
   ...)
+
+\method{prediction}{fda}(model, data = find_data(model, parent.frame()),
+  at = NULL, type = NULL, calculate_se = FALSE, category, ...)
 
 \method{prediction}{gausspr}(model, data, at = NULL, type = NULL,
   calculate_se = TRUE, category, ...)
@@ -165,6 +176,9 @@ prediction(model, ...)
 \method{prediction}{lqs}(model, data = find_data(model), at = NULL,
   calculate_se = FALSE, ...)
 
+\method{prediction}{mars}(model, data = NULL, at = NULL, type = "fitted",
+  calculate_se = FALSE, ...)
+
 \method{prediction}{mca}(model, data = find_data(model), at = NULL,
   calculate_se = FALSE, ...)
 
@@ -194,6 +208,9 @@ prediction(model, ...)
 
 \method{prediction}{polr}(model, data = find_data(model, parent.frame()),
   at = NULL, type = NULL, calculate_se = FALSE, category, ...)
+
+\method{prediction}{polyreg}(model, data = NULL, at = NULL,
+  type = "fitted", calculate_se = FALSE, ...)
 
 \method{prediction}{ppr}(model, data = find_data(model, parent.frame()),
   at = NULL, calculate_se = FALSE, ...)
@@ -271,10 +288,12 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{biglm}, see \code{\link[biglm]{biglm}} (including \dQuote{ffdf}-backed models provided by \code{\link[ffbase]{bigglm.ffdf}})
   \item \dQuote{bigLm}, see \code{\link[bigFastlm]{bigLm}}
   \item \dQuote{betareg}, see \code{\link[betareg]{betareg}}
+  \item \dQuote{bruto}, see \code{\link[mda]{bruto}}
   \item \dQuote{clm}, see \code{\link[ordinal]{clm}}
   \item \dQuote{coxph}, see \code{\link[survival]{coxph}}
   \item \dQuote{crch}, see \code{\link[crch]{crch}}
   \item \dQuote{earth}, see \code{\link[earth]{earth}}
+  \item \dQuote{fda}, see \code{\link[mda]{fda}}
   \item \dQuote{Gam}, see \code{\link[gam]{gam}}
   \item \dQuote{gausspr}, see \code{\link[kernlab]{gausspr}}
   \item \dQuote{gee}, see \code{\link[gee]{gee}}
@@ -289,8 +308,10 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{lme}, see \code{\link[nlme]{lme}}
   \item \dQuote{loess}, see \code{\link[stats]{loess}}
   \item \dQuote{lqs}, see \code{\link[MASS]{lqs}}
+  \item \dQuote{mars}, see \code{\link[mda]{mars}}
   \item \dQuote{mca}, see \code{\link[MASS]{mca}}
   \item \dQuote{mclogit}, see \code{\link[mclogit]{mclogit}}
+  \item \dQuote{mda}, see \code{\link[mda]{mda}}
   \item \dQuote{merMod}, see \code{\link[lme4]{lmer}}, \code{\link[lme4]{glmer}}
   \item \dQuote{mnlogit}, see \code{\link[mnlogit]{mnlogit}}
   \item \dQuote{mnp}, see \code{\link[MNP]{mnp}}
@@ -300,6 +321,7 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{nnet}, see \code{\link[nnet]{nnet}}
   \item \dQuote{plm}, see \code{\link[plm]{plm}}
   \item \dQuote{polr}, see \code{\link[MASS]{polr}}
+  \item \dQuote{polyreg}, see \code{\link[mda]{polyreg}}
   \item \dQuote{ppr}, see \code{\link[stats]{ppr}}
   \item \dQuote{princomp}, see \code{\link[stats]{princomp}}
   \item \dQuote{qda}, see \code{\link[MASS]{qda}}

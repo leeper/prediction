@@ -22,10 +22,12 @@
 #'   \item \dQuote{biglm}, see \code{\link[biglm]{biglm}} (including \dQuote{ffdf}-backed models provided by \code{\link[ffbase]{bigglm.ffdf}})
 #'   \item \dQuote{bigLm}, see \code{\link[bigFastlm]{bigLm}}
 #'   \item \dQuote{betareg}, see \code{\link[betareg]{betareg}}
+#'   \item \dQuote{bruto}, see \code{\link[mda]{bruto}}
 #'   \item \dQuote{clm}, see \code{\link[ordinal]{clm}}
 #'   \item \dQuote{coxph}, see \code{\link[survival]{coxph}}
 #'   \item \dQuote{crch}, see \code{\link[crch]{crch}}
 #'   \item \dQuote{earth}, see \code{\link[earth]{earth}}
+#'   \item \dQuote{fda}, see \code{\link[mda]{fda}}
 #'   \item \dQuote{Gam}, see \code{\link[gam]{gam}}
 #'   \item \dQuote{gausspr}, see \code{\link[kernlab]{gausspr}}
 #'   \item \dQuote{gee}, see \code{\link[gee]{gee}}
@@ -40,8 +42,10 @@
 #'   \item \dQuote{lme}, see \code{\link[nlme]{lme}}
 #'   \item \dQuote{loess}, see \code{\link[stats]{loess}}
 #'   \item \dQuote{lqs}, see \code{\link[MASS]{lqs}}
+#'   \item \dQuote{mars}, see \code{\link[mda]{mars}}
 #'   \item \dQuote{mca}, see \code{\link[MASS]{mca}}
 #'   \item \dQuote{mclogit}, see \code{\link[mclogit]{mclogit}}
+#'   \item \dQuote{mda}, see \code{\link[mda]{mda}}
 #'   \item \dQuote{merMod}, see \code{\link[lme4]{lmer}}, \code{\link[lme4]{glmer}}
 #'   \item \dQuote{mnlogit}, see \code{\link[mnlogit]{mnlogit}}
 #'   \item \dQuote{mnp}, see \code{\link[MNP]{mnp}}
@@ -51,6 +55,7 @@
 #'   \item \dQuote{nnet}, see \code{\link[nnet]{nnet}}
 #'   \item \dQuote{plm}, see \code{\link[plm]{plm}}
 #'   \item \dQuote{polr}, see \code{\link[MASS]{polr}}
+#'   \item \dQuote{polyreg}, see \code{\link[mda]{polyreg}}
 #'   \item \dQuote{ppr}, see \code{\link[stats]{ppr}}
 #'   \item \dQuote{princomp}, see \code{\link[stats]{princomp}}
 #'   \item \dQuote{qda}, see \code{\link[MASS]{qda}}

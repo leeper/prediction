@@ -315,6 +315,44 @@ if (require("mclogit", quietly = TRUE)) {
     })
 }
 
+if (require("mda", quietly = TRUE)) {
+    test_that("Test prediction() for 'bruto'", {
+        data("trees", package = "datasets")
+        m <- bruto(trees[,-3], trees[3])
+        p <- prediction(m, data = NULL)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+    test_that("Test prediction() for 'fda'", {
+        data("iris", package = "datasets")
+        m <- fda(Species ~ ., data = iris)
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted", "fitted.class") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+    test_that("Test prediction() for 'mars'", {
+        data("trees", package = "datasets")
+        m <- mars(trees[,-3], trees[3])
+        p <- prediction(m, data = NULL)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+    test_that("Test prediction() for 'mda'", {
+        data("glass", package = "mda")
+        m <- mda(Type ~ ., data = glass)
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+    test_that("Test prediction() for 'polyreg'", {
+        data("iris", package = "datasets")
+        m <- polyreg(iris[,2:3], iris$Sepal.Length)
+        p <- prediction(m, data = NULL)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+}
+
 if (require("mnlogit", quietly = TRUE)) {
     test_that("Test prediction() for 'mnlogit'", {
         data("Fish", package = "mnlogit")

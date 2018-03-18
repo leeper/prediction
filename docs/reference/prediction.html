@@ -88,7 +88,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Extract Predictions from a Model Object</h1>
-    <small>Source: <a href='https:/github.com/leeper/prediction/blob/master/R/prediction.R'><code>R/prediction.R</code></a>, <a href='https:/github.com/leeper/prediction/blob/master/R/prediction_Arima.R'><code>R/prediction_Arima.R</code></a>, <a href='https:/github.com/leeper/prediction/blob/master/R/prediction_Gam.R'><code>R/prediction_Gam.R</code></a>, and 50 more</small>
+    <small>Source: <a href='https:/github.com/leeper/prediction/blob/master/R/prediction.R'><code>R/prediction.R</code></a>, <a href='https:/github.com/leeper/prediction/blob/master/R/prediction_Arima.R'><code>R/prediction_Arima.R</code></a>, <a href='https:/github.com/leeper/prediction/blob/master/R/prediction_Gam.R'><code>R/prediction_Gam.R</code></a>, and 54 more</small>
     </div>
 
     
@@ -132,6 +132,10 @@
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
   <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"response"</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
+<span class='co'># S3 method for bruto</span>
+<span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"fitted"</span>,
+  <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
 <span class='co'># S3 method for clm</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
   <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>category</span>, <span class='no'>...</span>)
@@ -149,6 +153,10 @@
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
   <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"link"</span>), <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>category</span>,
   <span class='no'>...</span>)
+
+<span class='co'># S3 method for fda</span>
+<span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
+  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>category</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for gausspr</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='no'>data</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -215,6 +223,10 @@
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>), <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
+<span class='co'># S3 method for mars</span>
+<span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"fitted"</span>,
+  <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
 <span class='co'># S3 method for mca</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>), <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
@@ -254,6 +266,10 @@
 <span class='co'># S3 method for polr</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
   <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>category</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for polyreg</span>
+<span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"fitted"</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for ppr</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
@@ -359,10 +375,12 @@
 <li><p>&#8220;biglm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/biglm/topics/biglm'>biglm</a></code> (including &#8220;ffdf&#8221;-backed models provided by <code><a href='http://www.rdocumentation.org/packages/ffbase/topics/bigglm.ffdf'>bigglm.ffdf</a></code>)</p></li>
 <li><p>&#8220;bigLm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/bigFastlm/topics/bigLm'>bigLm</a></code></p></li>
 <li><p>&#8220;betareg&#8221;, see <code><a href='http://www.rdocumentation.org/packages/betareg/topics/betareg'>betareg</a></code></p></li>
+<li><p>&#8220;bruto&#8221;, see <code><a href='http://www.rdocumentation.org/packages/mda/topics/bruto'>bruto</a></code></p></li>
 <li><p>&#8220;clm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/ordinal/topics/clm'>clm</a></code></p></li>
 <li><p>&#8220;coxph&#8221;, see <code><a href='http://www.rdocumentation.org/packages/survival/topics/coxph'>coxph</a></code></p></li>
 <li><p>&#8220;crch&#8221;, see <code>crch</code></p></li>
 <li><p>&#8220;earth&#8221;, see <code>earth</code></p></li>
+<li><p>&#8220;fda&#8221;, see <code><a href='http://www.rdocumentation.org/packages/mda/topics/fda'>fda</a></code></p></li>
 <li><p>&#8220;Gam&#8221;, see <code>gam</code></p></li>
 <li><p>&#8220;gausspr&#8221;, see <code><a href='http://www.rdocumentation.org/packages/kernlab/topics/gausspr'>gausspr</a></code></p></li>
 <li><p>&#8220;gee&#8221;, see <code>gee</code></p></li>
@@ -377,8 +395,10 @@
 <li><p>&#8220;lme&#8221;, see <code><a href='http://www.rdocumentation.org/packages/nlme/topics/lme'>lme</a></code></p></li>
 <li><p>&#8220;loess&#8221;, see <code><a href='http://www.rdocumentation.org/packages/stats/topics/loess'>loess</a></code></p></li>
 <li><p>&#8220;lqs&#8221;, see <code><a href='http://www.rdocumentation.org/packages/MASS/topics/lqs'>lqs</a></code></p></li>
+<li><p>&#8220;mars&#8221;, see <code><a href='http://www.rdocumentation.org/packages/mda/topics/mars'>mars</a></code></p></li>
 <li><p>&#8220;mca&#8221;, see <code><a href='http://www.rdocumentation.org/packages/MASS/topics/mca'>mca</a></code></p></li>
 <li><p>&#8220;mclogit&#8221;, see <code>mclogit</code></p></li>
+<li><p>&#8220;mda&#8221;, see <code><a href='http://www.rdocumentation.org/packages/mda/topics/mda'>mda</a></code></p></li>
 <li><p>&#8220;merMod&#8221;, see <code><a href='http://www.rdocumentation.org/packages/lme4/topics/lmer'>lmer</a></code>, <code><a href='http://www.rdocumentation.org/packages/lme4/topics/glmer'>glmer</a></code></p></li>
 <li><p>&#8220;mnlogit&#8221;, see <code>mnlogit</code></p></li>
 <li><p>&#8220;mnp&#8221;, see <code>mnp</code></p></li>
@@ -388,6 +408,7 @@
 <li><p>&#8220;nnet&#8221;, see <code><a href='http://www.rdocumentation.org/packages/nnet/topics/nnet'>nnet</a></code></p></li>
 <li><p>&#8220;plm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/plm/topics/plm'>plm</a></code></p></li>
 <li><p>&#8220;polr&#8221;, see <code><a href='http://www.rdocumentation.org/packages/MASS/topics/polr'>polr</a></code></p></li>
+<li><p>&#8220;polyreg&#8221;, see <code><a href='http://www.rdocumentation.org/packages/mda/topics/polyreg'>polyreg</a></code></p></li>
 <li><p>&#8220;ppr&#8221;, see <code><a href='http://www.rdocumentation.org/packages/stats/topics/ppr'>ppr</a></code></p></li>
 <li><p>&#8220;princomp&#8221;, see <code><a href='http://www.rdocumentation.org/packages/stats/topics/princomp'>princomp</a></code></p></li>
 <li><p>&#8220;qda&#8221;, see <code><a href='http://www.rdocumentation.org/packages/MASS/topics/qda'>qda</a></code></p></li>

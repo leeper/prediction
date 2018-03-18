@@ -60,10 +60,12 @@ The currently supported model classes are:
  - "biglm" from `biglm::biglm()` (including `"ffdf"` backed models)
  - "bigLm" from `bigLm::bigLm()`
  - "betareg" from `betareg::betareg()`
+ - "bruto" from `mda::bruto()`
  - "clm" from `ordinal::clm()`
  - "coxph" from `survival::coxph()`
  - "crch" from `crch::crch()`
  - "earth" from `earth::earth()`
+ - "fda" from `mda::fda()`
  - "Gam" from `gam::gam()`
  - "gausspr" from `kernlab::gausspr()`
  - "gee" from `gee::gee()`
@@ -78,8 +80,10 @@ The currently supported model classes are:
  - "lme" from `nlme::lme()`
  - "loess" from `stats::loess()`
  - "lqs" from `MASS::lqs()`
+ - "mars" from `mda::mars()`
  - "mca" from `MASS::mca()`
  - "mclogit" from `mclogit::mclogit()`
+ - "mda" from `mda::mda()`
  - "merMod" from `lme4::lmer()` and `lme4::glmer()`
  - "mnlogit" from `mnlogit::mnlogit()`
  - "mnp" from `MNP::mnp()`

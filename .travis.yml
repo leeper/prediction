@@ -21,6 +21,7 @@ r_packages:
 - lme4
 - MASS
 - mclogit
+- mda
 - mlogit
 - mnlogit
 - MNP
