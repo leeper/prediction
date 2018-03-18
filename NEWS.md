@@ -1,4 +1,4 @@
-# prediction 0.2.9
+# prediction 0.2.10
 
 * Added `prediction.bruto()`method for "bruto" objects from **mda**. (#1)
 * Added `prediction.fda()`method for "fda" objects from **mda**. (#1)
