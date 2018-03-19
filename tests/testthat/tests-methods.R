@@ -135,16 +135,13 @@ if (require("crch", quietly = TRUE)) {
         expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
         expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
-#    test_that("Test prediction() for 'hxlr'", {
-#        e <- new.env()
-#        data("RainIbk", package = "crch", envir = e)
-#        RainIbk <- e$RainIbk
-#        RainIbk$sqrtensmean <- 
-#          apply(sqrt(RainIbk[,grep('^rainfc',names(RainIbk))]), 1, mean)
-#        q <- unique(quantile(RainIbk$rain, seq(0.1, 0.9, 0.1)))
-#        m <- crch::hxlr(sqrt(rain) ~ sqrtensmean, data = RainIbk, thresholds = sqrt(q))
-#        expect_true(inherits(prediction(m, data = RainIbk), "prediction"))
-#    })
+    test_that("Test prediction() for 'hxlr'", {
+        data("RainIbk", package = "crch")
+        RainIbk$sqrtensmean <- apply(sqrt(RainIbk[,grep('^rainfc',names(RainIbk))]), 1, mean)
+        q <- unique(quantile(RainIbk$rain, seq(0.1, 0.9, 0.1)))
+        m <- crch::hxlr(sqrt(rain) ~ sqrtensmean, data = RainIbk, thresholds = sqrt(q))
+        expect_true(inherits(prediction(m, data = RainIbk), "prediction"))
+    })
 }
 
 if (require("e1071", quietly = TRUE)) {
@@ -470,9 +467,15 @@ if (require("pscl", quietly = TRUE)) {
     #})
 }
 
-#if (require("quantreg", quietly = TRUE)) {
-#    test_that("Test prediction() for 'rq'", {})
-#}
+if (require("quantreg", quietly = TRUE)) {
+    test_that("Test prediction() for 'rq'", {
+        data("stackloss", package = "datasets")
+        m <- quantreg::rq(stack.loss ~ stack.x, tau = .5, data = stackloss)
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+}
 
 if (require("rpart", quietly = TRUE)) {
     test_that("Test prediction() for 'rpart'", {
