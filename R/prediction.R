@@ -70,6 +70,7 @@
 #'   \item \dQuote{survreg}, see \code{\link[survival]{survreg}}
 #'   \item \dQuote{svm}, see \code{\link[e1071]{svm}}
 #'   \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}
+#'   \item \dQuote{tobit}, see \code{\link[AER]{tobit}}
 #'   \item \dQuote{train}, see \code{\link[caret]{train}}
 #'   \item \dQuote{zeroinfl}, see \code{\link[pscl]{zeroinfl}}
 #' }
