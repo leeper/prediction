@@ -16,8 +16,8 @@ URL: https://github.com/leeper/prediction
 BugReports: https://github.com/leeper/prediction/issues
 Imports:
     utils,
-    data.table,
-    stats
+    stats,
+    data.table
 Suggests:
     datasets,
     methods,

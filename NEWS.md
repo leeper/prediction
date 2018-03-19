@@ -1,4 +1,4 @@
-# prediction 0.2.10
+# prediction 0.2.11
 
 * Added `prediction.glmML()` method for "glimML" objects from **aod**. (#1)
 * Added `prediction.glmQL()` method for "glimQL" objects from **aod**. (#1)
