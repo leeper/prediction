@@ -1,3 +1,4 @@
+#' @rdname find_data
 #' @title Extract data from a model object
 #' @description Attempt to reconstruct the data used to create a model object
 #' @param model The model object.
@@ -63,7 +64,19 @@ find_data.data.frame <- function(model, ...) {
 
 #' @rdname find_data
 #' @export
-find_data.lm <- find_data.default
+find_data.crch <- find_data.default
+
+#' @rdname find_data
+#' @export
+find_data.glimML <- function(model, ...) {
+    requireNamespace("methods", quietly = TRUE)
+    methods::slot(model, "data")
+}
+
+find_data.glimQL <- function(model, env = parent.frame(), ...) {
+    requireNamespace("methods", quietly = TRUE)
+    methods::slot(model, "fm")$data
+}
 
 #' @rdname find_data
 #' @export
@@ -71,9 +84,16 @@ find_data.glm <- find_data.default
 
 #' @rdname find_data
 #' @export
-find_data.svyglm <- function(model, ...) {
-    data <- model[["data"]]
-    data
+find_data.hxlr <- find_data.default
+
+#' @rdname find_data
+#' @export
+find_data.lm <- find_data.default
+
+#' @rdname find_data
+#' @export
+find_data.mca <- function(model, env = parent.frame(), ...) {
+    eval(model[["call"]][["df"]], envir = env)
 }
 
 #' @rdname find_data
@@ -85,11 +105,10 @@ find_data.merMod <- function(model, env = parent.frame(), ...) {
 
 #' @rdname find_data
 #' @export
-find_data.crch <- find_data.default
-
-#' @rdname find_data
-#' @export
-find_data.hxlr <- find_data.default
+find_data.svyglm <- function(model, ...) {
+    data <- model[["data"]]
+    data
+}
 
 #' @rdname find_data
 #' @export
@@ -110,9 +129,3 @@ find_data.vgam <- function(model, env = parent.frame(), ...) {
 #' @rdname find_data
 #' @export
 find_data.vglm <- find_data.vgam
-
-#' @rdname find_data
-#' @export
-find_data.mca <- function(model, env = parent.frame(), ...) {
-    eval(model[["call"]][["df"]], envir = env)
-}

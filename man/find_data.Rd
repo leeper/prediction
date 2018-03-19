@@ -4,16 +4,17 @@
 \alias{find_data}
 \alias{find_data.default}
 \alias{find_data.data.frame}
-\alias{find_data.lm}
-\alias{find_data.glm}
-\alias{find_data.svyglm}
-\alias{find_data.merMod}
 \alias{find_data.crch}
+\alias{find_data.glimML}
+\alias{find_data.glm}
 \alias{find_data.hxlr}
+\alias{find_data.lm}
+\alias{find_data.mca}
+\alias{find_data.merMod}
+\alias{find_data.svyglm}
 \alias{find_data.train}
 \alias{find_data.vgam}
 \alias{find_data.vglm}
-\alias{find_data.mca}
 \title{Extract data from a model object}
 \usage{
 find_data(model, ...)
@@ -22,25 +23,27 @@ find_data(model, ...)
 
 \method{find_data}{data.frame}(model, ...)
 
-\method{find_data}{lm}(model, env = parent.frame(), ...)
+\method{find_data}{crch}(model, env = parent.frame(), ...)
+
+\method{find_data}{glimML}(model, ...)
 
 \method{find_data}{glm}(model, env = parent.frame(), ...)
 
-\method{find_data}{svyglm}(model, ...)
+\method{find_data}{hxlr}(model, env = parent.frame(), ...)
+
+\method{find_data}{lm}(model, env = parent.frame(), ...)
+
+\method{find_data}{mca}(model, env = parent.frame(), ...)
 
 \method{find_data}{merMod}(model, env = parent.frame(), ...)
 
-\method{find_data}{crch}(model, env = parent.frame(), ...)
-
-\method{find_data}{hxlr}(model, env = parent.frame(), ...)
+\method{find_data}{svyglm}(model, ...)
 
 \method{find_data}{train}(model, ...)
 
 \method{find_data}{vgam}(model, env = parent.frame(), ...)
 
 \method{find_data}{vglm}(model, env = parent.frame(), ...)
-
-\method{find_data}{mca}(model, env = parent.frame(), ...)
 }
 \arguments{
 \item{model}{The model object.}

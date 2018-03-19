@@ -6,6 +6,23 @@ library("datasets")
 context("Test `prediction()` methods, conditional on package availability")
 
 if (require("AER", quietly = TRUE)) {
+    test_that("Test prediction() for 'glimML'", {
+        data("orob2", package = "aod")
+        m <- betabin(cbind(y, n - y) ~ seed, ~ 1, data = orob2)
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+    test_that("Test prediction() for 'glimQL'", {
+        data("orob2", package = "aod")
+        m <- quasibin(cbind(y, n - y) ~ seed * root, data = orob2, phi = 0)
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+}
+
+if (require("aod", quietly = TRUE)) {
     test_that("Test prediction() for 'ivreg'", {
         data("CigarettesSW", package = "AER")
         CigarettesSW$rprice <- with(CigarettesSW, price/cpi)

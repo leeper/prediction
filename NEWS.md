@@ -1,5 +1,10 @@
 # prediction 0.2.10
 
+* Added `prediction.glmML()` method for "glimML" objects from **aod**. (#1)
+* Added `prediction.glmQL()` method for "glimQL" objects from **aod**. (#1)
+
+# prediction 0.2.10
+
 * Added `prediction.bruto()`method for "bruto" objects from **mda**. (#1)
 * Added `prediction.fda()`method for "fda" objects from **mda**. (#1)
 * Added `prediction.mars()`method for "mars" objects from **mda**. (#1)

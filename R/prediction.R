@@ -32,6 +32,8 @@
 #'   \item \dQuote{gausspr}, see \code{\link[kernlab]{gausspr}}
 #'   \item \dQuote{gee}, see \code{\link[gee]{gee}}
 #'   \item \dQuote{gls}, see \code{\link[nlme]{gls}}
+#'   \item \dQuote{glimML}, see \code{\link[aod]{betabin}}, \code{\link[aod]{negbin}}
+#'   \item \dQuote{glimQL}, see \code{\link[aod]{quasibin}}, \code{\link[aod]{quasipois}}
 #'   \item \dQuote{hurdle}, see \code{\link[pscl]{hurdle}}
 #'   \item \dQuote{hxlr}, see \code{\link[crch]{hxlr}}
 #'   \item \dQuote{ivreg}, see \code{\link[AER]{ivreg}}

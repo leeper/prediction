@@ -69,6 +69,8 @@ The currently supported model classes are:
  - "Gam" from `gam::gam()`
  - "gausspr" from `kernlab::gausspr()`
  - "gee" from `gee::gee()`
+ - "glimML" from `aod::betabin()`, `aod::negbin()`
+ - "glimQL" from `aod::quasibin()`, `aod::quasipois()`
  - "gls" from `nlme::gls()`
  - "hurdle" from `pscl::hurdle()`
  - "hxlr" from `crch::hxlr()`
