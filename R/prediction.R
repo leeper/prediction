@@ -72,6 +72,7 @@
 #'   \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}
 #'   \item \dQuote{tobit}, see \code{\link[AER]{tobit}}
 #'   \item \dQuote{train}, see \code{\link[caret]{train}}
+#'   \item \dQuote{truncreg}, see \code{\link[truncreg]{truncreg}}
 #'   \item \dQuote{zeroinfl}, see \code{\link[pscl]{zeroinfl}}
 #' }
 #' 

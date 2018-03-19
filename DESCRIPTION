@@ -56,6 +56,7 @@ Enhances:
     sampleSelection,
     survey (>= 3.31-5),
     survival,
+    truncreg,
     VGAM
 ByteCompile: true
 RoxygenNote: 6.0.1

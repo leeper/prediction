@@ -109,6 +109,7 @@ The currently supported model classes are:
  - "svyglm" from `survey::svyglm()`
  - "tobit" from `AER::tobit()`
  - "train" from `caret::train()`
+ - "truncreg" from `truncreg::truncreg()`
  - "zeroinfl" from `pscl::zeroinfl()`
 
 ## Requirements and Installation

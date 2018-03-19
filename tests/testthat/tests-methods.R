@@ -599,3 +599,14 @@ if (require("survival", quietly = TRUE)) {
         expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
 }
+
+if (require("truncreg", quietly = TRUE)) {
+    test_that("Test prediction() for 'truncreg'", {
+        data("tobin", package = "survival")
+        m <- truncreg::truncreg(durable ~ age + quant, data = tobin, subset = durable > 0)
+        p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+}
+

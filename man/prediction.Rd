@@ -18,7 +18,7 @@
 %   R/prediction_rlm.R, R/prediction_rpart.R, R/prediction_rq.R,
 %   R/prediction_selection.R, R/prediction_speedglm.R, R/prediction_speedlm.R,
 %   R/prediction_survreg.R, R/prediction_svm.R, R/prediction_svyglm.R,
-%   R/prediction_train.R, R/prediction_zeroinfl.R
+%   R/prediction_train.R, R/prediction_truncreg.R, R/prediction_zeroinfl.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -79,6 +79,7 @@
 \alias{prediction.svm}
 \alias{prediction.svyglm}
 \alias{prediction.train}
+\alias{prediction.truncreg}
 \alias{prediction.zeroinfl}
 \title{Extract Predictions from a Model Object}
 \usage{
@@ -258,6 +259,9 @@ prediction(model, ...)
 \method{prediction}{train}(model, data = find_data(model), at = NULL,
   type = c("raw", "prob"), ...)
 
+\method{prediction}{truncreg}(model, data, at = NULL, calculate_se = FALSE,
+  ...)
+
 \method{prediction}{zeroinfl}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "count", "prob", "zero"),
   calculate_se = FALSE, ...)
@@ -347,6 +351,7 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{svyglm}, see \code{\link[survey]{svyglm}}
   \item \dQuote{tobit}, see \code{\link[AER]{tobit}}
   \item \dQuote{train}, see \code{\link[caret]{train}}
+  \item \dQuote{truncreg}, see \code{\link[truncreg]{truncreg}}
   \item \dQuote{zeroinfl}, see \code{\link[pscl]{zeroinfl}}
 }
 }
