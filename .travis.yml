@@ -4,6 +4,7 @@ cache: packages
 r_packages:
 - covr
 - AER
+- aod
 - betareg
 - bigFastlm
 - biglm
@@ -36,6 +37,7 @@ r_packages:
 - speedglm
 - survey
 - survival
+- truncreg
 - VGAM
 after_success:
 - Rscript -e 'library("covr");codecov()'
