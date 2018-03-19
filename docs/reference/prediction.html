@@ -88,7 +88,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Extract Predictions from a Model Object</h1>
-    <small>Source: <a href='https:/github.com/leeper/prediction/blob/master/R/prediction.R'><code>R/prediction.R</code></a>, <a href='https:/github.com/leeper/prediction/blob/master/R/prediction_Arima.R'><code>R/prediction_Arima.R</code></a>, <a href='https:/github.com/leeper/prediction/blob/master/R/prediction_Gam.R'><code>R/prediction_Gam.R</code></a>, and 54 more</small>
+    <small>Source: <a href='https:/github.com/leeper/prediction/blob/master/R/prediction.R'><code>R/prediction.R</code></a>, <a href='https:/github.com/leeper/prediction/blob/master/R/prediction_Arima.R'><code>R/prediction_Arima.R</code></a>, <a href='https:/github.com/leeper/prediction/blob/master/R/prediction_Gam.R'><code>R/prediction_Gam.R</code></a>, and 57 more</small>
     </div>
 
     
@@ -164,6 +164,14 @@
 
 <span class='co'># S3 method for gee</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for glimML</span>
+<span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
+  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"link"</span>), <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+
+<span class='co'># S3 method for glimQL</span>
+<span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
+  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"link"</span>), <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for glm</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
@@ -320,6 +328,10 @@
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>), <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"raw"</span>, <span class='st'>"prob"</span>), <span class='no'>...</span>)
 
+<span class='co'># S3 method for truncreg</span>
+<span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='no'>data</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='no'>...</span>)
+
 <span class='co'># S3 method for zeroinfl</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
   <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"count"</span>, <span class='st'>"prob"</span>, <span class='st'>"zero"</span>),
@@ -367,7 +379,7 @@
     <p>This function is simply a wrapper around <code><a href='http://www.rdocumentation.org/packages/stats/topics/predict'>predict</a></code> that returns a data frame containing the value of <code>data</code> and the predicted values with respect to all variables specified in <code>data</code>.</p>
 <p>Methods are currently implemented for the following object classes:</p><ul>
 <li><p>&#8220;lm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/stats/topics/lm'>lm</a></code></p></li>
-<li><p>&#8220;glm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/stats/topics/glm'>glm</a></code>, <code><a href='http://www.rdocumentation.org/packages/MASS/topics/glm.nb'>glm.nb</a></code>, <code>glmx</code>, <code>hetglm</code>, <code>brglm</code></p></li>
+<li><p>&#8220;glm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/stats/topics/glm'>glm</a></code>, <code><a href='http://www.rdocumentation.org/packages/MASS/topics/glm.nb'>glm.nb</a></code>, <code><a href='http://www.rdocumentation.org/packages/glmx/topics/glmx'>glmx</a></code>, <code><a href='http://www.rdocumentation.org/packages/glmx/topics/hetglm'>hetglm</a></code>, <code><a href='http://www.rdocumentation.org/packages/brglm/topics/brglm'>brglm</a></code></p></li>
 <li><p>&#8220;ar&#8221;, see <code><a href='http://www.rdocumentation.org/packages/stats/topics/ar'>ar</a></code></p></li>
 <li><p>&#8220;Arima&#8221;, see <code><a href='http://www.rdocumentation.org/packages/stats/topics/arima'>arima</a></code></p></li>
 <li><p>&#8220;arima0&#8221;, see <code><a href='http://www.rdocumentation.org/packages/stats/topics/arima0'>arima0</a></code></p></li>
@@ -378,16 +390,18 @@
 <li><p>&#8220;bruto&#8221;, see <code><a href='http://www.rdocumentation.org/packages/mda/topics/bruto'>bruto</a></code></p></li>
 <li><p>&#8220;clm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/ordinal/topics/clm'>clm</a></code></p></li>
 <li><p>&#8220;coxph&#8221;, see <code><a href='http://www.rdocumentation.org/packages/survival/topics/coxph'>coxph</a></code></p></li>
-<li><p>&#8220;crch&#8221;, see <code>crch</code></p></li>
-<li><p>&#8220;earth&#8221;, see <code>earth</code></p></li>
+<li><p>&#8220;crch&#8221;, see <code><a href='http://www.rdocumentation.org/packages/crch/topics/crch'>crch</a></code></p></li>
+<li><p>&#8220;earth&#8221;, see <code><a href='http://www.rdocumentation.org/packages/earth/topics/earth'>earth</a></code></p></li>
 <li><p>&#8220;fda&#8221;, see <code><a href='http://www.rdocumentation.org/packages/mda/topics/fda'>fda</a></code></p></li>
-<li><p>&#8220;Gam&#8221;, see <code>gam</code></p></li>
+<li><p>&#8220;Gam&#8221;, see <code><a href='http://www.rdocumentation.org/packages/gam/topics/gam'>gam</a></code></p></li>
 <li><p>&#8220;gausspr&#8221;, see <code><a href='http://www.rdocumentation.org/packages/kernlab/topics/gausspr'>gausspr</a></code></p></li>
-<li><p>&#8220;gee&#8221;, see <code>gee</code></p></li>
+<li><p>&#8220;gee&#8221;, see <code><a href='http://www.rdocumentation.org/packages/gee/topics/gee'>gee</a></code></p></li>
 <li><p>&#8220;gls&#8221;, see <code><a href='http://www.rdocumentation.org/packages/nlme/topics/gls'>gls</a></code></p></li>
-<li><p>&#8220;hurdle&#8221;, see <code>hurdle</code></p></li>
-<li><p>&#8220;hxlr&#8221;, see <code>hxlr</code></p></li>
-<li><p>&#8220;ivreg&#8221;, see <code>ivreg</code></p></li>
+<li><p>&#8220;glimML&#8221;, see <code><a href='http://www.rdocumentation.org/packages/aod/topics/betabin'>betabin</a></code>, <code><a href='http://www.rdocumentation.org/packages/aod/topics/negbin'>negbin</a></code></p></li>
+<li><p>&#8220;glimQL&#8221;, see <code><a href='http://www.rdocumentation.org/packages/aod/topics/quasibin'>quasibin</a></code>, <code><a href='http://www.rdocumentation.org/packages/aod/topics/quasipois'>quasipois</a></code></p></li>
+<li><p>&#8220;hurdle&#8221;, see <code><a href='http://www.rdocumentation.org/packages/pscl/topics/hurdle'>hurdle</a></code></p></li>
+<li><p>&#8220;hxlr&#8221;, see <code><a href='http://www.rdocumentation.org/packages/crch/topics/hxlr'>hxlr</a></code></p></li>
+<li><p>&#8220;ivreg&#8221;, see <code><a href='http://www.rdocumentation.org/packages/AER/topics/ivreg'>ivreg</a></code></p></li>
 <li><p>&#8220;knnreg&#8221;, see <code><a href='http://www.rdocumentation.org/packages/caret/topics/knnreg'>knnreg</a></code></p></li>
 <li><p>&#8220;kqr&#8221;, see <code><a href='http://www.rdocumentation.org/packages/kernlab/topics/kqr'>kqr</a></code></p></li>
 <li><p>&#8220;ksvm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/kernlab/topics/ksvm'>ksvm</a></code></p></li>
@@ -397,11 +411,11 @@
 <li><p>&#8220;lqs&#8221;, see <code><a href='http://www.rdocumentation.org/packages/MASS/topics/lqs'>lqs</a></code></p></li>
 <li><p>&#8220;mars&#8221;, see <code><a href='http://www.rdocumentation.org/packages/mda/topics/mars'>mars</a></code></p></li>
 <li><p>&#8220;mca&#8221;, see <code><a href='http://www.rdocumentation.org/packages/MASS/topics/mca'>mca</a></code></p></li>
-<li><p>&#8220;mclogit&#8221;, see <code>mclogit</code></p></li>
+<li><p>&#8220;mclogit&#8221;, see <code><a href='http://www.rdocumentation.org/packages/mclogit/topics/mclogit'>mclogit</a></code></p></li>
 <li><p>&#8220;mda&#8221;, see <code><a href='http://www.rdocumentation.org/packages/mda/topics/mda'>mda</a></code></p></li>
 <li><p>&#8220;merMod&#8221;, see <code><a href='http://www.rdocumentation.org/packages/lme4/topics/lmer'>lmer</a></code>, <code><a href='http://www.rdocumentation.org/packages/lme4/topics/glmer'>glmer</a></code></p></li>
-<li><p>&#8220;mnlogit&#8221;, see <code>mnlogit</code></p></li>
-<li><p>&#8220;mnp&#8221;, see <code>mnp</code></p></li>
+<li><p>&#8220;mnlogit&#8221;, see <code><a href='http://www.rdocumentation.org/packages/mnlogit/topics/mnlogit'>mnlogit</a></code></p></li>
+<li><p>&#8220;mnp&#8221;, see <code><a href='http://www.rdocumentation.org/packages/MNP/topics/mnp'>mnp</a></code></p></li>
 <li><p>&#8220;naiveBayes&#8221;, see <code><a href='http://www.rdocumentation.org/packages/e1071/topics/naiveBayes'>naiveBayes</a></code></p></li>
 <li><p>&#8220;nlme&#8221;, see <code><a href='http://www.rdocumentation.org/packages/nlme/topics/nlme'>nlme</a></code></p></li>
 <li><p>&#8220;nls&#8221;, see <code><a href='http://www.rdocumentation.org/packages/stats/topics/nls'>nls</a></code></p></li>
@@ -415,14 +429,16 @@
 <li><p>&#8220;rlm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/MASS/topics/rlm'>rlm</a></code></p></li>
 <li><p>&#8220;rpart&#8221;, see <code><a href='http://www.rdocumentation.org/packages/rpart/topics/rpart'>rpart</a></code></p></li>
 <li><p>&#8220;rq&#8221;, see <code><a href='http://www.rdocumentation.org/packages/quantreg/topics/rq'>rq</a></code></p></li>
-<li><p>&#8220;selection&#8221;, see <code>selection</code></p></li>
+<li><p>&#8220;selection&#8221;, see <code><a href='http://www.rdocumentation.org/packages/sampleSelection/topics/selection'>selection</a></code></p></li>
 <li><p>&#8220;speedglm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/speedglm/topics/speedglm'>speedglm</a></code></p></li>
 <li><p>&#8220;speedlm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/speedglm/topics/speedlm'>speedlm</a></code></p></li>
 <li><p>&#8220;survreg&#8221;, see <code><a href='http://www.rdocumentation.org/packages/survival/topics/survreg'>survreg</a></code></p></li>
 <li><p>&#8220;svm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/e1071/topics/svm'>svm</a></code></p></li>
 <li><p>&#8220;svyglm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/survey/topics/svyglm'>svyglm</a></code></p></li>
+<li><p>&#8220;tobit&#8221;, see <code><a href='http://www.rdocumentation.org/packages/AER/topics/tobit'>tobit</a></code></p></li>
 <li><p>&#8220;train&#8221;, see <code><a href='http://www.rdocumentation.org/packages/caret/topics/train'>train</a></code></p></li>
-<li><p>&#8220;zeroinfl&#8221;, see <code>zeroinfl</code></p></li>
+<li><p>&#8220;truncreg&#8221;, see <code><a href='http://www.rdocumentation.org/packages/truncreg/topics/truncreg'>truncreg</a></code></p></li>
+<li><p>&#8220;zeroinfl&#8221;, see <code><a href='http://www.rdocumentation.org/packages/pscl/topics/zeroinfl'>zeroinfl</a></code></p></li>
 </ul>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
