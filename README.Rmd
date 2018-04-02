@@ -121,12 +121,12 @@ The currently supported model classes are:
 [![codecov.io](http://codecov.io/github/leeper/prediction/coverage.svg?branch=master)](http://codecov.io/github/leeper/prediction?branch=master)
 [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
-The development version of this package can be installed directly from GitHub using `ghit`:
+The development version of this package can be installed directly from GitHub using `remotes`:
 
-```R
-if (!require("ghit")) {
-    install.packages("ghit")
-    library("ghit")
+``` r
+if (!require("remotes")) {
+    install.packages("remotes")
+    library("remotes")
 }
 install_github("leeper/prediction")
 ```
