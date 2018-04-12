@@ -15,6 +15,7 @@
 ^cache/.+$
 ^docs$
 ^docs/.+$
+^revdep.?
 ^ignore$
 ^inst/doc/.+\.log$
 ^inst/doc/.+\.Rmd$

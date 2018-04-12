@@ -73,7 +73,7 @@
 \alias{prediction.rpart}
 \alias{prediction.rq}
 \alias{prediction.selection}
-\alias{prediction.glm}
+\alias{prediction.speedglm}
 \alias{prediction.speedlm}
 \alias{prediction.survreg}
 \alias{prediction.svm}
@@ -143,7 +143,7 @@ prediction(model, ...)
   at = NULL, type = c("response", "link"), calculate_se = TRUE, ...)
 
 \method{prediction}{glm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link"), calculate_se = FALSE, ...)
+  at = NULL, type = c("response", "link"), calculate_se = TRUE, ...)
 
 \method{prediction}{glmx}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link"), calculate_se = FALSE, ...)
@@ -240,7 +240,7 @@ prediction(model, ...)
 \method{prediction}{selection}(model, data = find_data(model, parent.frame()),
   at = NULL, type = "response", calculate_se = FALSE, ...)
 
-\method{prediction}{glm}(model, data = find_data(model, parent.frame()),
+\method{prediction}{speedglm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link"), calculate_se = FALSE, ...)
 
 \method{prediction}{speedlm}(model, data = find_data(model, parent.frame()),

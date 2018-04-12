@@ -1,6 +1,6 @@
 #' @rdname prediction
 #' @export
-prediction.glm <- 
+prediction.speedglm <- 
 function(model, 
          data = find_data(model, parent.frame()), 
          at = NULL, 

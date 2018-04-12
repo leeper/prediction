@@ -1,3 +1,7 @@
+# prediction 0.3.2
+
+* Fix typo in "speedglm" that was overwriting "glm" method.
+
 # prediction 0.3.0
 
 * CRAN release.
