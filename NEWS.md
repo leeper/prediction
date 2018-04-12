@@ -1,3 +1,7 @@
+# prediction 0.3.0
+
+* CRAN release.
+
 # prediction 0.2.11
 
 * Added `prediction.glmML()` method for "glimML" objects from **aod**. (#1)
