@@ -25,10 +25,15 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Build list of data.frames — build_datalist" />
 
 <meta property="og:description" content="Construct a list of data.frames based upon an input data.frame and a list of one or more at values" />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,8 +56,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">prediction</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">prediction</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -77,6 +86,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -84,20 +94,23 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Build list of data.frames</h1>
-    <small>Source: <a href='https:/github.com/leeper/prediction/blob/master/R/build_datalist.R'><code>R/build_datalist.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/leeper/prediction/blob/master/R/build_datalist.R'><code>R/build_datalist.R</code></a></small>
+    <div class="hidden name"><code>build_datalist.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Construct a list of data.frames based upon an input data.frame and a list of one or more <code>at</code> values</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>build_datalist</span>(<span class='no'>data</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>as.data.frame</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -124,7 +137,7 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='find_data.html'>find_data</a></code>, <code><a href='mean_or_mode.html'>mean_or_mode</a></code>, <code><a href='seq_range.html'>seq_range</a></code></p>
+    <div class='dont-index'><p><code><a href='find_data.html'>find_data</a></code>, <code><a href='mean_or_mode.html'>mean_or_mode</a></code>, <code><a href='seq_range.html'>seq_range</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -232,6 +245,8 @@ Thomas J. Leeper
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

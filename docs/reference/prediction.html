@@ -25,10 +25,15 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Extract Predictions from a Model Object — prediction-package" />
 
 <meta property="og:description" content="Extract predicted values via predict from a model object, conditional on data, and return a data frame." />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,8 +56,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">prediction</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">prediction</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -77,6 +86,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -84,16 +94,19 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Extract Predictions from a Model Object</h1>
-    <small>Source: <a href='https:/github.com/leeper/prediction/blob/master/R/prediction.R'><code>R/prediction.R</code></a>, <a href='https:/github.com/leeper/prediction/blob/master/R/prediction_Arima.R'><code>R/prediction_Arima.R</code></a>, <a href='https:/github.com/leeper/prediction/blob/master/R/prediction_Gam.R'><code>R/prediction_Gam.R</code></a>, and 57 more</small>
+    <small class="dont-index">Source: <a href='https://github.com/leeper/prediction/blob/master/R/prediction.R'><code>R/prediction.R</code></a>, <a href='https://github.com/leeper/prediction/blob/master/R/prediction_Arima.R'><code>R/prediction_Arima.R</code></a>, <a href='https://github.com/leeper/prediction/blob/master/R/prediction_Gam.R'><code>R/prediction_Gam.R</code></a>, and 57 more</small>
+    <div class="hidden name"><code>prediction.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Extract predicted values via <code><a href='http://www.rdocumentation.org/packages/stats/topics/predict'>predict</a></code> from a model object, conditional on data, and return a data frame.</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='no'>...</span>)
 
@@ -175,7 +188,7 @@
 
 <span class='co'># S3 method for glm</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
-  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"link"</span>), <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"link"</span>), <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for glmx</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
@@ -245,7 +258,7 @@
 
 <span class='co'># S3 method for merMod</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>), <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"link"</span>), <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"link"</span>), <span class='kw'>re.form</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for mnlogit</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
@@ -303,7 +316,7 @@
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
   <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"response"</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
-<span class='co'># S3 method for glm</span>
+<span class='co'># S3 method for speedglm</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
   <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"link"</span>), <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
 
@@ -337,7 +350,7 @@
   <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"count"</span>, <span class='st'>"prob"</span>, <span class='st'>"zero"</span>),
   <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -368,6 +381,10 @@
       <th>category</th>
       <td><p>For multi-level or multi-category outcome models (e.g., ordered probit, multinomial logit, etc.), a value specifying which of the outcome levels should be used for the <code>"fitted"</code> column. If missing, some default is chosen automatically.</p></td>
     </tr>
+    <tr>
+      <th>re.form</th>
+      <td><p>An argument passed forward to <code><a href='http://www.rdocumentation.org/packages/lme4/topics/predict.merMod'>predict.merMod</a></code>.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -389,7 +406,7 @@
 <li><p>&#8220;betareg&#8221;, see <code><a href='http://www.rdocumentation.org/packages/betareg/topics/betareg'>betareg</a></code></p></li>
 <li><p>&#8220;bruto&#8221;, see <code><a href='http://www.rdocumentation.org/packages/mda/topics/bruto'>bruto</a></code></p></li>
 <li><p>&#8220;clm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/ordinal/topics/clm'>clm</a></code></p></li>
-<li><p>&#8220;coxph&#8221;, see <code><a href='http://www.rdocumentation.org/packages/survival/topics/coxph'>coxph</a></code></p></li>
+<li><p>&#8220;coxph&#8221;, see <code>coxph</code></p></li>
 <li><p>&#8220;crch&#8221;, see <code><a href='http://www.rdocumentation.org/packages/crch/topics/crch'>crch</a></code></p></li>
 <li><p>&#8220;earth&#8221;, see <code><a href='http://www.rdocumentation.org/packages/earth/topics/earth'>earth</a></code></p></li>
 <li><p>&#8220;fda&#8221;, see <code><a href='http://www.rdocumentation.org/packages/mda/topics/fda'>fda</a></code></p></li>
@@ -432,7 +449,7 @@
 <li><p>&#8220;selection&#8221;, see <code><a href='http://www.rdocumentation.org/packages/sampleSelection/topics/selection'>selection</a></code></p></li>
 <li><p>&#8220;speedglm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/speedglm/topics/speedglm'>speedglm</a></code></p></li>
 <li><p>&#8220;speedlm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/speedglm/topics/speedlm'>speedlm</a></code></p></li>
-<li><p>&#8220;survreg&#8221;, see <code><a href='http://www.rdocumentation.org/packages/survival/topics/survreg'>survreg</a></code></p></li>
+<li><p>&#8220;survreg&#8221;, see <code>survreg</code></p></li>
 <li><p>&#8220;svm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/e1071/topics/svm'>svm</a></code></p></li>
 <li><p>&#8220;svyglm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/survey/topics/svyglm'>svyglm</a></code></p></li>
 <li><p>&#8220;tobit&#8221;, see <code><a href='http://www.rdocumentation.org/packages/AER/topics/tobit'>tobit</a></code></p></li>
@@ -443,7 +460,7 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='find_data.html'>find_data</a></code>, <code><a href='build_datalist.html'>build_datalist</a></code>, <code><a href='mean_or_mode.html'>mean_or_mode</a></code>, <code><a href='seq_range.html'>seq_range</a></code></p>
+    <div class='dont-index'><p><code><a href='find_data.html'>find_data</a></code>, <code><a href='build_datalist.html'>build_datalist</a></code>, <code><a href='mean_or_mode.html'>mean_or_mode</a></code>, <code><a href='seq_range.html'>seq_range</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -501,6 +518,8 @@
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

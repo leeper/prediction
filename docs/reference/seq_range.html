@@ -25,10 +25,15 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Create a sequence over the range of a vector — seq_range" />
 
 <meta property="og:description" content="Define a sequence of evenly spaced values from the minimum to the maximum of a vector" />
 <meta name="twitter:card" content="summary" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -51,8 +56,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">prediction</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">prediction</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -77,6 +86,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -84,20 +94,23 @@
       
       </header>
 
-      <div class="row">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create a sequence over the range of a vector</h1>
-    <small>Source: <a href='https:/github.com/leeper/prediction/blob/master/R/seq_range.R'><code>R/seq_range.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/leeper/prediction/blob/master/R/seq_range.R'><code>R/seq_range.R</code></a></small>
+    <div class="hidden name"><code>seq_range.Rd</code></div>
     </div>
 
+    <div class="ref-description">
     
     <p>Define a sequence of evenly spaced values from the minimum to the maximum of a vector</p>
     
+    </div>
 
     <pre class="usage"><span class='fu'>seq_range</span>(<span class='no'>x</span>, <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
     
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
@@ -116,7 +129,7 @@
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <p><code><a href='mean_or_mode.html'>mean_or_mode</a></code>, <code><a href='build_datalist.html'>build_datalist</a></code></p>
+    <div class='dont-index'><p><code><a href='mean_or_mode.html'>mean_or_mode</a></code>, <code><a href='build_datalist.html'>build_datalist</a></code></p></div>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -149,6 +162,8 @@
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>

@@ -25,7 +25,12 @@
 <link href="../pkgdown.css" rel="stylesheet">
 <script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
+
+
+
 <meta property="og:title" content="Function reference" />
+
+
 <!-- mathjax -->
 <script src='https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML'></script>
 
@@ -48,8 +53,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="../index.html">prediction</a>
+      <span class="navbar-brand">
+        <a class="navbar-link" href="../index.html">prediction</a>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.3</span>
+      </span>
     </div>
+
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
@@ -74,6 +83,7 @@
   </a>
 </li>
       </ul>
+      
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
@@ -81,64 +91,59 @@
       
       </header>
 
-      <div class="row">
-  <div class="col-md-9">
+<div class="row">
+  <div class="contents col-md-9">
     <div class="page-header">
-      <h1>
-        Reference
-        <small>version&nbsp;0.2.11</small>
-      </h1>
+      <h1>Reference</h1>
     </div>
 
-    <div class="contents">
-      <table class="ref-index">
+    <table class="ref-index">
 
-      <colgroup>
-        <col class="alias" />
-        <col class="title" />
-      </colgroup>
+    <colgroup>
+      <col class="alias" />
+      <col class="title" />
+    </colgroup>
 
-      <tbody>
-        <tr>
-          <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
-          </th>
-        </tr>
-        <tr>
-          <!--  -->
-          <td>
-            <p><code><a href="build_datalist.html">build_datalist()</a></code> </p>
-          </td>
-          <td><p>Build list of data.frames</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="find_data.html">find_data()</a></code> </p>
-          </td>
-          <td><p>Extract data from a model object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="mean_or_mode.html">mean_or_mode()</a></code> <code><a href="mean_or_mode.html">median_or_mode()</a></code> </p>
-          </td>
-          <td><p>Class-dependent variable aggregation</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="prediction.html">prediction()</a></code> </p>
-          </td>
-          <td><p>Extract Predictions from a Model Object</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="seq_range.html">seq_range()</a></code> </p>
-          </td>
-          <td><p>Create a sequence over the range of a vector</p></td>
-        </tr>
-      </tbody>
-      </table>
-    </div>
+    <tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        <!--  -->
+        <td>
+          <p><code><a href="build_datalist.html">build_datalist()</a></code> </p>
+        </td>
+        <td><p>Build list of data.frames</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="find_data.html">find_data()</a></code> </p>
+        </td>
+        <td><p>Extract data from a model object</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="mean_or_mode.html">mean_or_mode()</a></code> <code><a href="mean_or_mode.html">median_or_mode()</a></code> </p>
+        </td>
+        <td><p>Class-dependent variable aggregation</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="prediction.html">prediction()</a></code> </p>
+        </td>
+        <td><p>Extract Predictions from a Model Object</p></td>
+      </tr><tr>
+        <!--  -->
+        <td>
+          <p><code><a href="seq_range.html">seq_range()</a></code> </p>
+        </td>
+        <td><p>Create a sequence over the range of a vector</p></td>
+      </tr>
+    </tbody>
+    </table>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
@@ -160,6 +165,8 @@
 
       </footer>
    </div>
+
+  
 
   </body>
 </html>
