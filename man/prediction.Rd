@@ -196,7 +196,7 @@ prediction(model, ...)
   at = NULL, type = c("response", "link"), calculate_se = TRUE, ...)
 
 \method{prediction}{merMod}(model, data = find_data(model), at = NULL,
-  type = c("response", "link"), calculate_se = FALSE, ...)
+  type = c("response", "link"), re.form = NULL, calculate_se = FALSE, ...)
 
 \method{prediction}{mnlogit}(model, data = find_data(model, parent.frame()),
   at = NULL, calculate_se = FALSE, category, ...)
@@ -280,6 +280,8 @@ prediction(model, ...)
 \item{calculate_se}{A logical indicating whether to calculate standard errors (if possible). The output will always contain a \dQuote{calculate_se} column regardless of this value; this only controls the calculation of standard errors. Setting it to \code{FALSE} may improve speed.}
 
 \item{category}{For multi-level or multi-category outcome models (e.g., ordered probit, multinomial logit, etc.), a value specifying which of the outcome levels should be used for the \code{"fitted"} column. If missing, some default is chosen automatically.}
+
+\item{re.form}{An argument passed forward to \code{\link[lme4]{predict.merMod}}.}
 }
 \value{
 A data frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, or a multiple thereof, if \code{!is.null(at)}. The return value contains \code{data} (possibly modified by \code{at} using \code{\link{build_datalist}}), plus a column containing fitted/predicted values (\code{"fitted"}) and a column containing the standard errors thereof (\code{"calculate_se"}). Additional columns may be reported depending on the object class.

@@ -1,3 +1,7 @@
+# prediction 0.3.3
+
+* `prediction.merMod()` gains an `re.form` argument to pass forward to `predict.merMod()`.
+
 # prediction 0.3.2
 
 * Fix typo in "speedglm" that was overwriting "glm" method.
