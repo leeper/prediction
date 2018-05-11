@@ -1,7 +1,7 @@
-library("datasets")
-
 # test all prediction() methods, conditional on availability of package
-# this file is organized alphabetically by package
+# this file is organized alphabetically by package name
+
+library("datasets")
 
 context("Test `prediction()` methods, conditional on package availability")
 
