@@ -32,7 +32,7 @@ function(data,
         
         # setup list of data.frames based on at
         data_out <- set_data_to_at(data, at = at)
-        at_specification <- data_out[["at"]]
+        at_specification <- cbind(index = seq_len(nrow(data_out[["at"]])), data_out[["at"]])
         data_out <- data_out[["data"]]
         
         if (isTRUE(as.data.frame)) {
