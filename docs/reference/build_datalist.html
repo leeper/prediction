@@ -58,7 +58,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">prediction</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.3</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.4</span>
       </span>
     </div>
 
@@ -162,9 +162,9 @@
 #&gt; Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
 #&gt; 
 #&gt; attr(,"at_specification")
-#&gt;   cyl
-#&gt; 1   4
-#&gt; 2   6</div><div class='input'>
+#&gt;   index cyl
+#&gt; 1     1   4
+#&gt; 2     2   6</div><div class='input'>
 <span class='fu'>str</span>(<span class='fu'>build_datalist</span>(<span class='fu'>head</span>(<span class='no'>mtcars</span>), <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>cyl</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>4</span>,<span class='fl'>6</span>), <span class='kw'>wt</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>2.75</span>,<span class='fl'>3</span>,<span class='fl'>3.25</span>))), <span class='fl'>1</span>)</div><div class='output co'>#&gt; List of 6
 #&gt;  $ 4.2.75:'data.frame':	6 obs. of  11 variables:
 #&gt;   ..- attr(*, "at")=List of 2
@@ -178,7 +178,7 @@
 #&gt;   ..- attr(*, "at")=List of 2
 #&gt;  $ 6.3.25:'data.frame':	6 obs. of  11 variables:
 #&gt;   ..- attr(*, "at")=List of 2
-#&gt;  - attr(*, "at_specification")='data.frame':	6 obs. of  2 variables:</div><div class='input'>
+#&gt;  - attr(*, "at_specification")='data.frame':	6 obs. of  3 variables:</div><div class='input'>
 <span class='fu'>str</span>(<span class='fu'>build_datalist</span>(<span class='fu'>head</span>(<span class='no'>mtcars</span>), <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'>data.frame</span>(<span class='kw'>cyl</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>4</span>,<span class='fl'>4</span>), <span class='kw'>wt</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='fl'>2.75</span>,<span class='fl'>3</span>))))</div><div class='output co'>#&gt; List of 2
 #&gt;  $ 4.2.75:'data.frame':	6 obs. of  11 variables:
 #&gt;   ..$ mpg : num [1:6] 21 21 22.8 21.4 18.7 18.1
@@ -210,9 +210,10 @@
 #&gt;   ..- attr(*, "at")=List of 2
 #&gt;   .. ..$ cyl: num 4
 #&gt;   .. ..$ wt : num 3
-#&gt;  - attr(*, "at_specification")='data.frame':	2 obs. of  2 variables:
-#&gt;   ..$ cyl: num [1:2] 4 4
-#&gt;   ..$ wt : num [1:2] 2.75 3</div><div class='input'>
+#&gt;  - attr(*, "at_specification")='data.frame':	2 obs. of  3 variables:
+#&gt;   ..$ index: int [1:2] 1 2
+#&gt;   ..$ cyl  : num [1:2] 4 4
+#&gt;   ..$ wt   : num [1:2] 2.75 3</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

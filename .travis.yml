@@ -32,6 +32,7 @@ r_packages:
 - ffbase
 - gam
 - gee
+- glmnet
 - glmx
 - kernlab
 - lme4
