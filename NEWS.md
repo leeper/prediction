@@ -1,7 +1,10 @@
+# prediction 0.3.4
+
+* Added `prediction.glmnet()` method for "glmnet" objects from **glmnet**. (#1)
+
 # prediction 0.3.3
 
 * `prediction.merMod()` gains an `re.form` argument to pass forward to `predict.merMod()`.
-* 
 
 # prediction 0.3.2
 

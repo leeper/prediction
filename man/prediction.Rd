@@ -6,19 +6,20 @@
 %   R/prediction_coxph.R, R/prediction_crch.R, R/prediction_earth.R,
 %   R/prediction_fda.R, R/prediction_gausspr.R, R/prediction_gee.R,
 %   R/prediction_glimML.R, R/prediction_glimQL.R, R/prediction_glm.R,
-%   R/prediction_glmx.R, R/prediction_gls.R, R/prediction_hetglm.R,
-%   R/prediction_hurdle.R, R/prediction_hxlr.R, R/prediction_ivreg.R,
-%   R/prediction_knnreg.R, R/prediction_kqr.R, R/prediction_ksvm.R,
-%   R/prediction_lm.R, R/prediction_lme.R, R/prediction_loess.R,
-%   R/prediction_lqs.R, R/prediction_mars.R, R/prediction_mca.R,
-%   R/prediction_mclogit.R, R/prediction_merMod.R, R/prediction_mnlogit.R,
-%   R/prediction_mnp.R, R/prediction_multinom.R, R/prediction_nls.R,
-%   R/prediction_nnet.R, R/prediction_plm.R, R/prediction_polr.R,
-%   R/prediction_polyreg.R, R/prediction_ppr.R, R/prediction_princomp.R,
-%   R/prediction_rlm.R, R/prediction_rpart.R, R/prediction_rq.R,
-%   R/prediction_selection.R, R/prediction_speedglm.R, R/prediction_speedlm.R,
-%   R/prediction_survreg.R, R/prediction_svm.R, R/prediction_svyglm.R,
-%   R/prediction_train.R, R/prediction_truncreg.R, R/prediction_zeroinfl.R
+%   R/prediction_glmnet.R, R/prediction_glmx.R, R/prediction_gls.R,
+%   R/prediction_hetglm.R, R/prediction_hurdle.R, R/prediction_hxlr.R,
+%   R/prediction_ivreg.R, R/prediction_knnreg.R, R/prediction_kqr.R,
+%   R/prediction_ksvm.R, R/prediction_lm.R, R/prediction_lme.R,
+%   R/prediction_loess.R, R/prediction_lqs.R, R/prediction_mars.R,
+%   R/prediction_mca.R, R/prediction_mclogit.R, R/prediction_merMod.R,
+%   R/prediction_mnlogit.R, R/prediction_mnp.R, R/prediction_multinom.R,
+%   R/prediction_nls.R, R/prediction_nnet.R, R/prediction_plm.R,
+%   R/prediction_polr.R, R/prediction_polyreg.R, R/prediction_ppr.R,
+%   R/prediction_princomp.R, R/prediction_rlm.R, R/prediction_rpart.R,
+%   R/prediction_rq.R, R/prediction_selection.R, R/prediction_speedglm.R,
+%   R/prediction_speedlm.R, R/prediction_survreg.R, R/prediction_svm.R,
+%   R/prediction_svyglm.R, R/prediction_train.R, R/prediction_truncreg.R,
+%   R/prediction_zeroinfl.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -42,6 +43,7 @@
 \alias{prediction.glimML}
 \alias{prediction.glimQL}
 \alias{prediction.glm}
+\alias{prediction.glmnet}
 \alias{prediction.glmx}
 \alias{prediction.gls}
 \alias{prediction.hetglm}
@@ -144,6 +146,9 @@ prediction(model, ...)
 
 \method{prediction}{glm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link"), calculate_se = TRUE, ...)
+
+\method{prediction}{glmnet}(model, data, lambda = model[["lambda"]][1L],
+  at = NULL, type = c("response", "link"), calculate_se = FALSE, ...)
 
 \method{prediction}{glmx}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link"), calculate_se = FALSE, ...)
@@ -281,6 +286,8 @@ prediction(model, ...)
 
 \item{category}{For multi-level or multi-category outcome models (e.g., ordered probit, multinomial logit, etc.), a value specifying which of the outcome levels should be used for the \code{"fitted"} column. If missing, some default is chosen automatically.}
 
+\item{lambda}{For models of class \dQuote{glmnet}, a value of the penalty parameter at which predictions are required.}
+
 \item{re.form}{An argument passed forward to \code{\link[lme4]{predict.merMod}}.}
 }
 \value{
@@ -312,6 +319,7 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{Gam}, see \code{\link[gam]{gam}}
   \item \dQuote{gausspr}, see \code{\link[kernlab]{gausspr}}
   \item \dQuote{gee}, see \code{\link[gee]{gee}}
+  \item \dQuote{glmnet}, see \code{\link[glmnet]{glmnet}}
   \item \dQuote{gls}, see \code{\link[nlme]{gls}}
   \item \dQuote{glimML}, see \code{\link[aod]{betabin}}, \code{\link[aod]{negbin}}
   \item \dQuote{glimQL}, see \code{\link[aod]{quasibin}}, \code{\link[aod]{quasipois}}

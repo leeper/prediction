@@ -29,14 +29,14 @@ if (require("AER", quietly = TRUE)) {
 if (require("aod", quietly = TRUE)) {
     test_that("Test prediction() for 'glimML'", {
         data("orob2", package = "aod")
-        m <- betabin(cbind(y, n - y) ~ seed, ~ 1, data = orob2)
+        m <- aod::betabin(cbind(y, n - y) ~ seed, ~ 1, data = orob2)
         p <- prediction(m)
         expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
         expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })
     test_that("Test prediction() for 'glimQL'", {
         data("orob2", package = "aod")
-        m <- quasibin(cbind(y, n - y) ~ seed * root, data = orob2, phi = 0)
+        m <- aod::quasibin(cbind(y, n - y) ~ seed * root, data = orob2, phi = 0)
         p <- prediction(m)
         expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
         expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
@@ -198,6 +198,17 @@ if (require("gee", quietly = TRUE)) {
         data("warpbreaks")
         m <- gee::gee(breaks ~ tension, id=wool, data=warpbreaks, corstr="exchangeable")
         p <- prediction(m)
+        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    })
+}
+
+if (require("glmnet", quietly = TRUE)) {
+    test_that("Test prediction() for 'glmnet'", {
+        x <- matrix(rnorm(100*20),100,20)
+        y <- rnorm(100)
+        m <- glmnet::glmnet(x,y)
+        p <- prediction(m, data = x)
         expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
         expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
     })

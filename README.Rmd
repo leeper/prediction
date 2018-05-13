@@ -71,6 +71,7 @@ The currently supported model classes are:
  - "gee" from `gee::gee()`
  - "glimML" from `aod::betabin()`, `aod::negbin()`
  - "glimQL" from `aod::quasibin()`, `aod::quasipois()`
+ - "glmnet" from `glmnet::glmnet()`
  - "gls" from `nlme::gls()`
  - "hurdle" from `pscl::hurdle()`
  - "hxlr" from `crch::hxlr()`
