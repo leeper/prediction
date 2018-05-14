@@ -18,7 +18,6 @@ function(model,
     } else {
         # reduce memory profile
         model[["model"]] <- NULL
-        attr(model[["terms"]], ".Environment") <- NULL
         
         # setup data
         if (is.null(at)) {

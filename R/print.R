@@ -8,7 +8,7 @@ summary.prediction <- function(object, digits = 4, ...) {
     if (is.null(at)) {
         objectby <- list(rep(1L, nrow(object)))
     } else {
-        objectby <- object[ , names(at), drop = FALSE]
+        objectby <- object[ , setdiff(names(at), "index"), drop = FALSE]
     }
     if (!"fitted.class" %in% names(object) || is.list(fc)) {
         # numeric outcome

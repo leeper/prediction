@@ -23,7 +23,6 @@ function(model,
     } else {
         # reduce memory profile
         model[["model"]] <- NULL
-        attr(model[["terms"]], ".Environment") <- NULL
         
         # setup data
         out <- build_datalist(data, at = at, as.data.frame = TRUE)

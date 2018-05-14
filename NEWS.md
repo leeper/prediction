@@ -1,3 +1,7 @@
+# prediction 0.3.5
+
+* Fixed a bug that required specifying `stats::poly()` rather than just `poly()` in model formulae. (#22)
+
 # prediction 0.3.4
 
 * Added `prediction.glmnet()` method for "glmnet" objects from **glmnet**. (#1)
