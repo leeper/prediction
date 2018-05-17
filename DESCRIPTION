@@ -55,6 +55,7 @@ Enhances:
     quantreg,
     rpart,
     sampleSelection,
+    speedglm,
     survey (>= 3.31-5),
     survival,
     truncreg,
