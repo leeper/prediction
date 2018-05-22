@@ -1,3 +1,8 @@
+# prediction 0.3.6
+
+* Small fixes for failing CRAN checks. (#25)
+* Remove `prediction.bigglm()` method (from **biglm**) due to failing tests. (#25)
+
 # prediction 0.3.5
 
 * Fixed a bug that required specifying `stats::poly()` rather than just `poly()` in model formulae. (#22)

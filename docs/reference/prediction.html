@@ -58,7 +58,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">prediction</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.4</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.5</span>
       </span>
     </div>
 
@@ -98,7 +98,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Extract Predictions from a Model Object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/leeper/prediction/blob/master/R/prediction.R'><code>R/prediction.R</code></a>, <a href='https://github.com/leeper/prediction/blob/master/R/prediction_Arima.R'><code>R/prediction_Arima.R</code></a>, <a href='https://github.com/leeper/prediction/blob/master/R/prediction_Gam.R'><code>R/prediction_Gam.R</code></a>, and 58 more</small>
+    <small class="dont-index">Source: <a href='https://github.com/leeper/prediction/blob/master/R/prediction.R'><code>R/prediction.R</code></a>, <a href='https://github.com/leeper/prediction/blob/master/R/prediction_Arima.R'><code>R/prediction_Arima.R</code></a>, <a href='https://github.com/leeper/prediction/blob/master/R/prediction_Gam.R'><code>R/prediction_Gam.R</code></a>, and 57 more</small>
     <div class="hidden name"><code>prediction.Rd</code></div>
     </div>
 
@@ -136,10 +136,6 @@
 
 <span class='co'># S3 method for bigLm</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for bigglm</span>
-<span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
-  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"response"</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for biglm</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
@@ -409,7 +405,6 @@
 <li><p>&#8220;Arima&#8221;, see <code><a href='http://www.rdocumentation.org/packages/stats/topics/arima'>arima</a></code></p></li>
 <li><p>&#8220;arima0&#8221;, see <code><a href='http://www.rdocumentation.org/packages/stats/topics/arima0'>arima0</a></code></p></li>
 <li><p>&#8220;bigglm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/biglm/topics/bigglm'>bigglm</a></code> (including &#8220;ffdf&#8221;-backed models provided by <code><a href='http://www.rdocumentation.org/packages/ffbase/topics/bigglm.ffdf'>bigglm.ffdf</a></code>)</p></li>
-<li><p>&#8220;biglm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/biglm/topics/biglm'>biglm</a></code> (including &#8220;ffdf&#8221;-backed models provided by <code><a href='http://www.rdocumentation.org/packages/ffbase/topics/bigglm.ffdf'>bigglm.ffdf</a></code>)</p></li>
 <li><p>&#8220;bigLm&#8221;, see <code><a href='http://www.rdocumentation.org/packages/bigFastlm/topics/bigLm'>bigLm</a></code></p></li>
 <li><p>&#8220;betareg&#8221;, see <code><a href='http://www.rdocumentation.org/packages/betareg/topics/betareg'>betareg</a></code></p></li>
 <li><p>&#8220;bruto&#8221;, see <code><a href='http://www.rdocumentation.org/packages/mda/topics/bruto'>bruto</a></code></p></li>
@@ -480,9 +475,14 @@
 <span class='co'># prediction for first case</span>
 <span class='fu'>prediction</span>(<span class='no'>x</span>, <span class='no'>iris</span>[<span class='fl'>1</span>,])</div><div class='output co'>#&gt; <span class='message'>Average prediction for 1 observation: 0.2533</span></div><div class='input'>
 <span class='co'># basic use of 'at' argument</span>
-<span class='fu'>prediction</span>(<span class='no'>x</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>Species</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"setosa"</span>, <span class='st'>"virginica"</span>)))</div><div class='output co'>#&gt; <span class='error'>Error in `[.data.frame`(object, , names(at), drop = FALSE): undefined columns selected</span></div><div class='input'>
+<span class='fu'>prediction</span>(<span class='no'>x</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>Species</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"setosa"</span>, <span class='st'>"virginica"</span>)))</div><div class='output co'>#&gt; <span class='message'>Average predictions for 150 observations:</span></div><div class='output co'>#&gt;  at(Species)  value
+#&gt;       setosa 0.2965
+#&gt;    virginica 2.1262</div><div class='input'>
 <span class='co'># prediction at means/modes of input variables</span>
-<span class='fu'>prediction</span>(<span class='no'>x</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'>lapply</span>(<span class='no'>iris</span>, <span class='no'>mean_or_mode</span>))</div><div class='output co'>#&gt; <span class='error'>Error in `[.data.frame`(object, , names(at), drop = FALSE): undefined columns selected</span></div><div class='input'>
+<span class='fu'>prediction</span>(<span class='no'>x</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'>lapply</span>(<span class='no'>iris</span>, <span class='no'>mean_or_mode</span>))</div><div class='output co'>#&gt; <span class='message'>Average prediction for 450 observation:</span></div><div class='output co'>#&gt;  at(Sepal.Length) at(Sepal.Width) at(Petal.Length) at(Petal.Width) at(Species)
+#&gt;             5.843           3.057            3.758           1.199      setosa
+#&gt;   value
+#&gt;  0.2967</div><div class='input'>
 # prediction with multi-category outcome
 </div><span class='co'># NOT RUN {</span>
   <span class='fu'>library</span>(<span class='st'>"mlogit"</span>)

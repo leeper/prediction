@@ -102,7 +102,6 @@ The currently supported model classes are:
  - "ar" from `stats::ar()`
  - "Arima" from `stats::arima()`
  - "arima0" from `stats::arima0()`
- - "bigglm" from `biglm::bigglm()` (including `"ffdf"` backed models)
  - "biglm" from `biglm::biglm()` (including `"ffdf"` backed models)
  - "bigLm" from `bigLm::bigLm()`
  - "betareg" from `betareg::betareg()`
