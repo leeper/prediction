@@ -1,3 +1,7 @@
+# prediction 0.3.7
+
+* Added a function `prediction_summary()` which simply calls `summary(prediction(...))`.
+
 # prediction 0.3.6
 
 * Small fixes for failing CRAN checks. (#25)
