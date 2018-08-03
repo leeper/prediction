@@ -44,7 +44,9 @@ library("prediction")
 ```
 
 ```
-## Average prediction for 32 observations: 20.0906
+## Data frame with 32 predictions from
+##  lm(formula = mpg ~ cyl * hp + wt, data = mtcars)
+## with average prediction: 20.0906
 ```
 
 ```r
@@ -79,16 +81,18 @@ prediction(x, at = list(hp = seq_range(mtcars$hp, 5)))
 ```
 
 ```
-## Average predictions for 32 observations:
+## Data frame with 160 predictions from
+##  lm(formula = mpg ~ cyl * hp + wt, data = mtcars)
+## with average predictions:
 ```
 
 ```
-##  at(hp)  value
-##    52.0 22.605
-##   122.8 19.328
-##   193.5 16.051
-##   264.2 12.774
-##   335.0  9.497
+##     hp      x
+##   52.0 22.605
+##  122.8 19.328
+##  193.5 16.051
+##  264.2 12.774
+##  335.0  9.497
 ```
 
 This more or less serves as a direct R port of (the subset of functionality of) Stata's `margins` command that calculates predictive marginal means, etc. For calculation of marginal or partial effects, see the [**margins**](https://cran.r-project.org/package=margins) package.
