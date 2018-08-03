@@ -78,4 +78,3 @@ function(model,
               type = NA_character_,
               category = category)
 }
-

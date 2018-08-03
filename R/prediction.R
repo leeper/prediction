@@ -117,6 +117,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = "response", 
+         vcov = stats::vcov(model),
          calculate_se = TRUE,
          ...) {
     
@@ -155,6 +156,7 @@ function(model,
               class = c("prediction", "data.frame"),
               row.names = seq_len(nrow(pred)),
               at = if (is.null(at)) at else at_specification,
+              vc = vc,
               model.class = class(model),
               type = type)
 }

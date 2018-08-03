@@ -5,6 +5,7 @@ function(model,
          data = find_data(model, parent.frame()), 
          at = NULL, 
          type = "response",
+         vcov = stats::vcov(model),
          calculate_se = TRUE,
          ...) {
     
@@ -25,18 +26,41 @@ function(model,
         model[["model"]] <- NULL
         
         # setup data
-        data <- build_datalist(data, at = at, as.data.frame = TRUE)
-        at_specification <- attr(data, "at_specification")
+        datalist <- build_datalist(data, at = at, as.data.frame = TRUE)
+        at_specification <- attr(datalist, "at_specification")
         # calculate predictions
         if (isTRUE(calculate_se)) {
-            tmp <- predict(model, newdata = data, type = type, se.fit = TRUE, ...)
+            tmp <- predict(model, newdata = datalist, type = type, se.fit = TRUE, ...)
             # cbind back together
-            pred <- make_data_frame(data, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
+            pred <- make_data_frame(datalist, fitted = tmp[["fit"]], se.fitted = tmp[["se.fit"]])
         } else {
-            tmp <- predict(model, newdata = data, type = type, se.fit = FALSE, ...)
+            tmp <- predict(model, newdata = datalist, type = type, se.fit = FALSE, ...)
             # cbind back together
-            pred <- make_data_frame(data, fitted = tmp, se.fitted = rep(NA_real_, nrow(data)))
+            pred <- make_data_frame(datalist, fitted = tmp, se.fitted = rep(NA_real_, nrow(datalist)))
         }
+    }
+    
+    # variance(s) of average predictions
+    if (isTRUE(calculate_se)) {
+        model_terms <- delete.response(terms(model))
+        if (is.null(at)) {
+            # no 'at_specification', so calculate variance of overall average prediction
+            model_frame <- model.frame(model_terms, data, na.action = na.pass, xlev = model$xlevels)
+            model_mat <- model.matrix(model_terms, model_frame, contrasts.arg = model$contrasts)
+            predicted_means <- colMeans(model_mat, na.rm = TRUE)
+            vc <- (predicted_means %*% vcov %*% predicted_means)[1L, 1L, drop = TRUE]
+        } else {
+            # with 'at_specification', calculate variance of all counterfactual predictions
+            datalist <- build_datalist(data, at = at, as.data.frame = FALSE)
+            vc <- unlist(lapply(datalist, function(one) {
+                model_frame <- model.frame(model_terms, one, na.action = na.pass, xlev = model$xlevels)
+                model_mat <- model.matrix(model_terms, model_frame, contrasts.arg = model$contrasts)
+                predicted_means <- colMeans(model_mat, na.rm = TRUE)
+                predicted_means %*% vcov %*% predicted_means
+            }))
+        }
+    } else {
+        vc <- NA_real_
     }
     
     # obs-x-(ncol(data)+2) data frame
@@ -44,6 +68,7 @@ function(model,
               class = c("prediction", "data.frame"),
               row.names = seq_len(nrow(pred)),
               at = if (is.null(at)) at else at_specification,
+              vcov = vc,
               model.class = class(model),
               type = type)
 }
