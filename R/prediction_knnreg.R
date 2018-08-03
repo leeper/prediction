@@ -17,11 +17,17 @@ prediction.knnreg <- function(model, data, at = NULL, calculate_se = FALSE, ...)
     }
     pred[["se.fitted"]] <- NA_real_
     
-    # obs-x-(ncol(data)+2) data frame
+    # variance(s) of average predictions
+    vc <- NA_real_
+    
+    # output
     structure(pred, 
-              class = c("prediction", "data.frame"), 
-              row.names = seq_len(nrow(pred)),
+              class = c("prediction", "data.frame"),
               at = if (is.null(at)) at else at_specification,
-              model.class = class(model),
-              type = NA_character_)
+              type = NA_character_,
+              call = if ("call" %in% names(model)) model[["call"]] else NULL,
+              model_class = class(model),
+              row.names = seq_len(nrow(pred)),
+              vcov = vc,
+              weighted = FALSE)
 }

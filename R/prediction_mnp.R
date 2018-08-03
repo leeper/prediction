@@ -62,12 +62,18 @@ function(model,
     }
     pred[["se.fitted"]] <- NA_real_
     
-    # obs-x-(ncol(data)+2+nlevels(outcome)) data frame
-    structure(pred,
-              class = c("prediction", "data.frame"), 
-              row.names = seq_len(nrow(pred)),
+    # variance(s) of average predictions
+    vc <- NA_real_
+    
+    # output
+    structure(pred, 
+              class = c("prediction", "data.frame"),
               at = if (is.null(at)) at else at_specification,
-              model.class = class(model),
               type = NA_character_,
-              category = category)
+              call = if ("call" %in% names(model)) model[["call"]] else NULL,
+              model_class = class(model),
+              row.names = seq_len(nrow(pred)),
+              vcov = vc,
+              category = category,
+              weighted = FALSE)
 }

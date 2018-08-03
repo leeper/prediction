@@ -11,12 +11,17 @@ prediction.Arima <- function(model, calculate_se = TRUE,...) {
         pred <- make_data_frame(fitted = tmp, se.fitted = rep(NA_real_, length(tmp)))
     }
     
+    # variance(s) of average predictions
+    vc <- NA_real_
     
-    # obs-x-(ncol(data)+2) data frame
+    # output
     structure(pred, 
-              class = c("prediction", "data.frame"), 
+              class = c("prediction", "data.frame"),
+              at = NULL,
+              type = NA_character_,
+              call = if ("call" %in% names(model)) model[["call"]] else NULL,
+              model_class = class(model),
               row.names = seq_len(nrow(pred)),
-              at = NULL, 
-              model.class = class(model),
-              type = NA_character_)
+              vcov = vc,
+              weighted = FALSE)
 }

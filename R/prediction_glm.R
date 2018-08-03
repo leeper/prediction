@@ -41,7 +41,7 @@ function(model,
     }
     
     # variance(s) of average predictions
-    if (isTRUE(calculate_se)) {
+    if (isTRUE(calculate_se) && type == "link") {
         # handle case where SEs are calculated
         model_terms <- delete.response(terms(model))
         if (is.null(at)) {
@@ -70,7 +70,7 @@ function(model,
     }
     
     # output
-    structure(pred, 
+    structure(pred,
               class = c("prediction", "data.frame"),
               at = if (is.null(at)) at else at_specification,
               type = type,
