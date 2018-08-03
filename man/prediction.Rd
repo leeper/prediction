@@ -18,7 +18,8 @@
 %   R/prediction_rlm.R, R/prediction_rpart.R, R/prediction_rq.R,
 %   R/prediction_selection.R, R/prediction_speedglm.R, R/prediction_speedlm.R,
 %   R/prediction_survreg.R, R/prediction_svm.R, R/prediction_svyglm.R,
-%   R/prediction_train.R, R/prediction_truncreg.R, R/prediction_zeroinfl.R
+%   R/prediction_train.R, R/prediction_truncreg.R, R/prediction_zeroinfl.R,
+%   R/summary.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -81,12 +82,14 @@
 \alias{prediction.train}
 \alias{prediction.truncreg}
 \alias{prediction.zeroinfl}
+\alias{prediction_summary}
 \title{Extract Predictions from a Model Object}
 \usage{
 prediction(model, ...)
 
 \method{prediction}{default}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = "response", calculate_se = TRUE, ...)
+  at = NULL, type = "response", vcov = stats::vcov(model),
+  calculate_se = TRUE, ...)
 
 \method{prediction}{Arima}(model, calculate_se = TRUE, ...)
 
@@ -140,7 +143,8 @@ prediction(model, ...)
   at = NULL, type = c("response", "link"), calculate_se = TRUE, ...)
 
 \method{prediction}{glm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link"), calculate_se = TRUE, ...)
+  at = NULL, type = c("response", "link"), vcov = stats::vcov(model),
+  calculate_se = TRUE, ...)
 
 \method{prediction}{glmnet}(model, data, lambda = model[["lambda"]][1L],
   at = NULL, type = c("response", "link"), calculate_se = FALSE, ...)
@@ -175,7 +179,8 @@ prediction(model, ...)
   calculate_se = TRUE, category, ...)
 
 \method{prediction}{lm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = "response", calculate_se = TRUE, ...)
+  at = NULL, type = "response", vcov = stats::vcov(model),
+  calculate_se = TRUE, ...)
 
 \method{prediction}{lme}(model, data = find_data(model), at = NULL,
   calculate_se = FALSE, ...)
@@ -193,7 +198,8 @@ prediction(model, ...)
   calculate_se = FALSE, ...)
 
 \method{prediction}{mclogit}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link"), calculate_se = TRUE, ...)
+  at = NULL, type = "response", vcov = stats::vcov(model),
+  calculate_se = TRUE, ...)
 
 \method{prediction}{merMod}(model, data = find_data(model), at = NULL,
   type = c("response", "link"), re.form = NULL, calculate_se = FALSE, ...)
@@ -229,7 +235,8 @@ prediction(model, ...)
   at = NULL, calculate_se = FALSE, ...)
 
 \method{prediction}{rlm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = "response", calculate_se = TRUE, ...)
+  at = NULL, type = "response", vcov = stats::vcov(model),
+  calculate_se = TRUE, ...)
 
 \method{prediction}{rpart}(model, data = find_data(model, parent.frame()),
   at = NULL, type = NULL, calculate_se = FALSE, category, ...)
@@ -265,6 +272,8 @@ prediction(model, ...)
 \method{prediction}{zeroinfl}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "count", "prob", "zero"),
   calculate_se = FALSE, ...)
+
+prediction_summary(model, ..., level = 0.95)
 }
 \arguments{
 \item{model}{A model object, perhaps returned by \code{\link[stats]{lm}} or \code{\link[stats]{glm}}.}
@@ -277,16 +286,20 @@ prediction(model, ...)
 
 \item{type}{A character string indicating the type of marginal effects to estimate. Mostly relevant for non-linear models, where the reasonable options are \dQuote{response} (the default) or \dQuote{link} (i.e., on the scale of the linear predictor in a GLM). For models of class \dQuote{polr} (from \code{\link[MASS]{polr}}), possible values are \dQuote{class} or \dQuote{probs}; both are returned.}
 
-\item{calculate_se}{A logical indicating whether to calculate standard errors (if possible). The output will always contain a \dQuote{calculate_se} column regardless of this value; this only controls the calculation of standard errors. Setting it to \code{FALSE} may improve speed.}
+\item{vcov}{A matrix containing the variance-covariance matrix for estimated model coefficients, or a function to perform the estimation with \code{model} as its only argument.}
+
+\item{calculate_se}{A logical indicating whether to calculate standard errors for observation-specific predictions and average predictions (if possible). The output will always contain a \dQuote{calculate_se} column regardless of this value; this only controls the calculation of standard errors. Setting it to \code{FALSE} may improve speed.}
 
 \item{category}{For multi-level or multi-category outcome models (e.g., ordered probit, multinomial logit, etc.), a value specifying which of the outcome levels should be used for the \code{"fitted"} column. If missing, some default is chosen automatically.}
 
 \item{lambda}{For models of class \dQuote{glmnet}, a value of the penalty parameter at which predictions are required.}
 
 \item{re.form}{An argument passed forward to \code{\link[lme4]{predict.merMod}}.}
+
+\item{level}{A numeric value specifying the confidence level for calculating p-values and confidence intervals.}
 }
 \value{
-A data frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, or a multiple thereof, if \code{!is.null(at)}. The return value contains \code{data} (possibly modified by \code{at} using \code{\link{build_datalist}}), plus a column containing fitted/predicted values (\code{"fitted"}) and a column containing the standard errors thereof (\code{"calculate_se"}). Additional columns may be reported depending on the object class.
+A data frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, or a multiple thereof, if \code{!is.null(at)}. The return value contains \code{data} (possibly modified by \code{at} using \code{\link{build_datalist}}), plus a column containing fitted/predicted values (\code{"fitted"}) and a column containing the standard errors thereof (\code{"calculate_se"}). Additional columns may be reported depending on the object class. The data frame also carries attributes used by \code{print} and \code{summary}, which will be lost during subsetting.
 }
 \description{
 Extract predicted values via \code{\link[stats]{predict}} from a model object, conditional on data, and return a data frame.
@@ -369,7 +382,10 @@ prediction(x)
 prediction(x, iris[1,])
 
 # basic use of 'at' argument
-prediction(x, at = list(Species = c("setosa", "virginica")))
+summary(prediction(x, at = list(Species = c("setosa", "virginica"))))
+
+# basic use of 'at' argument
+prediction(x, at = list(Sepal.Length = seq_range(iris$Sepal.Length, 5)))
 
 # prediction at means/modes of input variables
 prediction(x, at = lapply(iris, mean_or_mode))

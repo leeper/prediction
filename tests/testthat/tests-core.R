@@ -5,21 +5,34 @@ library("datasets")
 
 context("Test `prediction()` behavior")
 test_that("Test prediction()", {
-    expect_true(inherits(prediction(lm(mpg ~ cyl, data = mtcars), data = mtcars), "data.frame"), label = "prediction() works w data arg (LM)")
-    expect_true(inherits(prediction(glm(mpg ~ cyl, data = mtcars), data = mtcars), "data.frame"), label = "prediction() works w data arg (GLM)")
-    expect_true(inherits(prediction(lm(mpg ~ cyl, data = mtcars)), "data.frame"), label = "prediction() works w/o data arg (LM)")
-    expect_true(inherits(prediction(glm(mpg ~ cyl, data = mtcars)), "data.frame"), label = "prediction() works w/o data arg (GLM)")
-    expect_true(inherits(prediction(lm(mpg ~ cyl, data = mtcars), data = NULL), "data.frame"), label = "prediction() works w/ NULL data arg (LM)")
+    mod1 <- lm(mpg ~ cyl, data = mtcars)
+    mod2 <- glm(mpg ~ cyl, data = mtcars)
+    expect_true(inherits(prediction(mod1, data = mtcars), "data.frame"), label = "prediction() works w data arg (LM)")
+    expect_true(inherits(prediction(mod2, data = mtcars), "data.frame"), label = "prediction() works w data arg (GLM)")
+    expect_true(inherits(prediction(mod1), "data.frame"), label = "prediction() works w/o data arg (LM)")
+    expect_true(inherits(prediction(mod2), "data.frame"), label = "prediction() works w/o data arg (GLM)")
+    expect_error(inherits(prediction(mod1, data = NULL), "data.frame"), label = "prediction() errors w/ NULL data arg (LM)")
+    expect_error(inherits(prediction(mod2, data = NULL), "data.frame"), label = "prediction() errors w/ NULL data arg (GLM)")
+    expect_true(all.equal(prediction(mod1, data = mtcars)$fitted, predict(mod1), check.attributes = FALSE),
+                label = "prediction() matches predict() (LM)")
+    expect_true(all.equal(prediction(mod2, data = mtcars)$fitted, predict(mod2, type = "response"), check.attributes = FALSE),
+                label = "prediction() matches predict() (GLM)")
 })
 test_that("Test prediction(at = )", {
     m <- lm(mpg ~ cyl, data = mtcars)
     p1 <- prediction(m, at = list(cyl = 4))
     expect_true(inherits(p1, "data.frame"), label = "prediction(at = list(cyl = 4)) works")
     expect_true(nrow(p1) == nrow(mtcars), label = "prediction(at = list(cyl = 4)) works")
+    expect_true(all.equal(p1$fitted, predict(m, within(mtcars, cyl <- 4)), check.attributes = FALSE),
+                label = "prediction(at = list(cyl = 4)) matches predict()")
     
     p2 <- prediction(m, at = list(cyl = c(4, 6)))
     expect_true(inherits(p2, "data.frame"), label = "prediction(at = list(cyl = c(4, 6))) works")
     expect_true(nrow(p2) == 2*nrow(mtcars), label = "prediction(at = list(cyl = c(4, 6))) works")
+    expect_true(all.equal(p2$fitted,
+                          predict(m, rbind(within(mtcars, cyl <- 4), within(mtcars, cyl <- 6))),
+                          check.attributes = FALSE),
+                label = "prediction(at = list(cyl = c(4, 6))) matches predict()")
     
     p3 <- prediction(m, at = list(cyl = c(4, 6), wt = 2:3))
     expect_true(inherits(p3, "data.frame"), label = "prediction(at = list(cyl = c(4, 6), wt = 2:3)) works")
@@ -34,7 +47,13 @@ test_that("Test print()", {
     expect_true(inherits(print(prediction(lm(mpg ~ cyl, data = mtcars), data = mtcars)), "data.frame"), 
                 label = "print() works with numeric outcome")
     expect_true(inherits(print(prediction(lm(mpg ~ cyl, data = mtcars), data = mtcars, at = list(cyl = c(4,6,8)))), "data.frame"), 
-                label = "print() works with numeric outcome")
+                label = "print() works with numeric outcome and at()")
+})
+test_that("Test summary()", {
+    expect_true(inherits(summary(prediction(lm(mpg ~ cyl, data = mtcars), data = mtcars)), "data.frame"), 
+                label = "summary() works with numeric outcome")
+    expect_true(inherits(summary(prediction(lm(mpg ~ cyl, data = mtcars), data = mtcars, at = list(cyl = c(4,6,8)))), "data.frame"), 
+                label = "summary() works with numeric outcome and at()")
 })
 test_that("Test head() and tail()", {
     expect_true(inherits(head(prediction(lm(mpg ~ cyl, data = mtcars), data = mtcars)), "data.frame"), 

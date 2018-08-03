@@ -42,33 +42,41 @@ function(model,
     
     # variance(s) of average predictions
     if (isTRUE(calculate_se)) {
+        # handle case where SEs are calculated
         model_terms <- delete.response(terms(model))
         if (is.null(at)) {
             # no 'at_specification', so calculate variance of overall average prediction
             model_frame <- model.frame(model_terms, data, na.action = na.pass, xlev = model$xlevels)
             model_mat <- model.matrix(model_terms, model_frame, contrasts.arg = model$contrasts)
-            predicted_means <- colMeans(model_mat, na.rm = TRUE)
-            vc <- (predicted_means %*% vcov %*% predicted_means)[1L, 1L, drop = TRUE]
+            means_for_prediction <- colMeans(model_mat)
+            vc <- (means_for_prediction %*% vcov %*% means_for_prediction)[1L, 1L, drop = TRUE]
         } else {
             # with 'at_specification', calculate variance of all counterfactual predictions
             datalist <- build_datalist(data, at = at, as.data.frame = FALSE)
             vc <- unlist(lapply(datalist, function(one) {
                 model_frame <- model.frame(model_terms, one, na.action = na.pass, xlev = model$xlevels)
                 model_mat <- model.matrix(model_terms, model_frame, contrasts.arg = model$contrasts)
-                predicted_means <- colMeans(model_mat, na.rm = TRUE)
-                predicted_means %*% vcov %*% predicted_means
+                means_for_prediction <- colMeans(model_mat)
+                means_for_prediction %*% vcov %*% means_for_prediction
             }))
         }
     } else {
-        vc <- NA_real_
+        # handle case where SEs are *not* calculated
+        if (length(at)) {
+            vc <- rep(NA_real_, nrow(at_specification))
+        } else {
+            vc <- NA_real_
+        }
     }
     
-    # obs-x-(ncol(data)+2) data frame
+    # output
     structure(pred, 
               class = c("prediction", "data.frame"),
-              row.names = seq_len(nrow(pred)),
               at = if (is.null(at)) at else at_specification,
+              type = type,
+              call = if ("call" %in% names(model)) model[["call"]] else NULL,
+              model_class = class(model),
+              row.names = seq_len(nrow(pred)),
               vcov = vc,
-              model.class = class(model),
-              type = type)
+              weighted = FALSE)
 }

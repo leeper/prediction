@@ -14,7 +14,7 @@
 #' median_or_mode(iris)
 #' 
 #' @seealso \code{\link{prediction}}, \code{\link{build_datalist}}, \code{\link{seq_range}}
-#' @importFrom stats median setNames
+#' @import stats
 #' @export
 mean_or_mode <- function(x) {
     UseMethod("mean_or_mode")

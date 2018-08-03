@@ -1,6 +1,8 @@
 # prediction 0.3.7
 
+* `summary(prediction(...))` now reports variances of average predictions, along with test statistics, p-values, and confidence intervals, where supported. (#17)
 * Added a function `prediction_summary()` which simply calls `summary(prediction(...))`.
+* All methods now return additional attributes.
 
 # prediction 0.3.6
 

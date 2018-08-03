@@ -6,7 +6,8 @@
 #' @param data A data.frame over which to calculate marginal effects. If missing, \code{\link{find_data}} is used to specify the data frame.
 #' @param at A list of one or more named vectors, specifically values at which to calculate the predictions. These are used to modify the value of \code{data} (see \code{\link{build_datalist}} for details on use).
 #' @param type A character string indicating the type of marginal effects to estimate. Mostly relevant for non-linear models, where the reasonable options are \dQuote{response} (the default) or \dQuote{link} (i.e., on the scale of the linear predictor in a GLM). For models of class \dQuote{polr} (from \code{\link[MASS]{polr}}), possible values are \dQuote{class} or \dQuote{probs}; both are returned.
-#' @param calculate_se A logical indicating whether to calculate standard errors (if possible). The output will always contain a \dQuote{calculate_se} column regardless of this value; this only controls the calculation of standard errors. Setting it to \code{FALSE} may improve speed.
+#' @param vcov A matrix containing the variance-covariance matrix for estimated model coefficients, or a function to perform the estimation with \code{model} as its only argument.
+#' @param calculate_se A logical indicating whether to calculate standard errors for observation-specific predictions and average predictions (if possible). The output will always contain a \dQuote{calculate_se} column regardless of this value; this only controls the calculation of standard errors. Setting it to \code{FALSE} may improve speed.
 #' @param category For multi-level or multi-category outcome models (e.g., ordered probit, multinomial logit, etc.), a value specifying which of the outcome levels should be used for the \code{"fitted"} column. If missing, some default is chosen automatically.
 #' @param \dots Additional arguments passed to \code{\link[stats]{predict}} methods.
 #' @details This function is simply a wrapper around \code{\link[stats]{predict}} that returns a data frame containing the value of \code{data} and the predicted values with respect to all variables specified in \code{data}.
@@ -76,7 +77,7 @@
 #'   \item \dQuote{zeroinfl}, see \code{\link[pscl]{zeroinfl}}
 #' }
 #' 
-#' @return A data frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, or a multiple thereof, if \code{!is.null(at)}. The return value contains \code{data} (possibly modified by \code{at} using \code{\link{build_datalist}}), plus a column containing fitted/predicted values (\code{"fitted"}) and a column containing the standard errors thereof (\code{"calculate_se"}). Additional columns may be reported depending on the object class.
+#' @return A data frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, or a multiple thereof, if \code{!is.null(at)}. The return value contains \code{data} (possibly modified by \code{at} using \code{\link{build_datalist}}), plus a column containing fitted/predicted values (\code{"fitted"}) and a column containing the standard errors thereof (\code{"calculate_se"}). Additional columns may be reported depending on the object class. The data frame also carries attributes used by \code{print} and \code{summary}, which will be lost during subsetting.
 #' @examples
 #' require("datasets")
 #' x <- lm(Petal.Width ~ Sepal.Length * Sepal.Width * Species, data = iris)
@@ -87,7 +88,10 @@
 #' prediction(x, iris[1,])
 #' 
 #' # basic use of 'at' argument
-#' prediction(x, at = list(Species = c("setosa", "virginica")))
+#' summary(prediction(x, at = list(Species = c("setosa", "virginica"))))
+#' 
+#' # basic use of 'at' argument
+#' prediction(x, at = list(Sepal.Length = seq_range(iris$Sepal.Length, 5)))
 #' 
 #' # prediction at means/modes of input variables
 #' prediction(x, at = lapply(iris, mean_or_mode))
@@ -104,7 +108,7 @@
 #' 
 #' @keywords models
 #' @seealso \code{\link{find_data}}, \code{\link{build_datalist}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
-#' @importFrom stats predict get_all_vars model.frame
+#' @import stats
 #' @export
 prediction <- function(model, ...) {
     UseMethod("prediction")
@@ -133,9 +137,7 @@ function(model,
         }
     } else {
         # setup data
-        if (is.null(at)) {
-            data <- data
-        } else {
+        if (!is.null(at)) {
             data <- build_datalist(data, at = at, as.data.frame = TRUE)
             at_specification <- attr(data, "at_specification")
         }
@@ -151,12 +153,17 @@ function(model,
         }
     }
     
-    # obs-x-(ncol(data)+2) data.frame of predictions
+    # variance(s) of average predictions
+    vc <- NA_real_
+    
+    # output
     structure(pred, 
               class = c("prediction", "data.frame"),
-              row.names = seq_len(nrow(pred)),
               at = if (is.null(at)) at else at_specification,
-              vc = vc,
-              model.class = class(model),
-              type = type)
+              type = type,
+              call = if ("call" %in% names(model)) model[["call"]] else NULL,
+              model_class = class(model),
+              row.names = seq_len(nrow(pred)),
+              vcov = vc,
+              weighted = FALSE)
 }
