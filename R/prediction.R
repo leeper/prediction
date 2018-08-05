@@ -77,6 +77,8 @@
 #'   \item \dQuote{zeroinfl}, see \code{\link[pscl]{zeroinfl}}
 #' }
 #' 
+#' Where implemented, \code{prediction} also returns average predictions (and the variances thereof). Variances are implemented using the delta method, as described in \url{http://indiana.edu/~jslsoc/stata/ci_computations/spost_deltaci.pdf}.
+#' 
 #' @return A data frame with class \dQuote{prediction} that has a number of rows equal to number of rows in \code{data}, or a multiple thereof, if \code{!is.null(at)}. The return value contains \code{data} (possibly modified by \code{at} using \code{\link{build_datalist}}), plus a column containing fitted/predicted values (\code{"fitted"}) and a column containing the standard errors thereof (\code{"calculate_se"}). Additional columns may be reported depending on the object class. The data frame also carries attributes used by \code{print} and \code{summary}, which will be lost during subsetting.
 #' @examples
 #' require("datasets")

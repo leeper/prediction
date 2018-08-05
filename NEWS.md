@@ -1,3 +1,8 @@
+# prediction 0.3.8
+
+* Provisional support for variances of average predictions for GLMs. (#17)
+* Added an example dataset, `margex`, borrowed from Stata's identically named data.
+
 # prediction 0.3.7
 
 * `summary(prediction(...))` now reports variances of average predictions, along with test statistics, p-values, and confidence intervals, where supported. (#17)

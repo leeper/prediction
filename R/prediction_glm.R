@@ -41,25 +41,37 @@ function(model,
     }
     
     # variance(s) of average predictions
-    if (isTRUE(calculate_se) && type == "link") {
+    if (isTRUE(calculate_se)) {
         # handle case where SEs are calculated
         model_terms <- delete.response(terms(model))
         if (is.null(at)) {
             # no 'at_specification', so calculate variance of overall average prediction
             model_frame <- model.frame(model_terms, data, na.action = na.pass, xlev = model$xlevels)
             model_mat <- model.matrix(model_terms, model_frame, contrasts.arg = model$contrasts)
-            means_for_prediction <- colMeans(model_mat)
-            vc <- (means_for_prediction %*% vcov %*% means_for_prediction)[1L, 1L, drop = TRUE]
+            if (type == "link") {
+                means_for_prediction <- colMeans(model_mat)
+            } else if (type == "response") {
+                predictions_link <- predict(model, data = data, type = "link", se.fit = FALSE, ...)
+                means_for_prediction <- colMeans(model$family$mu.eta(predictions_link) * model_mat)
+            }
+            J <- matrix(means_for_prediction, nrow = 1L)
         } else {
             # with 'at_specification', calculate variance of all counterfactual predictions
             datalist <- build_datalist(data, at = at, as.data.frame = FALSE)
-            vc <- unlist(lapply(datalist, function(one) {
+            jacobian_list <- lapply(datalist, function(one) {
                 model_frame <- model.frame(model_terms, one, na.action = na.pass, xlev = model$xlevels)
                 model_mat <- model.matrix(model_terms, model_frame, contrasts.arg = model$contrasts)
-                means_for_prediction <- colMeans(model_mat)
-                means_for_prediction %*% vcov %*% means_for_prediction
-            }))
+                if (type == "link") {
+                    means_for_prediction <- colMeans(model_mat)
+                } else if (type == "response") {
+                    predictions_link <- predict(model, data = one, type = "link", se.fit = FALSE, ...)
+                    means_for_prediction <- colMeans(model$family$mu.eta(predictions_link) * model_mat)
+                }
+                means_for_prediction
+            })
+            J <- do.call("rbind", jacobian_list)
         }
+        vc <- diag(J %*% vcov %*% t(J))
     } else {
         # handle case where SEs are *not* calculated
         if (length(at)) {
@@ -78,5 +90,6 @@ function(model,
               model_class = class(model),
               row.names = seq_len(nrow(pred)),
               vcov = vc,
+              jacobian = J,
               weighted = FALSE)
 }

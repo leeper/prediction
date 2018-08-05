@@ -91,7 +91,7 @@ test_that("Test summary() w at()", {
 })
 
 test_that("Test prediction_summary()", {
-    m1 <- lm(mpg ~ cyl, data = mtcars), data = mtcars)
+    m1 <- lm(mpg ~ cyl, data = mtcars)
     p1 <- prediction(m1)
     s1 <- summary(p1)
     expect_true(identical(s1, prediction_summary(m1)), label = "prediction_summary() is correct")
