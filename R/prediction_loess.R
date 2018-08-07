@@ -24,6 +24,7 @@ prediction.loess <- function(model, data = find_data(model, parent.frame()), at 
     }
     
     # variance(s) of average predictions
+    J <- NULL
     vc <- NA_real_
     
     # output
@@ -35,6 +36,6 @@ prediction.loess <- function(model, data = find_data(model, parent.frame()), at 
               model_class = class(model),
               row.names = seq_len(nrow(pred)),
               vcov = vc,
+              jacobian = J,
               weighted = FALSE)
 }
-

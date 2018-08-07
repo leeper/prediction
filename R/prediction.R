@@ -156,6 +156,7 @@ function(model,
     }
     
     # variance(s) of average predictions
+    J <- NULL
     vc <- NA_real_
     
     # output
@@ -167,5 +168,6 @@ function(model,
               model_class = class(model),
               row.names = seq_len(nrow(pred)),
               vcov = vc,
+              jacobian = J,
               weighted = FALSE)
 }

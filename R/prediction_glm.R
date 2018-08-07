@@ -74,6 +74,7 @@ function(model,
         vc <- diag(J %*% vcov %*% t(J))
     } else {
         # handle case where SEs are *not* calculated
+        J <- NULL
         if (length(at)) {
             vc <- rep(NA_real_, nrow(at_specification))
         } else {

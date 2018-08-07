@@ -62,6 +62,7 @@ function(model,
         }
     } else {
         # handle case where SEs are *not* calculated
+        J <- NULL
         if (length(at)) {
             vc <- rep(NA_real_, nrow(at_specification))
         } else {
@@ -78,5 +79,6 @@ function(model,
               model_class = class(model),
               row.names = seq_len(nrow(pred)),
               vcov = vc,
+              jacobian = J,
               weighted = FALSE)
 }
