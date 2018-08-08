@@ -29,5 +29,6 @@ prediction.knnreg <- function(model, data, at = NULL, calculate_se = FALSE, ...)
               model_class = class(model),
               row.names = seq_len(nrow(pred)),
               vcov = vc,
+              jacobian = NULL,
               weighted = FALSE)
 }

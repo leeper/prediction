@@ -33,5 +33,6 @@ function(model,
               model_class = class(model),
               row.names = seq_len(nrow(pred)),
               vcov = vc,
+              jacobian = NULL,
               weighted = FALSE)
 }

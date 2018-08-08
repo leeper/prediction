@@ -43,6 +43,7 @@ function(model,
     # variance(s) of average predictions
     if (isTRUE(calculate_se)) {
         # handle case where SEs are calculated
+        J <- NULL
         model_terms <- delete.response(terms(model))
         if (is.null(at)) {
             # no 'at_specification', so calculate variance of overall average prediction

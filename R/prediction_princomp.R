@@ -34,5 +34,6 @@ prediction.princomp <- function(model, data = find_data(model, parent.frame()), 
               model_class = class(model),
               row.names = seq_len(nrow(pred)),
               vcov = vc,
+              jacobian = NULL,
               weighted = FALSE)
 }

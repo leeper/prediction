@@ -40,5 +40,6 @@ prediction.ar <- function(model, data, at = NULL, calculate_se = TRUE,...) {
               model_class = class(model),
               row.names = seq_len(nrow(pred)),
               vcov = vc,
+              jacobian = NULL,
               weighted = FALSE)
 }
