@@ -37,7 +37,7 @@ find_data.default <- function(model, env = parent.frame(), ...) {
         if (!is.null(model[["call"]][["subset"]])) {
             subs <- try(eval(model[["call"]][["subset"]], dat), silent = TRUE)
             if (inherits(subs, "try-error")) {
-                subs <- try(get("subs", env), silent = TRUE)
+                subs <- try(eval(model[["call"]][["subset"]], env), silent = TRUE)
                 if (inherits(subs, "try-error")) {
                     subs <- TRUE
                     warning("'find_data()' cannot locate variable(s) used in 'subset'")

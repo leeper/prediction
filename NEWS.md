@@ -1,3 +1,7 @@
+# prediction 0.3.10
+
+* Added tests for `find_data()` and `prediction.lm()` to check for correct behavior in the presence of missing data (`na.action`) and `subset` arguments. (#28)
+
 # prediction 0.3.8
 
 * Provisional support for variances of average predictions for GLMs. (#17)
