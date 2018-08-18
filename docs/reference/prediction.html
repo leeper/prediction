@@ -21,9 +21,11 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
 
@@ -31,7 +33,10 @@
 <meta property="og:title" content="Extract Predictions from a Model Object — prediction-package" />
 
 <meta property="og:description" content="Extract predicted values via predict from a model object, conditional on data, and return a data frame." />
+
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -58,7 +63,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">prediction</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.5</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.10</span>
       </span>
     </div>
 
@@ -98,7 +103,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Extract Predictions from a Model Object</h1>
-    <small class="dont-index">Source: <a href='https://github.com/leeper/prediction/blob/master/R/prediction.R'><code>R/prediction.R</code></a>, <a href='https://github.com/leeper/prediction/blob/master/R/prediction_Arima.R'><code>R/prediction_Arima.R</code></a>, <a href='https://github.com/leeper/prediction/blob/master/R/prediction_Gam.R'><code>R/prediction_Gam.R</code></a>, and 57 more</small>
+    <small class="dont-index">Source: <a href='https://github.com/leeper/prediction/blob/master/R/prediction.R'><code>R/prediction.R</code></a>, <a href='https://github.com/leeper/prediction/blob/master/R/prediction_Arima.R'><code>R/prediction_Arima.R</code></a>, <a href='https://github.com/leeper/prediction/blob/master/R/prediction_ar.R'><code>R/prediction_ar.R</code></a>, and 58 more</small>
     <div class="hidden name"><code>prediction.Rd</code></div>
     </div>
 
@@ -112,15 +117,11 @@
 
 <span class='co'># S3 method for default</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
-  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"response"</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"response"</span>, <span class='kw'>vcov</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/vcov'>vcov</a></span>(<span class='no'>model</span>),
+  <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for Arima</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
-
-<span class='co'># S3 method for Gam</span>
-<span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
-  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"link"</span>, <span class='st'>"terms"</span>), <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>)
 
 <span class='co'># S3 method for ar</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='no'>data</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
@@ -167,6 +168,11 @@
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
   <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>category</span>, <span class='no'>...</span>)
 
+<span class='co'># S3 method for Gam</span>
+<span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
+  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"link"</span>, <span class='st'>"terms"</span>), <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='no'>...</span>)
+
 <span class='co'># S3 method for gausspr</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='no'>data</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>category</span>, <span class='no'>...</span>)
@@ -184,7 +190,8 @@
 
 <span class='co'># S3 method for glm</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
-  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"link"</span>), <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"link"</span>), <span class='kw'>vcov</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/vcov'>vcov</a></span>(<span class='no'>model</span>),
+  <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for glmnet</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='no'>data</span>, <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='no'>model</span><span class='kw'>[[</span><span class='st'>"lambda"</span>]][<span class='fl'>1L</span>],
@@ -230,7 +237,8 @@
 
 <span class='co'># S3 method for lm</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
-  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"response"</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"response"</span>, <span class='kw'>vcov</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/vcov'>vcov</a></span>(<span class='no'>model</span>),
+  <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for lme</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>), <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -254,7 +262,8 @@
 
 <span class='co'># S3 method for mclogit</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
-  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"link"</span>), <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"response"</span>, <span class='kw'>vcov</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/vcov'>vcov</a></span>(<span class='no'>model</span>),
+  <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for merMod</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>), <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
@@ -302,7 +311,8 @@
 
 <span class='co'># S3 method for rlm</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
-  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"response"</span>, <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
+  <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='st'>"response"</span>, <span class='kw'>vcov</span> <span class='kw'>=</span> <span class='kw pkg'>stats</span><span class='kw ns'>::</span><span class='fu'><a href='http://www.rdocumentation.org/packages/stats/topics/vcov'>vcov</a></span>(<span class='no'>model</span>),
+  <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='no'>...</span>)
 
 <span class='co'># S3 method for rpart</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
@@ -348,7 +358,9 @@
 <span class='co'># S3 method for zeroinfl</span>
 <span class='fu'>prediction</span>(<span class='no'>model</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='find_data.html'>find_data</a></span>(<span class='no'>model</span>, <span class='fu'>parent.frame</span>()),
   <span class='kw'>at</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"response"</span>, <span class='st'>"count"</span>, <span class='st'>"prob"</span>, <span class='st'>"zero"</span>),
-  <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)</pre>
+  <span class='kw'>calculate_se</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>, <span class='no'>...</span>)
+
+<span class='fu'>prediction_summary</span>(<span class='no'>model</span>, <span class='no'>...</span>, <span class='kw'>level</span> <span class='kw'>=</span> <span class='fl'>0.95</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -374,8 +386,12 @@
       <td><p>A character string indicating the type of marginal effects to estimate. Mostly relevant for non-linear models, where the reasonable options are &#8220;response&#8221; (the default) or &#8220;link&#8221; (i.e., on the scale of the linear predictor in a GLM). For models of class &#8220;polr&#8221; (from <code><a href='http://www.rdocumentation.org/packages/MASS/topics/polr'>polr</a></code>), possible values are &#8220;class&#8221; or &#8220;probs&#8221;; both are returned.</p></td>
     </tr>
     <tr>
+      <th>vcov</th>
+      <td><p>A matrix containing the variance-covariance matrix for estimated model coefficients, or a function to perform the estimation with <code>model</code> as its only argument.</p></td>
+    </tr>
+    <tr>
       <th>calculate_se</th>
-      <td><p>A logical indicating whether to calculate standard errors (if possible). The output will always contain a &#8220;calculate_se&#8221; column regardless of this value; this only controls the calculation of standard errors. Setting it to <code>FALSE</code> may improve speed.</p></td>
+      <td><p>A logical indicating whether to calculate standard errors for observation-specific predictions and average predictions (if possible). The output will always contain a &#8220;calculate_se&#8221; column regardless of this value; this only controls the calculation of standard errors. Setting it to <code>FALSE</code> may improve speed.</p></td>
     </tr>
     <tr>
       <th>category</th>
@@ -389,11 +405,15 @@
       <th>re.form</th>
       <td><p>An argument passed forward to <code><a href='http://www.rdocumentation.org/packages/lme4/topics/predict.merMod'>predict.merMod</a></code>.</p></td>
     </tr>
+    <tr>
+      <th>level</th>
+      <td><p>A numeric value specifying the confidence level for calculating p-values and confidence intervals.</p></td>
+    </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with class &#8220;prediction&#8221; that has a number of rows equal to number of rows in <code>data</code>, or a multiple thereof, if <code>!is.null(at)</code>. The return value contains <code>data</code> (possibly modified by <code>at</code> using <code><a href='build_datalist.html'>build_datalist</a></code>), plus a column containing fitted/predicted values (<code>"fitted"</code>) and a column containing the standard errors thereof (<code>"calculate_se"</code>). Additional columns may be reported depending on the object class.</p>
+    <p>A data frame with class &#8220;prediction&#8221; that has a number of rows equal to number of rows in <code>data</code>, or a multiple thereof, if <code>!is.null(at)</code>. The return value contains <code>data</code> (possibly modified by <code>at</code> using <code><a href='build_datalist.html'>build_datalist</a></code>), plus a column containing fitted/predicted values (<code>"fitted"</code>) and a column containing the standard errors thereof (<code>"calculate_se"</code>). Additional columns may be reported depending on the object class. The data frame also carries attributes used by <code>print</code> and <code>summary</code>, which will be lost during subsetting.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
@@ -461,6 +481,7 @@
 <li><p>&#8220;truncreg&#8221;, see <code><a href='http://www.rdocumentation.org/packages/truncreg/topics/truncreg'>truncreg</a></code></p></li>
 <li><p>&#8220;zeroinfl&#8221;, see <code><a href='http://www.rdocumentation.org/packages/pscl/topics/zeroinfl'>zeroinfl</a></code></p></li>
 </ul>
+    <p>Where implemented, <code>prediction</code> also returns average predictions (and the variances thereof). Variances are implemented using the delta method, as described in <a href='http://indiana.edu/~jslsoc/stata/ci_computations/spost_deltaci.pdf'>http://indiana.edu/~jslsoc/stata/ci_computations/spost_deltaci.pdf</a>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -471,18 +492,35 @@
     <pre class="examples"><div class='input'><span class='fu'>require</span>(<span class='st'>"datasets"</span>)
 <span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'>lm</span>(<span class='no'>Petal.Width</span> ~ <span class='no'>Sepal.Length</span> * <span class='no'>Sepal.Width</span> * <span class='no'>Species</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>iris</span>)
 <span class='co'># prediction for every case</span>
-<span class='fu'>prediction</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='message'>Average prediction for 150 observations: 1.1993</span></div><div class='input'>
+<span class='fu'>prediction</span>(<span class='no'>x</span>)</div><div class='output co'>#&gt; <span class='message'>Data frame with 150 predictions from</span>
+#&gt; <span class='message'> lm(formula = Petal.Width ~ Sepal.Length * Sepal.Width * Species, </span>
+#&gt; <span class='message'>    data = iris)</span>
+#&gt; <span class='message'>with average prediction: 1.1993</span></div><div class='input'>
 <span class='co'># prediction for first case</span>
-<span class='fu'>prediction</span>(<span class='no'>x</span>, <span class='no'>iris</span>[<span class='fl'>1</span>,])</div><div class='output co'>#&gt; <span class='message'>Average prediction for 1 observation: 0.2533</span></div><div class='input'>
+<span class='fu'>prediction</span>(<span class='no'>x</span>, <span class='no'>iris</span>[<span class='fl'>1</span>,])</div><div class='output co'>#&gt; <span class='message'>Data frame with 1 predictions from</span>
+#&gt; <span class='message'> lm(formula = Petal.Width ~ Sepal.Length * Sepal.Width * Species, </span>
+#&gt; <span class='message'>    data = iris)</span>
+#&gt; <span class='message'>with average prediction: 0.2533</span></div><div class='input'>
 <span class='co'># basic use of 'at' argument</span>
-<span class='fu'>prediction</span>(<span class='no'>x</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>Species</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"setosa"</span>, <span class='st'>"virginica"</span>)))</div><div class='output co'>#&gt; <span class='message'>Average predictions for 150 observations:</span></div><div class='output co'>#&gt;  at(Species)  value
-#&gt;       setosa 0.2965
-#&gt;    virginica 2.1262</div><div class='input'>
+<span class='fu'>summary</span>(<span class='fu'>prediction</span>(<span class='no'>x</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>Species</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"setosa"</span>, <span class='st'>"virginica"</span>))))</div><div class='output co'>#&gt;  at(Species) Prediction      SE     z       p   lower  upper
+#&gt;       setosa     0.2965 0.13601  2.18 0.02925 0.02993 0.5631
+#&gt;    virginica     2.1262 0.04935 43.08 0.00000 2.02945 2.2229</div><div class='input'>
+<span class='co'># basic use of 'at' argument</span>
+<span class='fu'>prediction</span>(<span class='no'>x</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'>list</span>(<span class='kw'>Sepal.Length</span> <span class='kw'>=</span> <span class='fu'><a href='seq_range.html'>seq_range</a></span>(<span class='no'>iris</span>$<span class='no'>Sepal.Length</span>, <span class='fl'>5</span>)))</div><div class='output co'>#&gt; <span class='message'>Data frame with 750 predictions from</span>
+#&gt; <span class='message'> lm(formula = Petal.Width ~ Sepal.Length * Sepal.Width * Species, </span>
+#&gt; <span class='message'>    data = iris)</span>
+#&gt; <span class='message'>with average predictions:</span></div><div class='output co'>#&gt;  Sepal.Length     x
+#&gt;           4.3 1.143
+#&gt;           5.2 1.194
+#&gt;           6.1 1.245
+#&gt;           7.0 1.296
+#&gt;           7.9 1.347</div><div class='input'>
 <span class='co'># prediction at means/modes of input variables</span>
-<span class='fu'>prediction</span>(<span class='no'>x</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'>lapply</span>(<span class='no'>iris</span>, <span class='no'>mean_or_mode</span>))</div><div class='output co'>#&gt; <span class='message'>Average prediction for 450 observation:</span></div><div class='output co'>#&gt;  at(Sepal.Length) at(Sepal.Width) at(Petal.Length) at(Petal.Width) at(Species)
-#&gt;             5.843           3.057            3.758           1.199      setosa
-#&gt;   value
-#&gt;  0.2967</div><div class='input'>
+<span class='fu'>prediction</span>(<span class='no'>x</span>, <span class='kw'>at</span> <span class='kw'>=</span> <span class='fu'>lapply</span>(<span class='no'>iris</span>, <span class='no'>mean_or_mode</span>))</div><div class='output co'>#&gt; <span class='message'>Data frame with 450 predictions from</span>
+#&gt; <span class='message'> lm(formula = Petal.Width ~ Sepal.Length * Sepal.Width * Species, </span>
+#&gt; <span class='message'>    data = iris)</span>
+#&gt; <span class='message'>with average prediction:</span></div><div class='output co'>#&gt;  Sepal.Length Sepal.Width Petal.Length Petal.Width Species      x
+#&gt;         5.843       3.057        3.758       1.199  setosa 0.2967</div><div class='input'>
 # prediction with multi-category outcome
 </div><span class='co'># NOT RUN {</span>
   <span class='fu'>library</span>(<span class='st'>"mlogit"</span>)

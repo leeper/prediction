@@ -21,14 +21,20 @@
 <!-- clipboard.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js" integrity="sha384-cV+rhyOuRHc9Ub/91rihWcGmMmCXDeksTtCihMupQHSsi8GIIRDG0ThDc3HGQFJ3" crossorigin="anonymous"></script>
 
+<!-- sticky kit -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
-<script src="../jquery.sticky-kit.min.js"></script>
 <script src="../pkgdown.js"></script>
 
 
 
 <meta property="og:title" content="Changelog" />
+
+<meta property="og:image" content="/logo.png" />
+<meta name="twitter:card" content="summary" />
+
 
 
 <!-- mathjax -->
@@ -55,7 +61,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">prediction</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.5</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.3.10</span>
       </span>
     </div>
 
@@ -98,9 +104,37 @@
       <small>Source: <a href='https://github.com/leeper/prediction/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="prediction-0-3-10" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-3-10" class="anchor"></a>prediction 0.3.10<small> Unreleased </small>
+</h1>
+<ul>
+<li>Added tests for <code><a href="../reference/find_data.html">find_data()</a></code> and <code><a href="../reference/prediction.html">prediction.lm()</a></code> to check for correct behavior in the presence of missing data (<code>na.action</code>) and <code>subset</code> arguments. (<a href='https://github.com/leeper/prediction/issues/28'>#28</a>)</li>
+</ul>
+</div>
+    <div id="prediction-0-3-8" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-3-8" class="anchor"></a>prediction 0.3.8<small> Unreleased </small>
+</h1>
+<ul>
+<li>Provisional support for variances of average predictions for GLMs. (<a href='https://github.com/leeper/prediction/issues/17'>#17</a>)</li>
+<li>Added an example dataset, <code>margex</code>, borrowed from Stata’s identically named data.</li>
+</ul>
+</div>
+    <div id="prediction-0-3-7" class="section level1">
+<h1 class="page-header">
+<a href="#prediction-0-3-7" class="anchor"></a>prediction 0.3.7<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code>summary(prediction(...))</code> now reports variances of average predictions, along with test statistics, p-values, and confidence intervals, where supported. (<a href='https://github.com/leeper/prediction/issues/17'>#17</a>)</li>
+<li>Added a function <code><a href="../reference/prediction.html">prediction_summary()</a></code> which simply calls <code>summary(prediction(...))</code>.</li>
+<li>All methods now return additional attributes.</li>
+</ul>
+</div>
     <div id="prediction-0-3-6" class="section level1">
 <h1 class="page-header">
-<a href="#prediction-0-3-6" class="anchor"></a>prediction 0.3.6<small> Unreleased </small>
+<a href="#prediction-0-3-6" class="anchor"></a>prediction 0.3.6<small> 2018-05-22 </small>
 </h1>
 <ul>
 <li>Small fixes for failing CRAN checks. (<a href='https://github.com/leeper/prediction/issues/25'>#25</a>)</li>
@@ -441,6 +475,9 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#prediction-0-3-10">0.3.10</a></li>
+        <li><a href="#prediction-0-3-8">0.3.8</a></li>
+        <li><a href="#prediction-0-3-7">0.3.7</a></li>
         <li><a href="#prediction-0-3-6">0.3.6</a></li>
         <li><a href="#prediction-0-3-5">0.3.5</a></li>
         <li><a href="#prediction-0-3-4">0.3.4</a></li>
