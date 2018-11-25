@@ -1,3 +1,7 @@
+# prediction 0.3.11
+
+* Remove bigFastLm dependency, as it has been removed from CRAN.
+
 # prediction 0.3.10
 
 * Added tests for `find_data()` and `prediction.lm()` to check for correct behavior in the presence of missing data (`na.action`) and `subset` arguments. (#28)

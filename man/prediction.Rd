@@ -87,60 +87,66 @@
 \usage{
 prediction(model, ...)
 
-\method{prediction}{default}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = "response", vcov = stats::vcov(model),
-  calculate_se = TRUE, ...)
+\method{prediction}{default}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = "response",
+  vcov = stats::vcov(model), calculate_se = TRUE, ...)
 
 \method{prediction}{Arima}(model, calculate_se = TRUE, ...)
 
-\method{prediction}{ar}(model, data, at = NULL, calculate_se = TRUE, ...)
-
-\method{prediction}{arima0}(model, data, at = NULL, calculate_se = TRUE,
+\method{prediction}{ar}(model, data, at = NULL, calculate_se = TRUE,
   ...)
 
-\method{prediction}{betareg}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link", "precision", "variance",
-  "quantile"), calculate_se = FALSE, ...)
+\method{prediction}{arima0}(model, data, at = NULL,
+  calculate_se = TRUE, ...)
 
-\method{prediction}{bigLm}(model, data = NULL, calculate_se = FALSE, ...)
+\method{prediction}{betareg}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = c("response", "link", "precision",
+  "variance", "quantile"), calculate_se = FALSE, ...)
 
-\method{prediction}{biglm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = "response", calculate_se = TRUE, ...)
+\method{prediction}{bigLm}(model, data = NULL, calculate_se = FALSE,
+  ...)
 
-\method{prediction}{bruto}(model, data = NULL, at = NULL, type = "fitted",
-  calculate_se = FALSE, ...)
+\method{prediction}{biglm}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = "response", calculate_se = TRUE,
+  ...)
+
+\method{prediction}{bruto}(model, data = NULL, at = NULL,
+  type = "fitted", calculate_se = FALSE, ...)
 
 \method{prediction}{clm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = NULL, calculate_se = TRUE, category, ...)
 
-\method{prediction}{coxph}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("risk", "expected", "lp"), calculate_se = TRUE, ...)
+\method{prediction}{coxph}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = c("risk", "expected", "lp"),
+  calculate_se = TRUE, ...)
 
 \method{prediction}{crch}(model, data = find_data(model), at = NULL,
   type = c("response", "location", "scale", "quantile"),
   calculate_se = FALSE, ...)
 
-\method{prediction}{earth}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link"), calculate_se = TRUE, category,
-  ...)
+\method{prediction}{earth}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = c("response", "link"),
+  calculate_se = TRUE, category, ...)
 
 \method{prediction}{fda}(model, data = find_data(model, parent.frame()),
   at = NULL, type = NULL, calculate_se = FALSE, category, ...)
 
 \method{prediction}{Gam}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link", "terms"), calculate_se = TRUE,
-  ...)
+  at = NULL, type = c("response", "link", "terms"),
+  calculate_se = TRUE, ...)
 
 \method{prediction}{gausspr}(model, data, at = NULL, type = NULL,
   calculate_se = TRUE, category, ...)
 
 \method{prediction}{gee}(model, calculate_se = FALSE, ...)
 
-\method{prediction}{glimML}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link"), calculate_se = TRUE, ...)
+\method{prediction}{glimML}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = c("response", "link"),
+  calculate_se = TRUE, ...)
 
-\method{prediction}{glimQL}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link"), calculate_se = TRUE, ...)
+\method{prediction}{glimQL}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = c("response", "link"),
+  calculate_se = TRUE, ...)
 
 \method{prediction}{glm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = c("response", "link"), vcov = stats::vcov(model),
@@ -155,25 +161,26 @@ prediction(model, ...)
 \method{prediction}{gls}(model, data = find_data(model), at = NULL,
   calculate_se = FALSE, ...)
 
-\method{prediction}{hetglm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link", "scale"), calculate_se = FALSE,
-  ...)
-
-\method{prediction}{hurdle}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "count", "prob", "zero"),
+\method{prediction}{hetglm}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = c("response", "link", "scale"),
   calculate_se = FALSE, ...)
+
+\method{prediction}{hurdle}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = c("response", "count", "prob",
+  "zero"), calculate_se = FALSE, ...)
 
 \method{prediction}{hxlr}(model, data = find_data(model), at = NULL,
   type = c("class", "probability", "cumprob", "location", "scale"),
   calculate_se = FALSE, ...)
 
-\method{prediction}{ivreg}(model, data = find_data(model, parent.frame()),
-  at = NULL, calculate_se = FALSE, ...)
+\method{prediction}{ivreg}(model, data = find_data(model,
+  parent.frame()), at = NULL, calculate_se = FALSE, ...)
 
-\method{prediction}{knnreg}(model, data, at = NULL, calculate_se = FALSE,
+\method{prediction}{knnreg}(model, data, at = NULL,
+  calculate_se = FALSE, ...)
+
+\method{prediction}{kqr}(model, data, at = NULL, calculate_se = FALSE,
   ...)
-
-\method{prediction}{kqr}(model, data, at = NULL, calculate_se = FALSE, ...)
 
 \method{prediction}{ksvm}(model, data, at = NULL, type = NULL,
   calculate_se = TRUE, category, ...)
@@ -185,33 +192,36 @@ prediction(model, ...)
 \method{prediction}{lme}(model, data = find_data(model), at = NULL,
   calculate_se = FALSE, ...)
 
-\method{prediction}{loess}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = "response", calculate_se = TRUE, ...)
+\method{prediction}{loess}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = "response", calculate_se = TRUE,
+  ...)
 
 \method{prediction}{lqs}(model, data = find_data(model), at = NULL,
   calculate_se = FALSE, ...)
 
-\method{prediction}{mars}(model, data = NULL, at = NULL, type = "fitted",
-  calculate_se = FALSE, ...)
+\method{prediction}{mars}(model, data = NULL, at = NULL,
+  type = "fitted", calculate_se = FALSE, ...)
 
 \method{prediction}{mca}(model, data = find_data(model), at = NULL,
   calculate_se = FALSE, ...)
 
-\method{prediction}{mclogit}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = "response", vcov = stats::vcov(model),
-  calculate_se = TRUE, ...)
+\method{prediction}{mclogit}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = "response",
+  vcov = stats::vcov(model), calculate_se = TRUE, ...)
 
 \method{prediction}{merMod}(model, data = find_data(model), at = NULL,
-  type = c("response", "link"), re.form = NULL, calculate_se = FALSE, ...)
+  type = c("response", "link"), re.form = NULL, calculate_se = FALSE,
+  ...)
 
-\method{prediction}{mnlogit}(model, data = find_data(model, parent.frame()),
-  at = NULL, calculate_se = FALSE, category, ...)
+\method{prediction}{mnlogit}(model, data = find_data(model,
+  parent.frame()), at = NULL, calculate_se = FALSE, category, ...)
 
 \method{prediction}{mnp}(model, data = find_data(model, parent.frame()),
   at = NULL, type = NULL, calculate_se = FALSE, category, ...)
 
-\method{prediction}{multinom}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = NULL, calculate_se = FALSE, category, ...)
+\method{prediction}{multinom}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = NULL, calculate_se = FALSE,
+  category, ...)
 
 \method{prediction}{nls}(model, data = find_data(model, parent.frame()),
   at = NULL, calculate_se = FALSE, ...)
@@ -231,47 +241,51 @@ prediction(model, ...)
 \method{prediction}{ppr}(model, data = find_data(model, parent.frame()),
   at = NULL, calculate_se = FALSE, ...)
 
-\method{prediction}{princomp}(model, data = find_data(model, parent.frame()),
-  at = NULL, calculate_se = FALSE, ...)
+\method{prediction}{princomp}(model, data = find_data(model,
+  parent.frame()), at = NULL, calculate_se = FALSE, ...)
 
 \method{prediction}{rlm}(model, data = find_data(model, parent.frame()),
   at = NULL, type = "response", vcov = stats::vcov(model),
   calculate_se = TRUE, ...)
 
-\method{prediction}{rpart}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = NULL, calculate_se = FALSE, category, ...)
+\method{prediction}{rpart}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = NULL, calculate_se = FALSE,
+  category, ...)
 
 \method{prediction}{rq}(model, data = find_data(model, parent.frame()),
   at = NULL, calculate_se = TRUE, ...)
 
-\method{prediction}{selection}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = "response", calculate_se = FALSE, ...)
+\method{prediction}{selection}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = "response",
+  calculate_se = FALSE, ...)
 
-\method{prediction}{speedglm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link"), calculate_se = FALSE, ...)
+\method{prediction}{speedglm}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = c("response", "link"),
+  calculate_se = FALSE, ...)
 
-\method{prediction}{speedlm}(model, data = find_data(model, parent.frame()),
-  at = NULL, calculate_se = FALSE, ...)
+\method{prediction}{speedlm}(model, data = find_data(model,
+  parent.frame()), at = NULL, calculate_se = FALSE, ...)
 
-\method{prediction}{survreg}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "lp", "quantile", "uquantile"),
-  calculate_se = TRUE, ...)
+\method{prediction}{survreg}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = c("response", "lp", "quantile",
+  "uquantile"), calculate_se = TRUE, ...)
 
 \method{prediction}{svm}(model, data = NULL, at = NULL,
   calculate_se = TRUE, category, ...)
 
-\method{prediction}{svyglm}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "link"), calculate_se = TRUE, ...)
+\method{prediction}{svyglm}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = c("response", "link"),
+  calculate_se = TRUE, ...)
 
 \method{prediction}{train}(model, data = find_data(model), at = NULL,
   type = c("raw", "prob"), ...)
 
-\method{prediction}{truncreg}(model, data, at = NULL, calculate_se = FALSE,
-  ...)
-
-\method{prediction}{zeroinfl}(model, data = find_data(model, parent.frame()),
-  at = NULL, type = c("response", "count", "prob", "zero"),
+\method{prediction}{truncreg}(model, data, at = NULL,
   calculate_se = FALSE, ...)
+
+\method{prediction}{zeroinfl}(model, data = find_data(model,
+  parent.frame()), at = NULL, type = c("response", "count", "prob",
+  "zero"), calculate_se = FALSE, ...)
 
 prediction_summary(model, ..., level = 0.95)
 }
@@ -315,7 +329,6 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{Arima}, see \code{\link[stats]{arima}}
   \item \dQuote{arima0}, see \code{\link[stats]{arima0}}
   \item \dQuote{bigglm}, see \code{\link[biglm]{bigglm}} (including \dQuote{ffdf}-backed models provided by \code{\link[ffbase]{bigglm.ffdf}})
-  \item \dQuote{bigLm}, see \code{\link[bigFastlm]{bigLm}}
   \item \dQuote{betareg}, see \code{\link[betareg]{betareg}}
   \item \dQuote{bruto}, see \code{\link[mda]{bruto}}
   \item \dQuote{clm}, see \code{\link[ordinal]{clm}}

@@ -70,27 +70,6 @@ if (require("biglm", quietly = TRUE)) {
     #})
 }
 
-if (require("bigFastlm", quietly = TRUE)) {
-    test_that("Test prediction() for 'bigLm'", {
-        nrows <- 50000
-        ncols <- 50
-        bkFile <- tempfile(fileext = ".bk")
-        descFile <- tempfile(fileext = ".desc")
-        bigmat <- filebacked.big.matrix(nrow=nrows, ncol=ncols, type="double",
-                                        backingfile=basename(bkFile), 
-                                        descriptorfile=basename(descFile),
-                                        backingpath = tempdir(),
-                                        dimnames=c(NULL,NULL))
-        set.seed(123)
-        for (i in 1:ncols) bigmat[,i] = rnorm(nrows)*i
-        y <- rnorm(nrows) + bigmat[,1]
-        m <- bigLm(bigmat, y)
-        p <- prediction(m)
-        expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
-        expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
-    })
-}
-
 if (require("brglm", quietly = TRUE)) {
     test_that("Test prediction() for 'brglm'", {
         data("lizards", package = "brglm")

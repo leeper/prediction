@@ -21,7 +21,6 @@ r_packages:
 - AER
 - aod
 - betareg
-- bigFastlm
 - biglm
 - brglm
 - caret
