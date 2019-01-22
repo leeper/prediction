@@ -38,13 +38,13 @@ data("margex")
 # . regress y i.sex i.group
 # . margins sex
 m1 <- lm(y ~ factor(sex) + factor(group), data = margex)
-prediction(m1, at = list(sex = 0:1))
+prediction(m1, at = list(sex = c("male", "female")))
 
 # A simple case after logistic
 # . logistic outcome i.sex i.group
 # . margins sex
 m2 <- glm(outcome ~ sex + group, binomial(), data = margex)
-prediction(m2, at = list(sex = 0:1))
+prediction(m2, at = list(sex = c("male", "female")))
 
 # Average response versus response at average
 # . margins sex
