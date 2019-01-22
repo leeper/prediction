@@ -39,7 +39,6 @@ r_packages:
 - mclogit
 - mda
 - mlogit
-- mnlogit
 - MNP
 - nlme
 - nnet

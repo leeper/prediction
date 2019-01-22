@@ -1,3 +1,7 @@
+# prediction 0.3.12
+
+* Remove mnlogit dependency, as it has been removed from CRAN.
+
 # prediction 0.3.11
 
 * Remove bigFastLm dependency, as it has been removed from CRAN.
