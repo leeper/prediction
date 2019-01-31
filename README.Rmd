@@ -86,7 +86,6 @@ The currently supported model classes are:
  - "mclogit" from `mclogit::mclogit()`
  - "mda" from `mda::mda()`
  - "merMod" from `lme4::lmer()` and `lme4::glmer()`
- - "mnlogit" from `mnlogit::mnlogit()`
  - "mnp" from `MNP::mnp()`
  - "naiveBayes" from `e1071::naiveBayes()`
  - "nlme" from `nlme::nlme()`

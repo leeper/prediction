@@ -11,14 +11,14 @@
 %   R/prediction_kqr.R, R/prediction_ksvm.R, R/prediction_lm.R,
 %   R/prediction_lme.R, R/prediction_loess.R, R/prediction_lqs.R,
 %   R/prediction_mars.R, R/prediction_mca.R, R/prediction_mclogit.R,
-%   R/prediction_merMod.R, R/prediction_mnlogit.R, R/prediction_mnp.R,
-%   R/prediction_multinom.R, R/prediction_nls.R, R/prediction_nnet.R,
-%   R/prediction_plm.R, R/prediction_polr.R, R/prediction_polyreg.R,
-%   R/prediction_ppr.R, R/prediction_princomp.R, R/prediction_rlm.R,
-%   R/prediction_rpart.R, R/prediction_rq.R, R/prediction_selection.R,
-%   R/prediction_speedglm.R, R/prediction_speedlm.R, R/prediction_survreg.R,
-%   R/prediction_svm.R, R/prediction_svyglm.R, R/prediction_train.R,
-%   R/prediction_truncreg.R, R/prediction_zeroinfl.R
+%   R/prediction_merMod.R, R/prediction_mnp.R, R/prediction_multinom.R,
+%   R/prediction_nls.R, R/prediction_nnet.R, R/prediction_plm.R,
+%   R/prediction_polr.R, R/prediction_polyreg.R, R/prediction_ppr.R,
+%   R/prediction_princomp.R, R/prediction_rlm.R, R/prediction_rpart.R,
+%   R/prediction_rq.R, R/prediction_selection.R, R/prediction_speedglm.R,
+%   R/prediction_speedlm.R, R/prediction_survreg.R, R/prediction_svm.R,
+%   R/prediction_svyglm.R, R/prediction_train.R, R/prediction_truncreg.R,
+%   R/prediction_zeroinfl.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -58,7 +58,6 @@
 \alias{prediction.mca}
 \alias{prediction.mclogit}
 \alias{prediction.merMod}
-\alias{prediction.mnlogit}
 \alias{prediction.mnp}
 \alias{prediction.multinom}
 \alias{prediction.nls}
@@ -205,9 +204,6 @@ prediction(model, ...)
   type = c("response", "link"), re.form = NULL, calculate_se = FALSE,
   ...)
 
-\method{prediction}{mnlogit}(model, data = find_data(model,
-  parent.frame()), at = NULL, calculate_se = FALSE, category, ...)
-
 \method{prediction}{mnp}(model, data = find_data(model, parent.frame()),
   at = NULL, type = NULL, calculate_se = FALSE, category, ...)
 
@@ -343,7 +339,6 @@ Methods are currently implemented for the following object classes:
   \item \dQuote{mclogit}, see \code{\link[mclogit]{mclogit}}
   \item \dQuote{mda}, see \code{\link[mda]{mda}}
   \item \dQuote{merMod}, see \code{\link[lme4]{lmer}}, \code{\link[lme4]{glmer}}
-  \item \dQuote{mnlogit}, see \code{\link[mnlogit]{mnlogit}}
   \item \dQuote{mnp}, see \code{\link[MNP]{mnp}}
   \item \dQuote{naiveBayes}, see \code{\link[e1071]{naiveBayes}}
   \item \dQuote{nlme}, see \code{\link[nlme]{nlme}}

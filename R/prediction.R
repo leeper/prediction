@@ -48,7 +48,6 @@
 #'   \item \dQuote{mclogit}, see \code{\link[mclogit]{mclogit}}
 #'   \item \dQuote{mda}, see \code{\link[mda]{mda}}
 #'   \item \dQuote{merMod}, see \code{\link[lme4]{lmer}}, \code{\link[lme4]{glmer}}
-#'   \item \dQuote{mnlogit}, see \code{\link[mnlogit]{mnlogit}}
 #'   \item \dQuote{mnp}, see \code{\link[MNP]{mnp}}
 #'   \item \dQuote{naiveBayes}, see \code{\link[e1071]{naiveBayes}}
 #'   \item \dQuote{nlme}, see \code{\link[nlme]{nlme}}
