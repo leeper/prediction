@@ -21,7 +21,6 @@ r_packages:
 - AER
 - aod
 - betareg
-- bigFastlm
 - biglm
 - brglm
 - caret
@@ -40,7 +39,6 @@ r_packages:
 - mclogit
 - mda
 - mlogit
-- mnlogit
 - MNP
 - nlme
 - nnet
