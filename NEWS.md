@@ -1,3 +1,7 @@
+# prediction 0.3.13
+
+* Fixed a bug in `prediction_glm` with the `data` argument (Issue #32).
+
 # prediction 0.3.12
 
 * Remove mnlogit dependency, as it has been removed from CRAN.

@@ -19,6 +19,16 @@ test_that("Test prediction()", {
                 label = "prediction() matches predict() (GLM)")
 })
 
+test_that("Test prediction(data = )", {
+    m <- lm(mpg ~ cyl + wt, data = mtcars)
+    p1 <- prediction(m, data = data.frame(cyl = 4, wt = 3.9))
+    expect_true(inherits(p1, "data.frame"), label = "prediction(lm(~), data = data.frame()) works")
+
+    m <- glm(mpg ~ cyl + wt, data = mtcars)
+    p1 <- prediction(m, data = data.frame(cyl = 4, wt = 3.9))
+    expect_true(inherits(p1, "data.frame"), label = "prediction(glm(~), data = data.frame()) works")
+})
+
 test_that("Test prediction(at = )", {
     m <- lm(mpg ~ cyl, data = mtcars)
     p1 <- prediction(m, at = list(cyl = 4))
