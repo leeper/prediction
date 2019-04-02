@@ -89,6 +89,8 @@ check_factor_levels <- function(data, at) {
 
 check_values <- function(data, at) {
     # drop variables not in `at`
+    # first make sure any data.table is a data.frame to avoid error (for a data.table, this should include with=FALSE).
+    data <- as.data.frame(data)
     dat <- data[, names(at), drop = FALSE]
     
     # drop non-numeric variables from `dat` and `at`
