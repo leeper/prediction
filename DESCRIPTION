@@ -10,7 +10,10 @@ Authors@R: c(person("Thomas J.", "Leeper",
                     email = "thosjleeper@gmail.com",
                     comment = c(ORCID = "0000-0003-4097-6326")),
              person("Carl", "Ganz", role = "ctb",
-                    email = "carlganz@ucla.edu")
+                    email = "carlganz@ucla.edu"),
+             person("Vincent", "Arel-Bundock", role = "ctb",
+                    email = "vincent.arel-bundock@umontreal.ca",
+                    comment = c(ORCID = "0000-0003-2042-7063"))
             )
 URL: https://github.com/leeper/prediction
 BugReports: https://github.com/leeper/prediction/issues

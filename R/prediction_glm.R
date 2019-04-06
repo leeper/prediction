@@ -51,7 +51,7 @@ function(model,
             if (type == "link") {
                 means_for_prediction <- colMeans(model_mat)
             } else if (type == "response") {
-                predictions_link <- predict(model, data = data, type = "link", se.fit = FALSE, ...)
+                predictions_link <- predict(model, newdata = data, type = "link", se.fit = FALSE, ...)
                 means_for_prediction <- colMeans(model$family$mu.eta(predictions_link) * model_mat)
             }
             J <- matrix(means_for_prediction, nrow = 1L)
@@ -64,7 +64,7 @@ function(model,
                 if (type == "link") {
                     means_for_prediction <- colMeans(model_mat)
                 } else if (type == "response") {
-                    predictions_link <- predict(model, data = one, type = "link", se.fit = FALSE, ...)
+                    predictions_link <- predict(model, newdata = one, type = "link", se.fit = FALSE, ...)
                     means_for_prediction <- colMeans(model$family$mu.eta(predictions_link) * model_mat)
                 }
                 means_for_prediction
