@@ -10,7 +10,7 @@
 #' require("datasets")
 #' x <- lm(mpg ~ cyl * hp + wt, data = head(mtcars))
 #' find_data(x)
-#' 
+#'
 #' @seealso \code{\link{prediction}}, \code{\link{build_datalist}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
 #' @export
 find_data <- function(model, ...) {
@@ -107,6 +107,19 @@ find_data.merMod <- function(model, env = parent.frame(), ...) {
 #' @export
 find_data.svyglm <- function(model, ...) {
     data <- model[["data"]]
+    # handle subset
+    if (!is.null(model[["call"]][["subset"]])) {
+        subs <- try(eval(model[["call"]][["subset"]], data), silent = TRUE)
+        if (inherits(subs, "try-error")) {
+            subs <- TRUE
+            warning("'find_data()' cannot locate variable(s) used in 'subset'")
+        }
+        data <- data[subs, , drop = FALSE]
+    }
+    # handle na.action
+    if (!is.null(model[["na.action"]])) {
+        data <- data[-model[["na.action"]], , drop = FALSE]
+    }
     data
 }
 
