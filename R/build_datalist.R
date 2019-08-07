@@ -19,26 +19,25 @@
 #' @seealso \code{\link{find_data}}, \code{\link{mean_or_mode}}, \code{\link{seq_range}}
 #' @importFrom data.table rbindlist
 #' @export
-build_datalist <- 
+build_datalist <-
 function(data,
-         at = NULL, 
+         at = NULL,
          as.data.frame = FALSE,
          ...){
-    
+
     # check for `at` specification and `as.data.frame` arguments
     if (!is.null(at) && length(at) > 0) {
         # check `at` specification against data
         check_at(data, at)
-        
+
         # setup list of data.frames based on at
         data_out <- set_data_to_at(data, at = at)
         at_specification <- cbind(index = seq_len(nrow(data_out[["at"]])), data_out[["at"]])
         data_out <- data_out[["data"]]
-        
         if (isTRUE(as.data.frame)) {
             data_out <- data.table::rbindlist(data_out)
         }
-        
+
     } else if (isTRUE(as.data.frame)) {
         # if `at` empty and `as.data.frame = TRUE`, simply return original data
         data_out <- data
@@ -54,10 +53,10 @@ function(data,
 check_at <- function(data, at) {
     # check names of `at`
     check_at_names(names(data), at)
-    
+
     # check factor levels specified in `at`
     check_factor_levels(data, at)
-    
+
     # check values of numeric values are interpolations
     check_values(data, at)
 }
@@ -71,7 +70,7 @@ check_factor_levels <- function(data, at) {
             levels(factor(v))
         } else {
             NULL
-        } 
+        }
     })
     levels <- levels[!sapply(levels, is.null)]
     at <- at[names(at) %in% names(levels)]
@@ -79,8 +78,8 @@ check_factor_levels <- function(data, at) {
         atvals <- as.character(at[[i]])
         x <- atvals %in% levels[[names(at)[i]]]
         if (!all(x)) {
-            stop(paste0("Illegal factor levels for variable '", names(at)[i], "': ", 
-                        paste0(shQuote(atvals[!x]), collapse = ", ")), 
+            stop(paste0("Illegal factor levels for variable '", names(at)[i], "': ",
+                        paste0(shQuote(atvals[!x]), collapse = ", ")),
                  call. = FALSE)
         }
     }
@@ -90,7 +89,7 @@ check_factor_levels <- function(data, at) {
 check_values <- function(data, at) {
     # drop variables not in `at`
     dat <- data[, names(at), drop = FALSE]
-    
+
     # drop non-numeric variables from `dat` and `at`
     not_numeric <- !sapply(dat, class) %in% c("character", "factor", "ordered", "logical")
     at <- at[names(at) %in% names(dat)[not_numeric]]
@@ -100,7 +99,7 @@ check_values <- function(data, at) {
         # calculate variable ranges
         limits <- do.call(rbind, lapply(dat, range, na.rm = TRUE))
         rownames(limits) <- names(dat)
-        
+
         # check ranges
         for (i in seq_along(at)) {
             out <- (at[[i]] < limits[names(at)[i],1]) | (at[[i]] > limits[names(at)[i],2])
@@ -136,9 +135,13 @@ set_data_to_at <- function(data, at = NULL) {
     } else {
         expanded <- expand.grid(at, KEEP.OUT.ATTRS = FALSE)
     }
-    e <- split(expanded, unique(expanded))
+    for (i in intersect(names(data)[sapply(data, is.factor)], names(expanded))) {
+        expanded[, i] <- factor(expanded[[i]], levels(data[[i]]))
+    }
+    e <- split(expanded, unique(expanded), drop = TRUE)
     data_out <- lapply(e, function(atvals) {
         dat <- data
+
         dat <- `[<-`(dat, , names(atvals), value = atvals)
         structure(dat, at = as.list(atvals))
     })
