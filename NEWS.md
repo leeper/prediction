@@ -1,3 +1,9 @@
+# prediction 0.3.15
+
+* `prediction.svyglm` handles survey design objects as `data` argument.
+* `prediction.svyglm` handles `data` with NAs.
+* `build_datalist` preserves levels of factors that are mentioned in `at` argument.
+
 # prediction 0.3.13
 
 * Fixed a bug in `prediction_glm` with the `data` argument (Issue #32).
