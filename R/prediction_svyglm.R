@@ -17,6 +17,9 @@ function(model,
         pred <- data.frame(fitted = unclass(pred),
                            se.fitted = sqrt(unname(attributes(pred)[["var"]])))
     } else {
+        if (inherits(data, c("survey.design", "svyrep.design"))) {
+            data <- find_data(data)
+        }
         # setup data
         if (is.null(at)) {
             out <- data
