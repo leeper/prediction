@@ -125,6 +125,18 @@ find_data.svyglm <- function(model, ...) {
 
 #' @rdname find_data
 #' @export
+find_data.survey.design <- function(model, ...) {
+    model[["variables"]]
+}
+
+#' @rdname find_data
+#' @export
+find_data.svyrep.design <- function(model, ...) {
+    model[["variables"]]
+}
+
+#' @rdname find_data
+#' @export
 find_data.train <- function(model, ...) {
     model[["trainingData"]]
 }

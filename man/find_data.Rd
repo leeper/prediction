@@ -12,6 +12,8 @@
 \alias{find_data.mca}
 \alias{find_data.merMod}
 \alias{find_data.svyglm}
+\alias{find_data.survey.design}
+\alias{find_data.svyrep.design}
 \alias{find_data.train}
 \alias{find_data.vgam}
 \alias{find_data.vglm}
@@ -38,6 +40,10 @@ find_data(model, ...)
 \method{find_data}{merMod}(model, env = parent.frame(), ...)
 
 \method{find_data}{svyglm}(model, ...)
+
+\method{find_data}{survey.design}(model, ...)
+
+\method{find_data}{svyrep.design}(model, ...)
 
 \method{find_data}{train}(model, ...)
 
