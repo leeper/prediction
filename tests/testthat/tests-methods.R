@@ -481,7 +481,7 @@ if (require("sampleSelection", quietly = TRUE)) {
     test_that("Test prediction() for 'selection'", {
         data("Mroz87", package = "sampleSelection")
         Mroz87$kids  <- (Mroz87$kids5 + Mroz87$kids618 > 0)
-        m <- sampleSelection::heckit(lfp ~ age + I( age^2 ) + faminc + kids + educ, 
+        m <- sampleSelection::heckit(lfp ~ age + I( age^2 ) + faminc + kids + educ,
                                      wage ~ exper + I( exper^2 ) + educ + city, Mroz87)
         p <- prediction(m)
         expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
@@ -570,16 +570,22 @@ if (require("survey", quietly = TRUE)) {
         p <- prediction(m)
         expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
         expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+        dstrat2 <- subset(dstrat, yr.rnd == "No")
+        dstrat2$variables$enroll[10] = NA
+        p2 <- prediction(m, dstrat2)
+        expect_true(inherits(p2, "prediction"), label = "'prediction' class is correct")
+        expect_true(all(c("fitted", "se.fitted") %in% names(p2)), label = "'fitted' and 'se.fitted' columns returned")
+        expect_true(is.na(p2$fitted[10]) & is.na(p2$se.fitted[10]), label = "NAs in data handled correctly")
     })
 }
 
 if (require("survival", quietly = TRUE)) {
     test_that("Test prediction() for 'coxph'", {
-        test1 <- list(time=c(4,3,1,1,2,2,3), 
-              status=c(1,1,1,0,1,1,0), 
-              x=c(0,2,1,1,1,0,0), 
-              sex=c(0,0,0,0,1,1,1)) 
-        m <- survival::coxph(survival::Surv(time, status) ~ x + survival::strata(sex), test1) 
+        test1 <- list(time=c(4,3,1,1,2,2,3),
+              status=c(1,1,1,0,1,1,0),
+              x=c(0,2,1,1,1,0,0),
+              sex=c(0,0,0,0,1,1,1))
+        m <- survival::coxph(survival::Surv(time, status) ~ x + survival::strata(sex), test1)
         p <- prediction(m)
         expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
         expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")

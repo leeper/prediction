@@ -3,8 +3,8 @@ Type: Package
 Title: Tidy, Type-Safe 'prediction()' Methods
 Description: A one-function package containing 'prediction()', a type-safe alternative to 'predict()' that always returns a data frame. The 'summary()' method provides a data frame with average predictions, possibly over counterfactual versions of the data (a la the 'margins' command in 'Stata'). Marginal effect estimation is provided by the related package, 'margins' <https://cran.r-project.org/package=margins>. The package currently supports common model types (e.g., "lm", "glm") from the 'stats' package, as well as numerous other model classes from other add-on packages. See the README or main package documentation page for a complete listing.
 License: MIT + file LICENSE
-Version: 0.3.14
-Date: 2019-06-16
+Version: 0.3.15
+Date: 2019-08-08
 Authors@R: c(person("Thomas J.", "Leeper",
                     role = c("aut", "cre"), 
                     email = "thosjleeper@gmail.com",
@@ -13,7 +13,10 @@ Authors@R: c(person("Thomas J.", "Leeper",
                     email = "carlganz@ucla.edu"),
              person("Vincent", "Arel-Bundock", role = "ctb",
                     email = "vincent.arel-bundock@umontreal.ca",
-                    comment = c(ORCID = "0000-0003-2042-7063"))
+                    comment = c(ORCID = "0000-0003-2042-7063")),
+             person("Tomasz", "\u017b\u00F3\u0142tak", role = "ctb",
+                    email = "tomek@zozlak.org",
+                    comment = c(ORCID = "0000-0003-1354-4472"))
             )
 URL: https://github.com/leeper/prediction
 BugReports: https://github.com/leeper/prediction/issues
