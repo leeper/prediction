@@ -230,7 +230,7 @@ if (require("kernlab", quietly = TRUE)) {
     test_that("Test prediction() for 'kqr'", {
         x <- sort(runif(300))
         y <- sin(pi*x) + rnorm(300,0,sd=exp(sin(2*pi*x)))
-        m <- kernlab::kqr(x, y, tau = 0.5, C=0.15)
+        m <- kernlab::kqr(x, y, tau = 0.5, C=0.15, kpar = list(sigma = 10))
         p <- prediction(m)
         expect_true(inherits(p, "prediction"), label = "'prediction' class is correct")
         expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
