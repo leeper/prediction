@@ -139,7 +139,15 @@ set_data_to_at <- function(data, at = NULL) {
     e <- split(expanded, unique(expanded))
     data_out <- lapply(e, function(atvals) {
         dat <- data
-        dat <- `[<-`(dat, , names(atvals), value = atvals)
+        for (i in seq_along(atvals)) {
+            is_factor <- inherits(dat[[names(atvals)[i]]], "factor")
+            if (is_factor) {
+                levs <- levels(dat[[names(atvals)[i]]])
+                dat[names(atvals)[i]] <- factor(atvals[[i]], levels = levs)
+            } else{
+                dat[names(atvals)[i]] <- atvals[[i]]
+            }
+        }
         structure(dat, at = as.list(atvals))
     })
     return(list(data = data_out, at = expanded))

@@ -1,5 +1,6 @@
 ## prediction 0.3.15
 
+* `build_datalist()` dropped factor levels when replacing a factor variable. (#39, h/t Tomasz Żółtak)
 * `find_data()` now respects `subset` and `na.actions` arguments for `svyglm()` models. (#37, h/t Tomasz Żółtak)
 
 ## prediction 0.3.13
