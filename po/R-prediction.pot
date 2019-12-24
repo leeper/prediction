@@ -1,0 +1,125 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: prediction 0.3.15\n"
+"POT-Creation-Date: 2019-12-24 14:49\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "Illegal factor levels for variable '"
+msgstr ""
+
+msgid "':"
+msgstr ""
+
+msgid ","
+msgstr ""
+
+msgid "A 'at' value for '"
+msgstr ""
+
+msgid "' is"
+msgstr ""
+
+msgid "Some 'at' values for '"
+msgstr ""
+
+msgid "' are"
+msgstr ""
+
+msgid "'at' contains unnamed list elements"
+msgstr ""
+
+msgid "("
+msgstr ""
+
+msgid ")"
+msgstr ""
+
+msgid "<empty>"
+msgstr ""
+
+msgid "'find_data()' requires a formula call"
+msgstr ""
+
+msgid "'find_data()' cannot locate variable(s) used in 'subset'"
+msgstr ""
+
+msgid "'find_data.vgam()' requires the 'methods' package"
+msgstr ""
+
+msgid "prediction() for objects of class 'bigglm' only work when 'data' is specified"
+msgstr ""
+
+msgid "prediction() for objects of class 'biglm' only work when 'data' is specified"
+msgstr ""
+
+msgid "'type' is ignored for models of class '%s'"
+msgstr ""
+
+msgid "category %s not found"
+msgstr ""
+
+msgid "'data' is required for models of class '%s'"
+msgstr ""
+
+msgid "'data' is ignored for models of class '%s'"
+msgstr ""
+
+msgid "'prediction.mnp' only works when 'n.draws = 1'"
+msgstr ""
+
+msgid "Data frame with %d %s%swith modal prediction (of %d %s):"
+msgstr ""
+
+msgid "prediction"
+msgstr ""
+
+msgid "predictions"
+msgstr ""
+
+msgid "call"
+msgstr ""
+
+msgid "from\n %s"
+msgstr ""
+
+msgid "level"
+msgstr ""
+
+msgid "levels"
+msgstr ""
+
+msgid "Data frame with %d %s%swith average prediction: %s"
+msgstr ""
+
+msgid "%0."
+msgstr ""
+
+msgid "f"
+msgstr ""
+
+msgid "Data frame with %d %s%swith modal %s (of %d %s):"
+msgstr ""
+
+msgid "Data frame with %d %s%swith average %s:"
+msgstr ""
+
+msgid        "Unrecognized variable name in 'at': "
+msgid_plural "Unrecognized variable names in 'at': "
+msgstr[0]    ""
+msgstr[1]    ""
+
+msgid        "prediction"
+msgid_plural "predictions"
+msgstr[0]    ""
+msgstr[1]    ""
+
+msgid        "level"
+msgid_plural "levels"
+msgstr[0]    ""
+msgstr[1]    ""
