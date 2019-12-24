@@ -105,9 +105,26 @@ find_data.merMod <- function(model, env = parent.frame(), ...) {
 
 #' @rdname find_data
 #' @export
-find_data.svyglm <- function(model, ...) {
-    data <- model[["data"]]
-    data
+find_data.svyglm <- function(model, env = parent.frame(), ...) {
+    dat <- model[["data"]]
+    # handle subset
+    if (!is.null(model[["call"]][["subset"]])) {
+        subs <- try(eval(model[["call"]][["subset"]], dat), silent = TRUE)
+        if (inherits(subs, "try-error")) {
+            subs <- try(eval(model[["call"]][["subset"]], env), silent = TRUE)
+            if (inherits(subs, "try-error")) {
+                subs <- TRUE
+                warning("'find_data()' cannot locate variable(s) used in 'subset'")
+            }
+        }
+        dat <- dat[subs, , drop = FALSE]
+    }
+    # handle na.action
+    if (!is.null(model[["na.action"]])) {
+        dat <- dat[-model[["na.action"]], , drop = FALSE]
+    }
+
+    return(dat)
 }
 
 #' @rdname find_data

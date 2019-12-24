@@ -92,3 +92,15 @@ test_that("Test find_data.lm() with subsetted data", {
                 label = "find_data.lm() returns correct rows when subsetting and missing data are present")
     rm(mtcars2)
 })
+
+test_that("Test find_data.lm() with subsetted data", {
+    skip_if_not_installed("survey")
+    library("survey")
+    data(api)
+    dstrat <- svydesign(id=~1, strata=~stype, weights=~pw, data=apistrat, fpc=~fpc)
+    m <- svyglm(growth ~ target, dstrat)
+    f <- find_data(m, design = dstrat)
+
+    expect_true(identical(nrow(f), length(predict(m))), label = "Survey design model has correct rows")
+    expect_true(identical(nrow(prediction(m)), length(predict(m))), label = "Survey design model has correct rows")
+})
