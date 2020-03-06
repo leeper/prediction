@@ -37,7 +37,7 @@ find_data(model, ...)
 
 \method{find_data}{merMod}(model, env = parent.frame(), ...)
 
-\method{find_data}{svyglm}(model, env = parent.frame(), ...)
+\method{find_data}{svyglm}(model, ...)
 
 \method{find_data}{train}(model, ...)
 

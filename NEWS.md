@@ -3,6 +3,7 @@
 * `build_datalist()` now works correctly with data.table datasets. (#34, #35, h/t Dan Schrage)
 * `build_datalist()` dropped factor levels when replacing a factor variable. (#39, h/t Tomasz Żółtak)
 * `find_data()` now respects `subset` and `na.actions` arguments for `svyglm()` models. (#37, h/t Tomasz Żółtak)
+* Fix a bug in `margins()` with `glmerMod` objects (#129 - `margins`)
 
 ## prediction 0.3.13
 
