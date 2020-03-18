@@ -8,13 +8,14 @@
 %   R/prediction_glm.R, R/prediction_glmnet.R, R/prediction_glmx.R,
 %   R/prediction_gls.R, R/prediction_hetglm.R, R/prediction_hurdle.R,
 %   R/prediction_hxlr.R, R/prediction_ivreg.R, R/prediction_knnreg.R,
-%   R/prediction_kqr.R, R/prediction_ksvm.R, R/prediction_lm.R,
-%   R/prediction_lme.R, R/prediction_loess.R, R/prediction_lqs.R,
-%   R/prediction_mars.R, R/prediction_mca.R, R/prediction_mclogit.R,
-%   R/prediction_merMod.R, R/prediction_mnp.R, R/prediction_multinom.R,
-%   R/prediction_nls.R, R/prediction_nnet.R, R/prediction_plm.R,
-%   R/prediction_polr.R, R/prediction_polyreg.R, R/prediction_ppr.R,
-%   R/prediction_princomp.R, R/prediction_rlm.R, R/prediction_rpart.R,
+%   R/prediction_kqr.R, R/prediction_ksvm.R, R/prediction_linearRidge.R,
+%   R/prediction_linearRidge2.R, R/prediction_lm.R, R/prediction_lme.R,
+%   R/prediction_loess.R, R/prediction_lqs.R, R/prediction_mars.R,
+%   R/prediction_mca.R, R/prediction_mclogit.R, R/prediction_merMod.R,
+%   R/prediction_mnp.R, R/prediction_multinom.R, R/prediction_nls.R,
+%   R/prediction_nnet.R, R/prediction_plm.R, R/prediction_polr.R,
+%   R/prediction_polyreg.R, R/prediction_ppr.R, R/prediction_princomp.R,
+%   R/prediction_ridgeLinear.R, R/prediction_rlm.R, R/prediction_rpart.R,
 %   R/prediction_rq.R, R/prediction_selection.R, R/prediction_speedglm.R,
 %   R/prediction_speedlm.R, R/prediction_survreg.R, R/prediction_svm.R,
 %   R/prediction_svyglm.R, R/prediction_train.R, R/prediction_truncreg.R,
@@ -50,6 +51,8 @@
 \alias{prediction.knnreg}
 \alias{prediction.kqr}
 \alias{prediction.ksvm}
+\alias{prediction.ridgeLinear}
+\alias{prediction.linearRidge}
 \alias{prediction.lm}
 \alias{prediction.lme}
 \alias{prediction.loess}
@@ -300,6 +303,26 @@ prediction(model, ...)
   ...
 )
 
+\method{prediction}{ridgeLinear}(
+  model,
+  data = find_data(model, parent.frame()),
+  at = NULL,
+  type = "response",
+  vcov = stats::vcov(model),
+  calculate_se = FALSE,
+  ...
+)
+
+\method{prediction}{linearRidge}(
+  model,
+  data = find_data(model, parent.frame()),
+  at = NULL,
+  type = "response",
+  vcov = stats::vcov(model),
+  calculate_se = TRUE,
+  ...
+)
+
 \method{prediction}{lm}(
   model,
   data = find_data(model, parent.frame()),
@@ -449,6 +472,16 @@ prediction(model, ...)
   model,
   data = find_data(model, parent.frame()),
   at = NULL,
+  calculate_se = FALSE,
+  ...
+)
+
+\method{prediction}{ridgeLinear}(
+  model,
+  data = find_data(model, parent.frame()),
+  at = NULL,
+  type = "response",
+  vcov = stats::vcov(model),
   calculate_se = FALSE,
   ...
 )

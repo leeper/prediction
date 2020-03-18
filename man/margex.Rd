@@ -4,7 +4,8 @@
 \name{margex}
 \alias{margex}
 \title{Artificial data for margins, copied from Stata}
-\format{A data frame with 3000 observations on the following 11 variables.
+\format{
+A data frame with 3000 observations on the following 11 variables.
  \describe{
    \item{\samp{y}}{A numeric vector}
    \item{\samp{outcome}}{A binary numeric vector with values (0,1)}
@@ -17,7 +18,8 @@
    \item{\samp{treatment}}{A factor with two levels}
    \item{\samp{agegroup}}{A factor with three levels}
    \item{\samp{arm}}{A factor with three levels}
- }}
+ }
+}
 \source{
 \url{http://www.stata-press.com/data/r14/margex.dta}
 }
