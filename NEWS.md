@@ -1,6 +1,6 @@
 ## prediction 0.3.16
 
-* Add `prediction.ridgeLinear`
+* Add `prediction.ridgeLinear` (Issue #44)
 
 ## prediction 0.3.15
 
