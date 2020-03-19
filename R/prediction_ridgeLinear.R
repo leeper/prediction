@@ -11,7 +11,7 @@ prediction.ridgeLinear <-
            calculate_se = FALSE,
            ...) {
     if (calculate_se) {
-      stop(paste0("calculate_se not implemented"))
+      stop("calculate_se not implemented")
     }
     # extract predicted values
     data <- data
