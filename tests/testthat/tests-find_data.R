@@ -111,4 +111,19 @@ if (require("ridge")) {
     data <- find_data(mod1)
     expect_equal(data, mtcars)
   })
+  test_that("find_data for linearRidge through function calls", {
+    # this doesn't work with find_data.default
+    func1 <- function(formula, data, lambda) {
+      foo <- list(lambda=0.001)
+      return(linearRidge(formula, data = data, lambda=foo$lambda))
+    }
+    func2 <- function() {
+      mod1 <- func1('mpg ~ cyl + wt', mtcars)
+      data <- find_data(mod1)
+      expect_true(all(c('mpg', 'cyl', 'wt') %in% names(data)))
+      expect_equal(nrow(data), 32)
+      expect_equal(data$mpg, mtcars$mpg)
+    }
+    func2()
+  })
 }
