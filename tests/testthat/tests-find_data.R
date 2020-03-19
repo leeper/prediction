@@ -104,3 +104,11 @@ test_that("Test find_data.lm() with subsetted data", {
     expect_true(identical(nrow(f), length(predict(m))), label = "Survey design model has correct rows")
     expect_true(identical(nrow(prediction(m)), length(predict(m))), label = "Survey design model has correct rows")
 })
+
+if (require("ridge")) {
+  test_that("find_data for linearRidge", {
+    mod1 <- linearRidge(mpg ~ cyl + wt, data = mtcars)
+    data <- find_data(mod1)
+    expect_equal(data, mtcars)
+  })
+}
