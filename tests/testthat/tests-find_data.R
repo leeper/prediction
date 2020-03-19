@@ -109,7 +109,9 @@ if (require("ridge")) {
   test_that("find_data for linearRidge", {
     mod1 <- linearRidge(mpg ~ cyl + wt, data = mtcars)
     data <- find_data(mod1)
-    expect_equal(data, mtcars)
+    expect_true(all(c('mpg', 'cyl', 'wt') %in% names(data)))
+    expect_equal(nrow(data), 32)
+    expect_equal(data$mpg, mtcars$mpg)
   })
   test_that("find_data for linearRidge through function calls", {
     # this doesn't work with find_data.default
