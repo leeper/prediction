@@ -97,34 +97,49 @@ find_data.mca <- function(model, env = parent.frame(), ...) {
 }
 
 #' @rdname find_data
-#' @importFrom stats model.frame
+#' @importFrom stats terms
 #' @export
 find_data.merMod <- function(model, env = parent.frame(), ...) {
-    model.frame(model)
+    form <- try(terms(model), silent = TRUE)
+    if (inherits(form, "try-error") && is.null(model@call)) {
+        stop("'find_data()' requires a formula call")
+    } else  {
+        if (!is.null(model@call[["data"]])) {
+            dat <- eval(model@call[["data"]], env)
+            if (inherits(dat, "try-error")) {
+                dat <- get_all_vars(model, data = model@call[["data"]])
+            }
+        } else {
+            dat <- get_all_vars(model, data = env)
+        }
+        # handle subset
+        if (!is.null(model@call[["subset"]])) {
+            subs <- try(eval(model@call[["subset"]], dat), silent = TRUE)
+            if (inherits(subs, "try-error")) {
+                subs <- try(eval(model@call[["subset"]], env), silent = TRUE)
+                if (inherits(subs, "try-error")) {
+                    subs <- TRUE
+                    warning("'find_data()' cannot locate variable(s) used in 'subset'")
+                }
+            }
+            dat <- dat[subs, , drop = FALSE]
+        }
+        # handle na.action (commented out because it doesn't work with this S4) 
+        #if (!is.null(model[["na.action"]])) {
+        #    dat <- dat[-model[["na.action"]], , drop = FALSE]
+        #}
+    }
+    if (is.null(dat)) {
+        stop("'find_data()' requires a formula call")
+    }
+    dat
 }
 
 #' @rdname find_data
 #' @export
-find_data.svyglm <- function(model, env = parent.frame(), ...) {
-    dat <- model[["data"]]
-    # handle subset
-    if (!is.null(model[["call"]][["subset"]])) {
-        subs <- try(eval(model[["call"]][["subset"]], dat), silent = TRUE)
-        if (inherits(subs, "try-error")) {
-            subs <- try(eval(model[["call"]][["subset"]], env), silent = TRUE)
-            if (inherits(subs, "try-error")) {
-                subs <- TRUE
-                warning("'find_data()' cannot locate variable(s) used in 'subset'")
-            }
-        }
-        dat <- dat[subs, , drop = FALSE]
-    }
-    # handle na.action
-    if (!is.null(model[["na.action"]])) {
-        dat <- dat[-model[["na.action"]], , drop = FALSE]
-    }
-
-    return(dat)
+find_data.svyglm <- function(model, ...) {
+    data <- model[["data"]]
+    data
 }
 
 #' @rdname find_data
