@@ -1,3 +1,7 @@
+## prediction 0.3.16
+
+* Add `prediction.ridgeLinear` (Issue #44)
+
 ## prediction 0.3.15
 
 * `build_datalist()` now works correctly with data.table datasets. (#34, #35, h/t Dan Schrage)

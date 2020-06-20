@@ -92,6 +92,12 @@ find_data.lm <- find_data.default
 
 #' @rdname find_data
 #' @export
+find_data.ridgeLinear <- function(model, ...) {
+  model$model_frame
+}
+
+#' @rdname find_data
+#' @export
 find_data.mca <- function(model, env = parent.frame(), ...) {
     eval(model[["call"]][["df"]], envir = env)
 }

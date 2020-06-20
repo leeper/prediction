@@ -9,6 +9,7 @@
 \alias{find_data.glm}
 \alias{find_data.hxlr}
 \alias{find_data.lm}
+\alias{find_data.ridgeLinear}
 \alias{find_data.mca}
 \alias{find_data.merMod}
 \alias{find_data.svyglm}
@@ -32,6 +33,8 @@ find_data(model, ...)
 \method{find_data}{hxlr}(model, env = parent.frame(), ...)
 
 \method{find_data}{lm}(model, env = parent.frame(), ...)
+
+\method{find_data}{ridgeLinear}(model, ...)
 
 \method{find_data}{mca}(model, env = parent.frame(), ...)
 

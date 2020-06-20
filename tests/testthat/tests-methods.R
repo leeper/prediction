@@ -248,6 +248,22 @@ if (require("kernlab", quietly = TRUE)) {
     })
 }
 
+if (require("ridge", quietly = TRUE)) {
+  test_that("Test prediction() for 'ridge'", {
+    data("mtcars", package = "datasets")
+
+    model1 <- lm(mpg ~ wt + cyl, data = mtcars)
+    model2 <- linearRidge(mpg ~ wt + cyl, data = mtcars, lambda = 0)
+
+    preds1 <- prediction(model1)
+    preds2 <- prediction(model2)
+    expect_equal(preds1$fitted, preds2$fitted, tolerance = 0.0001, label = "predictions")
+    expect_true(inherits(preds2, "prediction"), label = "'prediction' class is correct")
+    # expect_true(all(c("fitted", "se.fitted") %in% names(p)), label = "'fitted' and 'se.fitted' columns returned")
+    expect_true(all(c("fitted") %in% names(preds2)), label = "'fitted' column returned")
+  })
+}
+
 if (require("lme4", quietly = TRUE)) {
     test_that("Test prediction() for 'merMod'", {
         data("cbpp", package = "lme4")

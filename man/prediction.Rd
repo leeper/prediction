@@ -14,11 +14,11 @@
 %   R/prediction_merMod.R, R/prediction_mnp.R, R/prediction_multinom.R,
 %   R/prediction_nls.R, R/prediction_nnet.R, R/prediction_plm.R,
 %   R/prediction_polr.R, R/prediction_polyreg.R, R/prediction_ppr.R,
-%   R/prediction_princomp.R, R/prediction_rlm.R, R/prediction_rpart.R,
-%   R/prediction_rq.R, R/prediction_selection.R, R/prediction_speedglm.R,
-%   R/prediction_speedlm.R, R/prediction_survreg.R, R/prediction_svm.R,
-%   R/prediction_svyglm.R, R/prediction_train.R, R/prediction_truncreg.R,
-%   R/prediction_zeroinfl.R, R/summary.R
+%   R/prediction_princomp.R, R/prediction_ridgeLinear.R, R/prediction_rlm.R,
+%   R/prediction_rpart.R, R/prediction_rq.R, R/prediction_selection.R,
+%   R/prediction_speedglm.R, R/prediction_speedlm.R, R/prediction_survreg.R,
+%   R/prediction_svm.R, R/prediction_svyglm.R, R/prediction_train.R,
+%   R/prediction_truncreg.R, R/prediction_zeroinfl.R, R/summary.R
 \name{prediction-package}
 \alias{prediction-package}
 \alias{prediction}
@@ -67,6 +67,7 @@
 \alias{prediction.polyreg}
 \alias{prediction.ppr}
 \alias{prediction.princomp}
+\alias{prediction.ridgeLinear}
 \alias{prediction.rlm}
 \alias{prediction.rpart}
 \alias{prediction.rq}
@@ -449,6 +450,16 @@ prediction(model, ...)
   model,
   data = find_data(model, parent.frame()),
   at = NULL,
+  calculate_se = FALSE,
+  ...
+)
+
+\method{prediction}{ridgeLinear}(
+  model,
+  data = find_data(model, parent.frame()),
+  at = NULL,
+  type = "response",
+  vcov = stats::vcov(model),
   calculate_se = FALSE,
   ...
 )
