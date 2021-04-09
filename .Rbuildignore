@@ -32,3 +32,4 @@
 ^vignettes/.+\.pdf$
 ^vignettes/.+\.sty$
 ^vignettes/.+\.tex$
+^\.github$
